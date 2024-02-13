@@ -263,6 +263,43 @@ export default StyleSheet.create({
     color:'#153562',
     paddingTop: 10,
   },
+
+  publist_bg: {
+    backgroundColor: '#EBF4FC',
+    paddingVertical: '15%',
+    paddingHorizontal: 15,
+  },
+
+  publist_head: {
+    fontFamily: 'Poppins',
+    fontSize: 24,
+    fontWeight: '600',
+    lineHeight: 28,
+    textAlign: 'center',
+    color:'#26252C',
+    paddingBottom: '10%'
+  },
+
+  pub_cards: {
+    height: 117,
+    width: 140,
+    borderRadius: 14,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  pub_name: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: '500',
+    lineHeight: 14,
+    textAlign: 'center',
+    color:'#26252C',
+  }
 });
 
 
