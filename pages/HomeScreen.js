@@ -20,6 +20,8 @@ import TopMenu from "../Global/TopMenu.js";
 import AboutSouthshore from "../Global/AboutSouthshore.js";
 import Footer from "../Global/Footer.js";
 import Banner from "../Global/Banner.js";
+import PubList from "../Global/PubList.js";
+
 
 
 
@@ -47,6 +49,9 @@ const HomeScreen = ({ navigation }) => {
         {/* <Text style={styles.check}>abcd abcd</Text> */}
         
         <AboutSouthshore/>
+
+        <PubList/>
+
         <SouthshoreInnovations />
       </ScrollView>
       <Footer />
