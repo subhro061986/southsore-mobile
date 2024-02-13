@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import xStyle from '../assets/css/x_style.js';
 
 import {
@@ -7,10 +7,10 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar, 
-  Image, 
-  Button, 
-  TextInput, 
+  StatusBar,
+  Image,
+  Button,
+  TextInput,
   TouchableOpacity,
   ImageBackground,
   Animated,
@@ -18,30 +18,44 @@ import {
 } from 'react-native';
 import TopMenu from "../Global/TopMenu.js";
 import Footer from "../Global/Footer.js";
+import Banner from "../Global/Banner.js";
 
 
 
-const HomeScreen =({navigation})=> {
+
+const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
-    
+
   }, []);
 
-  
-    return(
+
+  return (
     <SafeAreaView>
-        <ScrollView style={xStyle.homeBg}>
-            <TopMenu/>
-            <Text>HELLO</Text>
-        </ScrollView>
-            <Footer/>
-    </SafeAreaView>
+      <ScrollView style={xStyle.homeBg}>
+        <TopMenu />
+        {/* <Text>HELLO</Text> */}
+        {/* <Image
+          source={require('../assets/images/banner.png')}
+        /> */}
+        <Banner/>
+        {/* <Text style={styles.check}>abcd abcd</Text> */}
         
-    );
-  
-  }
+      </ScrollView>
+      <Footer />
+    </SafeAreaView>
+
+  );
+
+}
 
 
 
 
 export default HomeScreen;
+
+// const styles = StyleSheet.create({
+//   check:{
+//     fontFamily: 'Protest Revolution'
+//   }
+// })
