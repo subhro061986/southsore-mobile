@@ -32,6 +32,7 @@ const HomeScreen =({navigation})=> {
     <SafeAreaView>
         <ScrollView style={xStyle.homeBg}>
             <TopMenu/>
+            <Text>HELLO</Text>
         </ScrollView>
             <Footer/>
     </SafeAreaView>
