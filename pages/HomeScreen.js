@@ -19,6 +19,7 @@ import {
 import TopMenu from "../Global/TopMenu.js";
 import AboutSouthshore from "../Global/AboutSouthshore.js";
 import Footer from "../Global/Footer.js";
+import SouthshoreInnovations from "../Global/SouthshoreInnovations.js";
 
 
 
@@ -33,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView style={xStyle.homeBg}>
         <TopMenu />
         <AboutSouthshore/>
+        <SouthshoreInnovations />
       </ScrollView>
       <Footer />
     </SafeAreaView>

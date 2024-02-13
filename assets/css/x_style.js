@@ -87,6 +87,53 @@ export default StyleSheet.create({
     color: '#007FE3'
   },
 
+  southshoreInnovationsView:{
+    backgroundColor: '#EBF3FA'
+  },
+
+  southshoreInnovationsHeader : {
+    fontFamily: 'Poppins',
+    fontSize: 28,
+    fontWeight: '600',
+    lineHeight: 48,
+    textAlign: 'center',
+    color: '#26252C',
+    padding: 25,
+    paddingBottom: 25
+  },
+
+  southshoreInnovationsTag: {
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    fontWeight: '500',
+    lineHeight: 28,
+    textAlign: 'center',
+    paddingHorizontal: 15,
+    color: '#3F4556'
+  },
+
+  southshoreInnovationsDesc : {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 24,
+    textAlign: 'center',
+    padding: 20,
+    paddingBottom: 20,
+    color: '#555562'
+  },
+
+  southshoreInnovationsReadMore: {
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    fontWeight: '600',
+    lineHeight: 22,
+    textAlign: 'center',
+    padding: 20,
+    paddingBottom: 200,
+    color: '#007FE3'
+  },
+
   bottomnav: {
     position: 'absolute',
     bottom: Dimensions.get('screen').height * 0.1,
