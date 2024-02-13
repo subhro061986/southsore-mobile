@@ -25,6 +25,7 @@ import Banner from "../Global/Banner.js";
 
 
 import SouthshoreInnovations from "../Global/SouthshoreInnovations.js";
+import HowToSouthShore from "../Global/HowToSouthShore.js";
 
 
 
@@ -47,6 +48,7 @@ const HomeScreen = ({ navigation }) => {
         {/* <Text style={styles.check}>abcd abcd</Text> */}
         
         <AboutSouthshore/>
+        <HowToSouthShore />
         <SouthshoreInnovations />
       </ScrollView>
       <Footer />

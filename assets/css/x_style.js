@@ -35,6 +35,32 @@ export default StyleSheet.create({
     width: '35%',
   },
 
+  howToSouthShoreView: {
+    backgroundColor: '#FFF',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15
+  },
+
+  howToSouthShoreHeader : {
+    fontFamily: 'Poppins',
+    fontSize: 24,
+    fontWeight: '600',
+    lineHeight: 30,
+    textAlign: 'center',
+    color: '#26252C'
+  },
+
+  howToSouthShoreTag:{
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: '600',
+    lineHeight: 30,
+    textAlign: 'center',
+    color: '#374755'
+  },
+
   aboutSouthShoreView: {
     backgroundColor: '#FFF',
     display: 'flex',
