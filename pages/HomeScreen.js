@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import xStyle from '../assets/css/x_style.js';
 
 import {
@@ -7,39 +7,39 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar, 
-  Image, 
-  Button, 
-  TextInput, 
+  StatusBar,
+  Image,
+  Button,
+  TextInput,
   TouchableOpacity,
   ImageBackground,
   Animated,
   PermissionsAndroid
 } from 'react-native';
 import TopMenu from "../Global/TopMenu.js";
+import AboutSouthshore from "../Global/AboutSouthshore.js";
 import Footer from "../Global/Footer.js";
 
 
 
-const HomeScreen =({navigation})=> {
+const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
-    
+
   }, []);
 
-  
-    return(
+  return (
     <SafeAreaView>
-        <ScrollView style={xStyle.homeBg}>
-            <TopMenu/>
-            <Text>HELLO</Text>
-        </ScrollView>
-            <Footer/>
+      <ScrollView style={xStyle.homeBg}>
+        <TopMenu />
+        <AboutSouthshore/>
+      </ScrollView>
+      <Footer />
     </SafeAreaView>
-        
-    );
-  
-  }
+
+  );
+
+}
 
 
 
