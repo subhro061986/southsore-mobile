@@ -13,18 +13,26 @@ import {
 export const Footer = () => {
   return (
     <View style={xStyle.bottomnav}>
-      <Image
-        source={require('../assets/images/home.png')}
-      />
-      <Image
-        source={require('../assets/images/publisher.png')}
-      />
-      <Image
-        source={require('../assets/images/profile.png')}
-      />
-      <Image
-        source={require('../assets/images/login.png')}
-      />
+      <TouchableOpacity>
+        <Image
+          source={require('../assets/images/home.png')}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image
+          source={require('../assets/images/publisher.png')}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image
+          source={require('../assets/images/profile.png')}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image
+          source={require('../assets/images/login.png')}
+        />
+      </TouchableOpacity>
     </View>
   )
 }

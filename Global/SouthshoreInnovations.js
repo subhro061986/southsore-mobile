@@ -17,17 +17,19 @@ export const SouthshoreInnovations = () => {
   return (
     <View style={xStyle.southshoreInnovationsView}>
       <Text style={xStyle.southshoreInnovationsHeader}>
-      Southshore Innovations
+        Southshore Innovations
       </Text>
       <Text style={xStyle.southshoreInnovationsTag}>
-      Simple Solutions to Complex Problems
+        Simple Solutions to Complex Problems
       </Text>
       <Text style={xStyle.southshoreInnovationsDesc}>
-      Southshore Innovations Private Limited is a technology focused company headquartered at Chennai. The company is promoted by techno functional professionals with deep domain experience in different areas such as book production, sales, customer experience, distribution with specific focus on the publishing industry.
+        Southshore Innovations Private Limited is a technology focused company headquartered at Chennai. The company is promoted by techno functional professionals with deep domain experience in different areas such as book production, sales, customer experience, distribution with specific focus on the publishing industry.
       </Text>
-      <Text style={xStyle.southshoreInnovationsReadMore}>
-        Read More
-      </Text>
+      <TouchableOpacity>
+        <Text style={xStyle.southshoreInnovationsReadMore}>
+          Read More
+        </Text>
+      </TouchableOpacity>
     </View>
   )
 }

@@ -26,14 +26,16 @@ export const AboutSouthshore = () => {
         E-books junction – a digital marketplace, where knowledge knows no bounds
       </Text>
       <Text style={xStyle.aboutSouthShoreDescPart1}>
-      E-books junction is your passport to an extensive, ever-expanding library of e-books, thoughtfully curated from esteemed publishers both in India and abroad. As an avid learner, a dedicated student, or a professional striving for success, e-books junction.is your trusted companion on your intellectual journey.
+        E-books junction is your passport to an extensive, ever-expanding library of e-books, thoughtfully curated from esteemed publishers both in India and abroad. As an avid learner, a dedicated student, or a professional striving for success, e-books junction.is your trusted companion on your intellectual journey.
       </Text>
       <Text style={xStyle.aboutSouthShoreDescPart2}>
-      Why choose e-books? The benefits are undeniable. With e-books junction, you'll experience a world of advantages at your fingertips. First and foremost, accessibility.
+        Why choose e-books? The benefits are undeniable. With e-books junction, you'll experience a world of advantages at your fingertips. First and foremost, accessibility.
       </Text>
-      <Text style={xStyle.aboutSouthShoreReadMore}>
-        Read More
-      </Text>
+      <TouchableOpacity>
+        <Text style={xStyle.aboutSouthShoreReadMore}>
+          Read More
+        </Text>
+      </TouchableOpacity>
     </View>
   )
 }
