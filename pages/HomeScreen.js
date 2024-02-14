@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={xStyle.homeBg}>
+      <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]}>
         <TopMenu />
         {/* <Text>HELLO</Text> */}
         {/* <Image
