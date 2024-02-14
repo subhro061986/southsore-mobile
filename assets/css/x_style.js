@@ -129,7 +129,7 @@ export default StyleSheet.create({
     borderRadius: 100,
     paddingVertical: 20,
     paddingHorizontal: 45,
-    marginHorizontal: 86,
+    marginHorizontal: 46,
     marginVertical: 35,
     backgroundColor: '#007FE3',
   },
