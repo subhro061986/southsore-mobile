@@ -45,20 +45,102 @@ export default StyleSheet.create({
 
   howToSouthShoreHeader: {
     fontFamily: 'Poppins',
-    fontSize: 24,
-    fontWeight: '600',
+    fontSize: 26,
+    fontWeight: '700',
     lineHeight: 30,
     textAlign: 'center',
-    color: '#26252C'
+    color: '#26252C',
+    marginTop: 20,
+    paddingHorizontal: 15
+  },
+
+  howToSouthShoreTagView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10
   },
 
   howToSouthShoreTag: {
     fontFamily: 'Roboto',
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '400',
     lineHeight: 30,
     textAlign: 'center',
     color: '#374755'
+  },
+
+  howToSouthShoreTagPart2: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 30,
+    textAlign: 'center',
+    color: '#374755'
+  },
+
+  howToSouthShoreCard : {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 32,
+    paddingVertical: 30,
+    paddingHorizontal: 10,
+    marginVertical: 30,
+    marginHorizontal: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#AAB4BA',
+    borderWidth: 1,
+    width: 320
+  },
+
+  howToSouthShoreCardHead: {
+    fontFamily: 'Poppins',
+    fontSize: 20,
+    fontWeight: '500',
+    lineHeight: 32,
+    textAlign: 'center',
+    color: '#26252C',
+    // marginBottom: 15,
+  },
+
+  howToSouthShoreCardHeadSec: {
+    fontFamily: 'Poppins',
+    fontSize: 20,
+    fontWeight: '700',
+    lineHeight: 32,
+    textAlign: 'center',
+    color: '#26252C',
+    marginBottom: 15,
+  },
+
+  howToSouthShoreCardTag : {
+    fontFamily: 'Poppins',
+    fontWeight: '600',
+    fontSize: 16,
+    lineHeight: 24,
+    textAlign: 'center',
+    color: '#26252C',
+    marginBottom: 10
+  },
+
+  howToSouthShoreJoinNowBtn :{
+    borderRadius: 100,
+    paddingVertical: 20,
+    paddingHorizontal: 45,
+    marginHorizontal: 86,
+    marginVertical: 35,
+    backgroundColor: '#007FE3',
+  },
+
+  howToSouthShoreJoinNowBtnText : {
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    fontWeight: '700',
+    lineHeight: 16,
+    textAlign: 'center',
+    color: '#FFFFFF',
   },
 
   aboutSouthShoreView: {
@@ -72,7 +154,7 @@ export default StyleSheet.create({
   aboutSouthShoreHead: {
     fontFamily: 'Poppins',
     fontSize: 26,
-    fontWeight: '600',
+    fontWeight: '700',
     lineHeight: 34,
     textAlign: 'center',
     color: '#26252C',
@@ -82,7 +164,7 @@ export default StyleSheet.create({
   aboutSouthShoreHeadPart2: {
     fontFamily: 'Poppins',
     fontSize: 26,
-    fontWeight: '600',
+    fontWeight: '700',
     lineHeight: 34,
     textAlign: 'center',
     color: '#7B8890'
@@ -91,7 +173,7 @@ export default StyleSheet.create({
   aboutSouthShoreTag: {
     fontFamily: 'Roboto',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '700',
     lineHeight: 24,
     textAlign: 'center',
     padding: 20,
@@ -137,7 +219,7 @@ export default StyleSheet.create({
   southshoreInnovationsHeader: {
     fontFamily: 'Poppins',
     fontSize: 28,
-    fontWeight: '600',
+    fontWeight: '700',
     lineHeight: 48,
     textAlign: 'center',
     color: '#26252C',
@@ -147,11 +229,11 @@ export default StyleSheet.create({
 
   southshoreInnovationsTag: {
     fontFamily: 'Roboto',
-    fontSize: 18,
-    fontWeight: '500',
+    fontSize: 19,
+    fontWeight: '600',
     lineHeight: 28,
     textAlign: 'center',
-    paddingHorizontal: 15,
+    paddingHorizontal: 25,
     color: '#3F4556'
   },
 
