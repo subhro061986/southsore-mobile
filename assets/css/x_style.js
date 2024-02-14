@@ -345,15 +345,20 @@ export default StyleSheet.create({
     color: '#FFFFFF',
   },
 
+  
+
   buy_card: {
+    height: 450,
+    width: 300,
     backgroundColor: '#FFFFFF',
     borderRadius: 32,
-    paddingVertical: 30,
-    paddingHorizontal: 20,
+    paddingVertical: 40,
+    paddingHorizontal: 40,
     marginTop: 45,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal: 10
     // backgroundColor:'pink',
   },
 
@@ -412,6 +417,12 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: '#FFFFFF',
   },
+
+  modal_main_view: {
+    marginHorizontal: 50,
+    marginVertical: 90,
+    backgroundColor: 'white'
+  }
 });
 
 

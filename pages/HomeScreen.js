@@ -14,7 +14,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Animated,
-  PermissionsAndroid
+  PermissionsAndroid,
+  Modal
 } from 'react-native';
 import TopMenu from "../Global/TopMenu.js";
 import AboutSouthshore from "../Global/AboutSouthshore.js";
@@ -47,16 +48,19 @@ const HomeScreen = ({ navigation }) => {
         {/* <Image
           source={require('../assets/images/banner.png')}
         /> */}
-        <Banner/>
+        <Banner />
         {/* <Text style={styles.check}>abcd abcd</Text> */}
-        
-        <AboutSouthshore/>
-        <PubList/>
+
+        <AboutSouthshore />
+        <PubList />
         <HowToSouthShore />
-        <BuyStep/>
+        <BuyStep />
         <SouthshoreInnovations />
       </ScrollView>
       <Footer />
+
+      
+
     </SafeAreaView>
 
   );

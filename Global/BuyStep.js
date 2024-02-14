@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import xStyle from '../assets/css/x_style.js';
 
 import {
@@ -15,13 +15,29 @@ import {
     ImageBackground,
     Animated,
     PermissionsAndroid,
-    Linking
+    Linking,
+    Modal
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
 // import { useNavigation } from '@react-navigation/native';
 // import { UserProfile } from '../context/UserContext.js';
 
 export const BuyStep = () => {
+
+    const [modalvisibility, setmodalvisibility] = useState(false);
+
+    useEffect(() => {
+
+    }, []);
+
+    const joinNowModalHandler = () => {
+        setmodalvisibility(true);
+
+    }
+
+    const backbuttonhandler = () => {
+        setmodalvisibility(!modalvisibility);
+    }
 
     return (
         <>
@@ -32,23 +48,77 @@ export const BuyStep = () => {
                     titles across different genres and different publishers ensuring our
                     customers get the latest in the field.</Text>
                 <Text style={xStyle.buy_head_3}>Here are following <Text style={xStyle.buy_head_3_sec}>steps</Text></Text>
-                <View style={xStyle.buy_card}>
-                    <Image
-                        source={require('../assets/images/buystep.png')}
-                    />
-                    <Text style={xStyle.buy_card_head}>Browse <Text style={xStyle.buy_card_head_sec}>E-Pub Reader</Text></Text>
-                    <Text style={xStyle.buy_card_body}>Once you are on our platform
-                        &nbsp;<Text
-                            style={xStyle.buy_card_link}
-                            onPress={() => Linking.openURL('http://ebooksjunction.com/')}>
-                            www.ebooksjunctions.com</Text> as a customer,
-                        you have the option to choosing to select based on a publisher on their webstore on
-                        the platform or search / browse for books based on keywords,
-                        title name, author or the ISBN number.</Text>
-                </View>
-                <TouchableOpacity style={xStyle.buy_join_btn}>
+                <ScrollView horizontal={true} style={xStyle.buy_scroll_div}>
+                    <View style={xStyle.buy_card}>
+                        <Image
+                            source={require('../assets/images/buystep.png')}
+                        />
+                        <Text style={xStyle.buy_card_head}>Browse <Text style={xStyle.buy_card_head_sec}>E-Pub Reader</Text></Text>
+                        <Text style={xStyle.buy_card_body}>Once you are on our platform
+                            &nbsp;<Text
+                                style={xStyle.buy_card_link}
+                                onPress={() => Linking.openURL('http://ebooksjunction.com/')}>
+                                www.ebooksjunctions.com</Text> as a customer,
+                            you have the option to choosing to select based on a publisher on their webstore on
+                            the platform or search / browse for books based on keywords,
+                            title name, author or the ISBN number.</Text>
+                    </View>
+                    <View style={xStyle.buy_card}>
+                        <Image
+                            source={require('../assets/images/buystep.png')}
+                        />
+                        <Text style={xStyle.buy_card_head}>Browse <Text style={xStyle.buy_card_head_sec}>E-Pub Reader</Text></Text>
+                        <Text style={xStyle.buy_card_body}>Once you are on our platform
+                            &nbsp;<Text
+                                style={xStyle.buy_card_link}
+                                onPress={() => Linking.openURL('http://ebooksjunction.com/')}>
+                                www.ebooksjunctions.com</Text> as a customer,
+                            you have the option to choosing to select based on a publisher on their webstore on
+                            the platform or search / browse for books based on keywords,
+                            title name, author or the ISBN number.</Text>
+                    </View>
+                    <View style={xStyle.buy_card}>
+                        <Image
+                            source={require('../assets/images/buystep.png')}
+                        />
+                        <Text style={xStyle.buy_card_head}>Browse <Text style={xStyle.buy_card_head_sec}>E-Pub Reader</Text></Text>
+                        <Text style={xStyle.buy_card_body}>Once you are on our platform
+                            &nbsp;<Text
+                                style={xStyle.buy_card_link}
+                                onPress={() => Linking.openURL('http://ebooksjunction.com/')}>
+                                www.ebooksjunctions.com</Text> as a customer,
+                            you have the option to choosing to select based on a publisher on their webstore on
+                            the platform or search / browse for books based on keywords,
+                            title name, author or the ISBN number.</Text>
+                    </View>
+                </ScrollView>
+                <TouchableOpacity style={xStyle.buy_join_btn} onPress={joinNowModalHandler}>
                     <Text style={xStyle.buy_join_txt}>Join Now</Text>
                 </TouchableOpacity>
+            </View>
+
+            {/* --------JOIN NOW MODAL------- */}
+
+            <View>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalvisibility}
+                    // isVisible={modalvisibility}
+                    onRequestClose={backbuttonhandler}
+                    hasBackdrop={true}
+                    backdropColor={'black'}
+                    // statusBarTranslucent={true}
+                    backdropOpacity={0.5}
+                >
+
+                    <View style={xStyle.modal_main_view}>
+                        <Text>Hello Modal</Text>
+                    </View>
+
+
+
+                </Modal>
             </View>
         </>
     )
