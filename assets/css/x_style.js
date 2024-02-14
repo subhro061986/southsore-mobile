@@ -43,7 +43,7 @@ export default StyleSheet.create({
     padding: 15
   },
 
-  howToSouthShoreHeader : {
+  howToSouthShoreHeader: {
     fontFamily: 'Poppins',
     fontSize: 24,
     fontWeight: '600',
@@ -52,7 +52,7 @@ export default StyleSheet.create({
     color: '#26252C'
   },
 
-  howToSouthShoreTag:{
+  howToSouthShoreTag: {
     fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '600',
@@ -88,7 +88,7 @@ export default StyleSheet.create({
     color: '#7B8890'
   },
 
-  aboutSouthShoreTag : {
+  aboutSouthShoreTag: {
     fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '500',
@@ -110,7 +110,7 @@ export default StyleSheet.create({
     color: '#555562'
   },
 
-  aboutSouthShoreDescPart2:{
+  aboutSouthShoreDescPart2: {
     fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
@@ -130,11 +130,11 @@ export default StyleSheet.create({
     color: '#007FE3'
   },
 
-  southshoreInnovationsView:{
+  southshoreInnovationsView: {
     backgroundColor: '#EBF3FA'
   },
 
-  southshoreInnovationsHeader : {
+  southshoreInnovationsHeader: {
     fontFamily: 'Poppins',
     fontSize: 28,
     fontWeight: '600',
@@ -155,7 +155,7 @@ export default StyleSheet.create({
     color: '#3F4556'
   },
 
-  southshoreInnovationsDesc : {
+  southshoreInnovationsDesc: {
     fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
@@ -230,7 +230,7 @@ export default StyleSheet.create({
     fontWeight: '700',
     lineHeight: 18,
     textAlign: 'center',
-    color:'#133B72',
+    color: '#133B72',
     marginBottom: 20,
   },
 
@@ -240,7 +240,7 @@ export default StyleSheet.create({
     fontWeight: '800',
     lineHeight: 40,
     textAlign: 'center',
-    color:'#3448AF',
+    color: '#3448AF',
     paddingTop: 12,
   },
 
@@ -250,7 +250,7 @@ export default StyleSheet.create({
     fontWeight: '700',
     lineHeight: 26,
     textAlign: 'center',
-    color:'#012860',
+    color: '#012860',
     paddingTop: 10,
   },
 
@@ -260,7 +260,7 @@ export default StyleSheet.create({
     fontWeight: '600',
     lineHeight: 16,
     textAlign: 'center',
-    color:'#153562',
+    color: '#153562',
     paddingTop: 10,
   },
 
@@ -276,7 +276,7 @@ export default StyleSheet.create({
     fontWeight: '600',
     lineHeight: 28,
     textAlign: 'center',
-    color:'#26252C',
+    color: '#26252C',
     paddingBottom: '10%'
   },
 
@@ -298,8 +298,120 @@ export default StyleSheet.create({
     fontWeight: '500',
     lineHeight: 14,
     textAlign: 'center',
-    color:'#26252C',
-  }
+    color: '#26252C',
+  },
+
+  buy_bg: {
+    backgroundColor: '#2F4FA0',
+    paddingVertical: 50,
+    paddingHorizontal: 20,
+  },
+
+  buy_head_1: {
+    fontFamily: 'Poppins',
+    fontSize: 28,
+    fontWeight: '600',
+    lineHeight: 38,
+    textAlign: 'center',
+    color: 'white',
+    marginBottom: 25,
+  },
+
+  buy_head_2: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 24,
+    textAlign: 'center',
+    color: '#FDFDFF',
+  },
+
+  buy_head_3: {
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    fontWeight: '400',
+    lineHeight: 16,
+    textAlign: 'center',
+    color: '#FFFFFF',
+    marginTop: 20,
+  },
+
+  buy_head_3_sec: {
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    fontWeight: '800',
+    lineHeight: 16,
+    textAlign: 'center',
+    color: '#FFFFFF',
+  },
+
+  buy_card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 32,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
+    marginTop: 45,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor:'pink',
+  },
+
+  buy_card_head: {
+    fontFamily: 'Poppins',
+    fontSize: 20,
+    fontWeight: '500',
+    lineHeight: 32,
+    textAlign: 'center',
+    color: '#26252C',
+    marginBottom: 15,
+  },
+
+  buy_card_head_sec: {
+    fontFamily: 'Poppins',
+    fontSize: 20,
+    fontWeight: '700',
+    lineHeight: 32,
+    textAlign: 'center',
+    color: '#26252C',
+  },
+
+  buy_card_body: {
+    fontFamily: 'Poppins',
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 22,
+    textAlign: 'center',
+    color: '#64646F',
+  },
+
+  buy_card_link: {
+    fontFamily: 'Poppins',
+    fontSize: 14,
+    fontWeight: '500',
+    lineHeight: 22,
+    textAlign: 'center',
+    color: '#097EDA',
+  },
+
+  buy_join_btn: {
+    borderWidth: 0.5,
+    borderColor: '#FFFFFF',
+    borderRadius: 100,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    marginHorizontal: 86,
+    marginTop: 50,
+  },
+
+  buy_join_txt: {
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    fontWeight: '600',
+    lineHeight: 16,
+    textAlign: 'center',
+    color: '#FFFFFF',
+  },
 });
 
 

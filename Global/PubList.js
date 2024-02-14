@@ -34,6 +34,7 @@ export const PubList = () => {
                                 source={require('../assets/images/pub_2.png')}
                             />
                         </TouchableOpacity>
+                        <Text style={xStyle.pub_name}>Simon & Schuster</Text>
                     </View>
                     <View>
                         <TouchableOpacity style={xStyle.pub_cards}>
@@ -41,6 +42,7 @@ export const PubList = () => {
                                 source={require('../assets/images/pub_3.png')}
                             />
                         </TouchableOpacity>
+                        <Text style={xStyle.pub_name}>Houghton Mifflin..</Text>
                     </View>
                     <View>
                         <TouchableOpacity style={xStyle.pub_cards}>
@@ -48,6 +50,7 @@ export const PubList = () => {
                                 source={require('../assets/images/pub_1.png')}
                             />
                         </TouchableOpacity>
+                        <Text style={xStyle.pub_name}>Penguin Books</Text>
                     </View>
                     <View>
                         <TouchableOpacity style={xStyle.pub_cards}>
@@ -55,6 +58,7 @@ export const PubList = () => {
                                 source={require('../assets/images/pub_2.png')}
                             />
                         </TouchableOpacity>
+                        <Text style={xStyle.pub_name}>Simon & Schuster</Text>
                     </View>
                 </ScrollView>
             </View>

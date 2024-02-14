@@ -21,6 +21,7 @@ import AboutSouthshore from "../Global/AboutSouthshore.js";
 import Footer from "../Global/Footer.js";
 import Banner from "../Global/Banner.js";
 import PubList from "../Global/PubList.js";
+import BuyStep from "../Global/BuyStep.js";
 
 
 
@@ -52,6 +53,7 @@ const HomeScreen = ({ navigation }) => {
         <AboutSouthshore/>
         <PubList/>
         <HowToSouthShore />
+        <BuyStep/>
         <SouthshoreInnovations />
       </ScrollView>
       <Footer />
