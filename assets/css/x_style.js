@@ -504,7 +504,30 @@ export default StyleSheet.create({
     marginHorizontal: 50,
     marginVertical: 90,
     backgroundColor: 'white'
-  }
+  },
+
+  buy_join_modal_head: {
+    fontFamily: 'Poppins',
+    fontSize: 26,
+    fontWeight: '600',
+    lineHeight: 26,
+    textAlign: 'center',
+    color: '#26252C',
+    marginBottom:10
+  },
+
+  buy_join_modal_sub_head: {
+    fontFamily: 'Roboto',
+    fontSize: 12,
+    fontWeight: '400',
+    lineHeight: 14,
+    textAlign: 'center',
+    color: '#5A6E7A',
+  },
+
+  buy_join_modal_body: {
+    
+  },
 });
 
 

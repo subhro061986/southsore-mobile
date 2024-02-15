@@ -18,6 +18,9 @@ import {
     Linking,
     Modal
 } from 'react-native';
+
+import Overlay from 'react-native-modal-overlay';
+import { ZoomIn } from 'react-native-reanimated';
 // import { useAuth } from '../context/AuthContext.js';
 // import { useNavigation } from '@react-navigation/native';
 // import { UserProfile } from '../context/UserContext.js';
@@ -100,25 +103,31 @@ export const BuyStep = () => {
             {/* --------JOIN NOW MODAL------- */}
 
             <View>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
+                <Overlay
+                    // animationType={ZoomIn}
+                    // transparent={true}
                     visible={modalvisibility}
-                    // isVisible={modalvisibility}
-                    onRequestClose={backbuttonhandler}
-                    hasBackdrop={true}
-                    backdropColor={'black'}
-                    // statusBarTranslucent={true}
-                    backdropOpacity={0.5}
+                    // // isVisible={modalvisibility}
+                    // onRequestClose={backbuttonhandler}
+                    // hasBackdrop={true}
+                    // backdropColor={'black'}
+                    // // statusBarTranslucent={true}
+                    // backdropOpacity={0.5}
+                    onClose={backbuttonhandler}
+                    closeOnTouchOutside
+                    containerStyle={{ backgroundColor: 'rgba(38, 37, 37, 0.78)' }}
+                    childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
                 >
 
-                    <View style={xStyle.modal_main_view}>
-                        <Text>Hello Modal</Text>
-                    </View>
+
+                    <Text style={xStyle.buy_join_modal_head}>Join as Publisher</Text>
+                    <Text style={xStyle.buy_join_modal_sub_head}>Fill the form and continue to join as  publisher</Text>
+
+                    <View style={xStyle.buy_join_modal_body}></View>
 
 
 
-                </Modal>
+                </Overlay>
             </View>
         </>
     )
