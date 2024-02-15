@@ -143,6 +143,29 @@ export default StyleSheet.create({
     color: '#FFFFFF',
   },
 
+  howToSouthShoreModalHead: {
+    fontFamily: 'Poppins',
+    fontSize: 26,
+    fontWeight: '700',
+    lineHeight: 26,
+    textAlign: 'center',
+    color: '#26252C',
+    marginBottom:10
+  },
+
+  howToSouthShoreModalSubHead: {
+    fontFamily: 'Roboto',
+    fontSize: 12,
+    fontWeight: '400',
+    lineHeight: 14,
+    textAlign: 'center',
+    color: '#5A6E7A',
+  },
+
+  howToSouthShoreModalBody : {
+
+  },
+
   aboutSouthShoreView: {
     backgroundColor: '#FFF',
     display: 'flex',
