@@ -526,7 +526,36 @@ export default StyleSheet.create({
   },
 
   buy_join_modal_body: {
-    
+    backgroundColor:'yellow',
+    marginTop: 10,
+    display: 'flex',
+    justifyContent:'flex-start',
+    textAlign:'left',
+  },
+
+  buy_join_modal_legend: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    fontWeight: '500',
+    lineHeight: 36,
+    textAlign: 'left',
+    color: '#5A6E7A',
+  },
+
+  buy_join_modal_input_view:{
+    marginTop:8,
+    position:'relative',
+  },
+
+  buy_join_modal_input: {
+    borderColor:'#3F4556',
+    borderWidth:0.5,
+    borderRadius:10,
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 14,
+    width:260,
   },
 });
 
