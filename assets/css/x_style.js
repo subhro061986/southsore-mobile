@@ -648,6 +648,7 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 14,
+    color: '#7B8890',
     width:260,
     paddingLeft:12,
   },
