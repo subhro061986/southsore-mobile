@@ -163,7 +163,48 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreModalBody : {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    // backgroundColor: 'red',
+    width: '80%',
+  },
 
+  howToSouthShoreModalBodyFormLabel : {
+    color: '#26252C',
+    fontFamily: 'Poppins',
+    fontSize: 17,
+    fontWeight: '600',
+    lineHeight: 20,
+    marginTop: 10
+  },
+
+  howToSouthShoreModalBodyFormInput: {
+    borderColor: '#3F4556',
+    borderWidth: 0.5,
+    borderRadius: 10,
+    width: 250,
+    color: '#26252C',
+    paddingHorizontal: 20,
+    paddingHorizontal: 10
+  },
+
+  howToSouthShoreModalSubmit: {
+    borderRadius: 100,
+    paddingVertical: 20,
+    paddingHorizontal: 45,
+    marginHorizontal: 46,
+    marginVertical: 20,
+    backgroundColor: '#007FE3',
+  },
+
+  howToSouthShoreModalSubmitText : {
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    fontWeight: '600',
+    lineHeight: 16,
+    textAlign: 'center',
+    color: '#FFFFFF',
   },
 
   aboutSouthShoreView: {
