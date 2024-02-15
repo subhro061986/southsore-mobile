@@ -170,6 +170,16 @@ export default StyleSheet.create({
     width: '80%',
   },
 
+  howToSouthShoreModalBodyFormView:{
+    marginTop:8,
+    marginBottom:15,
+    position:'relative',
+  },
+
+  buy_join_modal_input_height: {
+    height:40,
+  },
+
   howToSouthShoreModalBodyFormLabel : {
     color: '#26252C',
     fontFamily: 'Poppins',
@@ -186,7 +196,19 @@ export default StyleSheet.create({
     width: 250,
     color: '#26252C',
     paddingHorizontal: 20,
-    paddingHorizontal: 10
+    paddingVertical: 10,
+    fontFamily: 'Roboto',
+    fontSize: 13,
+    fontWeight: '400',
+    lineHeight: 14,
+    // width:260,
+    // paddingLeft:12,
+  },
+
+  howToSouthShoreModalBodyFormInputIcon: {
+    position: 'absolute',
+    top:'53%',
+    right:'5%'
   },
 
   howToSouthShoreModalSubmit: {
