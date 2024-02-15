@@ -119,19 +119,57 @@ export const BuyStep = () => {
                     childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
                 >
 
-
+                    <TouchableOpacity 
+                    style={xStyle.buy_join_modal_cross}
+                    onPress={backbuttonhandler}
+                    >
+                        <Image
+                            source={require('../assets/images/close-circle.png')}
+                        />
+                    </TouchableOpacity>
                     <Text style={xStyle.buy_join_modal_head}>Join as Reader</Text>
-                    <Text style={xStyle.buy_join_modal_sub_head}>Fill the form and continue to join as  publisher</Text>
+                    <Text style={xStyle.buy_join_modal_sub_head}>Fill the form and continue to join as reader</Text>
 
                     <View style={xStyle.buy_join_modal_body}>
                         <Text style={xStyle.buy_join_modal_legend}>Name</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={xStyle.buy_join_modal_input} placeholder='Your Publishers Name' placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]} placeholder="Your Publisher's Name" placeholderTextColor={'#7B8890'}></TextInput>
                             <Image
                                 source={require('../assets/images/profile-circle.png')}
+                                style={xStyle.buy_join_modal_input_icon}
                             />
                         </View>
+                        <Text style={xStyle.buy_join_modal_legend}>Email</Text>
+                        <View style={xStyle.buy_join_modal_input_view}>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]} placeholder='Your email address' placeholderTextColor={'#7B8890'}></TextInput>
+                            <Image
+                                source={require('../assets/images/smsbox.png')}
+                                style={xStyle.buy_join_modal_input_icon}
+                            />
+                        </View>
+                        <Text style={xStyle.buy_join_modal_legend}>Phone no</Text>
+                        <View style={xStyle.buy_join_modal_input_view}>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]} placeholder='Your phone number' placeholderTextColor={'#7B8890'}></TextInput>
+                            <Image
+                                source={require('../assets/images/call.png')}
+                                style={xStyle.buy_join_modal_input_icon}
+                            />
+                        </View>
+                        <Text style={xStyle.buy_join_modal_legend}>Message</Text>
+                        <View style={xStyle.buy_join_modal_input_view}>
+                            <TextInput style={xStyle.buy_join_modal_input}
+                                placeholder='Your message'
+                                placeholderTextColor={'#7B8890'}
+                                multiline={true}
+                                numberOfLines={4}
+                                textAlignVertical='top'
+                            >
+                            </TextInput>
+                        </View>
                     </View>
+                    <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn}>
+                        <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Submit</Text>
+                    </TouchableOpacity>
 
 
 

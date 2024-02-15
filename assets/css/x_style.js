@@ -570,6 +570,12 @@ export default StyleSheet.create({
     backgroundColor: 'white'
   },
 
+  buy_join_modal_cross:{
+    display:'flex',
+    alignItems:'flex-end',
+    width:275,
+  },
+
   buy_join_modal_head: {
     fontFamily: 'Poppins',
     fontSize: 26,
@@ -590,7 +596,7 @@ export default StyleSheet.create({
   },
 
   buy_join_modal_body: {
-    backgroundColor:'yellow',
+    // backgroundColor:'yellow',
     marginTop: 10,
     display: 'flex',
     justifyContent:'flex-start',
@@ -608,6 +614,7 @@ export default StyleSheet.create({
 
   buy_join_modal_input_view:{
     marginTop:8,
+    marginBottom:15,
     position:'relative',
   },
 
@@ -620,6 +627,21 @@ export default StyleSheet.create({
     fontWeight: '400',
     lineHeight: 14,
     width:260,
+    paddingLeft:12,
+  },
+
+  buy_join_modal_input_height: {
+    height:40,
+  },
+
+  buy_join_modal_input_icon: {
+    position: 'absolute',
+    top:'21%',
+    right:'5%'
+  },
+
+  buy_submit_font: {
+    fontSize:16,
   },
 });
 
