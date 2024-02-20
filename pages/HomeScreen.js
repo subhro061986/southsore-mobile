@@ -74,6 +74,6 @@ export default HomeScreen;
 
 // const styles = StyleSheet.create({
 //   check:{
-//     fontFamily: 'Protest Revolution'
+//     //fontFamily: 'Protest Revolution'
 //   }
 // })

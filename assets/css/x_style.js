@@ -44,7 +44,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreHeader: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
     lineHeight: 30,
@@ -63,7 +63,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreTag: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 30,
@@ -72,7 +72,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreTagPart2: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '700',
     lineHeight: 30,
@@ -96,7 +96,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreCardHead: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '500',
     lineHeight: 32,
@@ -106,7 +106,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreCardHeadSec: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '700',
     lineHeight: 32,
@@ -116,7 +116,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreCardTag : {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontWeight: '600',
     fontSize: 16,
     lineHeight: 24,
@@ -135,7 +135,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreJoinNowBtnText : {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 18,
     fontWeight: '700',
     lineHeight: 16,
@@ -144,7 +144,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreModalHead: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
     lineHeight: 26,
@@ -154,7 +154,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreModalSubHead: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: '400',
     lineHeight: 14,
@@ -182,7 +182,7 @@ export default StyleSheet.create({
 
   howToSouthShoreModalBodyFormLabel : {
     color: '#26252C',
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 17,
     fontWeight: '600',
     lineHeight: 20,
@@ -197,7 +197,7 @@ export default StyleSheet.create({
     color: '#26252C',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 13,
     fontWeight: '400',
     lineHeight: 14,
@@ -221,7 +221,7 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreModalSubmitText : {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 16,
@@ -238,7 +238,7 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreHead: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
     lineHeight: 34,
@@ -248,7 +248,7 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreHeadPart2: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
     lineHeight: 34,
@@ -257,7 +257,7 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreTag: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '700',
     lineHeight: 24,
@@ -269,7 +269,7 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreDescPart1: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 22,
@@ -279,7 +279,7 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreDescPart2: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 22,
@@ -289,7 +289,7 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreReadMore: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 22,
@@ -303,7 +303,7 @@ export default StyleSheet.create({
   },
 
   southshoreInnovationsHeader: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 28,
     fontWeight: '700',
     lineHeight: 48,
@@ -314,7 +314,7 @@ export default StyleSheet.create({
   },
 
   southshoreInnovationsTag: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 19,
     fontWeight: '600',
     lineHeight: 28,
@@ -324,7 +324,7 @@ export default StyleSheet.create({
   },
 
   southshoreInnovationsDesc: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 24,
@@ -335,7 +335,7 @@ export default StyleSheet.create({
   },
 
   southshoreInnovationsReadMore: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 22,
@@ -373,7 +373,7 @@ export default StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8,
     paddingLeft: 50,
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontWeight: '400',
     fontSize: 14,
     lineHeight: 13,
@@ -393,7 +393,7 @@ export default StyleSheet.create({
   },
 
   intro_1: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 14,
     fontWeight: '700',
     lineHeight: 18,
@@ -403,7 +403,7 @@ export default StyleSheet.create({
   },
 
   intro_2: {
-    fontFamily: 'ProtestRevolution-Regular',
+    //fontFamily: 'ProtestRevolution-Regular',
     fontSize: 54,
     fontWeight: '800',
     lineHeight: 40,
@@ -413,7 +413,7 @@ export default StyleSheet.create({
   },
 
   intro_3: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
     lineHeight: 26,
@@ -423,7 +423,7 @@ export default StyleSheet.create({
   },
 
   intro_4: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: '600',
     lineHeight: 16,
@@ -439,7 +439,7 @@ export default StyleSheet.create({
   },
 
   publist_head: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 24,
     fontWeight: '600',
     lineHeight: 28,
@@ -461,7 +461,7 @@ export default StyleSheet.create({
   },
 
   pub_name: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 14,
@@ -476,7 +476,7 @@ export default StyleSheet.create({
   },
 
   buy_head_1: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 28,
     fontWeight: '600',
     lineHeight: 38,
@@ -486,7 +486,7 @@ export default StyleSheet.create({
   },
 
   buy_head_2: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 24,
@@ -495,7 +495,7 @@ export default StyleSheet.create({
   },
 
   buy_head_3: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '400',
     lineHeight: 16,
@@ -505,7 +505,7 @@ export default StyleSheet.create({
   },
 
   buy_head_3_sec: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '800',
     lineHeight: 16,
@@ -531,7 +531,7 @@ export default StyleSheet.create({
   },
 
   buy_card_head: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '500',
     lineHeight: 32,
@@ -541,7 +541,7 @@ export default StyleSheet.create({
   },
 
   buy_card_head_sec: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '700',
     lineHeight: 32,
@@ -550,7 +550,7 @@ export default StyleSheet.create({
   },
 
   buy_card_body: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 22,
@@ -559,7 +559,7 @@ export default StyleSheet.create({
   },
 
   buy_card_link: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 22,
@@ -578,7 +578,7 @@ export default StyleSheet.create({
   },
 
   buy_join_txt: {
-    fontFamily: 'Roboto',
+    ////fontFamily: 'Roboto',
     fontSize: 18,
     fontWeight: '600',
     lineHeight: 16,
@@ -599,7 +599,7 @@ export default StyleSheet.create({
   },
 
   buy_join_modal_head: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '600',
     lineHeight: 26,
@@ -609,7 +609,7 @@ export default StyleSheet.create({
   },
 
   buy_join_modal_sub_head: {
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: '400',
     lineHeight: 14,
@@ -626,7 +626,7 @@ export default StyleSheet.create({
   },
 
   buy_join_modal_legend: {
-    fontFamily: 'Poppins',
+    //fontFamily: 'Poppins',
     fontSize: 16,
     fontWeight: '500',
     lineHeight: 36,
@@ -644,7 +644,7 @@ export default StyleSheet.create({
     borderColor:'#3F4556',
     borderWidth:0.5,
     borderRadius:10,
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 14,
