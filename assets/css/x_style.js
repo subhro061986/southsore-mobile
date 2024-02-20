@@ -230,20 +230,15 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreHead: {
-    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
-    // lineHeight: 34,
     textAlign: 'center',
     color: '#26252C',
-    // paddingHorizontal: 15
   },
 
   aboutSouthShoreHeadPart2: {
-    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
-    // lineHeight: 34,
     textAlign: 'center',
     color: '#7B8890'
   },
@@ -255,12 +250,9 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreTag: {
-    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '700',
-    // lineHeight: 24,
     textAlign: 'center',
-    // padding: 20,
     color: '#5A6E7A'
   },
 
@@ -269,12 +261,9 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreDescPart1: {
-    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
-    // lineHeight: 22,
     textAlign: 'center',
-    // padding: 20,
     color: '#555562'
   },
 
@@ -283,12 +272,9 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreDescPart2: {
-    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
-    // lineHeight: 22,
     textAlign: 'center',
-    // paddingHorizontal: 15,
     color: '#26252C'
   },
 
@@ -297,12 +283,9 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreReadMore: {
-    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '600',
-    // lineHeight: 22,
     textAlign: 'center',
-    // padding: 20,
     color: '#007FE3'
   },
 
@@ -407,43 +390,31 @@ export default StyleSheet.create({
   },
 
   intro_1: {
-    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '700',
-    // lineHeight: 18,
     textAlign: 'center',
     color: '#133B72',
-    // marginBottom: 20,
   },
 
   intro_2: {
-    //fontFamily: 'ProtestRevolution-Regular',
     fontSize: 54,
     fontWeight: '800',
-    // lineHeight: 40,
     textAlign: 'center',
     color: '#3448AF',
-    // paddingTop: 12,
   },
 
   intro_3: {
-    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
-    // lineHeight: 26,
     textAlign: 'center',
     color: '#012860',
-    // paddingTop: 10,
   },
 
   intro_4: {
-    //fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: '600',
-    // lineHeight: 16,
     textAlign: 'center',
     color: '#153562',
-    // paddingTop: 10,
   },
 
   publist_bg: {
@@ -488,40 +459,38 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
   },
 
+  buy_head_1_View:{
+    marginBottom: 25
+  },
+
   buy_head_1: {
-    //fontFamily: 'Poppins',
     fontSize: 28,
     fontWeight: '600',
-    lineHeight: 38,
     textAlign: 'center',
     color: 'white',
-    marginBottom: 25,
   },
 
   buy_head_2: {
-    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 24,
     textAlign: 'center',
     color: '#FDFDFF',
   },
 
+  buy_head_3_View : {
+    marginTop : 20
+  },
+
   buy_head_3: {
-    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '400',
-    lineHeight: 16,
     textAlign: 'center',
     color: '#FFFFFF',
-    marginTop: 20,
   },
 
   buy_head_3_sec: {
-    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '800',
-    lineHeight: 16,
     textAlign: 'center',
     color: '#FFFFFF',
   },
@@ -555,10 +524,8 @@ export default StyleSheet.create({
   },
 
   buy_card_head_sec: {
-    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '700',
-    lineHeight: 32,
     textAlign: 'center',
     color: '#26252C',
   },
@@ -589,10 +556,8 @@ export default StyleSheet.create({
   },
 
   buy_join_txt: {
-    ////fontFamily: 'Roboto',
     fontSize: 18,
     fontWeight: '600',
-    lineHeight: 16,
     textAlign: 'center',
     color: '#FFFFFF',
   },
@@ -609,27 +574,25 @@ export default StyleSheet.create({
     width: 275,
   },
 
-  buy_join_modal_head: {
-    //fontFamily: 'Poppins',
-    fontSize: 26,
-    fontWeight: '600',
-    lineHeight: 26,
-    textAlign: 'center',
-    color: '#26252C',
+  buy_join_modal_head_view : {
     marginBottom: 10
   },
 
+  buy_join_modal_head: {
+    fontSize: 26,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: '#26252C',
+  },
+
   buy_join_modal_sub_head: {
-    //fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: '400',
-    lineHeight: 14,
     textAlign: 'center',
     color: '#5A6E7A',
   },
 
   buy_join_modal_body: {
-    // backgroundColor:'yellow',
     marginTop: 10,
     display: 'flex',
     justifyContent: 'flex-start',
@@ -637,10 +600,8 @@ export default StyleSheet.create({
   },
 
   buy_join_modal_legend: {
-    //fontFamily: 'Poppins',
     fontSize: 16,
     fontWeight: '500',
-    lineHeight: 36,
     textAlign: 'left',
     color: '#5A6E7A',
   },
@@ -655,10 +616,8 @@ export default StyleSheet.create({
     borderColor: '#3F4556',
     borderWidth: 0.5,
     borderRadius: 10,
-    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 14,
     color: '#7B8890',
     width: 260,
     paddingLeft: 12,

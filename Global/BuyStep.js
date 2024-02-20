@@ -45,12 +45,18 @@ export const BuyStep = () => {
     return (
         <>
             <View style={xStyle.buy_bg}>
-                <Text style={xStyle.buy_head_1}>Buy your favorite book in just 3 easy steps.</Text>
-                <Text style={xStyle.buy_head_2}>e-booksjunction has a range of curated academic and professional e-books from leading
+                <View style={xStyle.buy_head_1_View}>
+                    <Text style={xStyle.buy_head_1}>Buy your favorite book in just 3 easy steps.</Text>
+                </View>
+                <Text style={xStyle.buy_head_2}>
+                    e-booksjunction has a range of curated academic and professional e-books from leading
                     publishers both from India and internationally. We constantly increase the range of
                     titles across different genres and different publishers ensuring our
-                    customers get the latest in the field.</Text>
-                <Text style={xStyle.buy_head_3}>Here are following <Text style={xStyle.buy_head_3_sec}>steps</Text></Text>
+                    customers get the latest in the field.
+                </Text>
+                <View style={xStyle.buy_head_3_View}>
+                    <Text style={xStyle.buy_head_3}>Here are following <Text style={xStyle.buy_head_3_sec}>steps</Text></Text>
+                </View>
                 <ScrollView horizontal={true} style={xStyle.buy_scroll_div}>
                     <View style={xStyle.buy_card}>
                         <Image
@@ -119,22 +125,24 @@ export const BuyStep = () => {
                     childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
                 >
 
-                    <TouchableOpacity 
-                    style={xStyle.buy_join_modal_cross}
-                    onPress={backbuttonhandler}
+                    <TouchableOpacity
+                        style={xStyle.buy_join_modal_cross}
+                        onPress={backbuttonhandler}
                     >
                         <Image
                             source={require('../assets/images/close-circle.png')}
                         />
                     </TouchableOpacity>
-                    <Text style={xStyle.buy_join_modal_head}>Join as Reader</Text>
+                    <View style={xStyle.buy_join_modal_head_view}>
+                        <Text style={xStyle.buy_join_modal_head}>Join as Reader</Text>
+                    </View>
                     <Text style={xStyle.buy_join_modal_sub_head}>Fill the form and continue to join as reader</Text>
 
                     <View style={xStyle.buy_join_modal_body}>
                         <Text style={xStyle.buy_join_modal_legend}>Name</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]} 
-                            placeholder="Your Publisher's Name" placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder="Your Publisher's Name" placeholderTextColor={'#7B8890'}></TextInput>
                             <Image
                                 source={require('../assets/images/profile-circle.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -142,8 +150,8 @@ export const BuyStep = () => {
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>Email</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]} 
-                            placeholder='Your email address' placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder='Your email address' placeholderTextColor={'#7B8890'}></TextInput>
                             <Image
                                 source={require('../assets/images/smsbox.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -151,8 +159,8 @@ export const BuyStep = () => {
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>Phone no</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]} 
-                            placeholder='Your phone number' placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder='Your phone number' placeholderTextColor={'#7B8890'}></TextInput>
                             <Image
                                 source={require('../assets/images/call.png')}
                                 style={xStyle.buy_join_modal_input_icon}
