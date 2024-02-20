@@ -16,16 +16,22 @@ export const SouthshoreInnovations = () => {
 
   return (
     <View style={xStyle.southshoreInnovationsView}>
-      <Text style={xStyle.southshoreInnovationsHeader}>
-        Southshore Innovations
-      </Text>
-      <Text style={xStyle.southshoreInnovationsTag}>
-        Simple Solutions to Complex Problems
-      </Text>
-      <Text style={xStyle.southshoreInnovationsDesc}>
-        Southshore Innovations Private Limited is a technology focused company headquartered at Chennai. The company is promoted by techno functional professionals with deep domain experience in different areas such as book production, sales, customer experience, distribution with specific focus on the publishing industry.
-      </Text>
-      <TouchableOpacity>
+      <View style={xStyle.southshoreInnovationsHeader_view}>
+        <Text style={xStyle.southshoreInnovationsHeader}>
+          Southshore Innovations
+        </Text>
+      </View>
+      <View style={xStyle.southshoreInnovationsTag_view}>
+        <Text style={xStyle.southshoreInnovationsTag}>
+          Simple Solutions to Complex Problems
+        </Text>
+      </View>
+      <View style={xStyle.southshoreInnovationsDesc_view}>
+        <Text style={xStyle.southshoreInnovationsDesc}>
+          Southshore Innovations Private Limited is a technology focused company headquartered at Chennai. The company is promoted by techno functional professionals with deep domain experience in different areas such as book production, sales, customer experience, distribution with specific focus on the publishing industry.
+        </Text>
+      </View>
+      <TouchableOpacity style={xStyle.southshoreInnovationsReadMore_btn}>
         <Text style={xStyle.southshoreInnovationsReadMore}>
           Read More
         </Text>
