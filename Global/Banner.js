@@ -25,10 +25,16 @@ export const Banner = () => {
     return (
         <>
             <ImageBackground source={require('../assets/images/banner.png')} resizeMode="cover" style={xStyle.banner}>
-                <Text style={xStyle.intro_1}>Welcome to</Text>
+                <View>
+                    <Text style={xStyle.intro_1}>Welcome to</Text>
+                </View>
                 <Text style={xStyle.intro_2}>E-Books</Text>
-                <Text style={xStyle.intro_3}>Endless Possibilities</Text>
-                <Text style={xStyle.intro_4}>Shop, Read, Repeat!</Text>
+                <View style={[xStyle.paddingTop10]}>
+                    <Text style={xStyle.intro_3}>Endless Possibilities</Text>
+                </View>
+                <View style={[xStyle.paddingTop10]}>
+                    <Text style={xStyle.intro_4}>Shop, Read, Repeat!</Text>
+                </View>
             </ImageBackground>
         </>
     )

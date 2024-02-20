@@ -237,64 +237,84 @@ export default StyleSheet.create({
     padding: 15
   },
 
+  aboutSouthShoreHeadView: {
+    paddingHorizontal: 15
+  },
+
   aboutSouthShoreHead: {
     //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
-    lineHeight: 34,
+    // lineHeight: 34,
     textAlign: 'center',
     color: '#26252C',
-    paddingHorizontal: 15
+    // paddingHorizontal: 15
   },
 
   aboutSouthShoreHeadPart2: {
     //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
-    lineHeight: 34,
+    // lineHeight: 34,
     textAlign: 'center',
     color: '#7B8890'
+  },
+
+  aboutSouthShoreTagView:{
+    padding: 20,
+    borderBottomColor: 'rgba(124, 149, 167, 0.73)',
+    borderBottomWidth: 0.5
   },
 
   aboutSouthShoreTag: {
     //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '700',
-    lineHeight: 24,
+    // lineHeight: 24,
     textAlign: 'center',
-    padding: 20,
-    color: '#5A6E7A',
-    borderBottomColor: 'rgba(124, 149, 167, 0.73)',
-    borderBottomWidth: 0.5
+    // padding: 20,
+    color: '#5A6E7A'
+  },
+
+  aboutSouthShoreDescPart1View: {
+    padding: 20
   },
 
   aboutSouthShoreDescPart1: {
     //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 22,
+    // lineHeight: 22,
     textAlign: 'center',
-    padding: 20,
+    // padding: 20,
     color: '#555562'
+  },
+
+  aboutSouthShoreDescPart2View :{
+    paddingHorizontal : 15
   },
 
   aboutSouthShoreDescPart2: {
     //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 22,
+    // lineHeight: 22,
     textAlign: 'center',
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
     color: '#26252C'
+  },
+
+  aboutSouthShoreReadMoreBtn : {
+    padding: 20
   },
 
   aboutSouthShoreReadMore: {
     //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '600',
-    lineHeight: 22,
+    // lineHeight: 22,
     textAlign: 'center',
-    padding: 20,
+    // padding: 20,
     color: '#007FE3'
   },
 
@@ -392,44 +412,48 @@ export default StyleSheet.create({
     height: 285,
   },
 
+  paddingTop10:{
+    paddingTop: 10,
+  },
+
   intro_1: {
     //fontFamily: 'Poppins',
-    fontSize: 14,
+    fontSize: 20,
     fontWeight: '700',
-    lineHeight: 18,
+    // lineHeight: 18,
     textAlign: 'center',
     color: '#133B72',
-    marginBottom: 20,
+    // marginBottom: 20,
   },
 
   intro_2: {
     //fontFamily: 'ProtestRevolution-Regular',
     fontSize: 54,
     fontWeight: '800',
-    lineHeight: 40,
+    // lineHeight: 40,
     textAlign: 'center',
     color: '#3448AF',
-    paddingTop: 12,
+    // paddingTop: 12,
   },
 
   intro_3: {
     //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
-    lineHeight: 26,
+    // lineHeight: 26,
     textAlign: 'center',
     color: '#012860',
-    paddingTop: 10,
+    // paddingTop: 10,
   },
 
   intro_4: {
     //fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: '600',
-    lineHeight: 16,
+    // lineHeight: 16,
     textAlign: 'center',
     color: '#153562',
-    paddingTop: 10,
+    // paddingTop: 10,
   },
 
   publist_bg: {
