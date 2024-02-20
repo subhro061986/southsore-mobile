@@ -18,10 +18,12 @@ export const PubList = () => {
     return (
         <>
             <View style={xStyle.publist_bg}>
-                <Text style={xStyle.publist_head}>Listed Publishers</Text>
+                <View style={xStyle.publist_head_view}>
+                    <Text style={xStyle.publist_head}>Listed Publishers</Text>
+                </View>
                 <ScrollView horizontal={true}>
                     <View>
-                        <TouchableOpacity  style={xStyle.pub_cards}>
+                        <TouchableOpacity style={xStyle.pub_cards}>
                             <Image
                                 source={require('../assets/images/pub_1.png')}
                             />

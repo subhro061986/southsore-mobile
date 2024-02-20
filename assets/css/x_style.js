@@ -43,15 +43,16 @@ export default StyleSheet.create({
     padding: 15
   },
 
+  howToSouthShoreHeader_View: {
+    marginVertical: 20,
+    paddingHorizontal: 15
+  },
+
   howToSouthShoreHeader: {
-    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
-    lineHeight: 30,
     textAlign: 'center',
     color: '#26252C',
-    marginTop: 20,
-    paddingHorizontal: 15
   },
 
   howToSouthShoreTagView: {
@@ -59,28 +60,23 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10
   },
 
   howToSouthShoreTag: {
-    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 30,
     textAlign: 'center',
     color: '#374755'
   },
 
   howToSouthShoreTagPart2: {
-    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '700',
-    lineHeight: 30,
     textAlign: 'center',
     color: '#374755'
   },
 
-  howToSouthShoreCard : {
+  howToSouthShoreCard: {
     backgroundColor: '#FFFFFF',
     borderRadius: 32,
     paddingVertical: 30,
@@ -96,36 +92,35 @@ export default StyleSheet.create({
   },
 
   howToSouthShoreCardHead: {
-    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '500',
-    lineHeight: 32,
     textAlign: 'center',
     color: '#26252C',
-    // marginBottom: 15,
+  },
+
+  howToSouthShoreCardHeadSec_view: {
+    marginVertical: 15,
   },
 
   howToSouthShoreCardHeadSec: {
-    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '700',
-    lineHeight: 32,
     textAlign: 'center',
     color: '#26252C',
-    marginBottom: 15,
   },
 
-  howToSouthShoreCardTag : {
-    //fontFamily: 'Poppins',
+  howToSouthShoreCardTag_view: {
+    marginVertical: 10
+  },
+
+  howToSouthShoreCardTag: {
     fontWeight: '600',
     fontSize: 16,
-    lineHeight: 24,
     textAlign: 'center',
     color: '#26252C',
-    marginBottom: 10
   },
 
-  howToSouthShoreJoinNowBtn :{
+  howToSouthShoreJoinNowBtn: {
     borderRadius: 100,
     paddingVertical: 20,
     paddingHorizontal: 45,
@@ -134,35 +129,36 @@ export default StyleSheet.create({
     backgroundColor: '#007FE3',
   },
 
-  howToSouthShoreJoinNowBtnText : {
-    //fontFamily: 'Roboto',
+  howToSouthShoreJoinNowBtnText: {
     fontSize: 18,
     fontWeight: '700',
-    lineHeight: 16,
     textAlign: 'center',
     color: '#FFFFFF',
   },
 
+  howToSouthShoreModal_container: {
+    marginVertical: 5,
+  },
+
+  howToSouthShoreModalHead_view: {
+    marginVertical: 10,
+  },
+
   howToSouthShoreModalHead: {
-    //fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: '700',
-    lineHeight: 26,
     textAlign: 'center',
     color: '#26252C',
-    marginBottom:10
   },
 
   howToSouthShoreModalSubHead: {
-    //fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: '400',
-    lineHeight: 14,
     textAlign: 'center',
     color: '#5A6E7A',
   },
 
-  howToSouthShoreModalBody : {
+  howToSouthShoreModalBody: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
@@ -170,23 +166,20 @@ export default StyleSheet.create({
     width: '80%',
   },
 
-  howToSouthShoreModalBodyFormView:{
-    marginTop:8,
-    marginBottom:15,
-    position:'relative',
+  howToSouthShoreModalBodyFormView: {
+    marginTop: 8,
+    marginBottom: 15,
+    position: 'relative',
   },
 
   buy_join_modal_input_height: {
-    height:40,
+    height: 40,
   },
 
-  howToSouthShoreModalBodyFormLabel : {
+  howToSouthShoreModalBodyFormLabel: {
     color: '#26252C',
-    //fontFamily: 'Poppins',
     fontSize: 17,
     fontWeight: '600',
-    lineHeight: 20,
-    marginTop: 10
   },
 
   howToSouthShoreModalBodyFormInput: {
@@ -197,34 +190,29 @@ export default StyleSheet.create({
     color: '#26252C',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    //fontFamily: 'Roboto',
     fontSize: 13,
     fontWeight: '400',
-    lineHeight: 14,
-    // width:260,
-    // paddingLeft:12,
+    marginVertical: 10,
   },
 
   howToSouthShoreModalBodyFormInputIcon: {
     position: 'absolute',
-    top:'53%',
-    right:'5%'
+    top: '50%',
+    right: '5%'
   },
 
   howToSouthShoreModalSubmit: {
     borderRadius: 100,
     paddingVertical: 20,
-    paddingHorizontal: 45,
+    paddingHorizontal: 40,
     marginHorizontal: 46,
     marginVertical: 20,
     backgroundColor: '#007FE3',
   },
 
-  howToSouthShoreModalSubmitText : {
-    //fontFamily: 'Roboto',
+  howToSouthShoreModalSubmitText: {
     fontSize: 16,
     fontWeight: '600',
-    lineHeight: 16,
     textAlign: 'center',
     color: '#FFFFFF',
   },
@@ -322,46 +310,48 @@ export default StyleSheet.create({
     backgroundColor: '#EBF3FA'
   },
 
+  southshoreInnovationsHeader_view: {
+    padding: 25,
+  },
+
   southshoreInnovationsHeader: {
-    //fontFamily: 'Poppins',
     fontSize: 28,
     fontWeight: '700',
-    lineHeight: 48,
     textAlign: 'center',
     color: '#26252C',
-    padding: 25,
-    paddingBottom: 25
+  },
+
+  southshoreInnovationsTag_view: {
+    paddingHorizontal: 25,
   },
 
   southshoreInnovationsTag: {
-    //fontFamily: 'Roboto',
     fontSize: 19,
     fontWeight: '600',
-    lineHeight: 28,
     textAlign: 'center',
-    paddingHorizontal: 25,
     color: '#3F4556'
   },
 
+  southshoreInnovationsDesc_view: {
+    padding: 20,
+  },
+
   southshoreInnovationsDesc: {
-    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 24,
     textAlign: 'center',
-    padding: 20,
-    paddingBottom: 20,
     color: '#555562'
   },
 
+  southshoreInnovationsReadMore_btn: {
+    padding: 20,
+    marginBottom:200,
+  },
+
   southshoreInnovationsReadMore: {
-    //fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '600',
-    lineHeight: 22,
     textAlign: 'center',
-    padding: 20,
-    paddingBottom: 200,
     color: '#007FE3'
   },
 
@@ -458,18 +448,19 @@ export default StyleSheet.create({
 
   publist_bg: {
     backgroundColor: '#EBF4FC',
-    paddingVertical: '15%',
+    paddingVertical: '18%',
     paddingHorizontal: 15,
   },
 
+  publist_head_view: {
+    paddingBottom: '10%',
+  },
+
   publist_head: {
-    //fontFamily: 'Poppins',
     fontSize: 24,
     fontWeight: '600',
-    lineHeight: 28,
     textAlign: 'center',
     color: '#26252C',
-    paddingBottom: '10%'
   },
 
   pub_cards: {
@@ -485,10 +476,8 @@ export default StyleSheet.create({
   },
 
   pub_name: {
-    //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '500',
-    lineHeight: 14,
     textAlign: 'center',
     color: '#26252C',
   },
@@ -537,7 +526,7 @@ export default StyleSheet.create({
     color: '#FFFFFF',
   },
 
-  
+
 
   buy_card: {
     height: 450,
@@ -554,14 +543,15 @@ export default StyleSheet.create({
     // backgroundColor:'pink',
   },
 
+  buy_card_head_view: {
+    marginVertical: 10,
+  },
+
   buy_card_head: {
-    //fontFamily: 'Poppins',
     fontSize: 20,
     fontWeight: '500',
-    lineHeight: 32,
     textAlign: 'center',
     color: '#26252C',
-    marginBottom: 15,
   },
 
   buy_card_head_sec: {
@@ -574,10 +564,8 @@ export default StyleSheet.create({
   },
 
   buy_card_body: {
-    //fontFamily: 'Poppins',
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 22,
     textAlign: 'center',
     color: '#64646F',
   },
@@ -586,7 +574,6 @@ export default StyleSheet.create({
     //fontFamily: 'Poppins',
     fontSize: 14,
     fontWeight: '500',
-    lineHeight: 22,
     textAlign: 'center',
     color: '#097EDA',
   },
@@ -616,10 +603,10 @@ export default StyleSheet.create({
     backgroundColor: 'white'
   },
 
-  buy_join_modal_cross:{
-    display:'flex',
-    alignItems:'flex-end',
-    width:275,
+  buy_join_modal_cross: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    width: 275,
   },
 
   buy_join_modal_head: {
@@ -629,7 +616,7 @@ export default StyleSheet.create({
     lineHeight: 26,
     textAlign: 'center',
     color: '#26252C',
-    marginBottom:10
+    marginBottom: 10
   },
 
   buy_join_modal_sub_head: {
@@ -645,8 +632,8 @@ export default StyleSheet.create({
     // backgroundColor:'yellow',
     marginTop: 10,
     display: 'flex',
-    justifyContent:'flex-start',
-    textAlign:'left',
+    justifyContent: 'flex-start',
+    textAlign: 'left',
   },
 
   buy_join_modal_legend: {
@@ -658,37 +645,37 @@ export default StyleSheet.create({
     color: '#5A6E7A',
   },
 
-  buy_join_modal_input_view:{
-    marginTop:8,
-    marginBottom:15,
-    position:'relative',
+  buy_join_modal_input_view: {
+    marginTop: 8,
+    marginBottom: 15,
+    position: 'relative',
   },
 
   buy_join_modal_input: {
-    borderColor:'#3F4556',
-    borderWidth:0.5,
-    borderRadius:10,
+    borderColor: '#3F4556',
+    borderWidth: 0.5,
+    borderRadius: 10,
     //fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 14,
     color: '#7B8890',
-    width:260,
-    paddingLeft:12,
+    width: 260,
+    paddingLeft: 12,
   },
 
   buy_join_modal_input_height: {
-    height:40,
+    height: 40,
   },
 
   buy_join_modal_input_icon: {
     position: 'absolute',
-    top:'21%',
-    right:'5%'
+    top: '21%',
+    right: '5%'
   },
 
   buy_submit_font: {
-    fontSize:16,
+    fontSize: 16,
   },
 });
 
