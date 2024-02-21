@@ -108,101 +108,84 @@ export const HowToSouthShore = () => {
       {/* --------JOIN NOW MODAL------- */}
 
       <View>
-        <Overlay
-          // animationType={ZoomIn}
-          // transparent={true}
-          // // isVisible={modalvisibility}
-          // onRequestClose={backbuttonhandler}
-          // hasBackdrop={true}
-          // backdropColor={'black'}
-          // // statusBarTranslucent={true}
-          // backdropOpacity={0.5}
-          visible={modalvisibility}
-          onClose={backbuttonhandler}
-          closeOnTouchOutside
-          containerStyle={{ backgroundColor: 'rgba(38, 37, 37, 0.78)' }}
-          childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
-        >
-          <TouchableOpacity
-            style={xStyle.buy_join_modal_cross}
-            onPress={backbuttonhandler}
-          >
-            <Image
-              source={require('../assets/images/close-circle.png')}
-            />
-          </TouchableOpacity>
-          <View style={xStyle.howToSouthShoreModal_container}>
-            <View style={xStyle.howToSouthShoreModalHead_view}>
-              <Text style={xStyle.howToSouthShoreModalHead}>Join as Publisher</Text>
+                <Overlay
+                    // animationType={ZoomIn}
+                    // transparent={true}
+                    visible={modalvisibility}
+                    // // isVisible={modalvisibility}
+                    // onRequestClose={backbuttonhandler}
+                    // hasBackdrop={true}
+                    // backdropColor={'black'}
+                    // // statusBarTranslucent={true}
+                    // backdropOpacity={0.5}
+                    onClose={backbuttonhandler}
+                    closeOnTouchOutside
+                    containerStyle={{ backgroundColor: 'rgba(38, 37, 37, 0.78)' }}
+                    childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
+                >
+
+                    <TouchableOpacity
+                        style={xStyle.buy_join_modal_cross}
+                        onPress={backbuttonhandler}
+                    >
+                        <Image
+                            source={require('../assets/images/close-circle.png')}
+                        />
+                    </TouchableOpacity>
+                    <View style={xStyle.buy_join_modal_head_view}>
+                        <Text style={xStyle.buy_join_modal_head}>Join as Publisher</Text>
+                    </View>
+                    <Text style={xStyle.buy_join_modal_sub_head}>Fill the form and continue to join as publisher</Text>
+
+                    <View style={xStyle.buy_join_modal_body}>
+                        <Text style={xStyle.buy_join_modal_legend}>Name</Text>
+                        <View style={xStyle.buy_join_modal_input_view}>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder="Your Publisher's Name" placeholderTextColor={'#7B8890'}></TextInput>
+                            <Image
+                                source={require('../assets/images/profile-circle.png')}
+                                style={xStyle.buy_join_modal_input_icon}
+                            />
+                        </View>
+                        <Text style={xStyle.buy_join_modal_legend}>Email</Text>
+                        <View style={xStyle.buy_join_modal_input_view}>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder='Your email address' placeholderTextColor={'#7B8890'}></TextInput>
+                            <Image
+                                source={require('../assets/images/smsbox.png')}
+                                style={xStyle.buy_join_modal_input_icon}
+                            />
+                        </View>
+                        <Text style={xStyle.buy_join_modal_legend}>Phone no</Text>
+                        <View style={xStyle.buy_join_modal_input_view}>
+                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder='Your phone number' placeholderTextColor={'#7B8890'}></TextInput>
+                            <Image
+                                source={require('../assets/images/call.png')}
+                                style={xStyle.buy_join_modal_input_icon}
+                            />
+                        </View>
+                        <Text style={xStyle.buy_join_modal_legend}>Message</Text>
+                        <View style={xStyle.buy_join_modal_input_view}>
+                            <TextInput style={xStyle.buy_join_modal_input}
+                                placeholder='Your message'
+                                placeholderTextColor={'#7B8890'}
+                                multiline={true}
+                                numberOfLines={4}
+                                textAlignVertical='top'
+                            >
+                            </TextInput>
+                        </View>
+                    </View>
+                    <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn}>
+                        <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Submit</Text>
+                    </TouchableOpacity>
+
+
+
+                </Overlay>
             </View>
-            <Text style={xStyle.howToSouthShoreModalSubHead}>Fill the form and continue to join as  publisher</Text>
-            <View style={xStyle.howToSouthShoreModalBody}>
-              <View style={xStyle.howToSouthShoreModalBodyFormView}>
-                <Text style={xStyle.howToSouthShoreModalBodyFormLabel}>Name</Text>
-                <TextInput
-                  style={xStyle.howToSouthShoreModalBodyFormInput}
-                  placeholder="Your name"
-                  placeholderTextColor={'#7B8890'}
-                  keyboardType="text"
-                  value={name}
-                  onChangeText={(e) => setName(e)}
-                />
-                <Image
-                  source={require('../assets/images/profile-circle.png')}
-                  style={xStyle.howToSouthShoreModalBodyFormInputIcon}
-                />
-              </View>
-              <View>
-                <Text style={xStyle.howToSouthShoreModalBodyFormLabel}>Email</Text>
-                <TextInput
-                  style={xStyle.howToSouthShoreModalBodyFormInput}
-                  placeholder="Your email address"
-                  placeholderTextColor={'#7B8890'}
-                  keyboardType="email"
-                  value={email}
-                  onChangeText={(e) => setEmail(e)}
-                />
-                <Image
-                  source={require('../assets/images/smsbox.png')}
-                  style={xStyle.howToSouthShoreModalBodyFormInputIcon}
-                />
-              </View>
-              <View>
-                <Text style={xStyle.howToSouthShoreModalBodyFormLabel}>Phone</Text>
-                <TextInput
-                  style={xStyle.howToSouthShoreModalBodyFormInput}
-                  placeholder="Your phone number"
-                  placeholderTextColor={'#7B8890'}
-                  keyboardType="text"
-                  value={phoneNumber}
-                  onChangeText={(e) => setPhoneNumber(e)}
-                />
-                <Image
-                  source={require('../assets/images/call.png')}
-                  style={xStyle.howToSouthShoreModalBodyFormInputIcon}
-                />
-              </View>
-              <View>
-                <Text style={xStyle.howToSouthShoreModalBodyFormLabel}>Message</Text>
-                <TextInput
-                  style={xStyle.howToSouthShoreModalBodyFormInput}
-                  placeholder="Your message"
-                  placeholderTextColor={'#7B8890'}
-                  keyboardType="text"
-                  value={message}
-                  multiline={true}
-                  numberOfLines={4}
-                  textAlignVertical='top'
-                  onChangeText={(e) => setMessage(e)}
-                />
-              </View>
-              <TouchableOpacity style={xStyle.howToSouthShoreModalSubmit}>
-                <Text style={xStyle.howToSouthShoreModalSubmitText}>Submit</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Overlay>
-      </View>
+      
     </>
   )
 }

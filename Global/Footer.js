@@ -18,7 +18,9 @@ export const Footer = () => {
 
   return (
     <View style={xStyle.bottomnav}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('home')}
+      >
         <Image
           source={require('../assets/images/home.png')}
         />
