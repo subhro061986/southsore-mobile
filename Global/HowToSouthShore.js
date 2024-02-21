@@ -32,7 +32,7 @@ export const HowToSouthShore = () => {
   }
 
   const backbuttonhandler = () => {
-    setmodalvisibility(!modalvisibility);
+    setmodalvisibility(false);
   }
 
 

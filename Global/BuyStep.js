@@ -39,7 +39,7 @@ export const BuyStep = () => {
     }
 
     const backbuttonhandler = () => {
-        setmodalvisibility(!modalvisibility);
+        setmodalvisibility(false);
     }
 
     return (
