@@ -514,7 +514,7 @@ export default StyleSheet.create({
   },
 
   buy_card_head_view: {
-    marginVertical: 16,
+    marginVertical: 10,
   },
 
   buy_card_head: {
@@ -636,6 +636,10 @@ export default StyleSheet.create({
 
   buy_submit_font: {
     fontSize: 16,
+  },
+
+  pub_banner_view: {
+    backgroundColor:'red',
   },
 });
 

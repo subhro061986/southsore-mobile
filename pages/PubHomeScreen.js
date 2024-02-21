@@ -22,6 +22,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import TopMenu from "../Global/TopMenu.js";
 import Footer from "../Global/Footer.js";
+import FooterPub from '../Global/FooterPub.js';
 
 export const PubHomeScreen = () => {
 
@@ -33,18 +34,20 @@ export const PubHomeScreen = () => {
             <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]}>
                 <TopMenu />
                 <ImageBackground source={require('../assets/images/PubBg.png')} resizeMode="cover" style={xStyle.banner}>
-                    <View>
-                        <Image
-                            source={require('../assets/images/demoBook.png')}
-                        />
-                    </View>
-                    <View>
-                        <Text></Text>
-                        <Text></Text>
+                    <View style={xStyle.pub_banner_view}>
+                        <View>
+                            <Image
+                                source={require('../assets/images/demoBook.png')}
+                            />
+                        </View>
+                        <View>
+                            <Text>Your Gateway to Excellence</Text>
+                            <Text>Explore Academic & Professional E-Books with Ease</Text>
+                        </View>
                     </View>
                 </ImageBackground>
             </ScrollView>
-            <Footer />
+            <FooterPub />
         </SafeAreaView>
     )
 }
