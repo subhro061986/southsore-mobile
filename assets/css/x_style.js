@@ -514,7 +514,7 @@ export default StyleSheet.create({
   },
 
   buy_card_head_view: {
-    marginVertical: 10,
+    marginVertical: 16,
   },
 
   buy_card_head: {
