@@ -82,13 +82,13 @@ export default StyleSheet.create({
     paddingVertical: 30,
     paddingHorizontal: 10,
     marginVertical: 30,
-    marginHorizontal: 20,
+    marginHorizontal: 18,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: '#AAB4BA',
     borderWidth: 1,
-    width: 320
+    width: 290
   },
 
   howToSouthShoreCardHead: {
@@ -226,18 +226,18 @@ export default StyleSheet.create({
   },
 
   aboutSouthShoreHeadView: {
-    paddingHorizontal: 15
+    paddingHorizontal: 25
   },
 
   aboutSouthShoreHead: {
-    fontSize: 26,
+    fontSize: 25,
     fontWeight: '700',
     textAlign: 'center',
     color: '#26252C',
   },
 
   aboutSouthShoreHeadPart2: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: '700',
     textAlign: 'center',
     color: '#7B8890'
@@ -397,8 +397,8 @@ export default StyleSheet.create({
   },
 
   intro_2: {
-    fontSize: 54,
-    fontWeight: '800',
+    fontSize: 57,
+    fontWeight: '900',
     textAlign: 'center',
     color: '#3448AF',
   },
@@ -419,7 +419,8 @@ export default StyleSheet.create({
 
   publist_bg: {
     backgroundColor: '#EBF4FC',
-    paddingVertical: '18%',
+    paddingTop: '10%',
+    paddingBottom: '13%',
     paddingHorizontal: 15,
   },
 

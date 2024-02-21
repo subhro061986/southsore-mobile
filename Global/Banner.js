@@ -29,7 +29,7 @@ export const Banner = () => {
                     <Text style={xStyle.intro_1}>Welcome to</Text>
                 </View>
                 <Text style={xStyle.intro_2}>E-Books</Text>
-                <View style={[xStyle.paddingTop10]}>
+                <View>
                     <Text style={xStyle.intro_3}>Endless Possibilities</Text>
                 </View>
                 <View style={[xStyle.paddingTop10]}>
