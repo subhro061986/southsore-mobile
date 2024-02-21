@@ -328,7 +328,6 @@ export default StyleSheet.create({
 
   southshoreInnovationsReadMore_btn: {
     padding: 20,
-    marginBottom:200,
   },
 
   southshoreInnovationsReadMore: {
@@ -638,9 +637,66 @@ export default StyleSheet.create({
     fontSize: 16,
   },
 
-  pub_banner_view: {
-    backgroundColor:'red',
+  pub_banner: {
+    flex: 1,
+    flexDirection:'row',
+    paddingVertical: '10%',
+    height: 285,
+    width: Dimensions.get('screen').width,
   },
+
+  pub_banner_txt_view: {
+    width: '45%',
+    paddingVertical:'5%',
+  },
+
+  pub_banner_head: {
+    fontWeight:'500',
+    fontSize: 12,
+    color:'#42554E',
+  },
+
+  pub_banner_body_view: {
+    marginTop: '5%',
+  },
+
+  pub_banner_body: {
+    fontWeight:'600',
+    fontSize: 22,
+    color:'#202C27',
+  },
+
+  pub_about: {
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    paddingHorizontal:'10%',
+    paddingVertical:'15%',
+  },
+
+  pub_about_logo: {
+    marginBottom:'12%'
+  },
+
+  pub_about_body: {
+    fontWeight:'400',
+    fontSize: 14,
+    color:'#555562',
+    textAlign:'center',
+  },
+
+  pub_cat_cards: {
+    height: 82,
+    width: 82,
+    borderRadius: 100,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
 });
 
 
