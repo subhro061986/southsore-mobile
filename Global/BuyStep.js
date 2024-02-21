@@ -142,7 +142,7 @@ export const BuyStep = () => {
                         <Text style={xStyle.buy_join_modal_legend}>Name</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
                             <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder="Your Publisher's Name" placeholderTextColor={'#7B8890'}></TextInput>
+                                placeholder="Your Name" placeholderTextColor={'#7B8890'}></TextInput>
                             <Image
                                 source={require('../assets/images/profile-circle.png')}
                                 style={xStyle.buy_join_modal_input_icon}
