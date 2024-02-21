@@ -9,8 +9,13 @@ import {
 
 } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+
 
 export const Footer = () => {
+
+  const navigation = useNavigation();
+
   return (
     <View style={xStyle.bottomnav}>
       <TouchableOpacity>
@@ -18,7 +23,9 @@ export const Footer = () => {
           source={require('../assets/images/home.png')}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('pubhome')}
+      >
         <Image
           source={require('../assets/images/publisher.png')}
         />

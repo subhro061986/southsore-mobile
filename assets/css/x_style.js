@@ -346,7 +346,7 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#03142C',
-    borderRadius: 20,
+    borderRadius: 100,
     paddingHorizontal: 20,
     paddingVertical: 20,
     //height:100,
