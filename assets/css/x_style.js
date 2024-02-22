@@ -377,12 +377,24 @@ export default StyleSheet.create({
     color: '#26252C'
   },
 
-  categoryDetailsBooksMainDiv: {
-
+  categoryDetailsDropDown:{
+    backgroundColor: '#fff',
+    width : 220,
+    marginHorizontal: 15,
+    paddingHorizontal: 15,
+    borderColor : '#777983',
+    borderWidth: 0.5,
+    borderRadius: 20
   },
 
-  categoryDetailsBook: {
-
+  categoryDetailsDropDownPicker: { 
+    borderColor : '#777983',
+    borderWidth: 0.5,
+    borderRadius: 20,
+    backgroundColor: 'white', 
+    color : '#141516',
+    fontWeight : '500',
+    fontSize : 12
   },
 
   bottomnav: {
