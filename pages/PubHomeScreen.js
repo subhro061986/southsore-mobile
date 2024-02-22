@@ -131,6 +131,7 @@ export const PubHomeScreen = () => {
                 </View>
 
                 {/* New Arrival */}
+
                 <View style={xStyle.pub_home_new_view}>
                     <Text style={xStyle.pub_home_new_head}>New Arrivals</Text>
                     <View
@@ -148,56 +149,35 @@ export const PubHomeScreen = () => {
                                 style={xStyle.pub_home_new_card_txtbox}
                             >
                                 <View
-                                    style={{
-                                        borderBottomColor: '#B3B9C3',
-                                        borderBottomWidth: 0.5,
-                                        paddingBottom: '10%',
-                                        marginBottom: '6%'
-                                    }}
+                                    style={xStyle.pub_home_new_card_view_1}
                                 >
                                     <View
-                                    style={{
-                                        marginBottom:'3%'
-                                    }}
+                                        style={xStyle.pub_home_card_title_view}
                                     >
                                         <Text
-                                            style={{
-                                                fontWeight: '500',
-                                                fontSize: 14,
-                                                color: '#26252C'
-                                            }}
-                                        >Attitude Is Everyt..</Text>
+                                            style={xStyle.pub_home_card_title}
+                                        >
+                                            Attitude Is Everyt..
+                                        </Text>
                                     </View>
                                     <Text
-                                        style={{
-                                            fontWeight: '400',
-                                            fontSize: 11,
-                                            color: '#64646F',
-                                        }}
+                                        style={xStyle.pub_home_card_author}
                                     >Author:
                                         <Text
-                                            style={{
-                                                fontWeight: '500'
-                                            }}
+                                            style={xStyle.pub_home_card_author_name}
                                         >
                                             Jeff Keller
                                         </Text>
                                     </Text>
                                 </View>
                                 <View
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        justifyContent: 'space-between',
-                                    }}
+                                    style={xStyle.pub_home_card_price_view}
                                 >
                                     <Text
-                                        style={{
-                                            fontWeight: '600',
-                                            fontSize: 20,
-                                            color: '#26252C',
-                                        }}
-                                    >₹199</Text>
+                                        style={xStyle.pub_home_card_price}
+                                    >
+                                        ₹199
+                                    </Text>
                                     <TouchableOpacity>
                                         <Image
                                             source={require('../assets/images/plusBtn.png')}
@@ -211,30 +191,150 @@ export const PubHomeScreen = () => {
                             style={xStyle.pub_home_new_card}
                         >
                             <Image
-                                source={require('../assets/images/cov1.png')}
+                                source={require('../assets/images/cov2.png')}
                                 style={xStyle.pub_home_new_card_img}
                                 width={154}
                             />
+                            <View
+                                style={xStyle.pub_home_new_card_txtbox}
+                            >
+                                <View
+                                    style={xStyle.pub_home_new_card_view_1}
+                                >
+                                    <View
+                                        style={xStyle.pub_home_card_title_view}
+                                    >
+                                        <Text
+                                            style={xStyle.pub_home_card_title}
+                                        >
+                                            Harry Potter and th..
+                                        </Text>
+                                    </View>
+                                    <Text
+                                        style={xStyle.pub_home_card_author}
+                                    >Author:
+                                        <Text
+                                            style={xStyle.pub_home_card_author_name}
+                                        >
+                                            Jeff Keller
+                                        </Text>
+                                    </Text>
+                                </View>
+                                <View
+                                    style={xStyle.pub_home_card_price_view}
+                                >
+                                    <Text
+                                        style={xStyle.pub_home_card_price}
+                                    >
+                                        ₹300
+                                    </Text>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                         </View>
 
                         <View
                             style={xStyle.pub_home_new_card}
                         >
                             <Image
-                                source={require('../assets/images/cov1.png')}
+                                source={require('../assets/images/cov3.png')}
                                 style={xStyle.pub_home_new_card_img}
                                 width={154}
                             />
+                            <View
+                                style={xStyle.pub_home_new_card_txtbox}
+                            >
+                                <View
+                                    style={xStyle.pub_home_new_card_view_1}
+                                >
+                                    <View
+                                        style={xStyle.pub_home_card_title_view}
+                                    >
+                                        <Text
+                                            style={xStyle.pub_home_card_title}
+                                        >
+                                            Whit by Rock
+                                        </Text>
+                                    </View>
+                                    <Text
+                                        style={xStyle.pub_home_card_author}
+                                    >Author:
+                                        <Text
+                                            style={xStyle.pub_home_card_author_name}
+                                        >
+                                            Jeff Keller
+                                        </Text>
+                                    </Text>
+                                </View>
+                                <View
+                                    style={xStyle.pub_home_card_price_view}
+                                >
+                                    <Text
+                                        style={xStyle.pub_home_card_price}
+                                    >
+                                        ₹149
+                                    </Text>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                         </View>
 
                         <View
                             style={xStyle.pub_home_new_card}
                         >
                             <Image
-                                source={require('../assets/images/cov1.png')}
+                                source={require('../assets/images/cov4.png')}
                                 style={xStyle.pub_home_new_card_img}
                                 width={154}
                             />
+                            <View
+                                style={xStyle.pub_home_new_card_txtbox}
+                            >
+                                <View
+                                    style={xStyle.pub_home_new_card_view_1}
+                                >
+                                    <View
+                                        style={xStyle.pub_home_card_title_view}
+                                    >
+                                        <Text
+                                            style={xStyle.pub_home_card_title}
+                                        >
+                                            The way of the na..
+                                        </Text>
+                                    </View>
+                                    <Text
+                                        style={xStyle.pub_home_card_author}
+                                    >Author:
+                                        <Text
+                                            style={xStyle.pub_home_card_author_name}
+                                        >
+                                            Jeff Keller
+                                        </Text>
+                                    </Text>
+                                </View>
+                                <View
+                                    style={xStyle.pub_home_card_price_view}
+                                >
+                                    <Text
+                                        style={xStyle.pub_home_card_price}
+                                    >
+                                        ₹179
+                                    </Text>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                         </View>
                     </View>
                 </View>
