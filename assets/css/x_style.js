@@ -382,7 +382,7 @@ export default StyleSheet.create({
   },
 
   categoryDetailsBook: {
-    
+
   },
 
   bottomnav: {
@@ -804,6 +804,13 @@ export default StyleSheet.create({
   pub_home_new_card_img: {
     borderRadius: 13,
     resizeMode: 'contain',
+  },
+
+  pub_home_new_card_txtbox: {
+    marginHorizontal: '6%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingVertical: '5%',
   },
 });
 

@@ -145,30 +145,59 @@ export const PubHomeScreen = () => {
                                 width={154}
                             />
                             <View
-                            style={{
-                                backgroundColor: 'yellow',
-                                marginHorizontal: '5%',
-                                display:'flex',
-                                justifyContent: 'space-between',
-                                paddingVertical: '5%',
-                            }}
+                                style={xStyle.pub_home_new_card_txtbox}
                             >
                                 <View
-                                style={{
-                                    borderBottomColor: '#B3B9C3',
-                                    borderBottomWidth: 0.5,
-                                }}
+                                    style={{
+                                        borderBottomColor: '#B3B9C3',
+                                        borderBottomWidth: 0.5,
+                                        paddingBottom: '10%',
+                                        marginBottom: '6%'
+                                    }}
+                                >
+                                    <View
+                                    style={{
+                                        marginBottom:'3%'
+                                    }}
+                                    >
+                                        <Text
+                                            style={{
+                                                fontWeight: '500',
+                                                fontSize: 14,
+                                                color: '#26252C'
+                                            }}
+                                        >Attitude Is Everyt..</Text>
+                                    </View>
+                                    <Text
+                                        style={{
+                                            fontWeight: '400',
+                                            fontSize: 11,
+                                            color: '#64646F',
+                                        }}
+                                    >Author:
+                                        <Text
+                                            style={{
+                                                fontWeight: '500'
+                                            }}
+                                        >
+                                            Jeff Keller
+                                        </Text>
+                                    </Text>
+                                </View>
+                                <View
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                    }}
                                 >
                                     <Text
-                                    style={{
-                                        fontWeight: '500',
-                                        fontSize: 14
-                                    }}
-                                    >Attitude Is Everyt..</Text>
-                                    <Text>Author: <Text>Jeff Keller</Text></Text>
-                                </View>
-                                <View>
-                                    <Text>₹199</Text>
+                                        style={{
+                                            fontWeight: '600',
+                                            fontSize: 20,
+                                            color: '#26252C',
+                                        }}
+                                    >₹199</Text>
                                     <TouchableOpacity>
                                         <Image
                                             source={require('../assets/images/plusBtn.png')}
@@ -176,6 +205,26 @@ export const PubHomeScreen = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
+                        </View>
+
+                        <View
+                            style={xStyle.pub_home_new_card}
+                        >
+                            <Image
+                                source={require('../assets/images/cov1.png')}
+                                style={xStyle.pub_home_new_card_img}
+                                width={154}
+                            />
+                        </View>
+
+                        <View
+                            style={xStyle.pub_home_new_card}
+                        >
+                            <Image
+                                source={require('../assets/images/cov1.png')}
+                                style={xStyle.pub_home_new_card_img}
+                                width={154}
+                            />
                         </View>
 
                         <View
