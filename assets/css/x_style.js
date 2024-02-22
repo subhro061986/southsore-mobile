@@ -740,7 +740,7 @@ export default StyleSheet.create({
     marginVertical: '8%',
     display: 'flex',
     flexDirection: 'row',
-    flexWrap:'wrap',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
 
@@ -750,12 +750,19 @@ export default StyleSheet.create({
     borderColor: '#CDD2DF',
     borderWidth: 1,
     borderRadius: 14,
-    display:'flex',
+    display: 'flex',
   },
 
   pub_home_new_card_img: {
-    borderRadius:13,
-    resizeMode:'contain',
+    borderRadius: 13,
+    resizeMode: 'contain',
+  },
+
+  pub_home_new_card_txtbox: {
+    marginHorizontal: '6%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingVertical: '5%',
   },
 });
 
