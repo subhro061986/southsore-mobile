@@ -795,8 +795,6 @@ export default StyleSheet.create({
   },
 
   pub_home_new_body: {
-    borderColor: 'pink',
-    borderWidth: 1,
     marginVertical: '8%',
     display: 'flex',
     flexDirection: 'row',
@@ -811,6 +809,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 14,
     display: 'flex',
+    marginBottom: '3%',
   },
 
   pub_home_new_card_img: {
@@ -823,6 +822,45 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     paddingVertical: '5%',
+  },
+
+  pub_home_new_card_view_1: {
+    borderBottomColor: '#B3B9C3',
+    borderBottomWidth: 0.5,
+    paddingBottom: '10%',
+    marginBottom: '6%'
+  },
+
+  pub_home_card_title_view: {
+    marginBottom: '3%'
+  },
+
+  pub_home_card_title: {
+    fontWeight: '500',
+    fontSize: 14,
+    color: '#26252C',
+  },
+
+  pub_home_card_author: {
+    fontWeight: '400',
+    fontSize: 11,
+    color: '#64646F',
+  },
+
+  pub_home_card_author_name: {
+    fontWeight: '500'
+  },
+
+  pub_home_card_price_view: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  pub_home_card_price: {
+    fontWeight: '600',
+    fontSize: 20,
+    color: '#26252C',
   },
 });
 
