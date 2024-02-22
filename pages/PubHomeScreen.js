@@ -74,61 +74,138 @@ export const PubHomeScreen = () => {
 
                 {/* Category List */}
 
-                <View style={[xStyle.publist_bg, {marginBottom:'55%'}]}>
-                <View style={xStyle.publist_head_view}>
-                    <Text style={xStyle.publist_head}>Listed Publishers</Text>
+                <View style={xStyle.publist_bg}>
+                    <View style={xStyle.publist_head_view}>
+                        <Text style={xStyle.publist_head}>Listed Publishers</Text>
+                    </View>
+                    <ScrollView horizontal={true}>
+                        <View>
+                            <TouchableOpacity style={xStyle.pub_cat_cards}>
+                                <Image
+                                    source={require('../assets/images/art.png')}
+                                />
+                            </TouchableOpacity>
+                            <Text style={xStyle.pub_name}>Art & Photo..</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity style={xStyle.pub_cat_cards}>
+                                <Image
+                                    source={require('../assets/images/eng.png')}
+                                />
+                            </TouchableOpacity>
+                            <Text style={xStyle.pub_name}>English L..</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity style={xStyle.pub_cat_cards}>
+                                <Image
+                                    source={require('../assets/images/bio.png')}
+                                />
+                            </TouchableOpacity>
+                            <Text style={xStyle.pub_name}>Biographies..</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity style={xStyle.pub_cat_cards}>
+                                <Image
+                                    source={require('../assets/images/art.png')}
+                                />
+                            </TouchableOpacity>
+                            <Text style={xStyle.pub_name}>Art & Photo..</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity style={xStyle.pub_cat_cards}>
+                                <Image
+                                    source={require('../assets/images/eng.png')}
+                                />
+                            </TouchableOpacity>
+                            <Text style={xStyle.pub_name}>English L..</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity style={xStyle.pub_cat_cards}>
+                                <Image
+                                    source={require('../assets/images/bio.png')}
+                                />
+                            </TouchableOpacity>
+                            <Text style={xStyle.pub_name}>Biographies..</Text>
+                        </View>
+                    </ScrollView>
                 </View>
-                <ScrollView horizontal={true}>
-                    <View>
-                        <TouchableOpacity style={xStyle.pub_cat_cards}>
+
+                {/* New Arrival */}
+                <View style={xStyle.pub_home_new_view}>
+                    <Text style={xStyle.pub_home_new_head}>New Arrivals</Text>
+                    <View
+                        style={xStyle.pub_home_new_body}
+                    >
+                        <View
+                            style={xStyle.pub_home_new_card}
+                        >
                             <Image
-                                source={require('../assets/images/art.png')}
+                                source={require('../assets/images/cov1.png')}
+                                style={xStyle.pub_home_new_card_img}
+                                width={154}
                             />
-                        </TouchableOpacity>
-                        <Text style={xStyle.pub_name}>Art & Photo..</Text>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={xStyle.pub_cat_cards}>
+                        </View>
+
+                        <View
+                            style={xStyle.pub_home_new_card}
+                        >
                             <Image
-                                source={require('../assets/images/eng.png')}
+                                source={require('../assets/images/cov1.png')}
+                                style={xStyle.pub_home_new_card_img}
+                                width={154}
                             />
-                        </TouchableOpacity>
-                        <Text style={xStyle.pub_name}>English L..</Text>
+                        </View>
                     </View>
-                    <View>
-                        <TouchableOpacity style={xStyle.pub_cat_cards}>
+                </View>
+
+                {/* Buying Steps */}
+
+                <View style={xStyle.pub_home_buy_bg}>
+                    <View style={xStyle.buy_head_1_View}>
+                        <Text style={xStyle.pub_buy_head_1}>Buy your favorite book in just 3 easy steps.</Text>
+                    </View>
+                    <Text style={xStyle.pub_buy_head_3}>Here are following <Text style={xStyle.pub_buy_head_3_sec}>steps</Text></Text>
+                    <ScrollView horizontal={true} style={xStyle.buy_scroll_div}>
+                        <View style={xStyle.buy_card}>
                             <Image
-                                source={require('../assets/images/bio.png')}
+                                source={require('../assets/images/buystep.png')}
                             />
-                        </TouchableOpacity>
-                        <Text style={xStyle.pub_name}>Biographies..</Text>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={xStyle.pub_cat_cards}>
+                            <View style={xStyle.buy_card_head_view}>
+                                <Text style={xStyle.buy_card_head}>Browse <Text style={xStyle.buy_card_head_sec}>E-Pub Reader</Text></Text>
+                            </View>
+                            <Text style={xStyle.buy_card_body}>Once you are on our platform
+                                &nbsp;<Text
+                                    style={xStyle.buy_card_link}
+                                    onPress={() => Linking.openURL('http://ebooksjunction.com/')}>
+                                    www.ebooksjunctions.com</Text> as a customer,
+                                you have the option to choosing to select based on a publisher on their webstore on
+                                the platform or search / browse for books based on keywords,
+                                title name, author or the ISBN number.</Text>
+                        </View>
+                        <View style={xStyle.buy_card}>
                             <Image
-                                source={require('../assets/images/art.png')}
+                                source={require('../assets/images/buystep2.png')}
                             />
-                        </TouchableOpacity>
-                        <Text style={xStyle.pub_name}>Art & Photo..</Text>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={xStyle.pub_cat_cards}>
+                            <View style={xStyle.buy_card_head_view}>
+                                <Text style={xStyle.buy_card_head}>Select and <Text style={xStyle.buy_card_head_sec}>Buy</Text></Text>
+                            </View>
+                            <Text style={xStyle.buy_card_body}>
+                                Make your selection(s) across publishers, genres and add to the shopping cart, log in with your credentials and complete the purchase. You have a range of options to pay through our secure payment gateway.
+                            </Text>
+                        </View>
+                        <View style={xStyle.buy_card}>
                             <Image
-                                source={require('../assets/images/eng.png')}
+                                source={require('../assets/images/buystep3.png')}
                             />
-                        </TouchableOpacity>
-                        <Text style={xStyle.pub_name}>English L..</Text>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={xStyle.pub_cat_cards}>
-                            <Image
-                                source={require('../assets/images/bio.png')}
-                            />
-                        </TouchableOpacity>
-                        <Text style={xStyle.pub_name}>Biographies..</Text>
-                    </View>
-                </ScrollView>
-            </View>
+                            <View style={xStyle.buy_card_head_view}>
+                                <Text style={xStyle.buy_card_head}>Download and <Text style={xStyle.buy_card_head_sec}>Read</Text></Text>
+                            </View>
+                            <Text style={xStyle.buy_card_body}>
+                                Once you make a purchase, the selected book(s) come to your dashboard and are available in your ‘MyBookshelf section”. As a next step download the e-book reader to your device and the book as well for you to enjoy a simple and seamless offline reading.
+                            </Text>
+                        </View>
+                    </ScrollView>
+                </View>
 
             </ScrollView>
             <FooterPub />

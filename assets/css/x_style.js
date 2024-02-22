@@ -243,7 +243,7 @@ export default StyleSheet.create({
     color: '#7B8890'
   },
 
-  aboutSouthShoreTagView:{
+  aboutSouthShoreTagView: {
     padding: 20,
     borderBottomColor: 'rgba(124, 149, 167, 0.73)',
     borderBottomWidth: 0.5
@@ -267,8 +267,8 @@ export default StyleSheet.create({
     color: '#555562'
   },
 
-  aboutSouthShoreDescPart2View :{
-    paddingHorizontal : 15
+  aboutSouthShoreDescPart2View: {
+    paddingHorizontal: 15
   },
 
   aboutSouthShoreDescPart2: {
@@ -278,7 +278,7 @@ export default StyleSheet.create({
     color: '#26252C'
   },
 
-  aboutSouthShoreReadMoreBtn : {
+  aboutSouthShoreReadMoreBtn: {
     padding: 20
   },
 
@@ -384,7 +384,7 @@ export default StyleSheet.create({
     height: 285,
   },
 
-  paddingTop10:{
+  paddingTop10: {
     paddingTop: 10,
   },
 
@@ -459,7 +459,7 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
   },
 
-  buy_head_1_View:{
+  buy_head_1_View: {
     marginBottom: 25
   },
 
@@ -477,8 +477,8 @@ export default StyleSheet.create({
     color: '#FDFDFF',
   },
 
-  buy_head_3_View : {
-    marginTop : 20
+  buy_head_3_View: {
+    marginTop: 20
   },
 
   buy_head_3: {
@@ -574,7 +574,7 @@ export default StyleSheet.create({
     width: 275,
   },
 
-  buy_join_modal_head_view : {
+  buy_join_modal_head_view: {
     marginBottom: 10
   },
 
@@ -639,7 +639,7 @@ export default StyleSheet.create({
 
   pub_banner: {
     flex: 1,
-    flexDirection:'row',
+    flexDirection: 'row',
     paddingVertical: '10%',
     height: 285,
     width: Dimensions.get('screen').width,
@@ -647,13 +647,13 @@ export default StyleSheet.create({
 
   pub_banner_txt_view: {
     width: '45%',
-    paddingVertical:'5%',
+    paddingVertical: '5%',
   },
 
   pub_banner_head: {
-    fontWeight:'500',
+    fontWeight: '500',
     fontSize: 12,
-    color:'#42554E',
+    color: '#42554E',
   },
 
   pub_banner_body_view: {
@@ -661,28 +661,28 @@ export default StyleSheet.create({
   },
 
   pub_banner_body: {
-    fontWeight:'600',
+    fontWeight: '600',
     fontSize: 22,
-    color:'#202C27',
+    color: '#202C27',
   },
 
   pub_about: {
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    paddingHorizontal:'10%',
-    paddingVertical:'15%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: '10%',
+    paddingVertical: '15%',
   },
 
   pub_about_logo: {
-    marginBottom:'12%'
+    marginBottom: '12%'
   },
 
   pub_about_body: {
-    fontWeight:'400',
+    fontWeight: '400',
     fontSize: 14,
-    color:'#555562',
-    textAlign:'center',
+    color: '#555562',
+    textAlign: 'center',
   },
 
   pub_cat_cards: {
@@ -697,6 +697,65 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
 
+  pub_home_buy_bg: {
+    backgroundColor: '#D9F1E8',
+    paddingTop: 50,
+    paddingBottom: 200,
+    paddingHorizontal: 20,
+  },
+
+  pub_buy_head_1: {
+    fontSize: 28,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: '#111F2B',
+  },
+
+  pub_buy_head_3: {
+    fontSize: 16,
+    fontWeight: '400',
+    textAlign: 'center',
+    color: '#343545',
+  },
+
+  pub_buy_head_3_sec: {
+    fontWeight: '600',
+  },
+
+  pub_home_new_view: {
+    paddingVertical: '10%',
+    paddingHorizontal: '5%',
+  },
+
+  pub_home_new_head: {
+    fontSize: 26,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: '#26252C',
+  },
+
+  pub_home_new_body: {
+    borderColor: 'pink',
+    borderWidth: 1,
+    marginVertical: '8%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  pub_home_new_card: {
+    height: 252,
+    width: 156,
+    borderColor: '#CDD2DF',
+    borderWidth: 1,
+    borderRadius: 14,
+    display:'flex',
+  },
+
+  pub_home_new_card_img: {
+    borderRadius:13,
+    resizeMode:'contain',
+  },
 });
 
 
