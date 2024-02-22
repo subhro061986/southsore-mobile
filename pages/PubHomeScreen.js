@@ -140,11 +140,17 @@ export const PubHomeScreen = () => {
                         <View
                             style={xStyle.pub_home_new_card}
                         >
+
                             <Image
                                 source={require('../assets/images/cov1.png')}
                                 style={xStyle.pub_home_new_card_img}
                                 width={154}
                             />
+                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                <Image
+                                    source={require('../assets/images/wishlist.png')}
+                                />
+                            </TouchableOpacity>
                             <View
                                 style={xStyle.pub_home_new_card_txtbox}
                             >
@@ -195,6 +201,11 @@ export const PubHomeScreen = () => {
                                 style={xStyle.pub_home_new_card_img}
                                 width={154}
                             />
+                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                <Image
+                                    source={require('../assets/images/wishlist.png')}
+                                />
+                            </TouchableOpacity>
                             <View
                                 style={xStyle.pub_home_new_card_txtbox}
                             >
@@ -245,6 +256,11 @@ export const PubHomeScreen = () => {
                                 style={xStyle.pub_home_new_card_img}
                                 width={154}
                             />
+                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                <Image
+                                    source={require('../assets/images/wishlist.png')}
+                                />
+                            </TouchableOpacity>
                             <View
                                 style={xStyle.pub_home_new_card_txtbox}
                             >
@@ -295,6 +311,11 @@ export const PubHomeScreen = () => {
                                 style={xStyle.pub_home_new_card_img}
                                 width={154}
                             />
+                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                <Image
+                                    source={require('../assets/images/wishlist.png')}
+                                />
+                            </TouchableOpacity>
                             <View
                                 style={xStyle.pub_home_new_card_txtbox}
                             >
@@ -336,6 +357,286 @@ export const PubHomeScreen = () => {
                                 </View>
                             </View>
                         </View>
+                    </View>
+                </View>
+
+                {/* Best Seller */}
+
+                <View style={xStyle.pub_home_best_bg}>
+                    <Text style={xStyle.pub_home_best_head}>Best Seller</Text>
+
+                    <View style={xStyle.pub_home_best_card}>
+                        <Image
+                            source={require('../assets/images/bcov1.png')}
+                            style={xStyle.pub_home_best_cover}
+                            height={134}
+                            width={138}
+                        />
+                        <View style={xStyle.pub_home_best_card_col2}>
+                            <View style={xStyle.pub_home_best_card_col2_top}>
+                                <View>
+                                    <Text style={xStyle.pub_home_best_card_title}>The Goldfinch</Text>
+                                    <View style={xStyle.pub_home_card_author_view}>
+                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                                    </View>
+                                </View>
+                                <TouchableOpacity>
+                                    <Image
+                                        source={require('../assets/images/wishblue.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={xStyle.pub_home_best_card_col2_bottom}>
+                                <View>
+                                    <Text style={xStyle.pub_home_best_card_price}>
+                                        ₹149
+                                    </Text>
+                                </View>
+                                <View>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+
+                    <View style={xStyle.pub_home_best_card}>
+                        <Image
+                            source={require('../assets/images/bcov2.png')}
+                            style={xStyle.pub_home_best_cover}
+                            height={134}
+                            width={138}
+                        />
+                        <View style={xStyle.pub_home_best_card_col2}>
+                            <View style={xStyle.pub_home_best_card_col2_top}>
+                                <View>
+                                    <Text style={xStyle.pub_home_best_card_title}>The Hypocrite..</Text>
+                                    <View style={xStyle.pub_home_card_author_view}>
+                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                                    </View>
+                                </View>
+                                <TouchableOpacity>
+                                    <Image
+                                        source={require('../assets/images/wishblue.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={xStyle.pub_home_best_card_col2_bottom}>
+                                <View>
+                                    <Text style={xStyle.pub_home_best_card_price}>
+                                        ₹199
+                                    </Text>
+                                </View>
+                                <View>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+
+                    <View style={xStyle.pub_home_best_card}>
+                        <Image
+                            source={require('../assets/images/bcov3.png')}
+                            style={xStyle.pub_home_best_cover}
+                            height={134}
+                            width={138}
+                        />
+                        <View style={xStyle.pub_home_best_card_col2}>
+                            <View style={xStyle.pub_home_best_card_col2_top}>
+                                <View>
+                                    <Text style={xStyle.pub_home_best_card_title}>The Swallows</Text>
+                                    <View style={xStyle.pub_home_card_author_view}>
+                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                                    </View>
+                                </View>
+                                <TouchableOpacity>
+                                    <Image
+                                        source={require('../assets/images/wishblue.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={xStyle.pub_home_best_card_col2_bottom}>
+                                <View>
+                                    <Text style={xStyle.pub_home_best_card_price}>
+                                        ₹249
+                                    </Text>
+                                </View>
+                                <View>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+
+                    <View style={xStyle.pub_home_best_card}>
+                        <Image
+                            source={require('../assets/images/bcov4.png')}
+                            style={xStyle.pub_home_best_cover}
+                            height={134}
+                            width={138}
+                        />
+                        <View style={xStyle.pub_home_best_card_col2}>
+                            <View style={xStyle.pub_home_best_card_col2_top}>
+                                <View>
+                                    <Text style={xStyle.pub_home_best_card_title}>Dune</Text>
+                                    <View style={xStyle.pub_home_card_author_view}>
+                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                                    </View>
+                                </View>
+                                <TouchableOpacity>
+                                    <Image
+                                        source={require('../assets/images/wishblue.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={xStyle.pub_home_best_card_col2_bottom}>
+                                <View>
+                                    <Text style={xStyle.pub_home_best_card_price}>
+                                        ₹149
+                                    </Text>
+                                </View>
+                                <View>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+
+                </View>
+
+                {/* Recommendations */}
+
+                <View style={xStyle.pub_home_new_view}>
+                    <Text style={xStyle.pub_home_new_head}>Recommendations</Text>
+                    <View
+                        style={xStyle.pub_home_new_body}
+                    >
+                        <View
+                            style={xStyle.pub_home_new_card}
+                        >
+
+                            <Image
+                                source={require('../assets/images/cov1.png')}
+                                style={xStyle.pub_home_new_card_img}
+                                width={154}
+                            />
+                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                <Image
+                                    source={require('../assets/images/wishlist.png')}
+                                />
+                            </TouchableOpacity>
+                            <View
+                                style={xStyle.pub_home_new_card_txtbox}
+                            >
+                                <View
+                                    style={xStyle.pub_home_new_card_view_1}
+                                >
+                                    <View
+                                        style={xStyle.pub_home_card_title_view}
+                                    >
+                                        <Text
+                                            style={xStyle.pub_home_card_title}
+                                        >
+                                            Attitude Is Everyt..
+                                        </Text>
+                                    </View>
+                                    <Text
+                                        style={xStyle.pub_home_card_author}
+                                    >Author:
+                                        <Text
+                                            style={xStyle.pub_home_card_author_name}
+                                        >
+                                            Jeff Keller
+                                        </Text>
+                                    </Text>
+                                </View>
+                                <View
+                                    style={xStyle.pub_home_card_price_view}
+                                >
+                                    <Text
+                                        style={xStyle.pub_home_card_price}
+                                    >
+                                        ₹199
+                                    </Text>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+
+                        <View
+                            style={xStyle.pub_home_new_card}
+                        >
+                            <Image
+                                source={require('../assets/images/cov2.png')}
+                                style={xStyle.pub_home_new_card_img}
+                                width={154}
+                            />
+                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                <Image
+                                    source={require('../assets/images/wishlist.png')}
+                                />
+                            </TouchableOpacity>
+                            <View
+                                style={xStyle.pub_home_new_card_txtbox}
+                            >
+                                <View
+                                    style={xStyle.pub_home_new_card_view_1}
+                                >
+                                    <View
+                                        style={xStyle.pub_home_card_title_view}
+                                    >
+                                        <Text
+                                            style={xStyle.pub_home_card_title}
+                                        >
+                                            Harry Potter and th..
+                                        </Text>
+                                    </View>
+                                    <Text
+                                        style={xStyle.pub_home_card_author}
+                                    >Author:
+                                        <Text
+                                            style={xStyle.pub_home_card_author_name}
+                                        >
+                                            Jeff Keller
+                                        </Text>
+                                    </Text>
+                                </View>
+                                <View
+                                    style={xStyle.pub_home_card_price_view}
+                                >
+                                    <Text
+                                        style={xStyle.pub_home_card_price}
+                                    >
+                                        ₹300
+                                    </Text>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+
                     </View>
                 </View>
 

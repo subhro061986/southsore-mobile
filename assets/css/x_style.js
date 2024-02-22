@@ -798,6 +798,7 @@ export default StyleSheet.create({
     borderRadius: 14,
     display: 'flex',
     marginBottom: '3%',
+    position: 'relative',
   },
 
   pub_home_new_card_img: {
@@ -846,6 +847,78 @@ export default StyleSheet.create({
   },
 
   pub_home_card_price: {
+    fontWeight: '600',
+    fontSize: 20,
+    color: '#26252C',
+  },
+
+  pub_home_new_card_wishbtn: {
+    position: 'absolute',
+    top: '5%',
+    right: '8%',
+
+  },
+
+  pub_home_best_bg: {
+    backgroundColor: '#EEF1F9',
+    paddingVertical: '15%',
+    paddingHorizontal: '6%',
+  },
+
+  pub_home_best_head: {
+    fontWeight: '600',
+    fontSize: 26,
+    textAlign: 'center',
+    color: '#26252C',
+  },
+
+  pub_home_best_card: {
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 14,
+    backgroundColor: '#FFFFFF',
+    marginVertical: '8%',
+  },
+
+  pub_home_best_cover: {
+    borderRadius: 13,
+    resizeMode: 'contain',
+  },
+
+  pub_home_best_card_col2: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginVertical: '5%',
+    marginLeft: '3%'
+  },
+
+  pub_home_best_card_col2_top: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 160,
+    borderBottomColor: '#B3B9C3',
+    borderBottomWidth: 0.5,
+    paddingBottom: '5%',
+  },
+
+  pub_home_best_card_title: {
+    fontWeight: '500',
+    fontSize: 16,
+    color: '#26252C',
+  },
+
+  pub_home_card_author_view: {
+    marginTop: '5%'
+  },
+
+  pub_home_best_card_col2_bottom: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  pub_home_best_card_price: {
     fontWeight: '600',
     fontSize: 20,
     color: '#26252C',
