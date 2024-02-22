@@ -144,6 +144,38 @@ export const PubHomeScreen = () => {
                                 style={xStyle.pub_home_new_card_img}
                                 width={154}
                             />
+                            <View
+                            style={{
+                                backgroundColor: 'yellow',
+                                marginHorizontal: '5%',
+                                display:'flex',
+                                justifyContent: 'space-between',
+                                paddingVertical: '5%',
+                            }}
+                            >
+                                <View
+                                style={{
+                                    borderBottomColor: '#B3B9C3',
+                                    borderBottomWidth: 0.5,
+                                }}
+                                >
+                                    <Text
+                                    style={{
+                                        fontWeight: '500',
+                                        fontSize: 14
+                                    }}
+                                    >Attitude Is Everyt..</Text>
+                                    <Text>Author: <Text>Jeff Keller</Text></Text>
+                                </View>
+                                <View>
+                                    <Text>₹199</Text>
+                                    <TouchableOpacity>
+                                        <Image
+                                            source={require('../assets/images/plusBtn.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                         </View>
 
                         <View

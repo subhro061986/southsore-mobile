@@ -740,6 +740,7 @@ export default StyleSheet.create({
     marginVertical: '8%',
     display: 'flex',
     flexDirection: 'row',
+    flexWrap:'wrap',
     justifyContent: 'space-between',
   },
 
