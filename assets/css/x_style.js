@@ -337,6 +337,54 @@ export default StyleSheet.create({
     color: '#007FE3'
   },
 
+  // Cateory Details Page start
+  categoryDetailsBodyBg: {
+    backgroundColor: '#EFF2FC',
+    height: Dimensions.get('screen').height,
+    width: '100%'
+  },
+
+  categoryDetailsHeaderView: {
+    padding: 20
+  },
+
+  categoryDetailsHeader: {
+    fontWeight: '900',
+    fontSize: 20,
+    color: '#26252C'
+  },
+
+  categoryDetailsHeaderResults: {
+    fontWeight: '400',
+    fontSize: 14,
+    color: '#555562'
+  },
+
+  categoryDetailsSortingMainView: {
+    margin: 20,
+    paddingBottom: 15,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomColor: '#9EA1A3',
+    borderBottomWidth: 0.5
+  },
+
+  categoryDetailsSortText: {
+    fontWeight: '400',
+    fontSize: 14,
+    color: '#26252C'
+  },
+
+  categoryDetailsBooksMainDiv: {
+
+  },
+
+  categoryDetailsBook: {
+
+  },
+
   bottomnav: {
     position: 'absolute',
     bottom: Dimensions.get('screen').height * 0.1,

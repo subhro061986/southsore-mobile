@@ -26,6 +26,7 @@ export const FooterPub = () => {
         />
       </TouchableOpacity>
       <TouchableOpacity
+      onPress={() => navigation.navigate('categorydetails')}
       >
         <Image
           source={require('../assets/images/categoryicon.png')}
