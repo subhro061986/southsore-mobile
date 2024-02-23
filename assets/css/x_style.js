@@ -380,25 +380,24 @@ export default StyleSheet.create({
 
   categoryDetailsSortText: {
     fontWeight: '400',
-    fontSize: 14,
+    fontSize: 15,
     color: '#26252C'
   },
 
   categoryDetailsDropDown:{
     backgroundColor: '#fff',
-    width : 220,
+    width : '68%',
     marginHorizontal: 15,
     paddingHorizontal: 15,
     borderColor : '#777983',
     borderWidth: 0.5,
-    borderRadius: 10
+    borderRadius: 10,
+    color : '#141516',
+    fontWeight : '500',
+    fontSize : 12
   },
 
   categoryDetailsDropDownPicker: { 
-    borderColor : '#777983',
-    borderWidth: 0.5,
-    borderRadius: 10,
-    backgroundColor: 'white', 
     color : '#141516',
     fontWeight : '500',
     fontSize : 12
@@ -421,6 +420,51 @@ export default StyleSheet.create({
     color: '#555562', 
     textDecorationLine: 'underline',
     textDecorationColor: '#555562'
+  },
+
+  categoryDetailsModalCross: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    width: '90%',
+  },
+
+  categoryDetailsModalHeaderView: {
+    marginBottom: 10
+  },
+
+  categoryDetailsModalHeader: {
+    fontSize: 20,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: '#26252C',
+  },
+
+  categoryDetailsModalBody: {
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+
+  categoryDetailsModalBody: {
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    width: '90%'
+  },
+
+  categoryDetailsModalRadioBtn: { 
+    display: 'flex', 
+    flexDirection: 'row', 
+    justifyContent: 'flex-start', 
+    alignItems: 'center'
+  },
+
+  categoryDetailsModalRadioBtnTextFont:{
+    fontSize: 14,
+    color: '#64646F',
+    fontWeight: '500'
   },
 
   bottomnav: {
@@ -953,7 +997,7 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 160,
+    width: 170,
     borderBottomColor: '#B3B9C3',
     borderBottomWidth: 0.5,
     paddingBottom: '5%',
