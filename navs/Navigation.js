@@ -5,6 +5,7 @@ import SplashScreen from '../pages/SplashScreen';
 import HomeScreen from '../pages/HomeScreen';
 import PubHomeScreen from '../pages/PubHomeScreen';
 import CategoryDetails from '../pages/CategoryDetails';
+import ProductDetails from '../pages/ProductDetails';
 
 
 
@@ -17,6 +18,7 @@ const Navigation=()=>{
           <Stack.Screen name="home" component={HomeScreen} options={{title: 'intro',headerShown: false}}/>
           <Stack.Screen name="pubhome" component={PubHomeScreen} options={{title: 'pubintro',headerShown: false}}/>
           <Stack.Screen name="categorydetails" component={CategoryDetails} options={{title: 'categorydetails',headerShown: false}}/>
+          <Stack.Screen name="productdetails" component={ProductDetails} options={{title: 'prodetails',headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

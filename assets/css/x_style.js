@@ -807,7 +807,7 @@ export default StyleSheet.create({
   },
 
   pub_home_new_view: {
-    paddingVertical: '10%',
+    paddingVertical: '6%',
     paddingHorizontal: '5%',
   },
 
@@ -916,7 +916,7 @@ export default StyleSheet.create({
 
   pub_home_best_bg: {
     backgroundColor: '#EEF1F9',
-    paddingVertical: '15%',
+    paddingVertical: '10%',
     paddingHorizontal: '6%',
   },
 
