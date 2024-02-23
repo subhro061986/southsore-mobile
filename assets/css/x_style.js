@@ -402,6 +402,25 @@ export default StyleSheet.create({
     fontSize : 12
   },
 
+  categoryDetailsBooksMainDiv : {
+    // paddingVertical: '15%',
+    paddingHorizontal: '6%',
+    paddingBottom : '15%'
+  },
+
+  categoryDetailsViewMore_btn: {
+    padding: 20,
+  },
+
+  categoryDetailsViewMore: {
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: '#007FE3', 
+    textDecorationLine: 'underline',
+    textDecorationColor: '#007FE3'
+  },
+
   bottomnav: {
     position: 'absolute',
     bottom: Dimensions.get('screen').height * 0.1,
@@ -913,7 +932,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 14,
     backgroundColor: '#FFFFFF',
-    marginVertical: '8%',
+    marginVertical: '3%',
   },
 
   pub_home_best_cover: {

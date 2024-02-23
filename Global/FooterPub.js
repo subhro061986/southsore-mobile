@@ -34,12 +34,12 @@ export const FooterPub = () => {
       </TouchableOpacity>
       <TouchableOpacity>
         <Image
-          source={require('../assets/images/profile.png')}
+          source={require('../assets/images/newarrivals.png')}
         />
       </TouchableOpacity>
       <TouchableOpacity>
         <Image
-          source={require('../assets/images/login.png')}
+          source={require('../assets/images/bestsellers.png')}
         />
       </TouchableOpacity>
     </View>
