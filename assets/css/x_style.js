@@ -286,11 +286,14 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    color: '#007FE3'
+    color: '#007FE3',
+    textDecorationLine: 'underline',
+    textDecorationColor: '#007FE3'
   },
 
   southshoreInnovationsView: {
-    backgroundColor: '#EBF3FA'
+    backgroundColor: '#EBF3FA',
+    paddingBottom: '50%',
   },
 
   southshoreInnovationsHeader_view: {
@@ -334,7 +337,9 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    color: '#007FE3'
+    color: '#007FE3',
+    textDecorationLine: 'underline',
+    textDecorationColor: '#007FE3'
   },
 
   // Cateory Details Page start
@@ -802,6 +807,13 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
 
+  pub_home_rec_body: {
+    marginVertical: '8%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
   pub_home_new_card: {
     height: 252,
     width: 156,
@@ -810,6 +822,18 @@ export default StyleSheet.create({
     borderRadius: 14,
     display: 'flex',
     marginBottom: '3%',
+    position: 'relative',
+  },
+
+  pub_home_rec_card: {
+    height: 252,
+    width: 156,
+    borderColor: '#CDD2DF',
+    borderWidth: 1,
+    borderRadius: 14,
+    display: 'flex',
+    marginBottom: '3%',
+    marginHorizontal: 5,
     position: 'relative',
   },
 

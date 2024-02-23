@@ -76,7 +76,7 @@ export const PubHomeScreen = () => {
 
                 <View style={xStyle.publist_bg}>
                     <View style={xStyle.publist_head_view}>
-                        <Text style={xStyle.publist_head}>Listed Publishers</Text>
+                        <Text style={xStyle.publist_head}>Categories</Text>
                     </View>
                     <ScrollView horizontal={true}>
                         <View>
@@ -524,118 +524,175 @@ export const PubHomeScreen = () => {
                 <View style={xStyle.pub_home_new_view}>
                     <Text style={xStyle.pub_home_new_head}>Recommendations</Text>
                     <View
-                        style={xStyle.pub_home_new_body}
+                        style={xStyle.pub_home_rec_body}
                     >
-                        <View
-                            style={xStyle.pub_home_new_card}
-                        >
-
-                            <Image
-                                source={require('../assets/images/cov1.png')}
-                                style={xStyle.pub_home_new_card_img}
-                                width={154}
-                            />
-                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
-                                <Image
-                                    source={require('../assets/images/wishlist.png')}
-                                />
-                            </TouchableOpacity>
+                        <ScrollView horizontal={true}>
                             <View
-                                style={xStyle.pub_home_new_card_txtbox}
+                                style={xStyle.pub_home_rec_card}
                             >
+
+                                <Image
+                                    source={require('../assets/images/cov1.png')}
+                                    style={xStyle.pub_home_new_card_img}
+                                    width={154}
+                                />
+                                <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                    <Image
+                                        source={require('../assets/images/wishlist.png')}
+                                    />
+                                </TouchableOpacity>
                                 <View
-                                    style={xStyle.pub_home_new_card_view_1}
+                                    style={xStyle.pub_home_new_card_txtbox}
                                 >
                                     <View
-                                        style={xStyle.pub_home_card_title_view}
+                                        style={xStyle.pub_home_new_card_view_1}
                                     >
-                                        <Text
-                                            style={xStyle.pub_home_card_title}
+                                        <View
+                                            style={xStyle.pub_home_card_title_view}
                                         >
-                                            Attitude Is Everyt..
+                                            <Text
+                                                style={xStyle.pub_home_card_title}
+                                            >
+                                                Attitude Is Everyt..
+                                            </Text>
+                                        </View>
+                                        <Text
+                                            style={xStyle.pub_home_card_author}
+                                        >Author:
+                                            <Text
+                                                style={xStyle.pub_home_card_author_name}
+                                            >
+                                                Jeff Keller
+                                            </Text>
                                         </Text>
                                     </View>
-                                    <Text
-                                        style={xStyle.pub_home_card_author}
-                                    >Author:
-                                        <Text
-                                            style={xStyle.pub_home_card_author_name}
-                                        >
-                                            Jeff Keller
-                                        </Text>
-                                    </Text>
-                                </View>
-                                <View
-                                    style={xStyle.pub_home_card_price_view}
-                                >
-                                    <Text
-                                        style={xStyle.pub_home_card_price}
+                                    <View
+                                        style={xStyle.pub_home_card_price_view}
                                     >
-                                        ₹199
-                                    </Text>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
+                                        <Text
+                                            style={xStyle.pub_home_card_price}
+                                        >
+                                            ₹199
+                                        </Text>
+                                        <TouchableOpacity>
+                                            <Image
+                                                source={require('../assets/images/plusBtn.png')}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
 
-                        <View
-                            style={xStyle.pub_home_new_card}
-                        >
-                            <Image
-                                source={require('../assets/images/cov2.png')}
-                                style={xStyle.pub_home_new_card_img}
-                                width={154}
-                            />
-                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
-                                <Image
-                                    source={require('../assets/images/wishlist.png')}
-                                />
-                            </TouchableOpacity>
                             <View
-                                style={xStyle.pub_home_new_card_txtbox}
+                                style={xStyle.pub_home_rec_card}
                             >
+                                <Image
+                                    source={require('../assets/images/cov2.png')}
+                                    style={xStyle.pub_home_new_card_img}
+                                    width={154}
+                                />
+                                <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                    <Image
+                                        source={require('../assets/images/wishlist.png')}
+                                    />
+                                </TouchableOpacity>
                                 <View
-                                    style={xStyle.pub_home_new_card_view_1}
+                                    style={xStyle.pub_home_new_card_txtbox}
                                 >
                                     <View
-                                        style={xStyle.pub_home_card_title_view}
+                                        style={xStyle.pub_home_new_card_view_1}
                                     >
-                                        <Text
-                                            style={xStyle.pub_home_card_title}
+                                        <View
+                                            style={xStyle.pub_home_card_title_view}
                                         >
-                                            Harry Potter and th..
+                                            <Text
+                                                style={xStyle.pub_home_card_title}
+                                            >
+                                                Harry Potter and th..
+                                            </Text>
+                                        </View>
+                                        <Text
+                                            style={xStyle.pub_home_card_author}
+                                        >Author:
+                                            <Text
+                                                style={xStyle.pub_home_card_author_name}
+                                            >
+                                                Jeff Keller
+                                            </Text>
                                         </Text>
                                     </View>
-                                    <Text
-                                        style={xStyle.pub_home_card_author}
-                                    >Author:
-                                        <Text
-                                            style={xStyle.pub_home_card_author_name}
-                                        >
-                                            Jeff Keller
-                                        </Text>
-                                    </Text>
-                                </View>
-                                <View
-                                    style={xStyle.pub_home_card_price_view}
-                                >
-                                    <Text
-                                        style={xStyle.pub_home_card_price}
+                                    <View
+                                        style={xStyle.pub_home_card_price_view}
                                     >
-                                        ₹300
-                                    </Text>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
+                                        <Text
+                                            style={xStyle.pub_home_card_price}
+                                        >
+                                            ₹300
+                                        </Text>
+                                        <TouchableOpacity>
+                                            <Image
+                                                source={require('../assets/images/plusBtn.png')}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
+
+                            <View
+                                style={xStyle.pub_home_rec_card}
+                            >
+                                <Image
+                                    source={require('../assets/images/cov4.png')}
+                                    style={xStyle.pub_home_new_card_img}
+                                    width={154}
+                                />
+                                <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
+                                    <Image
+                                        source={require('../assets/images/wishlist.png')}
+                                    />
+                                </TouchableOpacity>
+                                <View
+                                    style={xStyle.pub_home_new_card_txtbox}
+                                >
+                                    <View
+                                        style={xStyle.pub_home_new_card_view_1}
+                                    >
+                                        <View
+                                            style={xStyle.pub_home_card_title_view}
+                                        >
+                                            <Text
+                                                style={xStyle.pub_home_card_title}
+                                            >
+                                                The Way of The..
+                                            </Text>
+                                        </View>
+                                        <Text
+                                            style={xStyle.pub_home_card_author}
+                                        >Author:
+                                            <Text
+                                                style={xStyle.pub_home_card_author_name}
+                                            >
+                                                Jeff Keller
+                                            </Text>
+                                        </Text>
+                                    </View>
+                                    <View
+                                        style={xStyle.pub_home_card_price_view}
+                                    >
+                                        <Text
+                                            style={xStyle.pub_home_card_price}
+                                        >
+                                            ₹179
+                                        </Text>
+                                        <TouchableOpacity>
+                                            <Image
+                                                source={require('../assets/images/plusBtn.png')}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </ScrollView>
 
                     </View>
                 </View>
