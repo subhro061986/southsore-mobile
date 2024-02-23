@@ -256,11 +256,11 @@ export const CategoryDetails = () => {
                         </View>
                     </View>
 
-                    <TouchableOpacity style={xStyle.categoryDetailsViewMore_btn}>
+                    {/* <TouchableOpacity style={xStyle.categoryDetailsViewMore_btn}>
                         <Text style={xStyle.categoryDetailsViewMore}>
                             View More
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
                 <BuyStepsPub />
             </ScrollView>
