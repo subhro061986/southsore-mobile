@@ -350,7 +350,8 @@ export default StyleSheet.create({
   },
 
   categoryDetailsHeaderView: {
-    padding: 20
+    paddingHorizontal: 20,
+    paddingVertical: 10
   },
 
   categoryDetailsHeader: {
@@ -366,7 +367,8 @@ export default StyleSheet.create({
   },
 
   categoryDetailsSortingMainView: {
-    margin: 20,
+    marginHorizontal: 20,
+    marginVertical: 10,
     paddingBottom: 15,
     display: 'flex',
     flexDirection: 'row',
@@ -389,13 +391,13 @@ export default StyleSheet.create({
     paddingHorizontal: 15,
     borderColor : '#777983',
     borderWidth: 0.5,
-    borderRadius: 20
+    borderRadius: 10
   },
 
   categoryDetailsDropDownPicker: { 
     borderColor : '#777983',
     borderWidth: 0.5,
-    borderRadius: 20,
+    borderRadius: 10,
     backgroundColor: 'white', 
     color : '#141516',
     fontWeight : '500',
@@ -405,7 +407,7 @@ export default StyleSheet.create({
   categoryDetailsBooksMainDiv : {
     // paddingVertical: '15%',
     paddingHorizontal: '6%',
-    paddingBottom : '15%'
+    paddingBottom : '10%'
   },
 
   categoryDetailsViewMore_btn: {
@@ -416,9 +418,9 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    color: '#007FE3', 
+    color: '#555562', 
     textDecorationLine: 'underline',
-    textDecorationColor: '#007FE3'
+    textDecorationColor: '#555562'
   },
 
   bottomnav: {
@@ -783,7 +785,7 @@ export default StyleSheet.create({
 
   pub_home_buy_bg: {
     backgroundColor: '#D9F1E8',
-    paddingTop: 50,
+    paddingTop: 30,
     paddingBottom: 200,
     paddingHorizontal: 20,
   },
