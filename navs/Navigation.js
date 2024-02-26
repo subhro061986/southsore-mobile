@@ -6,6 +6,7 @@ import HomeScreen from '../pages/HomeScreen';
 import PubHomeScreen from '../pages/PubHomeScreen';
 import CategoryDetails from '../pages/CategoryDetails';
 import ProductDetails from '../pages/ProductDetails';
+import ConfirmOrder from '../pages/ConfirmOrder';
 
 
 
@@ -19,6 +20,8 @@ const Navigation=()=>{
           <Stack.Screen name="pubhome" component={PubHomeScreen} options={{title: 'pubintro',headerShown: false}}/>
           <Stack.Screen name="categorydetails" component={CategoryDetails} options={{title: 'categorydetails',headerShown: false}}/>
           <Stack.Screen name="productdetails" component={ProductDetails} options={{title: 'prodetails',headerShown: false}}/>
+          <Stack.Screen name="confirmOrder" component={ConfirmOrder} options={{title: 'confirmOrder',headerShown: false}}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );

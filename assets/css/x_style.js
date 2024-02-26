@@ -1024,6 +1024,59 @@ export default StyleSheet.create({
     fontSize: 20,
     color: '#26252C',
   },
+
+  // kaustav Confirm Order start
+  ConfirmOrderView: {
+    
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+  },
+  ConfirmOrderViewMain: {
+    backgroundColor: '#EFF2FC',
+    padding: 25,
+    height:Dimensions.get('screen').height
+  },
+  ConfirmOrderMainHeaderText:{
+    fontSize: 26,
+    fontFamily:'Poppins',
+    fontWeight: '600',
+    textAlign: 'center',
+    color: '#26252C'
+  },
+  ConfirmOrdeSubHeaderText:{
+    marginVertical:5,
+    fontSize: 14,
+    fontWeight: '600',
+    fontFamily:'Roboto',
+    textAlign: 'center',
+    color: '#555562',
+  },
+  ConfirmOrderCard: {
+    display: 'flex',
+    width:'100%',
+    borderRadius: 14,
+    
+    marginVertical: '15%',
+    height:100,
+    alignItems:'center',
+    
+  },
+  ConfirmOrderButton:{
+    borderRadius: 100,
+    borderColor:'#26252C',
+    padding:10,
+    borderWidth:0.5,
+    display: 'flex',
+    width:'97%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical:'7%',
+    borderBottomColor: '#B3B9C3',
+    borderBottomWidth: 0.5,
+  }
+  // Confirm Order end
 });
 
 
