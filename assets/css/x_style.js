@@ -998,7 +998,7 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 170,
+    width: '62%',
     borderBottomColor: '#B3B9C3',
     borderBottomWidth: 0.5,
     paddingBottom: '5%',
@@ -1064,6 +1064,101 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: 32,
     color: '#26252C'
+  },
+
+  prod_det_btn_view: {
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    marginVertical: '10%',
+  },
+
+  prod_det_add_btn: {
+    borderWidth: 0.5,
+    borderRadius: 100,
+    borderColor: '#26252C',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems:'center',
+    paddingHorizontal: '8%',
+    paddingVertical:'5%',
+  },
+
+  prod_det_add_btn_txt: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#26252C',
+    textAlign:'center',
+  },
+
+  prod_det_buy_btn: {
+    borderRadius: 100,
+    backgroundColor: '#007FE3',
+    width:140,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
+    paddingHorizontal: '8%',
+    paddingVertical:'5%',
+  },
+
+  prod_det_add_buy_txt: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#FFFFFF',
+    textAlign:'center',
+  },
+
+  prod_det_border: {
+    borderWidth: 0.5,
+    borderColor: '#B3B9C3',
+  },
+
+  prod_det_des_head_view: {
+    marginTop: '8%',
+  },
+
+  prod_det_des_head: {
+    fontWeight: '600',
+    fontSize: 16,
+    color: '#26252C',
+  },
+
+  prod_det_des_body_view: {
+    marginTop: '5%',
+  },
+
+  prod_det_des_body: {
+    fontWeight: '400',
+    fontSize: 14,
+    color: '#555562',
+  },
+
+  prod_det_details_head_view: {
+    marginTop: '5%'
+  },
+
+  prod_det_details_head: {
+    fontWeight: '500',
+    fontSize: 16,
+    color: '#26252C',
+  },
+
+  prod_det_details_body_view: {
+    marginTop: '4%',
+  },
+
+  prod_det_details_body_title: {
+    fontWeight: '400',
+    fontSize: 16,
+    color: '#575A63',
+  },
+
+  prod_det_details_body_value: {
+    fontWeight: '700',
+    fontSize: 16,
+    color: '#575A63',
   },
 });
 
