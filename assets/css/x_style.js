@@ -384,12 +384,12 @@ export default StyleSheet.create({
     color: '#26252C'
   },
 
-  categoryDetailsDropDown:{
+  categoryDetailsDropDown: {
     backgroundColor: '#fff',
     width : '68%',
     marginHorizontal: 15,
     paddingHorizontal: 15,
-    borderColor : '#777983',
+    borderColor: '#777983',
     borderWidth: 0.5,
     borderRadius: 10,
     color : '#141516',
@@ -403,10 +403,10 @@ export default StyleSheet.create({
     fontSize : 12
   },
 
-  categoryDetailsBooksMainDiv : {
+  categoryDetailsBooksMainDiv: {
     // paddingVertical: '15%',
     paddingHorizontal: '6%',
-    paddingBottom : '10%'
+    paddingBottom: '10%'
   },
 
   categoryDetailsViewMore_btn: {
@@ -417,7 +417,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    color: '#555562', 
+    color: '#555562',
     textDecorationLine: 'underline',
     textDecorationColor: '#555562'
   },
@@ -499,6 +499,7 @@ export default StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
     lineHeight: 13,
+    color: '#FFFFFF',
   },
 
   search_pos: {
@@ -966,6 +967,10 @@ export default StyleSheet.create({
     paddingHorizontal: '6%',
   },
 
+  pub_home_best_head_view: {
+    marginBottom: '8%',
+  },
+
   pub_home_best_head: {
     fontWeight: '600',
     fontSize: 26,
@@ -990,14 +995,14 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     marginVertical: '5%',
-    marginLeft: '3%'
+    marginLeft: '3%',
+    width: '50%',
   },
 
   pub_home_best_card_col2_top: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 170,
     borderBottomColor: '#B3B9C3',
     borderBottomWidth: 0.5,
     paddingBottom: '5%',
@@ -1075,8 +1080,154 @@ export default StyleSheet.create({
     marginVertical:'7%',
     borderBottomColor: '#B3B9C3',
     borderBottomWidth: 0.5,
-  }
+  },
   // Confirm Order end
+  prod_det_view: {
+    paddingHorizontal: '6%',
+    paddingVertical: '10%',
+    width: '100%',
+  },
+
+  prod_det_cov_img: {
+    borderRadius: 20,
+  },
+
+  prod_det_head_view: {
+    marginTop: '5%'
+  },
+
+  prod_det_head: {
+    fontWeight: '500',
+    fontSize: 28,
+    color: '#26252C'
+  },
+
+  prod_det_author_view: {
+    marginTop: '2%'
+  },
+
+  prod_det_card_author: {
+    fontWeight: '400',
+    fontSize: 16,
+    color: '#64646F',
+  },
+
+  prod_det_card_author_name: {
+    fontWeight: '500'
+  },
+
+  prod_det_price_view: {
+    marginTop: '4%'
+  },
+
+  prod_det_price: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#26252C'
+  },
+
+  prod_det_price_value: {
+    fontWeight: '600',
+    fontSize: 32,
+    color: '#26252C'
+  },
+
+  prod_det_btn_view: {
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    marginVertical: '10%',
+  },
+
+  prod_det_add_btn: {
+    borderWidth: 0.5,
+    borderRadius: 100,
+    borderColor: '#26252C',
+    display: 'flex',
+    flexDirection: 'row',
+    width: 145,
+    justifyContent: 'center',
+    alignItems:'center',
+    paddingHorizontal: '8%',
+    paddingVertical:'5%',
+  },
+
+  prod_det_add_btn_txt: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#26252C',
+    textAlign:'center',
+  },
+
+  prod_det_buy_btn: {
+    borderRadius: 100,
+    backgroundColor: '#007FE3',
+    width:140,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
+    paddingHorizontal: '8%',
+    paddingVertical:'5%',
+  },
+
+  prod_det_add_buy_txt: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#FFFFFF',
+    textAlign:'center',
+  },
+
+  prod_det_border: {
+    borderWidth: 0.5,
+    borderColor: '#B3B9C3',
+  },
+
+  prod_det_des_head_view: {
+    marginTop: '8%',
+  },
+
+  prod_det_des_head: {
+    fontWeight: '600',
+    fontSize: 16,
+    color: '#26252C',
+  },
+
+  prod_det_des_body_view: {
+    marginTop: '5%',
+  },
+
+  prod_det_des_body: {
+    fontWeight: '400',
+    fontSize: 14,
+    color: '#555562',
+  },
+
+  prod_det_details_head_view: {
+    marginTop: '5%'
+  },
+
+  prod_det_details_head: {
+    fontWeight: '500',
+    fontSize: 16,
+    color: '#26252C',
+  },
+
+  prod_det_details_body_view: {
+    marginTop: '4%',
+  },
+
+  prod_det_details_body_title: {
+    fontWeight: '400',
+    fontSize: 16,
+    color: '#575A63',
+  },
+
+  prod_det_details_body_value: {
+    fontWeight: '700',
+    fontSize: 16,
+    color: '#575A63',
+  },
 });
 
 
