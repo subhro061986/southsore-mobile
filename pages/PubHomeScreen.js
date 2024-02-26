@@ -140,9 +140,9 @@ export const PubHomeScreen = () => {
                     <View
                         style={xStyle.pub_home_new_body}
                     >
-                        <View
+                        <TouchableOpacity
                             style={xStyle.pub_home_new_card}
-                            onTouchStart={() => navigation.navigate('productdetails')}
+                            onPress={() => navigation.navigate('productdetails')}
                         >
 
                             <Image
@@ -195,9 +195,9 @@ export const PubHomeScreen = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
 
-                        <View
+                        <TouchableOpacity
                             style={xStyle.pub_home_new_card}
                         >
                             <Image
@@ -250,9 +250,9 @@ export const PubHomeScreen = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
 
-                        <View
+                        <TouchableOpacity
                             style={xStyle.pub_home_new_card}
                         >
                             <Image
@@ -305,9 +305,9 @@ export const PubHomeScreen = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
 
-                        <View
+                        <TouchableOpacity
                             style={xStyle.pub_home_new_card}
                         >
                             <Image
@@ -360,7 +360,7 @@ export const PubHomeScreen = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
 

@@ -384,30 +384,30 @@ export default StyleSheet.create({
     color: '#26252C'
   },
 
-  categoryDetailsDropDown:{
+  categoryDetailsDropDown: {
     backgroundColor: '#fff',
-    width : 220,
+    width: 220,
     marginHorizontal: 15,
     paddingHorizontal: 15,
-    borderColor : '#777983',
+    borderColor: '#777983',
     borderWidth: 0.5,
     borderRadius: 10
   },
 
-  categoryDetailsDropDownPicker: { 
-    borderColor : '#777983',
+  categoryDetailsDropDownPicker: {
+    borderColor: '#777983',
     borderWidth: 0.5,
     borderRadius: 10,
-    backgroundColor: 'white', 
-    color : '#141516',
-    fontWeight : '500',
-    fontSize : 12
+    backgroundColor: 'white',
+    color: '#141516',
+    fontWeight: '500',
+    fontSize: 12
   },
 
-  categoryDetailsBooksMainDiv : {
+  categoryDetailsBooksMainDiv: {
     // paddingVertical: '15%',
     paddingHorizontal: '6%',
-    paddingBottom : '10%'
+    paddingBottom: '10%'
   },
 
   categoryDetailsViewMore_btn: {
@@ -418,7 +418,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    color: '#555562', 
+    color: '#555562',
     textDecorationLine: 'underline',
     textDecorationColor: '#555562'
   },
@@ -455,6 +455,7 @@ export default StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
     lineHeight: 13,
+    color: '#FFFFFF',
   },
 
   search_pos: {
@@ -979,6 +980,46 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: 20,
     color: '#26252C',
+  },
+
+  prod_det_view: {
+    paddingHorizontal: '6%',
+    paddingVertical: '10%',
+    width: '100%',
+  },
+
+  prod_det_cov_img: {
+    borderRadius: 20,
+  },
+
+  prod_det_head_view: {
+    marginTop: '5%'
+  },
+
+  prod_det_head: {
+    fontWeight: '500',
+    fontSize: 28,
+    color: '#26252C'
+  },
+
+  prod_det_author_view: {
+    marginTop: '2%'
+  },
+
+  prod_det_price_view: {
+    marginTop: '4%'
+  },
+
+  prod_det_price: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#26252C'
+  },
+
+  prod_det_price_value: {
+    fontWeight: '600',
+    fontSize: 32,
+    color: '#26252C'
   },
 });
 

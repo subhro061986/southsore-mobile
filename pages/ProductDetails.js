@@ -37,10 +37,29 @@ export const ProductDetails = () => {
             <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]}>
                 <TopMenuPub />
 
-                
+                {/* Product Details */}
+
+                <View style={xStyle.prod_det_view}>
+                    <Image
+                        source={require('../assets/images/bookdet.png')}
+                        style={xStyle.prod_det_cov_img}
+                    />
+                    <View style={xStyle.prod_det_head_view}>
+                        <Text style={xStyle.prod_det_head}>The Swallows</Text>
+                    </View>
+                    <View style={xStyle.prod_det_author_view}>
+                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                    </View>
+                    <View style={xStyle.prod_det_price_view}>
+                        <Text style={xStyle.prod_det_price}>Price: <Text style={xStyle.prod_det_price_value}>₹249</Text></Text>
+                    </View>
+                    <View></View>
+                </View>
+
+
                 {/* Best Seller */}
 
-                <BestSeller/>
+                <BestSeller />
 
                 {/* Buying Steps */}
 
