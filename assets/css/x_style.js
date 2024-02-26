@@ -467,6 +467,118 @@ export default StyleSheet.create({
     fontWeight: '500'
   },
 
+  // Cart Page
+  cartPageBodyBg: {
+    backgroundColor: '#EFF2FC',
+    height: Dimensions.get('screen').height,
+    width: '100%'
+  },
+
+  cartPageHeaderView: {
+    paddingHorizontal: 20,
+    paddingVertical: 12
+  },
+
+  cartPageHeader: {
+    fontWeight: '900',
+    fontSize: 22,
+    color: '#26252C'
+  },
+
+  cartPageHeaderResults: {
+    fontWeight: '400',
+    fontSize: 14,
+    color: '#555562'
+  },
+
+  cartPageBooksMainDiv: {
+    // paddingVertical: '15%',
+    paddingHorizontal: '6%',
+    paddingBottom: '10%'
+  },
+
+  cartPageOrderSummaryView: {
+    backgroundColor: '#fff',
+    marginHorizontal: 20,
+    paddingHorizontal: '6%',
+    paddingVertical: '10%',
+    borderRadius: 14,
+    marginBottom: '55%'
+  },
+
+  cartPageOrderSummaryHeaderView: {
+    paddingBottom: 20,
+    borderBottomColor: 'rgba(179, 185, 195, 0.5)',
+    borderBottomWidth: 0.5
+  },
+
+  cartPageOrderSummaryBody: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    borderBottomColor: 'rgba(179, 185, 195, 0.5)',
+    borderBottomWidth: 0.5
+  },
+
+  cartPageOrderSummaryBodyItems: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 8
+  },
+
+  cartPageOrderSummaryBodyItemsLabelText: {
+    fontWeight: '500',
+    fontSize: 16,
+    color: '#575A63'
+  },
+
+  cartPageOrderSummaryBodyItemsValueText: {
+    fontWeight: '600',
+    fontSize: 20,
+    color: '#26252C'
+  },
+
+  cartPageOrderSummaryTotal: {
+    borderBottomColor: 'rgba(179, 185, 195, 0.5)',
+    borderBottomWidth: 0.5,
+    paddingVertical: 15
+  },
+
+  cartPageOrderSummaryBtns: {
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    marginVertical: '7%',
+  },
+
+  cartPageOrderSummaryCancelBtn: {
+    borderWidth: 0.5,
+    borderRadius: 100,
+    borderColor: '#26252C',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems:'center',
+    paddingHorizontal: '10%',
+    paddingVertical:'5%',
+  },
+
+  cartPageOrderSummaryCheckoutBtn: {
+    borderRadius: 100,
+    backgroundColor: '#007FE3',
+    width:140,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
+    paddingHorizontal: '10%',
+    paddingVertical:'5%',
+  },
+
   bottomnav: {
     position: 'absolute',
     bottom: Dimensions.get('screen').height * 0.1,

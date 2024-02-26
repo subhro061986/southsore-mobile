@@ -28,17 +28,17 @@ export const CartPage = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView>
-            <ScrollView style={xStyle.categoryDetailsBodyBg} stickyHeaderIndices={[0]}>
+            <ScrollView style={xStyle.cartPageBodyBg} stickyHeaderIndices={[0]}>
                 <TopMenuPub />
-                <View style={xStyle.categoryDetailsHeaderView}>
-                    <Text style={xStyle.categoryDetailsHeader}>
+                <View style={xStyle.cartPageHeaderView}>
+                    <Text style={xStyle.cartPageHeader}>
                         My Cart
                     </Text>
-                    <Text style={xStyle.categoryDetailsHeaderResults}>
+                    <Text style={xStyle.cartPageHeaderResults}>
                         3 items added to the list
                     </Text>
                 </View>
-                <View style={xStyle.categoryDetailsBooksMainDiv}>
+                <View style={xStyle.cartPageBooksMainDiv}>
                     <View style={xStyle.pub_home_best_card}>
                         <Image
                             source={require('../assets/images/bcov1.png')}
@@ -130,6 +130,34 @@ export const CartPage = () => {
                                 </View>
                             </View>
                         </View>
+                    </View>
+                </View>
+
+                <View style={xStyle.cartPageOrderSummaryView}>
+                    <View style={xStyle.cartPageOrderSummaryHeaderView}>
+                        <Text style={xStyle.cartPageHeader}>Order Summary</Text>
+                    </View>
+                    <View style={xStyle.cartPageOrderSummaryBody}>
+                        <View style={xStyle.cartPageOrderSummaryBodyItems}>
+                            <Text style={xStyle.cartPageOrderSummaryBodyItemsLabelText}>Subtotal</Text>
+                            <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹597</Text>
+                        </View>
+                        <View style={xStyle.cartPageOrderSummaryBodyItems}>
+                            <Text style={xStyle.cartPageOrderSummaryBodyItemsLabelText}>GST</Text>
+                            <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>5%</Text>
+                        </View>
+                    </View>
+                    <View style={[xStyle.cartPageOrderSummaryTotal, xStyle.cartPageOrderSummaryBodyItems]}>
+                        <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>Total</Text>
+                        <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹625</Text>
+                    </View>
+                    <View style={xStyle.cartPageOrderSummaryBtns}>
+                        <TouchableOpacity style={xStyle.cartPageOrderSummaryCancelBtn}>
+                            <Text style={xStyle.prod_det_add_btn_txt}>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={xStyle.cartPageOrderSummaryCheckoutBtn}>
+                            <Text style={xStyle.prod_det_add_buy_txt}>Checkout</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
