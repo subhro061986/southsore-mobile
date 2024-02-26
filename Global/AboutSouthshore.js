@@ -6,14 +6,19 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Button,
+  Alert
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors.js';
 // import { useAuth } from '../context/AuthContext.js';
 // import { useNavigation } from '@react-navigation/native';
 // import { UserProfile } from '../context/UserContext.js';
 
 export const AboutSouthshore = () => {
-
+  const navigation = useNavigation();
   return (
     <View style={xStyle.aboutSouthShoreView}>
       <View style={xStyle.aboutSouthShoreHeadView}>
@@ -39,11 +44,18 @@ export const AboutSouthshore = () => {
         Why choose e-books? The benefits are undeniable. With e-books junction, you'll experience a world of advantages at your fingertips. First and foremost, accessibility.
       </Text>
       </View>
+      
       <TouchableOpacity style={xStyle.aboutSouthShoreReadMoreBtn}>
         <Text style={xStyle.aboutSouthShoreReadMore}>
           Read More
         </Text>
       </TouchableOpacity>
+      <Button 
+      title="Press me"
+      onPress={() => navigation.navigate('confirmOrder')}
+      />
+       
+     
     </View>
   )
 }
