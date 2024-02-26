@@ -9,10 +9,11 @@ import {
   TextInput
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 // import { UserProfile } from '../context/UserContext.js';
 
 export const TopMenu = () => {
+  const navigation = useNavigation();
 
   return (
     <View style={xStyle.topnav}>
@@ -33,7 +34,9 @@ export const TopMenu = () => {
               source={require('../assets/images/heart.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('cartdetails')}
+          >
             <Image
               source={require('../assets/images/shopping-cart.png')}
             />
