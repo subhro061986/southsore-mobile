@@ -17,8 +17,10 @@ import {
     PermissionsAndroid
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
+import Overlay from 'react-native-modal-overlay';
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
+import { RadioButton } from 'react-native-paper';
 // import { UserProfile } from '../context/UserContext.js';
 
 import BuyStepsPub from '../Global/BuyStepsPub.js';
@@ -29,6 +31,7 @@ export const CategoryDetails = () => {
 
     const navigation = useNavigation();
     const [sortSelected, setSortSelected] = useState(0);
+    const [priceFilter, setPriceFilter] = useState(0);
     const sortSelectionChange = (itemValue, itemIndex) => {
         setSortSelected(itemValue);
     }
@@ -55,6 +58,21 @@ export const CategoryDetails = () => {
             title: 'Z -> A'
         },
     ]
+
+    const [modalvisibility, setmodalvisibility] = useState(false);
+
+    useEffect(() => {
+
+    }, []);
+
+    const filterModalHandler = () => {
+        setmodalvisibility(true);
+
+    }
+
+    const backbuttonhandler = () => {
+        setmodalvisibility(false);
+    }
 
     return (
         <SafeAreaView>
@@ -97,7 +115,7 @@ export const CategoryDetails = () => {
                             </Picker>
                         </View>
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={filterModalHandler}>
                         <Image
                             source={require('../assets/images/filterBtn.png')}
                         />
@@ -265,6 +283,70 @@ export const CategoryDetails = () => {
                 <BuyStepsPub />
             </ScrollView>
             <FooterPub />
+
+            <View>
+                <Overlay
+                    // animationType={ZoomIn}
+                    // transparent={true}
+                    visible={modalvisibility}
+                    // // isVisible={modalvisibility}
+                    // onRequestClose={backbuttonhandler}
+                    // hasBackdrop={true}
+                    // backdropColor={'black'}
+                    // // statusBarTranslucent={true}
+                    // backdropOpacity={0.5}
+                    onClose={backbuttonhandler}
+                    closeOnTouchOutside
+                    containerStyle={{ backgroundColor: 'rgba(38, 37, 37, 0.78)' }}
+                    childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
+                >
+
+                    <TouchableOpacity
+                        style={xStyle.categoryDetailsModalCross}
+                        onPress={backbuttonhandler}
+                    >
+                        <Image
+                            source={require('../assets/images/close-circle.png')}
+                        />
+                    </TouchableOpacity>
+                    <View style={xStyle.categoryDetailsModalHeaderView}>
+                        <Text style={xStyle.categoryDetailsModalHeader}>Refine your Search by Price</Text>
+                    </View>
+
+                    <View style={xStyle.categoryDetailsModalBody}>
+                        <View style={xStyle.categoryDetailsModalRadioBtn}>
+                            <RadioButton
+                                value="1"
+                                status={priceFilter === 1 ? 'checked' : 'unchecked'}
+                                onPress={() => setPriceFilter(1)}
+                            />
+                            <Text style={xStyle.categoryDetailsModalRadioBtnTextFont}>
+                                Under ₹500
+                            </Text>
+                        </View>
+                        <View style={xStyle.categoryDetailsModalRadioBtn}>
+                            <RadioButton
+                                value="2"
+                                status={priceFilter === 2 ? 'checked' : 'unchecked'}
+                                onPress={() => setPriceFilter(2)}
+                            />
+                            <Text style={xStyle.categoryDetailsModalRadioBtnTextFont}>
+                                ₹1,000 - ₹1,500
+                            </Text>
+                        </View>
+                        <View style={xStyle.categoryDetailsModalRadioBtn}>
+                            <RadioButton
+                                value="3"
+                                status={priceFilter === 3 ? 'checked' : 'unchecked'}
+                                onPress={() => setPriceFilter(3)}
+                            />
+                            <Text style={xStyle.categoryDetailsModalRadioBtnTextFont}>
+                                ₹1,500 - ₹3,000
+                            </Text>
+                        </View>
+                    </View>
+                </Overlay>
+            </View>
         </SafeAreaView>
     )
 }
