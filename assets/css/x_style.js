@@ -1079,6 +1079,10 @@ export default StyleSheet.create({
     paddingHorizontal: '6%',
   },
 
+  pub_home_best_head_view: {
+    marginBottom: '8%',
+  },
+
   pub_home_best_head: {
     fontWeight: '600',
     fontSize: 26,
@@ -1103,14 +1107,14 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     marginVertical: '5%',
-    marginLeft: '3%'
+    marginLeft: '3%',
+    width: '50%',
   },
 
   pub_home_best_card_col2_top: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '62%',
     borderBottomColor: '#B3B9C3',
     borderBottomWidth: 0.5,
     paddingBottom: '5%',
@@ -1162,6 +1166,16 @@ export default StyleSheet.create({
     marginTop: '2%'
   },
 
+  prod_det_card_author: {
+    fontWeight: '400',
+    fontSize: 16,
+    color: '#64646F',
+  },
+
+  prod_det_card_author_name: {
+    fontWeight: '500'
+  },
+
   prod_det_price_view: {
     marginTop: '4%'
   },
@@ -1190,6 +1204,8 @@ export default StyleSheet.create({
     borderRadius: 100,
     borderColor: '#26252C',
     display: 'flex',
+    flexDirection: 'row',
+    width: 145,
     justifyContent: 'center',
     alignItems:'center',
     paddingHorizontal: '8%',

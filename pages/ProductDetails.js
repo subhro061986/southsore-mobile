@@ -51,7 +51,7 @@ export const ProductDetails = () => {
                         <Text style={xStyle.prod_det_head}>The Swallows</Text>
                     </View>
                     <View style={xStyle.prod_det_author_view}>
-                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                        <Text style={xStyle.prod_det_card_author}>Author: <Text style={xStyle.prod_det_card_author_name}>Jeff Keller</Text></Text>
                     </View>
                     <View style={xStyle.prod_det_price_view}>
                         <Text style={xStyle.prod_det_price}>Price: <Text style={xStyle.prod_det_price_value}>₹249</Text></Text>
@@ -59,6 +59,9 @@ export const ProductDetails = () => {
                     <View style={xStyle.prod_det_btn_view}>
                         <TouchableOpacity style={xStyle.prod_det_add_btn}>
                             <Text style={xStyle.prod_det_add_btn_txt}>Add to Cart</Text>
+                            <Image
+                                source={require('../assets/images/cartblack.png')}
+                            />
                         </TouchableOpacity>
                         <TouchableOpacity style={xStyle.prod_det_buy_btn}>
                             <Text style={xStyle.prod_det_add_buy_txt}>Buy Now</Text>
