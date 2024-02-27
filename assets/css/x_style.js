@@ -494,7 +494,7 @@ export default StyleSheet.create({
   cartPageBooksMainDiv: {
     // paddingVertical: '15%',
     paddingHorizontal: '6%',
-    paddingBottom: '10%'
+    paddingBottom: '5%'
   },
 
   cartPageOrderSummaryView: {
