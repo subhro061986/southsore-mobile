@@ -1257,10 +1257,10 @@ export default StyleSheet.create({
     borderColor: '#26252C',
     display: 'flex',
     flexDirection: 'row',
-    width: 145,
-    justifyContent: 'center',
+    width: '50%',
+    justifyContent: 'space-between',
     alignItems:'center',
-    paddingHorizontal: '8%',
+    paddingHorizontal: '5%',
     paddingVertical:'5%',
   },
 
@@ -1268,13 +1268,12 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: 18,
     color: '#26252C',
-    textAlign:'center',
   },
 
   prod_det_buy_btn: {
     borderRadius: 100,
     backgroundColor: '#007FE3',
-    width:140,
+    width:'45%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -22,7 +22,10 @@ export const BestSeller = () => {
                 <Text style={xStyle.pub_home_best_head}>Best Seller</Text>
             </View>
 
-            <View style={xStyle.pub_home_best_card}>
+            <TouchableOpacity 
+            style={xStyle.pub_home_best_card}
+            onPress={() => navigation.navigate('productdetails')}
+            >
                 <Image
                     source={require('../assets/images/bcov1.png')}
                     style={xStyle.pub_home_best_cover}
@@ -58,9 +61,9 @@ export const BestSeller = () => {
                         </View>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
 
-            <View style={xStyle.pub_home_best_card}>
+            <TouchableOpacity style={xStyle.pub_home_best_card}>
                 <Image
                     source={require('../assets/images/bcov2.png')}
                     style={xStyle.pub_home_best_cover}
@@ -96,9 +99,9 @@ export const BestSeller = () => {
                         </View>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
 
-            <View style={xStyle.pub_home_best_card}>
+            <TouchableOpacity style={xStyle.pub_home_best_card}>
                 <Image
                     source={require('../assets/images/bcov3.png')}
                     style={xStyle.pub_home_best_cover}
@@ -134,9 +137,9 @@ export const BestSeller = () => {
                         </View>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
 
-            <View style={xStyle.pub_home_best_card}>
+            <TouchableOpacity style={xStyle.pub_home_best_card}>
                 <Image
                     source={require('../assets/images/bcov4.png')}
                     style={xStyle.pub_home_best_cover}
@@ -172,7 +175,7 @@ export const BestSeller = () => {
                         </View>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
 
         </View>
     )

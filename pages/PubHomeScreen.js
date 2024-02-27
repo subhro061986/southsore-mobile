@@ -376,8 +376,9 @@ export const PubHomeScreen = () => {
                         style={xStyle.pub_home_rec_body}
                     >
                         <ScrollView horizontal={true}>
-                            <View
+                            <TouchableOpacity
                                 style={xStyle.pub_home_rec_card}
+                                onPress={() => navigation.navigate('productdetails')}
                             >
 
                                 <Image
@@ -430,9 +431,9 @@ export const PubHomeScreen = () => {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
 
-                            <View
+                            <TouchableOpacity
                                 style={xStyle.pub_home_rec_card}
                             >
                                 <Image
@@ -485,9 +486,9 @@ export const PubHomeScreen = () => {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
 
-                            <View
+                            <TouchableOpacity
                                 style={xStyle.pub_home_rec_card}
                             >
                                 <Image
@@ -540,7 +541,7 @@ export const PubHomeScreen = () => {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         </ScrollView>
 
                     </View>
