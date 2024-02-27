@@ -386,21 +386,21 @@ export default StyleSheet.create({
 
   categoryDetailsDropDown: {
     backgroundColor: '#fff',
-    width : '68%',
+    width: '68%',
     marginHorizontal: 15,
     paddingHorizontal: 15,
     borderColor: '#777983',
     borderWidth: 0.5,
     borderRadius: 10,
-    color : '#141516',
-    fontWeight : '500',
-    fontSize : 12
+    color: '#141516',
+    fontWeight: '500',
+    fontSize: 12
   },
 
-  categoryDetailsDropDownPicker: { 
-    color : '#141516',
-    fontWeight : '500',
-    fontSize : 12
+  categoryDetailsDropDownPicker: {
+    color: '#141516',
+    fontWeight: '500',
+    fontSize: 12
   },
 
   categoryDetailsBooksMainDiv: {
@@ -454,14 +454,14 @@ export default StyleSheet.create({
     width: '90%'
   },
 
-  categoryDetailsModalRadioBtn: { 
-    display: 'flex', 
-    flexDirection: 'row', 
-    justifyContent: 'flex-start', 
+  categoryDetailsModalRadioBtn: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
 
-  categoryDetailsModalRadioBtnTextFont:{
+  categoryDetailsModalRadioBtnTextFont: {
     fontSize: 14,
     color: '#64646F',
     fontWeight: '500'
@@ -550,9 +550,9 @@ export default StyleSheet.create({
   },
 
   cartPageOrderSummaryBtns: {
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: '7%',
   },
 
@@ -562,21 +562,21 @@ export default StyleSheet.create({
     borderColor: '#26252C',
     display: 'flex',
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     paddingHorizontal: '10%',
-    paddingVertical:'5%',
+    paddingVertical: '5%',
   },
 
   cartPageOrderSummaryCheckoutBtn: {
     borderRadius: 100,
     backgroundColor: '#007FE3',
-    width:140,
+    width: 140,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center',
+    alignItems: 'center',
     paddingHorizontal: '10%',
-    paddingVertical:'5%',
+    paddingVertical: '5%',
   },
 
   bottomnav: {
@@ -1144,7 +1144,7 @@ export default StyleSheet.create({
 
   // kaustav Confirm Order start
   ConfirmOrderView: {
-    
+
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -1153,43 +1153,43 @@ export default StyleSheet.create({
   ConfirmOrderViewMain: {
     backgroundColor: '#EFF2FC',
     padding: 25,
-    height:Dimensions.get('screen').height
+    height: Dimensions.get('screen').height
   },
-  ConfirmOrderMainHeaderText:{
+  ConfirmOrderMainHeaderText: {
     fontSize: 26,
-    fontFamily:'Poppins',
+    fontFamily: 'Poppins',
     fontWeight: '600',
     textAlign: 'center',
     color: '#26252C'
   },
-  ConfirmOrdeSubHeaderText:{
-    marginVertical:5,
+  ConfirmOrdeSubHeaderText: {
+    marginVertical: 5,
     fontSize: 14,
     fontWeight: '600',
-    fontFamily:'Roboto',
+    fontFamily: 'Roboto',
     textAlign: 'center',
     color: '#555562',
   },
   ConfirmOrderCard: {
     display: 'flex',
-    width:'100%',
+    width: '100%',
     borderRadius: 14,
-    
+
     marginVertical: '15%',
-    height:100,
-    alignItems:'center',
-    
+    height: 100,
+    alignItems: 'center',
+
   },
-  ConfirmOrderButton:{
+  ConfirmOrderButton: {
     borderRadius: 100,
-    borderColor:'#26252C',
-    padding:10,
-    borderWidth:0.5,
+    borderColor: '#26252C',
+    padding: 10,
+    borderWidth: 0.5,
     display: 'flex',
-    width:'97%',
+    width: '97%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical:'7%',
+    marginVertical: '7%',
     borderBottomColor: '#B3B9C3',
     borderBottomWidth: 0.5,
   },
@@ -1245,9 +1245,9 @@ export default StyleSheet.create({
   },
 
   prod_det_btn_view: {
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: '10%',
   },
 
@@ -1259,9 +1259,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     width: '50%',
     justifyContent: 'space-between',
-    alignItems:'center',
+    alignItems: 'center',
     paddingHorizontal: '5%',
-    paddingVertical:'5%',
+    paddingVertical: '5%',
   },
 
   prod_det_add_btn_txt: {
@@ -1273,20 +1273,20 @@ export default StyleSheet.create({
   prod_det_buy_btn: {
     borderRadius: 100,
     backgroundColor: '#007FE3',
-    width:'45%',
+    width: '45%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center',
+    alignItems: 'center',
     paddingHorizontal: '8%',
-    paddingVertical:'5%',
+    paddingVertical: '5%',
   },
 
   prod_det_add_buy_txt: {
     fontWeight: '600',
     fontSize: 18,
     color: '#FFFFFF',
-    textAlign:'center',
+    textAlign: 'center',
   },
 
   prod_det_border: {
@@ -1339,6 +1339,32 @@ export default StyleSheet.create({
     fontSize: 16,
     color: '#575A63',
   },
+
+  topbar: {
+    backgroundColor: '#03142C',
+    paddingHorizontal: 15,
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
+
+  topbar_bottom: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#3E4158',
+    paddingVertical: '5%'
+  },
+
+  topbar_btn_txt: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#FFFFFF',
+    textAlign: 'center',
+  },
+
+  topbar_btn_mb: {
+    marginBottom: '5%',
+  }
 });
 
 

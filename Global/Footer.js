@@ -32,7 +32,9 @@ export const Footer = () => {
           source={require('../assets/images/publisher.png')}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('profile')}
+      >
         <Image
           source={require('../assets/images/profile.png')}
         />
