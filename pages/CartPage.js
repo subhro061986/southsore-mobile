@@ -135,7 +135,7 @@ export const CartPage = () => {
 
                 <View style={xStyle.cartPageOrderSummaryView}>
                     <View style={xStyle.cartPageOrderSummaryHeaderView}>
-                        <Text style={xStyle.cartPageHeader}>Order Summary</Text>
+                        <Text style={[xStyle.cartPageHeader,{fontSize:20}]}>Order Summary</Text>
                     </View>
                     <View style={xStyle.cartPageOrderSummaryBody}>
                         <View style={xStyle.cartPageOrderSummaryBodyItems}>
@@ -151,12 +151,40 @@ export const CartPage = () => {
                         <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>Total</Text>
                         <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹625</Text>
                     </View>
-                    <View style={xStyle.cartPageOrderSummaryBtns}>
-                        <TouchableOpacity style={xStyle.cartPageOrderSummaryCancelBtn}>
-                            <Text style={xStyle.prod_det_add_btn_txt}>Cancel</Text>
+                    <View style={{
+                        display:'flex',
+                        flexDirection:'row',
+                        justifyContent:'space-between',
+                        marginTop:'5%',
+                        marginBottom:'2%'
+                    }}>
+                        <TouchableOpacity style={{
+                            alignItems:'center',
+                            paddingHorizontal:'10%',
+                            paddingVertical:'4%',
+                            borderWidth:0.5,
+                            borderColor: '#26252C',
+                            borderRadius:100
+                        }}>
+                            <Text style={{
+                            fontWeight: '600',
+                            fontSize: 16,
+                            color: '#26252C',
+                            }}>Cancel</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={xStyle.cartPageOrderSummaryCheckoutBtn}>
-                            <Text style={xStyle.prod_det_add_buy_txt}>Checkout</Text>
+                        <TouchableOpacity style={{
+                            backgroundColor: '#007FE3',
+                            paddingHorizontal:'10%',
+                            paddingVertical:'4%',
+                            borderRadius:100,
+                            alignItems:'center',
+                        }}>
+                            <Text style={{
+                                fontWeight: '600',
+                                fontSize: 16,
+                                color: '#ffffff',
+                            }}
+                            >Checkout</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
