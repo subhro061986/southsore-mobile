@@ -32,6 +32,7 @@ export const Profile = () => {
     const [contactInfoModalVisibility, setmodalvisibility] = useState(false);
     const [personalInfoModalVisibility, setPersonalmodalvisibility] = useState(false);
     const [sortCountrySelected, setSortSelected] = useState(0);
+    const [sortStateSelected, setSortStateSelected] = useState(0);
 
     useEffect(() => {
 
@@ -57,6 +58,10 @@ export const Profile = () => {
 
     const sortCountrySelectionChange = (itemValue, itemIndex) => {
         setSortSelected(itemValue);
+    }
+
+    const sortStateSelectionChange = (itemValue, itemIndex) => {
+        setSortStateSelected(itemValue);
     }
 
     const sortCountryValue = [
@@ -274,12 +279,22 @@ export const Profile = () => {
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>State</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder='Your State' placeholderTextColor={'#7B8890'}></TextInput>
-                            <Image
-                                source={require('../assets/images/call.png')}
-                                style={xStyle.buy_join_modal_input_icon}
-                            />
+                            <View style={xStyle.prof_picker_view}>
+                                <Picker
+                                    style={xStyle.categoryDetailsDropDownPicker}
+                                    selectedValue={sortStateSelected}
+                                    onValueChange={(itemValue, itemIndex) =>
+                                        sortStateSelectionChange(itemValue, itemIndex)
+                                    }
+                                >
+                                    <Picker.Item label="Please Select" value="0" />
+                                    {
+                                        sortCountryValue.map((data, index) => (
+                                            <Picker.Item label={data.title} value={data.id} key={index} />
+                                        ))
+                                    }
+                                </Picker>
+                            </View>
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>City</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
