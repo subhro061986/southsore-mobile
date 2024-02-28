@@ -19,7 +19,7 @@ export const TopBar = () => {
         <>
             <View style={xStyle.topbar}>
                 <View style={xStyle.topnav_top}>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={xStyle.topbar_back_btn}>
                         <Image
                             source={require('../assets/images/backbtn.png')}
                         />
@@ -27,7 +27,9 @@ export const TopBar = () => {
                     <TouchableOpacity
                     >
                         <Image
-                            source={require('../assets/images/profimg.png')}
+                            source={require('../assets/images/nouser.png')}
+                            height={30}
+                            width={30}
                         />
                     </TouchableOpacity>
                 </View>

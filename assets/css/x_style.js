@@ -172,9 +172,7 @@ export default StyleSheet.create({
     position: 'relative',
   },
 
-  buy_join_modal_input_height: {
-    height: 40,
-  },
+ 
 
   howToSouthShoreModalBodyFormLabel: {
     color: '#26252C',
@@ -567,6 +565,12 @@ export default StyleSheet.create({
     paddingVertical: '5%',
   },
 
+  cartPageOrderSummaryCancelBtnTxt: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#26252C',
+  },
+
   cartPageOrderSummaryCheckoutBtn: {
     borderRadius: 100,
     backgroundColor: '#007FE3',
@@ -577,6 +581,13 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: '10%',
     paddingVertical: '5%',
+  },
+
+  cartPageOrderSummaryCheckoutBtnTxT: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#FFFFFF',
+    textAlign: 'center',
   },
 
   bottomnav: {
@@ -863,11 +874,11 @@ export default StyleSheet.create({
     fontWeight: '400',
     color: '#7B8890',
     width: 260,
-    paddingLeft: 12,
+    paddingHorizontal: '4%',
   },
 
   buy_join_modal_input_height: {
-    height: 40,
+    paddingVertical: '2%',
   },
 
   buy_join_modal_input_icon: {
@@ -1347,6 +1358,11 @@ export default StyleSheet.create({
     paddingBottom: 15,
   },
 
+  topbar_back_btn: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+
   topbar_bottom: {
     display: 'flex',
     flexDirection: 'row',
@@ -1365,7 +1381,26 @@ export default StyleSheet.create({
   topbar_btn_mb: {
     marginBottom: '5%',
   },
+  homepaddinng: {
+    paddingHorizontal: '6%',
+  },
 
+  profbg: {
+    backgroundColor: '#EFF2FC',
+    height: Dimensions.get('screen').height,
+    width: '100%'
+  },
+
+  prof_head_view: {
+    marginTop: '5%',
+    marginBottom: '10%',
+  },
+
+  prof_head: {
+    fontWeight: '600',
+    fontSize: 20,
+    color: '#26252C',
+  },
   // Billing Address Kaustav
 
   BillingAddressViewMain: {
@@ -1529,7 +1564,113 @@ export default StyleSheet.create({
     color:'#575A63'
    },
    
+   
 
 
+  prof_contact_view: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: '5%',
+    paddingVertical: '8%',
+  },
+
+  prof_user_img_view: {
+    height: 60,
+    width: 60,
+    borderWidth: 2,
+    borderColor: '#097EDA',
+    borderRadius: 100,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  prof_user_name: {
+    fontWeight: '600',
+    fontSize: 16,
+    color: '#26252C',
+  },
+
+  prof_user_contact_info: {
+    fontWeight: '500',
+    fontSize: 14,
+    color: '#555562',
+  },
+
+  prof_user_contact_info_view: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '72%',
+  },
+
+  prof_user_contact_info_txt_view: {
+    marginVertical: '3%'
+  },
+
+  prof_personal_view: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: '5%',
+    paddingVertical: '8%',
+    marginVertical: '5%',
+    height: 180,
+  },
+
+  prof_user_personal_info_title: {
+    fontWeight: '400',
+    fontSize: 14,
+    color: '#555562',
+  },
+
+  prof_personal_text_view: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    height: '100%'
+  },
+
+  prof_upload_img_sec: {
+    borderWidth: 0.5,
+    borderColor: '#3F4556',
+    borderRadius: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 150,
+    width: 150,
+    position: 'relative',
+  },
+
+  prof_upload_img_margin: {
+    marginBottom: '4%'
+  },
+
+  prof_upload_img_txt: {
+    fontWeight: '400',
+    fontSize: 13,
+    color: '#7B8890',
+  },
+
+  prof_upload_camera_btn: {
+    position: 'absolute',
+    bottom: '26%',
+    right: '15%'
+  },
+
+  prof_picker_view: {
+    borderColor: '#3F4556',
+    borderWidth: 0.5,
+    borderRadius: 10,
+    width: '100%',
+    height: 40,
+    display: 'flex',
+    justifyContent: 'center',
+  },
 });
 
