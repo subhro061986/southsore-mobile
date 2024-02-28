@@ -863,11 +863,11 @@ export default StyleSheet.create({
     fontWeight: '400',
     color: '#7B8890',
     width: 260,
-    paddingLeft: 12,
+    paddingHorizontal: '4%',
   },
 
   buy_join_modal_input_height: {
-    height: 40,
+    paddingVertical: '2%',
   },
 
   buy_join_modal_input_icon: {
@@ -1492,10 +1492,7 @@ export default StyleSheet.create({
     borderColor: '#3F4556',
     borderWidth: 0.5,
     borderRadius: 10,
-    fontSize: 14,
-    fontWeight: '400',
-    color: '#7B8890',
-    width: 260,
+    width: '100%',
     height: 40,
     display: 'flex',
     justifyContent: 'center',
