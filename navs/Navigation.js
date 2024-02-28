@@ -10,6 +10,7 @@ import ConfirmOrder from '../pages/ConfirmOrder';
 import CartPage from '../pages/CartPage';
 import Profile from '../pages/Profile';
 import MyWishlist from '../pages/MyWishlist';
+import BillingAddressPage from '../pages/BillingAddressPage';
 
 
 
@@ -27,6 +28,7 @@ const Navigation=()=>{
           <Stack.Screen name="cartdetails" component={CartPage} options={{title: 'cartdetails',headerShown: false}}/>
           <Stack.Screen name="profile" component={Profile} options={{title: 'profile',headerShown: false}}/>
           <Stack.Screen name="wishlist" component={MyWishlist} options={{title: 'wishlist',headerShown: false}}/>
+          <Stack.Screen name="billingAddress" component={BillingAddressPage} options={{title:'billingAddress', headerShown:false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
