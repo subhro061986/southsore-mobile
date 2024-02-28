@@ -29,7 +29,9 @@ export const TopMenu = () => {
               source={require('../assets/images/sms.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('wishlist')}
+          >
             <Image
               source={require('../assets/images/heart.png')}
             />

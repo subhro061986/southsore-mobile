@@ -553,43 +553,37 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: '7%',
+    marginTop: '5%',
+    marginBottom: '2%'
   },
 
   cartPageOrderSummaryCancelBtn: {
-    borderWidth: 0.5,
-    borderRadius: 100,
-    borderColor: '#26252C',
-    display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: '10%',
-    paddingVertical: '5%',
+    paddingVertical: '4%',
+    borderWidth: 0.5,
+    borderColor: '#26252C',
+    borderRadius: 100
   },
 
   cartPageOrderSummaryCancelBtnTxt: {
     fontWeight: '600',
-    fontSize: 18,
+    fontSize: 16,
     color: '#26252C',
   },
 
   cartPageOrderSummaryCheckoutBtn: {
-    borderRadius: 100,
     backgroundColor: '#007FE3',
-    width: 140,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     paddingHorizontal: '10%',
-    paddingVertical: '5%',
+    paddingVertical: '4%',
+    borderRadius: 100,
+    alignItems: 'center',
   },
 
   cartPageOrderSummaryCheckoutBtnTxT: {
     fontWeight: '600',
-    fontSize: 18,
-    color: '#FFFFFF',
-    textAlign: 'center',
+    fontSize: 16,
+    color: '#ffffff',
   },
 
   bottomnav: {

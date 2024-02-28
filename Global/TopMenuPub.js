@@ -28,7 +28,9 @@ export const TopMenuPub = () => {
               source={require('../assets/images/call-white.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('wishlist')}
+          >
             <Image
               source={require('../assets/images/heart.png')}
             />
