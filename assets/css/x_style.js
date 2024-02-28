@@ -1364,7 +1364,172 @@ export default StyleSheet.create({
 
   topbar_btn_mb: {
     marginBottom: '5%',
-  }
-});
+  },
 
+  // Billing Address Kaustav
+
+  BillingAddressViewMain: {
+    backgroundColor: '#EFF2FC',
+    padding: 25,
+  },
+  BillingAddressMainHeader: {
+    fontWeight: '600',
+    fontSize: 20,
+    color: '#26252C',
+  },
+  BillingAddressCard: {
+   width:'100%',
+   backgroundColor:"#FFF",
+   borderRadius:20,
+   display: 'flex',
+   alignItems: 'flex-start',
+   marginVertical: '5%',
+   padding:20,
+   justifyContent:'center',
+  
+  },
+  BillingAddressApplyCouponBtnText: {
+    color: '#007FE3',
+    fontWeight:'700',
+    fontSize:16
+  },
+  BillingAddressFormLabel:{
+    color:'#26252C',
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom:10,
+    textAlign:'left'
+  },
+  BillingAddressViewTextInput: {
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    marginBottom:10,
+    position:'relative'
+  },
+  BillingAddressIcon: {
+      padding: 10,
+      position: 'absolute',
+      right: 10,
+  },
+  BillingAddressFormTextInput:{
+    border:1,
+    borderWidth:0.5,
+    borderRadius:8,
+    borderColor:'#3F4556',
+    width:'100%',
+    color:'#26252C',
+    backgroundColor: '#fff',
+    paddingVertical:'2%',
+    paddingHorizontal:'5%'
+
+  },
+  BillingAddressCardHeaderText:{
+    fontWeight: '600',
+    fontSize: 20,
+    color: '#26252C',
+    paddingBottom:20
+  },
+  BillingAddressDropDown: {
+    backgroundColor: '#fff',
+    width: '100%',
+    borderColor: '#777983',
+    borderWidth: 0.5,
+    borderRadius: 10,
+    marginBottom:10,
+    height:40,
+    display:'flex',
+    justifyContent:'center',
+  },
+  BillingAddressDropDownPicker: {
+    color: '#141516',
+    fontWeight: '500',
+    fontSize: 12,
+    paddingVertical:10,
+  },
+  BillingAddressSaveBtn: {
+    backgroundColor: '#007FE3',
+    borderRadius:40,
+    paddingHorizontal:30,
+    paddingVertical:13,
+    marginVertical:10
+  },
+  BillingAddressApplyCoupnBtn: {
+    
+      paddingHorizontal:25,
+      paddingVertical:13,
+      borderWidth:1.5,
+      borderColor: '#007FE3',
+      borderRadius:10,
+      marginLeft:10
+  },
+  BillingAddressSaveBtnArea: {
+    display:'flex', 
+    justifyContent:'center',
+    alignItems:'center',
+    width:'100%'
+  },
+  BillingAddressBtnText: {
+    color: '#FFF',
+    fontWeight: '600',
+    fontSize: 18
+  },
+  BillingAddressApplyCouponView:{
+    borderBottomWidth:0.5,
+    borderColor:'#B3B9C3',
+    width:'100%',
+    marginBottom:20
+  },
+  BillingAddressOrderTotalDetailsView:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    marginBottom:20,
+    width:'100%'
+  },
+  BillingAddressApplyCoupnView:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    marginBottom:10,
+    width:'100%'
+  },
+  BillingAddressApplyCouponTextInput:{
+    border:1,
+    borderWidth:0.5,
+    borderRadius:10,
+    borderColor:'#3F4556',
+    width:'65%',
+    color:'#26252C',
+    backgroundColor: '#fff',
+    padding:10,
+
+  },
+  BillingAddressApplyCouponCard: {
+    width:'100%',
+    backgroundColor:"#FFF",
+    borderRadius:20,
+    display: 'flex',
+    alignItems: 'flex-start',
+    marginTop: '5%',
+    marginBottom:'55%',
+    padding:20,
+    justifyContent:'center',
+   },
+   BillingAddressApplyCouponPriceText:{
+    fontWeight:'600',
+    // fontSize:20,
+    color:'#26252C'
+   },
+   BillingAddressApplyCouponOrderTotalText:{
+    fontWeight:'400',
+    // fontSize:16,
+    color:'#575A63'
+   },
+   
+
+
+});
 

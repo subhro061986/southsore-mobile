@@ -51,8 +51,13 @@ export const AboutSouthshore = () => {
         </Text>
       </TouchableOpacity>
       <Button 
-      title="Press me"
+      title="Confirm Order Button"
       onPress={() => navigation.navigate('confirmOrder')}
+      />
+      <Button 
+      title="BillingAddress Button"
+      onPress={() => navigation.navigate('billingAddress')}
+      style= {{marginTop:'5%'}}
       />
        
      

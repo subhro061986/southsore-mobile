@@ -50,7 +50,7 @@ export const ConfirmOrder = () => {
             </View>
                         
             </ScrollView>
-            <Footer />
+            <FooterPub />
         </SafeAreaView>
         </>
     )
