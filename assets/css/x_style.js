@@ -567,6 +567,12 @@ export default StyleSheet.create({
     paddingVertical: '5%',
   },
 
+  cartPageOrderSummaryCancelBtnTxt: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#26252C',
+  },
+
   cartPageOrderSummaryCheckoutBtn: {
     borderRadius: 100,
     backgroundColor: '#007FE3',
@@ -577,6 +583,13 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: '10%',
     paddingVertical: '5%',
+  },
+
+  cartPageOrderSummaryCheckoutBtnTxT: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#FFFFFF',
+    textAlign: 'center',
   },
 
   bottomnav: {

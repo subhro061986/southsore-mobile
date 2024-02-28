@@ -153,10 +153,10 @@ export const CartPage = () => {
                     </View>
                     <View style={xStyle.cartPageOrderSummaryBtns}>
                         <TouchableOpacity style={xStyle.cartPageOrderSummaryCancelBtn}>
-                            <Text style={xStyle.prod_det_add_btn_txt}>Cancel</Text>
+                            <Text style={xStyle.cartPageOrderSummaryCancelBtnTxt}>Cancel</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={xStyle.cartPageOrderSummaryCheckoutBtn}>
-                            <Text style={xStyle.prod_det_add_buy_txt}>Checkout</Text>
+                            <Text style={xStyle.cartPageOrderSummaryCheckoutBtnTxT}>Checkout</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
