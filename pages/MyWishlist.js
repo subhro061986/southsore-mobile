@@ -68,6 +68,14 @@ export const MyWishlist = () => {
                                         ₹149
                                     </Text>
                                 </View>
+                                <TouchableOpacity
+                                    style={xStyle.wishlistMoveToCartBtn}
+                                // onPress={() => navigation.navigate('wishlist')}
+                                >
+                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                        Move to Cart
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -99,6 +107,14 @@ export const MyWishlist = () => {
                                         ₹199
                                     </Text>
                                 </View>
+                                <TouchableOpacity
+                                    style={xStyle.wishlistMoveToCartBtn}
+                                // onPress={() => navigation.navigate('wishlist')}
+                                >
+                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                        Move to Cart
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -130,6 +146,14 @@ export const MyWishlist = () => {
                                         ₹249
                                     </Text>
                                 </View>
+                                <TouchableOpacity
+                                    style={xStyle.wishlistMoveToCartBtn}
+                                // onPress={() => navigation.navigate('wishlist')}
+                                >
+                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                        Move to Cart
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -161,6 +185,14 @@ export const MyWishlist = () => {
                                         ₹149
                                     </Text>
                                 </View>
+                                <TouchableOpacity
+                                    style={xStyle.wishlistMoveToCartBtn}
+                                // onPress={() => navigation.navigate('wishlist')}
+                                >
+                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                        Move to Cart
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -192,6 +224,14 @@ export const MyWishlist = () => {
                                         ₹199
                                     </Text>
                                 </View>
+                                <TouchableOpacity
+                                    style={xStyle.wishlistMoveToCartBtn}
+                                // onPress={() => navigation.navigate('wishlist')}
+                                >
+                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                        Move to Cart
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -223,6 +263,14 @@ export const MyWishlist = () => {
                                         ₹249
                                     </Text>
                                 </View>
+                                <TouchableOpacity
+                                    style={xStyle.wishlistMoveToCartBtn}
+                                // onPress={() => navigation.navigate('wishlist')}
+                                >
+                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                        Move to Cart
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>

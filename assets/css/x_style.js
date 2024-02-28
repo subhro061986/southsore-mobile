@@ -584,6 +584,21 @@ export default StyleSheet.create({
     color: '#ffffff',
   },
 
+  wishlistMoveToCartBtn: {
+    alignItems: 'center',
+    paddingHorizontal: '8%',
+    paddingVertical: '5%',
+    borderWidth: 0.5,
+    borderColor: '#26252C',
+    borderRadius: 100
+  },
+
+  wishlistMoveToCartBtnTxt: {
+    fontWeight: '600',
+    fontSize: 11,
+    color: '#26252C',
+  },
+
   bottomnav: {
     position: 'absolute',
     bottom: Dimensions.get('screen').height * 0.1,
