@@ -133,6 +133,20 @@ export const Profile = () => {
                             />
                         </TouchableOpacity>
                     </View>
+                    <TouchableOpacity
+                        style={xStyle.mb200}
+                        onPress={() => navigation.navigate('changepassword')}
+                    >
+                        <Text style={{
+                            fontSize: 13,
+                            fontWeight: '500',
+                            color: '#007FE3',
+                            textDecorationLine: 'underline',
+                            textDecorationColor: '#007FE3'
+                        }}>
+                            Change Password
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
             <Footer />
