@@ -27,7 +27,7 @@ export const TopBar = () => {
                     <TouchableOpacity
                     >
                         <Image
-                            source={require('../assets/images/nouser.png')}
+                            source={require('../assets/images/user_small.png')}
                             height={30}
                             width={30}
                         />
@@ -45,6 +45,7 @@ export const TopBar = () => {
                     <Text style={xStyle.topbar_btn_txt}>Bookshelf</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate('wishlist')}
                 >
                     <Image
                         source={require('../assets/images/wishnav.png')}

@@ -100,7 +100,7 @@ export const Profile = () => {
                         <View style={xStyle.prof_user_contact_info_view}>
                             <View style={xStyle.prof_user_img_view}>
                                 <Image
-                                    source={require('../assets/images/nouser.png')}
+                                    source={require('../assets/images/user_big.png')}
                                 // style={xStyle.topbar_btn_mb}
                                 />
                             </View>
@@ -131,6 +131,16 @@ export const Profile = () => {
                             <Image
                                 source={require('../assets/images/editicon.png')}
                             />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[xStyle.prof_change_password_view, xStyle.mb200]}>
+                        <TouchableOpacity
+                            // style={xStyle.mb200}
+                            onPress={() => navigation.navigate('changepassword')}
+                        >
+                            <Text style={xStyle.prof_change_password_btn_txt}>
+                                Change Password
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -210,7 +220,7 @@ export const Profile = () => {
                         </View>
                     </View>
                     <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn}>
-                        <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Upload</Text>
+                        <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Save</Text>
                     </TouchableOpacity>
 
 
@@ -316,7 +326,7 @@ export const Profile = () => {
                         </View>
                     </View>
                     <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn}>
-                        <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Upload</Text>
+                        <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Save</Text>
                     </TouchableOpacity>
 
 

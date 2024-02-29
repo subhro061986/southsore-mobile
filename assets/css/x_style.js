@@ -600,6 +600,94 @@ export default StyleSheet.create({
     color: '#26252C',
   },
 
+  logInModalBody: {
+    marginVertical: '15%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    textAlign: 'left',
+  },
+
+  forgotPasswordView: {
+    display: 'flex',
+    alignItems: 'flex-end'
+  },
+
+  forgotPasswordTxt: {
+    fontWeight: '600',
+    fontSize: 14,
+    color: '#0355C6'
+  },
+
+  logInBtn: {
+    borderRadius: 100,
+    paddingVertical: 13,
+    paddingHorizontal: 40,
+    width: 200,
+    marginHorizontal: 46,
+    backgroundColor: '#007FE3',
+  },
+
+  logInBtnText: {
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: '#FFFFFF',
+  },
+
+  signInWithGoogleBtn: {
+    borderRadius: 100,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    width: 200,
+    marginHorizontal: 46,
+    marginVertical: 16,
+    backgroundColor: '#fff',
+    borderColor: '#26252C',
+    borderWidth: 0.5,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  signInWithGoogleBtnTxt: {
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: '#575A63',
+    // marginRight: 10
+  },
+
+  logInFooter: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: '10%'
+  },
+
+  logInFooterTxt: {
+    fontSize: 15,
+    fontWeight: '400',
+    color: '#3F4556',
+    marginRight: 5
+  },
+
+  signUpModalBody: {
+    marginVertical: '10%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    textAlign: 'left',
+  },
+
+  signUpFooter: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10
+  },
+
   bottomnav: {
     position: 'absolute',
     bottom: Dimensions.get('screen').height * 0.1,
@@ -1588,8 +1676,8 @@ export default StyleSheet.create({
   },
 
   prof_user_img_view: {
-    height: 60,
-    width: 60,
+    height: 70,
+    width: 70,
     borderWidth: 2,
     borderColor: '#097EDA',
     borderRadius: 100,
@@ -1614,7 +1702,7 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '72%',
+    width: '78%',
   },
 
   prof_user_contact_info_txt_view: {
@@ -1787,6 +1875,26 @@ export default StyleSheet.create({
     top:8,
   },
 
+  // MyOrders Kaustav end 
 
+  mb200: {
+    marginBottom: 200,
+  },
+
+  prof_change_password_view: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    display: 'flex',
+    alignItems: 'center',
+    paddingVertical: '5%',
+  },
+
+  prof_change_password_btn_txt: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#007FE3',
+    textDecorationLine: 'underline',
+    textDecorationColor: '#007FE3'
+  },
 });
 

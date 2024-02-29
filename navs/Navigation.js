@@ -13,6 +13,7 @@ import MyWishlist from '../pages/MyWishlist';
 import BillingAddressPage from '../pages/BillingAddressPage';
 import MyBookshelf from '../pages/MyBookshelf';
 import MyOrders from '../pages/MyOrders';
+import ChangePassword from '../pages/ChangePassword';
 
 
 
@@ -33,6 +34,7 @@ const Navigation=()=>{
           <Stack.Screen name="mybookshelf" component={MyBookshelf} options={{title: 'mybookshelf',headerShown: false}}/>
           <Stack.Screen name="myorders" component={MyOrders} options={{title: 'myorders',headerShown: false}}/>
           <Stack.Screen name="billingAddress" component={BillingAddressPage} options={{title:'billingAddress', headerShown:false }}/>
+          <Stack.Screen name="changepassword" component={ChangePassword} options={{title:'changepassword', headerShown:false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
