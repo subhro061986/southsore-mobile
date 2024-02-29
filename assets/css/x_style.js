@@ -1681,5 +1681,9 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
   },
+
+  mb200: {
+    marginBottom: 200,
+  },
 });
 
