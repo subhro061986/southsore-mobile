@@ -27,7 +27,7 @@ export const TopBar = () => {
                     <TouchableOpacity
                     >
                         <Image
-                            source={require('../assets/images/nouser.png')}
+                            source={require('../assets/images/user_small.png')}
                             height={30}
                             width={30}
                         />

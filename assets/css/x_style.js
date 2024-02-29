@@ -172,7 +172,7 @@ export default StyleSheet.create({
     position: 'relative',
   },
 
- 
+
 
   howToSouthShoreModalBodyFormLabel: {
     color: '#26252C',
@@ -1510,59 +1510,59 @@ export default StyleSheet.create({
     color: '#26252C',
   },
   BillingAddressCard: {
-   width:'100%',
-   backgroundColor:"#FFF",
-   borderRadius:20,
-   display: 'flex',
-   alignItems: 'flex-start',
-   marginVertical: '5%',
-   padding:20,
-   justifyContent:'center',
-  
+    width: '100%',
+    backgroundColor: "#FFF",
+    borderRadius: 20,
+    display: 'flex',
+    alignItems: 'flex-start',
+    marginVertical: '5%',
+    padding: 20,
+    justifyContent: 'center',
+
   },
   BillingAddressApplyCouponBtnText: {
     color: '#007FE3',
-    fontWeight:'700',
-    fontSize:16
+    fontWeight: '700',
+    fontSize: 16
   },
-  BillingAddressFormLabel:{
-    color:'#26252C',
+  BillingAddressFormLabel: {
+    color: '#26252C',
     fontSize: 16,
     fontWeight: '500',
-    marginBottom:10,
-    textAlign:'left'
+    marginBottom: 10,
+    textAlign: 'left'
   },
   BillingAddressViewTextInput: {
-    display:'flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    marginBottom:10,
-    position:'relative'
+    marginBottom: 10,
+    position: 'relative'
   },
   BillingAddressIcon: {
-      padding: 10,
-      position: 'absolute',
-      right: 10,
+    padding: 10,
+    position: 'absolute',
+    right: 10,
   },
-  BillingAddressFormTextInput:{
-    border:1,
-    borderWidth:0.5,
-    borderRadius:8,
-    borderColor:'#3F4556',
-    width:'100%',
-    color:'#26252C',
+  BillingAddressFormTextInput: {
+    border: 1,
+    borderWidth: 0.5,
+    borderRadius: 8,
+    borderColor: '#3F4556',
+    width: '100%',
+    color: '#26252C',
     backgroundColor: '#fff',
-    paddingVertical:'2%',
-    paddingHorizontal:'5%'
+    paddingVertical: '2%',
+    paddingHorizontal: '5%'
 
   },
-  BillingAddressCardHeaderText:{
+  BillingAddressCardHeaderText: {
     fontWeight: '600',
     fontSize: 20,
     color: '#26252C',
-    paddingBottom:20
+    paddingBottom: 20
   },
   BillingAddressDropDown: {
     backgroundColor: '#fff',
@@ -1570,98 +1570,98 @@ export default StyleSheet.create({
     borderColor: '#777983',
     borderWidth: 0.5,
     borderRadius: 10,
-    marginBottom:10,
-    height:40,
-    display:'flex',
-    justifyContent:'center',
+    marginBottom: 10,
+    height: 40,
+    display: 'flex',
+    justifyContent: 'center',
   },
   BillingAddressDropDownPicker: {
     color: '#141516',
     fontWeight: '500',
     fontSize: 12,
-    paddingVertical:10,
+    paddingVertical: 10,
   },
   BillingAddressSaveBtn: {
     backgroundColor: '#007FE3',
-    borderRadius:40,
-    paddingHorizontal:30,
-    paddingVertical:13,
-    marginVertical:10
+    borderRadius: 40,
+    paddingHorizontal: 30,
+    paddingVertical: 13,
+    marginVertical: 10
   },
   BillingAddressApplyCoupnBtn: {
-    
-      paddingHorizontal:25,
-      paddingVertical:13,
-      borderWidth:1.5,
-      borderColor: '#007FE3',
-      borderRadius:10,
-      marginLeft:10
+
+    paddingHorizontal: 25,
+    paddingVertical: 13,
+    borderWidth: 1.5,
+    borderColor: '#007FE3',
+    borderRadius: 10,
+    marginLeft: 10
   },
   BillingAddressSaveBtnArea: {
-    display:'flex', 
-    justifyContent:'center',
-    alignItems:'center',
-    width:'100%'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
   },
   BillingAddressBtnText: {
     color: '#FFF',
     fontWeight: '600',
     fontSize: 18
   },
-  BillingAddressApplyCouponView:{
-    borderBottomWidth:0.5,
-    borderColor:'#B3B9C3',
-    width:'100%',
-    marginBottom:20
+  BillingAddressApplyCouponView: {
+    borderBottomWidth: 0.5,
+    borderColor: '#B3B9C3',
+    width: '100%',
+    marginBottom: 20
   },
-  BillingAddressOrderTotalDetailsView:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginBottom:20,
-    width:'100%'
+  BillingAddressOrderTotalDetailsView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    width: '100%'
   },
-  BillingAddressApplyCoupnView:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginBottom:10,
-    width:'100%'
+  BillingAddressApplyCoupnView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    width: '100%'
   },
-  BillingAddressApplyCouponTextInput:{
-    border:1,
-    borderWidth:0.5,
-    borderRadius:10,
-    borderColor:'#3F4556',
-    width:'65%',
-    color:'#26252C',
+  BillingAddressApplyCouponTextInput: {
+    border: 1,
+    borderWidth: 0.5,
+    borderRadius: 10,
+    borderColor: '#3F4556',
+    width: '65%',
+    color: '#26252C',
     backgroundColor: '#fff',
-    padding:10,
+    padding: 10,
 
   },
   BillingAddressApplyCouponCard: {
-    width:'100%',
-    backgroundColor:"#FFF",
-    borderRadius:20,
+    width: '100%',
+    backgroundColor: "#FFF",
+    borderRadius: 20,
     display: 'flex',
     alignItems: 'flex-start',
     marginTop: '5%',
-    marginBottom:'55%',
-    padding:20,
-    justifyContent:'center',
-   },
-   BillingAddressApplyCouponPriceText:{
-    fontWeight:'600',
+    marginBottom: '55%',
+    padding: 20,
+    justifyContent: 'center',
+  },
+  BillingAddressApplyCouponPriceText: {
+    fontWeight: '600',
     // fontSize:20,
-    color:'#26252C'
-   },
-   BillingAddressApplyCouponOrderTotalText:{
-    fontWeight:'400',
+    color: '#26252C'
+  },
+  BillingAddressApplyCouponOrderTotalText: {
+    fontWeight: '400',
     // fontSize:16,
-    color:'#575A63'
-   },
-   
-   
+    color: '#575A63'
+  },
+
+
 
 
   prof_contact_view: {
@@ -1675,8 +1675,8 @@ export default StyleSheet.create({
   },
 
   prof_user_img_view: {
-    height: 60,
-    width: 60,
+    height: 70,
+    width: 70,
     borderWidth: 2,
     borderColor: '#097EDA',
     borderRadius: 100,
@@ -1701,7 +1701,7 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '72%',
+    width: '78%',
   },
 
   prof_user_contact_info_txt_view: {
@@ -1772,6 +1772,22 @@ export default StyleSheet.create({
 
   mb200: {
     marginBottom: 200,
+  },
+
+  prof_change_password_view: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    display: 'flex',
+    alignItems: 'center',
+    paddingVertical: '5%',
+  },
+
+  prof_change_password_btn_txt: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#007FE3',
+    textDecorationLine: 'underline',
+    textDecorationColor: '#007FE3'
   },
 });
 
