@@ -36,6 +36,7 @@ export const TopBar = () => {
             </View>
             <View style={xStyle.topbar_bottom}>
                 <TouchableOpacity
+                onPress={() =>navigation.navigate('mybookshelf')}
                 >
                     <Image
                         source={require('../assets/images/bookshelf.png')}
@@ -52,6 +53,7 @@ export const TopBar = () => {
                     <Text style={xStyle.topbar_btn_txt}>Wishlist</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                 onPress={() =>navigation.navigate('myorders')}
                 >
                     <Image
                         source={require('../assets/images/orders.png')}

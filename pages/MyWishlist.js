@@ -22,6 +22,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import TopMenuPub from '../Global/TopMenuPub.js';
 import FooterPub from '../Global/FooterPub.js';
+import Footer from '../Global/Footer.js';
 
 export const MyWishlist = () => {
 
@@ -277,7 +278,7 @@ export const MyWishlist = () => {
                 </View>
 
             </ScrollView>
-            <FooterPub />
+            <Footer />
         </SafeAreaView>
     )
 }

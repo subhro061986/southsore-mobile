@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import MyBookshelf from '../../pages/MyBookshelf';
 
 export default StyleSheet.create({
 
@@ -172,7 +173,7 @@ export default StyleSheet.create({
     position: 'relative',
   },
 
- 
+
 
   howToSouthShoreModalBodyFormLabel: {
     color: '#26252C',
@@ -1422,59 +1423,59 @@ export default StyleSheet.create({
     color: '#26252C',
   },
   BillingAddressCard: {
-   width:'100%',
-   backgroundColor:"#FFF",
-   borderRadius:20,
-   display: 'flex',
-   alignItems: 'flex-start',
-   marginVertical: '5%',
-   padding:20,
-   justifyContent:'center',
-  
+    width: '100%',
+    backgroundColor: "#FFF",
+    borderRadius: 20,
+    display: 'flex',
+    alignItems: 'flex-start',
+    marginVertical: '5%',
+    padding: 20,
+    justifyContent: 'center',
+
   },
   BillingAddressApplyCouponBtnText: {
     color: '#007FE3',
-    fontWeight:'700',
-    fontSize:16
+    fontWeight: '700',
+    fontSize: 16
   },
-  BillingAddressFormLabel:{
-    color:'#26252C',
+  BillingAddressFormLabel: {
+    color: '#26252C',
     fontSize: 16,
     fontWeight: '500',
-    marginBottom:10,
-    textAlign:'left'
+    marginBottom: 10,
+    textAlign: 'left'
   },
   BillingAddressViewTextInput: {
-    display:'flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    marginBottom:10,
-    position:'relative'
+    marginBottom: 10,
+    position: 'relative'
   },
   BillingAddressIcon: {
-      padding: 10,
-      position: 'absolute',
-      right: 10,
+    padding: 10,
+    position: 'absolute',
+    right: 10,
   },
-  BillingAddressFormTextInput:{
-    border:1,
-    borderWidth:0.5,
-    borderRadius:8,
-    borderColor:'#3F4556',
-    width:'100%',
-    color:'#26252C',
+  BillingAddressFormTextInput: {
+    border: 1,
+    borderWidth: 0.5,
+    borderRadius: 8,
+    borderColor: '#3F4556',
+    width: '100%',
+    color: '#26252C',
     backgroundColor: '#fff',
-    paddingVertical:'2%',
-    paddingHorizontal:'5%'
+    paddingVertical: '2%',
+    paddingHorizontal: '5%'
 
   },
-  BillingAddressCardHeaderText:{
+  BillingAddressCardHeaderText: {
     fontWeight: '600',
     fontSize: 20,
     color: '#26252C',
-    paddingBottom:20
+    paddingBottom: 20
   },
   BillingAddressDropDown: {
     backgroundColor: '#fff',
@@ -1482,98 +1483,98 @@ export default StyleSheet.create({
     borderColor: '#777983',
     borderWidth: 0.5,
     borderRadius: 10,
-    marginBottom:10,
-    height:40,
-    display:'flex',
-    justifyContent:'center',
+    marginBottom: 10,
+    height: 40,
+    display: 'flex',
+    justifyContent: 'center',
   },
   BillingAddressDropDownPicker: {
     color: '#141516',
     fontWeight: '500',
     fontSize: 12,
-    paddingVertical:10,
+    paddingVertical: 10,
   },
   BillingAddressSaveBtn: {
     backgroundColor: '#007FE3',
-    borderRadius:40,
-    paddingHorizontal:30,
-    paddingVertical:13,
-    marginVertical:10
+    borderRadius: 40,
+    paddingHorizontal: 30,
+    paddingVertical: 13,
+    marginVertical: 10
   },
   BillingAddressApplyCoupnBtn: {
-    
-      paddingHorizontal:25,
-      paddingVertical:13,
-      borderWidth:1.5,
-      borderColor: '#007FE3',
-      borderRadius:10,
-      marginLeft:10
+
+    paddingHorizontal: 25,
+    paddingVertical: 13,
+    borderWidth: 1.5,
+    borderColor: '#007FE3',
+    borderRadius: 10,
+    marginLeft: 10
   },
   BillingAddressSaveBtnArea: {
-    display:'flex', 
-    justifyContent:'center',
-    alignItems:'center',
-    width:'100%'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
   },
   BillingAddressBtnText: {
     color: '#FFF',
     fontWeight: '600',
     fontSize: 18
   },
-  BillingAddressApplyCouponView:{
-    borderBottomWidth:0.5,
-    borderColor:'#B3B9C3',
-    width:'100%',
-    marginBottom:20
+  BillingAddressApplyCouponView: {
+    borderBottomWidth: 0.5,
+    borderColor: '#B3B9C3',
+    width: '100%',
+    marginBottom: 20
   },
-  BillingAddressOrderTotalDetailsView:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginBottom:20,
-    width:'100%'
+  BillingAddressOrderTotalDetailsView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    width: '100%'
   },
-  BillingAddressApplyCoupnView:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginBottom:10,
-    width:'100%'
+  BillingAddressApplyCoupnView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    width: '100%'
   },
-  BillingAddressApplyCouponTextInput:{
-    border:1,
-    borderWidth:0.5,
-    borderRadius:10,
-    borderColor:'#3F4556',
-    width:'65%',
-    color:'#26252C',
+  BillingAddressApplyCouponTextInput: {
+    border: 1,
+    borderWidth: 0.5,
+    borderRadius: 10,
+    borderColor: '#3F4556',
+    width: '65%',
+    color: '#26252C',
     backgroundColor: '#fff',
-    padding:10,
+    padding: 10,
 
   },
   BillingAddressApplyCouponCard: {
-    width:'100%',
-    backgroundColor:"#FFF",
-    borderRadius:20,
+    width: '100%',
+    backgroundColor: "#FFF",
+    borderRadius: 20,
     display: 'flex',
     alignItems: 'flex-start',
     marginTop: '5%',
-    marginBottom:'55%',
-    padding:20,
-    justifyContent:'center',
-   },
-   BillingAddressApplyCouponPriceText:{
-    fontWeight:'600',
+    marginBottom: '55%',
+    padding: 20,
+    justifyContent: 'center',
+  },
+  BillingAddressApplyCouponPriceText: {
+    fontWeight: '600',
     // fontSize:20,
-    color:'#26252C'
-   },
-   BillingAddressApplyCouponOrderTotalText:{
-    fontWeight:'400',
+    color: '#26252C'
+  },
+  BillingAddressApplyCouponOrderTotalText: {
+    fontWeight: '400',
     // fontSize:16,
-    color:'#575A63'
-   },
-   
-   
+    color: '#575A63'
+  },
+
+
 
 
   prof_contact_view: {
@@ -1681,5 +1682,111 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
   },
+  pub_home_best_card_col2_top: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomColor: '#B3B9C3',
+    borderBottomWidth: 0.5,
+    paddingBottom: '5%',
+  },
+
+  //MyBookShelf Kaustav
+
+  MyBookshelfMainView: {
+    marginVertical: '5%',
+    marginLeft: '3%',
+    width: '50%',
+  },
+  MyBookshelfMainTextView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: '10%',
+  },
+  // MyBookShelf Kaustav end
+
+  // MyOrders kaustav start
+
+  MyOrdersCard: {
+    borderRadius: 14,
+    backgroundColor: '#FFFFFF',
+    padding: '3%',
+    marginBottom:'7%'
+
+  },
+  MyOrdersProductDetailsMainView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomColor: '#B3B9C3',
+    borderBottomWidth: 0.5,
+    marginBottom: '5%',
+    paddingBottom: '5%',
+  },
+  MyOrdersProductDetailsView: {
+    marginLeft: '5%',
+    width: '50%',
+  },
+  MyOrdersProductDetailsHeadersView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginRight: '3%',
+  },
+  MyOrderPriceView: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingBottom: '10%',
+  },
+  MyOrderMainPriceText: {
+    fontWeight: '600',
+    fontSize: 20,
+    color: '#26252C'
+  },
+  MyOrderDiscountedPriceText: {
+    fontWeight: '600',
+    fontSize: 13,
+    color: '#ACB1B4',
+    marginLeft: '3%',
+    textDecorationLine: 'line-through',
+    textDecorationStyle: 'solid'
+  },
+  MyOrdersFooter: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '3%'
+  },
+  MyOrderFooterText: {
+    fontWeight: '400',
+    fontSize: 12,
+    color: '#575A63',
+  },
+  MyOrderFooterDownloadBtn: {
+    borderWidth: 0.5,
+    borderRadius: 100,
+    borderColor: '#26252C',
+    position: 'relative',
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    width: '35%'
+  },
+  MyOrderFooterDownloadBtnText: {
+    color:'#26252C',
+    fontWeight:'600',
+    fontSize:12
+  },
+  MyOrderFooterDownloadBtnImg: {
+    position:'absolute',
+    right:8,
+    top:8,
+  },
+
+
 });
 
