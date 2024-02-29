@@ -20,6 +20,7 @@ export const Footer = () => {
 
   const [logInModalvisibility, setLogInModalvisibility] = useState(false);
   const [signUpModalvisibility, setSignUpModalvisibility] = useState(false);
+  const [forgotPasswordModalvisibility, setForotPasswordModalvisibility] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -43,6 +44,16 @@ export const Footer = () => {
 
   const signUpBackButtonHandler = () => {
     setSignUpModalvisibility(false);
+  }
+
+  const forgotPasswordModalHandler = () => {
+    setForotPasswordModalvisibility(true)
+    setSignUpModalvisibility(false);
+    setLogInModalvisibility(false);
+  }
+
+  const forgotPasswordBackButtonHandler = () => {
+    setForotPasswordModalvisibility(false);
   }
 
   return (
@@ -128,7 +139,10 @@ export const Footer = () => {
                 style={xStyle.buy_join_modal_input_icon}
               />
             </View>
-            <TouchableOpacity style={xStyle.forgotPasswordView}>
+            <TouchableOpacity
+              style={xStyle.forgotPasswordView}
+              onPress={forgotPasswordModalHandler}
+            >
               <Text style={xStyle.forgotPasswordTxt}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
@@ -245,6 +259,57 @@ export const Footer = () => {
             >
               <Text style={xStyle.forgotPasswordTxt}>Sign In</Text>
             </TouchableOpacity>
+          </View>
+        </Overlay>
+      </View>
+
+      {/* --------FORGOT PASSWORD MODAL------- */}
+
+      <View>
+        <Overlay
+          // animationType={ZoomIn}
+          // transparent={true}
+          visible={forgotPasswordModalvisibility}
+          // // isVisible={modalvisibility}
+          // onRequestClose={backbuttonhandler}
+          // hasBackdrop={true}
+          // backdropColor={'black'}
+          // // statusBarTranslucent={true}
+          // backdropOpacity={0.5}
+          onClose={forgotPasswordBackButtonHandler}
+          closeOnTouchOutside
+          containerStyle={{ backgroundColor: 'rgba(38, 37, 37, 0.78)' }}
+          childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
+        >
+          <TouchableOpacity
+            style={xStyle.buy_join_modal_cross}
+            onPress={forgotPasswordBackButtonHandler}
+          >
+            <Image
+              source={require('../assets/images/close-circle.png')}
+            />
+          </TouchableOpacity>
+          <View style={xStyle.buy_join_modal_head_view}>
+            <Text style={xStyle.buy_join_modal_head}>Forget Password</Text>
+          </View>
+
+          <View style={xStyle.logInModalBody}>
+            <Text style={xStyle.buy_join_modal_legend}>Enter Your Registered Email</Text>
+            <View style={xStyle.buy_join_modal_input_view}>
+              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder='Your registered email address' placeholderTextColor={'#7B8890'}></TextInput>
+              {/* <Image
+                source={require('../assets/images/smsbox.png')}
+                style={xStyle.buy_join_modal_input_icon}
+              /> */}
+            </View>
+          </View>
+          <TouchableOpacity style={xStyle.logInBtn}>
+            <Text style={[xStyle.logInBtnText]}>Send Request</Text>
+          </TouchableOpacity>
+          
+          <View style={xStyle.logInFooter}>
+            
           </View>
         </Overlay>
       </View>
