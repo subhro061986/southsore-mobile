@@ -1491,7 +1491,7 @@ export default StyleSheet.create({
 
   prof_head_view: {
     marginTop: '5%',
-    marginBottom: '10%',
+    marginBottom: '6%',
   },
 
   prof_head: {
