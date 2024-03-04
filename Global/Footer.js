@@ -17,13 +17,19 @@ import { useAuth } from '../Context/Authcontext.js';
 export const Footer = () => {
 
   const navigation = useNavigation();
-  const { logIn, logOut, authData, forgot_password } = useAuth()
+  const { logIn, logOut, authData, forgot_password, Registration } = useAuth()
 
   const [logInModalvisibility, setLogInModalvisibility] = useState(false);
   const [signUpModalvisibility, setSignUpModalvisibility] = useState(false);
   const [forgotPasswordModalvisibility, setForotPasswordModalvisibility] = useState(false);
+  // Log in
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // Register User
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [userName, setUserName] = useState('');
+  const [phone, setPhone] = useState('');
 
   useEffect(() => {
 
@@ -74,51 +80,119 @@ export const Footer = () => {
     // }
 
     // else {
-      let sendLoginData = {
-        email: email,
-        password: password
-      }
+    let sendLoginData = {
+      email: email,
+      password: password
+    }
 
-      const resp = await logIn(sendLoginData) // API CALL
-      console.log("login response", resp)
+    const resp = await logIn(sendLoginData) // API CALL
+    console.log("login response", resp)
 
-      if (resp?.status === 200) {
-        // navigate('/');
-        navigation.navigate('mybookshelf');
+    if (resp?.status === 200) {
+      // navigate('/');
+      navigation.navigate('mybookshelf');
 
-        // NotificationManager.success(resp.message, 'Success !', 5000,);
-        // console.log("Logged in ")
-        // toast.success("Logged in Successfully", {
-        //     position: "top-right",
-        //     autoClose: 2000,
-        //     hideProgressBar: true,
-        //     closeOnClick: true,
-        //     pauseOnHover: true,
-        //     draggable: true,
-        //     closeButton:false,
-        //     theme: "light",
-        //     });
+      // NotificationManager.success(resp.message, 'Success !', 5000,);
+      // console.log("Logged in ")
+      // toast.success("Logged in Successfully", {
+      //     position: "top-right",
+      //     autoClose: 2000,
+      //     hideProgressBar: true,
+      //     closeOnClick: true,
+      //     pauseOnHover: true,
+      //     draggable: true,
+      //     closeButton:false,
+      //     theme: "light",
+      //     });
 
 
-      }
-      else {
-        // NotificationManager.error(resp.message, 'Error !', 5000,);
-        // toast.error("Login Unsuccessful !", {
-        //   position: "top-right",
-        //   autoClose: 4000,
-        //   hideProgressBar: true,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   closeButton: false,
-        //   theme: "light",
-        //   style: { color: "rgb(250, 62, 75)", fontWeight: 'bold', backgroundColor: "rgb(252, 242, 243)" }
-        // });
-        alert("Log in failed!");
-      }
+    }
+    else {
+      // NotificationManager.error(resp.message, 'Error !', 5000,);
+      // toast.error("Login Unsuccessful !", {
+      //   position: "top-right",
+      //   autoClose: 4000,
+      //   hideProgressBar: true,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   closeButton: false,
+      //   theme: "light",
+      //   style: { color: "rgb(250, 62, 75)", fontWeight: 'bold', backgroundColor: "rgb(252, 242, 243)" }
+      // });
+      alert("Log in failed!");
+    }
 
     // }
 
+  }
+
+  const user_registration = async () => {
+    var json = {
+      email: signUpEmail,
+      password: signUpPassword,
+      contactno: phone,
+      name: userName
+    }
+    const resp = await Registration(json)
+    console.log('reg_resp', resp)
+
+    if (resp === undefined || resp === null || resp === '') {
+      // ** change it as needed
+      console.log('registraion resp not obtained')
+    }
+    else {
+      if (resp.statuscode === '0') {
+        // let prof_img = resp.output['profileimage'] !== null ? resp.output['profileimage'] : profile
+        alert("Registered successfully!")
+        // setProfilePic(prof_img)
+        setSignUpModalvisibility(false);
+        setLogInModalvisibility(false);
+        navigation.navigate("home"); // ask sir for this nav route
+      }
+
+      else {
+        // setEmailError('Account already exist with this email!')
+        alert('Account already exist with this email!')
+      }
+    }
+  }
+
+
+  const do_registration = () => {
+    // if (username === '' && password === '' && email === '' && phone === '') {
+    //     setUserNameError('Please enter username')
+    //     setPhoneError('Please enter phone number')
+    //     setPasswordError('Please enter password')
+    //     setEmailError('Please enter email')
+    // }
+    // else if (username === '') {
+    //     setUserNameError('Please enter username')
+    //     setPhoneError('')
+    //     setPasswordError('')
+    //     setEmailError('')
+    // }
+    // else if (password === '') {
+    //     setPasswordError('Please enter password')
+    //     setPhoneError('')
+    //     setUserNameError('')
+    //     setEmailError('')
+    // }
+    // else if (email === '') {
+    //     setEmailError('Please enter email')
+    //     setPhoneError('')
+    //     setUserNameError('')
+    //     setPasswordError('')
+    // }
+    // else if (phone === '') {
+    //     setEmailError('')
+    //     setPhoneError('Please enter phone number')
+    //     setUserNameError('')
+    //     setPasswordError('')
+    // }
+    // else {
+    user_registration()
+    // }
   }
 
   return (
@@ -281,8 +355,13 @@ export const Footer = () => {
           <View style={xStyle.signUpModalBody}>
             <Text style={xStyle.buy_join_modal_legend}>Name</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder="Your name" placeholderTextColor={'#7B8890'}></TextInput>
+              <TextInput
+                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder="Your name"
+                placeholderTextColor={'#7B8890'}
+                value={userName}
+                onChangeText={(e) => setUserName(e)}
+              />
               <Image
                 source={require('../assets/images/profile-circle.png')}
                 style={xStyle.buy_join_modal_input_icon}
@@ -290,8 +369,13 @@ export const Footer = () => {
             </View>
             <Text style={xStyle.buy_join_modal_legend}>Email</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your email address' placeholderTextColor={'#7B8890'}></TextInput>
+              <TextInput
+                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder='Your email address'
+                placeholderTextColor={'#7B8890'}
+                value={signUpEmail}
+                onChangeText={(e) => setSignUpEmail(e)}
+              />
               <Image
                 source={require('../assets/images/smsbox.png')}
                 style={xStyle.buy_join_modal_input_icon}
@@ -299,8 +383,13 @@ export const Footer = () => {
             </View>
             <Text style={xStyle.buy_join_modal_legend}>Phone no</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your phone number' placeholderTextColor={'#7B8890'}></TextInput>
+              <TextInput
+                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder='Your phone number'
+                placeholderTextColor={'#7B8890'}
+                value={phone}
+                onChangeText={(e) => setPhone(e)}
+              />
               <Image
                 source={require('../assets/images/call.png')}
                 style={xStyle.buy_join_modal_input_icon}
@@ -308,15 +397,21 @@ export const Footer = () => {
             </View>
             <Text style={xStyle.buy_join_modal_legend}>Password</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your password' placeholderTextColor={'#7B8890'}></TextInput>
+              <TextInput
+                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder='Your password'
+                placeholderTextColor={'#7B8890'}
+                value={signUpPassword}
+                onChangeText={(e) => setSignUpPassword(e)}
+                secureTextEntry={true}
+              />
               <Image
                 source={require('../assets/images/eye-slash.png')}
                 style={xStyle.buy_join_modal_input_icon}
               />
             </View>
           </View>
-          <TouchableOpacity style={xStyle.logInBtn}>
+          <TouchableOpacity style={xStyle.logInBtn} onPress={do_registration}>
             <Text style={[xStyle.logInBtnText]}>Sign Up</Text>
           </TouchableOpacity>
           <TouchableOpacity style={xStyle.signInWithGoogleBtn}>
