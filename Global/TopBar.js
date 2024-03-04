@@ -63,6 +63,8 @@ export const TopBar = () => {
                     <Text style={xStyle.topbar_btn_txt}>Orders</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                 onPress={() =>navigation.navigate('profile')}
+
                 >
                     <Image
                         source={require('../assets/images/profnav.png')}
