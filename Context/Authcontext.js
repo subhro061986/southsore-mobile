@@ -5,10 +5,11 @@ import React, {
   useEffect,
 } from "react";
 import axios from "axios";
-import Config from "../Config/Config.json";
+import Config from '../config/Config.json'
 import { jwtDecode } from "jwt-decode";
 import { v4 as uuidv4 } from 'uuid';
-import Cookies from "js-cookie";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+//import Cookies from "js-cookie";
 
 
 
@@ -26,7 +27,7 @@ const AuthProvider = ({ children }) => {
   // !  wishlistshow === isLoggedin
 
   const getDataFromStorage = async () => {
-    var userToken = localStorage.getItem("userid");
+    var userToken = await AsyncStorage.getItem("userid");
     console.log("userToken : ", userToken);
     if (authData === '') {
 
@@ -66,8 +67,8 @@ const AuthProvider = ({ children }) => {
       if (Date.now() >= expirationTime) {
         console.log("Token Expired")
         setIsexpired(true)
-        // localStorage.removeItem("userid")
-        localStorage.setItem("userid", '');
+        // await AsyncStorage.removeItem("userid")
+        await AsyncStorage.setItem("userid", '');
 
       }
       else {
@@ -89,14 +90,14 @@ const AuthProvider = ({ children }) => {
 
   const detect_unique_id = async () => {
 
-    let my_unique_id = localStorage.getItem("unique_id")
+    let my_unique_id = await AsyncStorage.getItem("unique_id")
 
     if (my_unique_id === "" || my_unique_id === null || my_unique_id === undefined ){
 
      
       let system_uuid = uuidv4()
       console.log("in If ", system_uuid)
-      localStorage.setItem('unique_id', system_uuid)
+      await AsyncStorage.setItem('unique_id', system_uuid)
       SetUuid(system_uuid)
 
 
@@ -120,7 +121,7 @@ const AuthProvider = ({ children }) => {
 
 
   const wishlist_hide_show = async () => {
-    let token = localStorage.getItem("userid");
+    let token = await AsyncStorage.getItem("userid");
     if (token === null || token === undefined || token === "") {
       setWishlistshow(false)
     }
@@ -146,14 +147,14 @@ const AuthProvider = ({ children }) => {
         setAuthData(response.data.token)
         setWishlistshow(true)
         // setAuthUsername(response.data.data[0].username)
-        localStorage.setItem("userid", response.data.token);
-        // localStorage.setItem("username", response.data.data[0].username);
+        await AsyncStorage.setItem("userid", response.data.token);
+        // await AsyncStorage.setItem("username", response.data.data[0].username);
       }
       else {
         setAuthData('')
         // setAuthUsername('')
-        localStorage.setItem("userid", '');
-        // localStorage.setItem("username", '');
+        await AsyncStorage.setItem("userid", '');
+        // await AsyncStorage.setItem("username", '');
       }
       return response
 
@@ -174,8 +175,8 @@ const AuthProvider = ({ children }) => {
     setAuthData('')
     setWishlistshow(false)
     // setAuthUsername('')
-    localStorage.setItem("userid", '');
-    // localStorage.setItem("username", '');
+    await AsyncStorage.setItem("userid", '');
+    // await AsyncStorage.setItem("username", '');
 
     return 'Success';
   }

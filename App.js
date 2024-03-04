@@ -9,6 +9,8 @@ import {
   View,
 } from 'react-native';
 import Navigation from './navs/Navigation';
+import { UserProvider } from './Context/Usercontext';
+import { AuthProvider } from './Context/Authcontext';
 
 
 
@@ -16,7 +18,12 @@ import Navigation from './navs/Navigation';
 const App= () => {
  
   return (
-    <Navigation/>
+    <AuthProvider>
+    <UserProvider>
+        <Navigation/>
+    </UserProvider>
+    </AuthProvider>
+    
   );
 };
 
