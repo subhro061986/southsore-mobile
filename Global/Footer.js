@@ -12,11 +12,12 @@ import {
 
 import { useNavigation } from '@react-navigation/native';
 import Overlay from 'react-native-modal-overlay';
-
+import { useAuth } from '../Context/Authcontext.js';
 
 export const Footer = () => {
 
   const navigation = useNavigation();
+  const { logIn, logOut, authData, forgot_password } = useAuth()
 
   const [logInModalvisibility, setLogInModalvisibility] = useState(false);
   const [signUpModalvisibility, setSignUpModalvisibility] = useState(false);
@@ -54,6 +55,70 @@ export const Footer = () => {
 
   const forgotPasswordBackButtonHandler = () => {
     setForotPasswordModalvisibility(false);
+  }
+
+  const doLogin = async () => {
+    // console.log('Email : ', email);
+    // console.log('pass : ', password);
+    // if (email === '' && password === '') {
+    //   // setEmailError('Please enter email')
+    //   // setPasswordError('Please enter password')
+    // }
+    // else if (email === '') {
+    //   // setEmailError('Please enter email')
+    //   // setPasswordError('')
+    // }
+    // else if (password === '') {
+    //   // setPasswordError('Please enter password')
+    //   // setEmailError('')
+    // }
+
+    // else {
+      let sendLoginData = {
+        email: email,
+        password: password
+      }
+
+      const resp = await logIn(sendLoginData) // API CALL
+      console.log("login response", resp)
+
+      if (resp?.status === 200) {
+        // navigate('/');
+        navigation.navigate('mybookshelf');
+
+        // NotificationManager.success(resp.message, 'Success !', 5000,);
+        // console.log("Logged in ")
+        // toast.success("Logged in Successfully", {
+        //     position: "top-right",
+        //     autoClose: 2000,
+        //     hideProgressBar: true,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     closeButton:false,
+        //     theme: "light",
+        //     });
+
+
+      }
+      else {
+        // NotificationManager.error(resp.message, 'Error !', 5000,);
+        // toast.error("Login Unsuccessful !", {
+        //   position: "top-right",
+        //   autoClose: 4000,
+        //   hideProgressBar: true,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   closeButton: false,
+        //   theme: "light",
+        //   style: { color: "rgb(250, 62, 75)", fontWeight: 'bold', backgroundColor: "rgb(252, 242, 243)" }
+        // });
+        alert("Log in failed!");
+      }
+
+    // }
+
   }
 
   return (
@@ -123,8 +188,13 @@ export const Footer = () => {
           <View style={xStyle.logInModalBody}>
             <Text style={xStyle.buy_join_modal_legend}>Email</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your email address' placeholderTextColor={'#7B8890'}></TextInput>
+              <TextInput
+                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder='Your email address'
+                placeholderTextColor={'#7B8890'}
+                value={email}
+                onChangeText={(e) => setEmail(e)}
+              />
               <Image
                 source={require('../assets/images/smsbox.png')}
                 style={xStyle.buy_join_modal_input_icon}
@@ -132,8 +202,14 @@ export const Footer = () => {
             </View>
             <Text style={xStyle.buy_join_modal_legend}>Password</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your password' placeholderTextColor={'#7B8890'}></TextInput>
+              <TextInput
+                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder='Your password'
+                placeholderTextColor={'#7B8890'}
+                value={password}
+                onChangeText={(e) => setPassword(e)}
+                secureTextEntry={true}
+              />
               <Image
                 source={require('../assets/images/eye-slash.png')}
                 style={xStyle.buy_join_modal_input_icon}
@@ -146,7 +222,7 @@ export const Footer = () => {
               <Text style={xStyle.forgotPasswordTxt}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={xStyle.logInBtn}>
+          <TouchableOpacity style={xStyle.logInBtn} onPress={doLogin}>
             <Text style={[xStyle.logInBtnText]}>Sign In</Text>
           </TouchableOpacity>
           <TouchableOpacity style={xStyle.signInWithGoogleBtn}>
@@ -307,9 +383,9 @@ export const Footer = () => {
           <TouchableOpacity style={xStyle.logInBtn}>
             <Text style={[xStyle.logInBtnText]}>Send Request</Text>
           </TouchableOpacity>
-          
+
           <View style={xStyle.logInFooter}>
-            
+
           </View>
         </Overlay>
       </View>
