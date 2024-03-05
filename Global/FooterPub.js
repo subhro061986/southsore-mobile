@@ -35,7 +35,7 @@ export const FooterPub = () => {
   const getCatgegoryData = (data) => {
     console.log("data : ", data.id);
     navigation.navigate('categorydetails',
-      {  category_id: data.id }
+      { category_id: data.id }
     )
     setCategoryModalvisibility(false);
   }
@@ -44,28 +44,42 @@ export const FooterPub = () => {
     <>
       <View style={xStyle.bottomnav}>
         <TouchableOpacity
+          style={xStyle.footerBtn}
           onPress={() => navigation.navigate('home')}
         >
           <Image
             source={require('../assets/images/home.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Home
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={xStyle.footerBtn}
           onPress={modalHandler}
         >
           <Image
             source={require('../assets/images/categoryicon.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Categories
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={xStyle.footerBtn}>
           <Image
             source={require('../assets/images/newarrivals.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            New Arrivals
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={xStyle.footerBtn}>
           <Image
             source={require('../assets/images/bestsellers.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Best Sellers
+          </Text>
         </TouchableOpacity>
       </View>
       {/* --------PUBLISHER LIST MODAL------- */}
@@ -102,15 +116,15 @@ export const FooterPub = () => {
               {
                 categoryByPublisherList.map((data, index) => (
                   <TouchableOpacity
-                    style={[xStyle.list_modal_card_view, {alignItems: 'center'}]}
+                    style={[xStyle.list_modal_card_view, { alignItems: 'center' }]}
                     key={index}
-                    onPress={() =>  getCatgegoryData(data)}
+                    onPress={() => getCatgegoryData(data)}
                   >
-                    <View style={[xStyle.list_modal_card, {width: 50, height: 50, alignItems: 'center'}]}>
+                    <View style={[xStyle.list_modal_card, { width: 50, height: 50, alignItems: 'center' }]}>
                       <Image
                         source={require('../assets/images/categoryimg.png')}
                         // width={90}
-                        style={[xStyle.list_modal_icon, {height: 25, width: 25}]}
+                        style={[xStyle.list_modal_icon, { height: 25, width: 25 }]}
                       // style={{resizeMode:'contain'}}
                       />
                     </View>

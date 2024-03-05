@@ -80,7 +80,7 @@ export const Footer = () => {
   const get_pub_data = (pub_id) => {
     // let pub_id = e.target.value
     navigation.navigate('pubhome',
-        { publisher_id: pub_id }
+      { publisher_id: pub_id }
     )
     setPublisherModalvisibility(false);
   }
@@ -193,31 +193,46 @@ export const Footer = () => {
     <>
       <View style={xStyle.bottomnav}>
         <TouchableOpacity
+          style={xStyle.footerBtn}
           onPress={() => navigation.navigate('home')}
         >
           <Image
             source={require('../assets/images/home.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Home
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={xStyle.footerBtn}
           // onPress={() => navigation.navigate('pubhome')}
           onPress={publisherModalHandler}
         >
           <Image
             source={require('../assets/images/publisher.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Publisher
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={xStyle.footerBtn}
           onPress={() => navigation.navigate('profile')}
         >
           <Image
             source={require('../assets/images/profile.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            My Profile
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={logInModalHandler}>
+        <TouchableOpacity style={xStyle.footerBtn} onPress={logInModalHandler}>
           <Image
             source={require('../assets/images/login.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Login
+          </Text>
         </TouchableOpacity>
       </View>
 
