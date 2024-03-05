@@ -43,7 +43,7 @@ export const MyBookshelf = () => {
                 <View style={[xStyle.cartPageBooksMainDiv, {
                     marginBottom: '50%'
                 }]}>
-                    <View style={xStyle.pub_home_best_card}>
+                    <View style={[xStyle.pub_home_best_card]}>
                         <Image
                             source={require('../assets/images/bcov1.png')}
                             style={xStyle.pub_home_best_cover}

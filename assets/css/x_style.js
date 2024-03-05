@@ -1647,7 +1647,7 @@ export default StyleSheet.create({
     display: 'flex',
     alignItems: 'flex-start',
     marginTop: '5%',
-    marginBottom: '55%',
+    // marginBottom: '55%',
     padding: 20,
     justifyContent: 'center',
   },
@@ -1782,7 +1782,8 @@ export default StyleSheet.create({
   //MyBookShelf Kaustav
 
   MyBookshelfMainView: {
-    marginVertical: '5%',
+    // marginVertical: '5%',
+    marginTop:'3%',
     marginLeft: '3%',
     width: '50%',
   },

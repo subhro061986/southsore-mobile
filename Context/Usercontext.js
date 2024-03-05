@@ -211,69 +211,69 @@ const UserProvider = ({ children }) => {
     // }
   }
   const place_order = async () => {
-    // try {
-    //   const response = await axios.get(Config.API_URL +Config.PLACE_ORDER ,
+    try {
+      const response = await axios.get(Config.API_URL +Config.PLACE_ORDER ,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("place_order_resp : ", response);
+      console.log("place_order_resp : ", response);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("place_order_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("place_order_error : ", error)
+    }
   }
 
   const myorders = async (currentpageno, record_no) => {
-    // try {
-    //   const response = await axios.get(Config.API_URL +Config.MY_ORDERS + "?currentPage="+ currentpageno + "&recordPerPage="+record_no,
+    try {
+      const response = await axios.get(Config.API_URL +Config.MY_ORDERS + "?currentPage="+ currentpageno + "&recordPerPage="+record_no,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("myorders_resp : ", response);
+      console.log("myorders_resp : ", response);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("myorders_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("myorders_error : ", error)
+    }
   }
 
   const applyCoupon = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL +Config.COUPON_CODE ,args,
+    try {
+      const response = await axios.post(Config.API_URL +Config.COUPON_CODE ,args,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("applyCoupon_resp : ", response);
+      console.log("applyCoupon_resp : ", response);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("applyCoupon_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("applyCoupon_error : ", error)
+    }
   }
 
 
@@ -631,69 +631,69 @@ const UserProvider = ({ children }) => {
 
 
   const change_personal_details = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.CHANGE_PERSONAL_INFO, args,
+    try {
+      const response = await axios.post(Config.API_URL + Config.CHANGE_PERSONAL_INFO, args,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'multipart/form-data',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("change_personal_details : ", response.data);
+      console.log("change_personal_details : ", response.data);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("change_personal_details_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("change_personal_details_error : ", error)
+    }
   }
 
 
   const change_contact_details = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.CHANGE_CONTACT_INFO, args,
+    try {
+      const response = await axios.post(Config.API_URL + Config.CHANGE_CONTACT_INFO, args,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("change_contact_details : ", response.data);
+      console.log("change_contact_details : ", response.data);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("change_contact_details_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("change_contact_details_error : ", error)
+    }
   }
   const change_billing_address = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.CHANGE_BILLING_ADDRESS, args,
+    try {
+      const response = await axios.post(Config.API_URL + Config.CHANGE_BILLING_ADDRESS, args,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("change_billing_address : ", response.data);
+      console.log("change_billing_address : ", response.data);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("change_billing_address_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("change_billing_address_error : ", error)
+    }
   }
 
 
@@ -721,67 +721,67 @@ const UserProvider = ({ children }) => {
 
 
   const my_profile = async () => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.MY_PROFILE,
+    try {
+      const response = await axios.get(Config.API_URL + Config.MY_PROFILE,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("my_profile : ", response.data);
+      console.log("my_profile : ", response.data);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("my_profile_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("my_profile_error : ", error)
+    }
   }
   const get_country_list = async () => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.COUNTRY_LIST,
+    try {
+      const response = await axios.get(Config.API_URL + Config.COUNTRY_LIST,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("get_country_list : ", response.data);
+      console.log("get_country_list : ", response.data);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("get_country_list_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("get_country_list_error : ", error)
+    }
   }
   const get_state_list = async (countryId) => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.STATE_LIST + countryId,
+    try {
+      const response = await axios.get(Config.API_URL + Config.STATE_LIST + countryId,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   console.log("get_country_list : ", response.data);
+      console.log("get_country_list : ", response.data);
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("get_country_list_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("get_country_list_error : ", error)
+    }
   }
 
   const getAllPublishers = async () => {
@@ -839,79 +839,79 @@ const UserProvider = ({ children }) => {
 
   /* Razor Pay */
   const createOrder = async (data) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.RAZORPAY_CREATE_ORDER,data,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-    //     })
+    try {
+      const response = await axios.post(Config.API_URL + Config.RAZORPAY_CREATE_ORDER,data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
+        })
         
-    //   console.log("razor pay create order  : ", response);
-    //   return response.data;
-    // }
-    // catch (error) {
-    //   console.log("BOOKSHELF CONTEXT ERROR: ", error);
-    // }
+      console.log("razor pay create order  : ", response);
+      return response.data;
+    }
+    catch (error) {
+      console.log("BOOKSHELF CONTEXT ERROR: ", error);
+    }
   }
   const processPayment = async (data) => {
-  //   try {
-  //     const response = await axios.post(Config.API_URL + Config.RAZORPAY_PROCESS_PAYMENT,data,
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Authorization': 'Bearer ' + authData
-  //         },
-  //       })
+    try {
+      const response = await axios.post(Config.API_URL + Config.RAZORPAY_PROCESS_PAYMENT,data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
+        })
         
-  //     console.log("razor pay payment confirmed  : ", response);
-  //     return response.data;
-  //   }
-  //   catch (error) {
-  //     console.log("BOOKSHELF CONTEXT ERROR: ", error);
-  //   }
-  // }
+      console.log("razor pay payment confirmed  : ", response);
+      return response.data;
+    }
+    catch (error) {
+      console.log("BOOKSHELF CONTEXT ERROR: ", error);
+    }
+  }
   
-   const getPublishersById = async (id) => {}
-  //   console.log("ID GET BY ID",id)
-  //   console.log("ID GET BY ID==>",publisherId)
-  //   console.log('ID GET BY ID==>',localStorage.getItem('publisher_id') )
-  //   //setPublisherId(0)
-  //   let pub_id=0;
-  //   if(id===undefined || id===0 || id==='0')
-  //   {
-  //     if(publisherId===0 || publisherId==='0')
-  //     {
-  //       pub_id=localStorage.getItem('publisher_id')
-  //     }
-  //     else{
-  //       pub_id=publisherId
-  //     }
+   const getPublishersById = async (id) => {
+    console.log("ID GET BY ID",id)
+    console.log("ID GET BY ID==>",publisherId)
+    console.log('ID GET BY ID==>',localStorage.getItem('publisher_id') )
+    //setPublisherId(0)
+    let pub_id=0;
+    if(id===undefined || id===0 || id==='0')
+    {
+      if(publisherId===0 || publisherId==='0')
+      {
+        pub_id=localStorage.getItem('publisher_id')
+      }
+      else{
+        pub_id=publisherId
+      }
       
-  //   }
-  //   else{
-  //     pub_id=id
-  //   }
-  //   console.log("PUB API",Config.API_URL + Config.GET_PUB_DETAILS+pub_id)
-  //   try {
-  //     const response = await axios.get(Config.API_URL + Config.GET_PUB_DETAILS+pub_id,
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       })
+    }
+    else{
+      pub_id=id
+    }
+    console.log("PUB API",Config.API_URL + Config.GET_PUB_DETAILS+pub_id)
+    try {
+      const response = await axios.get(Config.API_URL + Config.GET_PUB_DETAILS+pub_id,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
         
-  //       setPublisherData(response?.data?.output)
-  //       setPublisherId(response?.data?.output?.id)
-  //       localStorage.setItem('publisher_id',response?.data?.output?.id)
-  //       category_by_publisher(response?.data?.output?.id)
-  //     console.log("GET ALL PUBLISHERS BY ID : ", response);
-  //     return response;
-  //   }
-  //   catch (error) {
-  //     console.log("PUBLISHER CONTEXT ERROR: ", error);
-  //   }
+        setPublisherData(response?.data?.output)
+        setPublisherId(response?.data?.output?.id)
+        localStorage.setItem('publisher_id',response?.data?.output?.id)
+        category_by_publisher(response?.data?.output?.id)
+      console.log("GET ALL PUBLISHERS BY ID : ", response);
+      return response;
+    }
+    catch (error) {
+      console.log("PUBLISHER CONTEXT ERROR: ", error);
+    }
   }
 
 
@@ -1023,7 +1023,7 @@ const UserProvider = ({ children }) => {
         getAllActivePublishers,
         allActivePublisher,
         allActivePublisher1,
-        //getPublishersById,
+        getPublishersById,
         publisherData,
         publisherId,
         categoryByPublisherList,
