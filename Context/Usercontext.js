@@ -873,7 +873,7 @@ const UserProvider = ({ children }) => {
     }
   }
   
-   const getPublishersById = async (id) => {}
+   const getPublishersById = async (id) => {
     console.log("ID GET BY ID",id)
     console.log("ID GET BY ID==>",publisherId)
     console.log('ID GET BY ID==>',await AsyncStorage.getItem('publisher_id') )
