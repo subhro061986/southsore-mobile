@@ -1801,7 +1801,7 @@ export default StyleSheet.create({
     borderRadius: 14,
     backgroundColor: '#FFFFFF',
     padding: '3%',
-    marginBottom:'7%'
+    marginBottom: '7%'
 
   },
   MyOrdersProductDetailsMainView: {
@@ -1866,14 +1866,14 @@ export default StyleSheet.create({
     width: '35%'
   },
   MyOrderFooterDownloadBtnText: {
-    color:'#26252C',
-    fontWeight:'600',
-    fontSize:12
+    color: '#26252C',
+    fontWeight: '600',
+    fontSize: 12
   },
   MyOrderFooterDownloadBtnImg: {
-    position:'absolute',
-    right:8,
-    top:8,
+    position: 'absolute',
+    right: 8,
+    top: 8,
   },
 
   // MyOrders Kaustav end 
@@ -1896,6 +1896,40 @@ export default StyleSheet.create({
     color: '#007FE3',
     textDecorationLine: 'underline',
     textDecorationColor: '#007FE3'
+  },
+
+  list_modal_view: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around'
+  },
+
+  list_modal_card_view: {
+    width: 90, marginBottom: 10
+  },
+
+  list_modal_card: {
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderRadius: 14,
+    height: 80,
+    width: 80,
+    display: 'flex',
+    justifyContent: 'center'
+  },
+
+  list_modal_icon: {
+    width: 75,
+    height: 75,
+    resizeMode: 'contain'
+  },
+
+  list_modal_legend: {
+    fontSize: 12,
+    fontWeight: "500",
+    textAlign: "center",
+    color: 'grey',
   },
 });
 

@@ -54,14 +54,14 @@ const UserProvider = ({ children }) => {
     , [authData]);
 
     
-    // useEffect(() => {
-    //     let  loc_pub = localStorage.getItem('publisher_id')
+    useEffect(() => {
+        let  loc_pub = AsyncStorage.getItem('publisher_id')
 
-    //     if(publisherId === 0 || publisherId === '0' || publisherId === '' || publisherId === null || publisherId === undefined){
-    //       setPublisherId(loc_pub)
-    //     }
+        if(publisherId === 0 || publisherId === '0' || publisherId === '' || publisherId === null || publisherId === undefined){
+          setPublisherId(loc_pub)
+        }
         
-    //   }, [publisherId]);
+      }, [publisherId]);
 
   // ** --------------------- GALLERY API ------------------------------
 
@@ -283,7 +283,7 @@ const UserProvider = ({ children }) => {
 
     // let default_img = json_obj.front_cover !== null ? json_obj.front_cover : null;
 
-    // let basket = JSON.parse(localStorage.getItem("cart_data")) || []
+    // let basket = JSON.parse(await AsyncStorage.getItem("cart_data")) || []
 
     // let json_data = {
     //   title: json_obj.title,
@@ -304,7 +304,7 @@ const UserProvider = ({ children }) => {
 
     // if (is_present_prod === undefined) {
     //   basket.push(json_data)
-    //   localStorage.setItem("cart_data", JSON.stringify([...basket]))
+    //   await AsyncStorage.setItem("cart_data", JSON.stringify([...basket]))
     // } else {
     //   console.log(`${json_obj.title} : Already present in basket`)
     // }
@@ -318,37 +318,37 @@ const UserProvider = ({ children }) => {
 
 
   const get_items = async () => {
-    // console.log("Hello in context")
-    // let array_item = []
-    // let local_storage_data = JSON.parse(localStorage.getItem("cart_data"))
-    // if (local_storage_data === undefined || local_storage_data === null) {
-    //   array_item = []
-    // }
+    console.log("Hello in context")
+    let array_item = []
+    let local_storage_data = JSON.parse(await AsyncStorage.getItem("cart_data"))
+    if (local_storage_data === undefined || local_storage_data === null) {
+      array_item = []
+    }
 
-    // else {
-    //   array_item = [...local_storage_data]
-    // }
+    else {
+      array_item = [...local_storage_data]
+    }
 
-    // let item_no = array_item.length
-    // setItems(item_no)
-    // total_price_itemsno()
-    // console.log("getcartitems", item_no)
+    let item_no = array_item.length
+    setItems(item_no)
+    total_price_itemsno()
+    console.log("getcartitems", item_no)
   }
 
 
 
   const total_price_itemsno = async () => {
-    // console.log("executing " )
-    // let total_price = 0
-    // let items_no = 0
-    // let storage_arr = JSON.parse(localStorage.getItem("cart_data"))
-    // for (let i = 0; i < storage_arr?.length; i++) {
+    console.log("executing " )
+    let total_price = 0
+    let items_no = 0
+    let storage_arr = JSON.parse(await AsyncStorage.getItem("cart_data"))
+    for (let i = 0; i < storage_arr?.length; i++) {
 
-    //   total_price = total_price + storage_arr[i].items_no * storage_arr[i].price
-    //   items_no = items_no + storage_arr[i].items_no
-    // }
-    // localStorage.setItem("cart_items_no", items_no)
-    // setprice(total_price)
+      total_price = total_price + storage_arr[i].items_no * storage_arr[i].price
+      items_no = items_no + storage_arr[i].items_no
+    }
+    await AsyncStorage.setItem("cart_items_no", items_no)
+    setprice(total_price)
 
 
   }
@@ -360,27 +360,27 @@ const UserProvider = ({ children }) => {
 
 
     
-    // try {
+    try {
       
-    //   const response = await axios.get(Config.API_URL + Config.GET_WISHLIST_BOOKS +
-    //     "?currentPage=" + current_page + "&recordPerPage=" + record_per_page,
+      const response = await axios.get(Config.API_URL + Config.GET_WISHLIST_BOOKS +
+        "?currentPage=" + current_page + "&recordPerPage=" + record_per_page,
 
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
 
-    //     })
+        })
 
-    //   setWishlistItems(response.data.output.books)
+      setWishlistItems(response.data.output.books)
 
-    //   return response.data
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("wishlist_books_resp_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("wishlist_books_resp_error : ", error)
+    }
   }
 
 
@@ -466,82 +466,82 @@ const UserProvider = ({ children }) => {
 
 
 
-    // console.log("Called localstorage_price_items_signin function")
+    console.log("Called localstorage_price_items_signin function")
 
-    // let localstorage_bookids = []
-    // let localstorage_array_item = []
-    // let local_storage_data = JSON.parse(localStorage.getItem("cart_data"))
-    // let local_storage_uuid = localStorage.getItem("unique_id")
+    let localstorage_bookids = []
+    let localstorage_array_item = []
+    let local_storage_data = JSON.parse(await AsyncStorage.getItem("cart_data"))
+    let local_storage_uuid = await AsyncStorage.getItem("unique_id")
 
-    // if (local_storage_data === undefined || local_storage_data === null) {
+    if (local_storage_data === undefined || local_storage_data === null) {
 
-    //   localstorage_bookids = []
-    //   console.log("My_uuid_1 :", local_storage_uuid)
-    // }
+      localstorage_bookids = []
+      console.log("My_uuid_1 :", local_storage_uuid)
+    }
 
-    // else {
+    else {
 
-    //   console.log("My_uuid_2 :", local_storage_uuid)
+      console.log("My_uuid_2 :", local_storage_uuid)
 
-    //   console.log("See_uuid ", localStorage.getItem("unique_id"))
+      console.log("See_uuid ", await AsyncStorage.getItem("unique_id"))
 
-    //   const resp = await cart_items({
-    //     deviceid: local_storage_uuid
-    //     // "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
-    //   })
+      const resp = await cart_items({
+        deviceid: local_storage_uuid
+        // "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
+      })
 
-    //   if (resp === undefined || resp === null ) {
-    //     localstorage_bookids = []
-    //     console.log("My_uuid :", local_storage_uuid)
-    //   }
-    //   else {
-    //     console.log("My_uuid :", local_storage_uuid)
+      if (resp === undefined || resp === null ) {
+        localstorage_bookids = []
+        console.log("My_uuid :", local_storage_uuid)
+      }
+      else {
+        console.log("My_uuid :", local_storage_uuid)
 
-    //     let cartitems = resp.output
+        let cartitems = resp.output
 
-    //     console.log("cart_items_resp_else ", resp)
+        console.log("cart_items_resp_else ", resp)
 
-    //     localstorage_array_item = [...local_storage_data]
+        localstorage_array_item = [...local_storage_data]
 
-    //     for (let i = 0; i < localstorage_array_item.length; i++) {
-    //       let book_id = localstorage_array_item[i].my_book_id
+        for (let i = 0; i < localstorage_array_item.length; i++) {
+          let book_id = localstorage_array_item[i].my_book_id
 
-    //       // let book_is_present = cartItems.find((val) => val.id === book_id)
-    //       let book_is_present = cartitems.find((val) => val.id === book_id)
+          // let book_is_present = cartItems.find((val) => val.id === book_id)
+          let book_is_present = cartitems.find((val) => val.id === book_id)
 
-    //       console.log("book_is_present ", book_is_present)
+          console.log("book_is_present ", book_is_present)
 
-    //       if (book_is_present === undefined) {
-    //         localstorage_bookids.push(book_id)
-    //       }
+          if (book_is_present === undefined) {
+            localstorage_bookids.push(book_id)
+          }
 
 
-    //     }
-    //   }
-    // }
+        }
+      }
+    }
 
-    // console.log("localstorage_bookids_aray : ", localstorage_bookids)
+    console.log("localstorage_bookids_aray : ", localstorage_bookids)
 
-    // let mul_json =
-    // {
-    //   deviceid: local_storage_uuid,
-    //   // "9E7C1A59-7473-405F-81A7-11E25C70F0AC",
-    //   bookids: localstorage_bookids
-    // }
+    let mul_json =
+    {
+      deviceid: local_storage_uuid,
+      // "9E7C1A59-7473-405F-81A7-11E25C70F0AC",
+      bookids: localstorage_bookids
+    }
 
-    // const response = await add_multiple_item(mul_json)
-    // console.log("Multiple_resp ", response)
-    // localStorage.removeItem('cart_data')
+    const response = await add_multiple_item(mul_json)
+    console.log("Multiple_resp ", response)
+    await AsyncStorage.removeItem('cart_data')
 
-    // console.log("Token_is_expired :", isexpired)
+    console.log("Token_is_expired :", isexpired)
 
-    // if (response === undefined || response === null || isexpired === true) {
-    //   setItems(0)
-    //   setprice(0)
-    // }
-    // else {
-    //   price_items_signin(response)
-    // }
+    if (response === undefined || response === null || isexpired === true) {
+      setItems(0)
+      setprice(0)
+    }
+    else {
+      price_items_signin(response)
+    }
 
     
 
@@ -873,17 +873,17 @@ const UserProvider = ({ children }) => {
     }
   }
   
-   const getPublishersById = async (id) => {
+   const getPublishersById = async (id) => {}
     console.log("ID GET BY ID",id)
     console.log("ID GET BY ID==>",publisherId)
-    console.log('ID GET BY ID==>',localStorage.getItem('publisher_id') )
+    console.log('ID GET BY ID==>',await AsyncStorage.getItem('publisher_id') )
     //setPublisherId(0)
     let pub_id=0;
     if(id===undefined || id===0 || id==='0')
     {
       if(publisherId===0 || publisherId==='0')
       {
-        pub_id=localStorage.getItem('publisher_id')
+        pub_id=await AsyncStorage.getItem('publisher_id')
       }
       else{
         pub_id=publisherId
@@ -904,7 +904,7 @@ const UserProvider = ({ children }) => {
         
         setPublisherData(response?.data?.output)
         setPublisherId(response?.data?.output?.id)
-        localStorage.setItem('publisher_id',response?.data?.output?.id)
+        await AsyncStorage.setItem('publisher_id',response?.data?.output?.id)
         category_by_publisher(response?.data?.output?.id)
       console.log("GET ALL PUBLISHERS BY ID : ", response);
       return response;
