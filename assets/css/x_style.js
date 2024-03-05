@@ -1916,12 +1916,14 @@ export default StyleSheet.create({
     height: 80,
     width: 80,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '3%'
   },
 
   list_modal_icon: {
-    width: 75,
-    height: 75,
+    width: 70,
+    height: 70,
     resizeMode: 'contain'
   },
 

@@ -124,8 +124,9 @@ const UserProvider = ({ children }) => {
           setallNewArrival([])
         }
       }
-
+      console.log('new arrival', allNewArrival)
       return response.data
+      
 
     }
     catch (error) {
@@ -134,22 +135,50 @@ const UserProvider = ({ children }) => {
   }
 
 
-  const best_selling_books = async (record_per_page) => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.BEST_SELLING + "?recordPerPage=" + record_per_page,
+  const best_selling_books = async (record_per_page,publisher_id) => {
+    let pub_id=0;
+    if(publisher_id===undefined || publisher_id===0 || publisher_id==='0')
+    {
+      if(publisherId===0 || publisherId==='0'){
+        pub_id=await AsyncStorage.getItem('publisher_id')
+      }
+      else{
+        pub_id=publisherId
+        
+      }
+      
+    }
+    else{
+      pub_id=publisher_id
+    }
+    try {
+      const response = await axios.get(Config.API_URL + Config.BEST_SELLING + "/"+ pub_id + "?recordPerPage=" + record_per_page,
 
-    //     {
-    //       headers: {
-    //         'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
-    //       },
+        {
+          headers: {
+            'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
+          },
 
-    //     })
-    //   return response.data
+        })
+        if (response === undefined || response === null) {
+          setAllBestSeller([])
+      }
+      else {
+          if (response.data.statuscode === "0" && response.data.output.length > 0) {
+            setAllBestSeller(response.data.output)
+          }
+          else {
+            setAllBestSeller([])
+          }
+      }
+      console.log('best seller', response.data.output)  
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("Book_details_error : ", error)
-    // }
+    }
+    catch (error) {
+      setAllBestSeller([])
+      console.log("Book_details_error : ", error)
+    }
   }
 
 
@@ -1052,6 +1081,7 @@ const UserProvider = ({ children }) => {
         get_state_list,
         getAllPublishers,
         getAllActivePublishers,
+        allBestSeller,
         allActivePublisher,
         allActivePublisher1,
         getPublishersById,

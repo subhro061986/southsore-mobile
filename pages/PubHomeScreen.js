@@ -34,7 +34,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
 
     // const navigation = useNavigation();
 
-    const { getPublishersById, publisherId, getNewArrivals, allNewArrival, publisherData } = UserProfile();
+    const { getPublishersById, publisherId, getNewArrivals, allNewArrival, publisherData, allBestSeller } = UserProfile();
     const { authData } = useAuth();
 
     const [publisherDetails, setPublisherDetails] = useState('')
@@ -46,6 +46,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
 
     const getPubById = async () => {
         // let pubid = 0;
+        // const about = document.getElementById("pub_about");
         // if (route.params === null || route.params === 'null') {
         //   pubid = publisherId
         // }
@@ -55,6 +56,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
         const result = await getPublishersById(route.params.publisher_id)
         console.log("RESULT from Banner ===>", result);
         setPublisherDetails(result?.data?.output)
+        // about.innerHTML = result?.data?.output?.about;
 
     }
 
@@ -66,14 +68,23 @@ export const PubHomeScreen = ({ route, navigation }) => {
 
                 {/* Banner */}
 
-                <ImageBackground
-                    source={require('../assets/images/PubBg.png')}
+                <View
+                    // source={require('../assets/images/PubBg.png')}
                     // source={{uri:Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date()}}
-                    resizeMode="cover" style={xStyle.pub_banner}>
+                    // resizeMode="cover" 
+                    style={xStyle.pub_banner}>
 
 
                     <Image
-                        source={require('../assets/images/demoBook.png')}
+                        // source={require('../assets/images/demoBook.png')}
+                        source={require('../assets/images/PubBg.png')}
+                        // source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date() }}
+                        width={'10%'}
+                        height={200}
+                        style={{
+                            resizeMode: 'contain'
+                        }}
+
                     />
 
                     <View style={xStyle.pub_banner_txt_view}>
@@ -83,21 +94,27 @@ export const PubHomeScreen = ({ route, navigation }) => {
                         </View>
                     </View>
 
-                </ImageBackground>
+                </View>
 
                 {/* Publisher About */}
 
                 <View style={xStyle.pub_about}>
                     <Image
-                        source={require('../assets/images/demoPubLogo.png')}
-                        style={xStyle.pub_about_logo}
+                        // source={require('../assets/images/demoPubLogo.png')}
+                        source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + '/' + publisherDetails.logo }}
+                        style={[xStyle.pub_about_logo, { resizeMode: 'contain' }]}
+                        height={50}
+                        width={200}
                     />
-                    <Text style={xStyle.pub_about_body}>
-                        Juris Press is a prominent publisher of law and other professional books
+                    <View
+                    // style={xStyle.pub_about_body}
+                    >
+                        <Text id='pub_about'></Text>
+                        {/* Juris Press is a prominent publisher of law and other professional books
                         , headquartered in Chennai, India. Established with a commitment to providing high-quality
                         , authoritative literature
-                        , Juris Press specializes in catering to the discerning needs of the professional
-                    </Text>
+                        , Juris Press specializes in catering to the discerning needs of the professional */}
+                    </View>
                     <TouchableOpacity style={xStyle.southshoreInnovationsReadMore_btn}>
                         <Text style={xStyle.southshoreInnovationsReadMore}>
                             Read More
@@ -187,13 +204,13 @@ export const PubHomeScreen = ({ route, navigation }) => {
                                         style={{
                                             borderRadius: 13,
                                             resizeMode: 'contain',
-                                            width:'100%',
-                                            height:130,
+                                            width: '100%',
+                                            height: 130,
                                             // borderWidth:1,
                                             // borderColor:'black'
                                         }}
-                                        // width={154}
-                                        // height={130}
+                                    // width={154}
+                                    // height={130}
                                     />
                                     <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
                                         <Image
@@ -213,7 +230,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
                                                     style={xStyle.pub_home_card_title}
                                                 >
                                                     {/* Attitude Is Everyt.. */}
-                                                    {data.title.length > 20 ? data.title.substring(0, 15) + ".." : data.title}
+                                                    {data.title.length > 15 ? data.title.substring(0, 15) + ".." : data.title}
                                                 </Text>
                                             </View>
                                             <Text
@@ -223,7 +240,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
                                                     style={xStyle.pub_home_card_author_name}
                                                 >
                                                     {/* Jeff Keller */}
-                                                    {data.authors.length > 20 ? data.authors.substring(0, 15) + ".." : data.authors}
+                                                    {data.authors.length > 15 ? data.authors.substring(0, 15) + ".." : data.authors}
                                                 </Text>
                                             </Text>
                                         </View>
@@ -416,6 +433,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
                 {/* Best Seller */}
 
                 <BestSeller />
+
 
                 {/* Recommendations */}
 
