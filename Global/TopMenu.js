@@ -11,9 +11,13 @@ import {
 // import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
 // import { UserProfile } from '../context/UserContext.js';
+import Autocomplete from 'react-native-autocomplete-input';
 
 export const TopMenu = () => {
   const navigation = useNavigation();
+
+  // const { query } = this.state;
+  // const data = filterData(query);
 
   return (
     <View style={xStyle.topnav}>
@@ -47,6 +51,25 @@ export const TopMenu = () => {
       </View>
       <View style={xStyle.topnav_bottom}>
         <TextInput style={xStyle.search_bar} placeholder='Search by Author, Tittle, ISBN' placeholderTextColor={'#B0B6CC'}></TextInput>
+        
+          {/* <Autocomplete
+          style={{
+            flex: 1,
+            left: 0,
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            zIndex: 1
+          }}
+            data={data}
+            value={query}
+            onChangeText={(text) => this.setState({ query: text })}
+            flatListProps={{
+              keyExtractor: (_, idx) => idx,
+              renderItem: ({ item }) => <Text>{item}</Text>,
+            }}
+          /> */}
+        
         <View style={xStyle.search_pos}>
           <Image
             source={require('../assets/images/search-normal.png')}

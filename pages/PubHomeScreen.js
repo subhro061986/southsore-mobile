@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect, useState } from 'react';
 import xStyle from '../assets/css/x_style.js';
 
 import {
@@ -17,7 +17,10 @@ import {
     PermissionsAndroid
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute   } from '@react-navigation/native';
+import { UserProfile } from '../Context/Usercontext';
+import Config from "../config/Config.json"
+import { useAuth } from '../Context/Authcontext';
 // import { UserProfile } from '../context/UserContext.js';
 
 import TopMenu from "../Global/TopMenu.js";
@@ -30,16 +33,43 @@ import BestSeller from '../Global/BestSeller.js';
 export const PubHomeScreen = () => {
 
     const navigation = useNavigation();
+    const route  = useRoute();
+    
+    const { getPublishersById, publisherId } = UserProfile();
+    const { authData } = useAuth();
+    
+    const [publisherDetails, setPublisherDetails] = useState('')
+
+    useEffect(() => {
+        getPubById();
+    }, [authData])
+
+    const getPubById = async () => {
+        let pubid = 0;
+        if (route.state === null || route.state === 'null') {
+          pubid = publisherId
+        }
+        else {
+          pubid = route.state.publisher_id
+        }
+        const result = await getPublishersById(pubid)
+        console.log("RESULT from Banner ===>",result);
+        setPublisherDetails(result?.data?.output)
+    
+    }
 
 
     return (
         <SafeAreaView>
-            <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]}>
+            <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]} keyboardShouldPersistTaps='always'>
                 <TopMenuPub />
 
                 {/* Banner */}
 
-                <ImageBackground source={require('../assets/images/PubBg.png')} resizeMode="cover" style={xStyle.pub_banner}>
+                <ImageBackground 
+                // source={require('../assets/images/PubBg.png')} 
+                source={{uri:Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date()}}
+                resizeMode="cover" style={xStyle.pub_banner}>
 
 
                     <Image

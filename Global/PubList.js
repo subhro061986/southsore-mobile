@@ -10,10 +10,21 @@ import {
     ScrollView
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
-// import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
+import { useNavigation } from '@react-navigation/native';
+import { UserProfile } from '../Context/Usercontext';
+import Config from "../config/Config.json"
 
 export const PubList = () => {
+
+    const navigation = useNavigation();
+    const { allActivePublisher } = UserProfile()
+
+    // useEffect(() => {
+    //   }, [])
+
+    const goToCatagory = (val) => {
+        navigation.navigate('pubhome', { state: { publisher_id: val.id } })
+      }
 
     return (
         <>
@@ -22,15 +33,30 @@ export const PubList = () => {
                     <Text style={xStyle.publist_head}>Listed Publishers</Text>
                 </View>
                 <ScrollView horizontal={true}>
-                    <View>
-                        <TouchableOpacity style={xStyle.pub_cards}>
-                            <Image
-                                source={require('../assets/images/pub_1.png')}
-                            />
-                        </TouchableOpacity>
-                        <Text style={xStyle.pub_name}>Penguin Books</Text>
-                    </View>
-                    <View>
+                    {allActivePublisher.map((data, index) => (
+
+                        data.isactive === 1 && (
+                            <TouchableOpacity
+                                key={index}
+                                onPress={() => goToCatagory(data)}
+                            >
+                                <View style={xStyle.pub_cards}>
+                                    <Image
+                                        // source={require('../assets/images/pub_1.png')}
+                                        source={{uri:Config.API_URL + Config.PUB_IMAGES + data.id + '/' + data.logo}}
+                                        style={{
+                                            height:108,
+                                            width:85,
+                                            resizeMode: 'contain',
+                                        }}
+                                    />
+                                </View>
+                                <Text style={xStyle.pub_name}>{data.name}</Text>
+                            </TouchableOpacity>
+                        )
+
+                    ))}
+                    {/* <View>
                         <TouchableOpacity style={xStyle.pub_cards}>
                             <Image
                                 source={require('../assets/images/pub_2.png')}
@@ -61,7 +87,7 @@ export const PubList = () => {
                             />
                         </TouchableOpacity>
                         <Text style={xStyle.pub_name}>Simon & Schuster</Text>
-                    </View>
+                    </View> */}
                 </ScrollView>
             </View>
         </>
