@@ -46,11 +46,11 @@ export const PubHomeScreen = () => {
 
     const getPubById = async () => {
         let pubid = 0;
-        if (route.state === null || route.state === 'null') {
+        if (route.params === null || route.params === 'null') {
           pubid = publisherId
         }
         else {
-          pubid = route.state.publisher_id
+          pubid = route.params.publisher_id
         }
         const result = await getPublishersById(pubid)
         console.log("RESULT from Banner ===>",result);
