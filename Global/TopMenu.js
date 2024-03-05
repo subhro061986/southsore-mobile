@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState,useEffect } from 'react';
 import xStyle from '../assets/css/x_style.js';
 
 import {
@@ -10,45 +10,40 @@ import {
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
 import Autocomplete from 'react-native-autocomplete-input';
+import { UserProfile } from '../Context/Usercontext.js';
 
 export const TopMenu = () => {
   const navigation = useNavigation();
+  const {allActivePublisher}=UserProfile()
+  const [filteredFilms, setFilteredFilms] = useState([]);
 
-  const [query, setQuery] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
-  const [showAutocomplete, setShowAutocomplete] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  
 
-  const data = [
-    {id: 1, title: 'JavaScript' },
-    {id: 2, title: 'Java' },
-    {id: 3, title: 'Python' },
-    {id: 4, title: 'React Native' },
-    {id: 5, title: 'Ruby' },
-  ];
+  useEffect(() => {
+    
+  }, []);
 
-  const handleInputChange = (text) => {
-    setQuery(text);
-
-    const filtered = data.filter(item =>
-      item.title.toLowerCase().includes(text.toLowerCase())
-    );
-
-    setFilteredData(filtered);
-    // setShowAutocomplete(true); // Show autocomplete when text input changes
+  const findPublisher = (query) => {
+    // Method called every time when we change the value of the input
+    if (query) {
+      // Making a case insensitive regular expression
+      const regex = new RegExp(`${query.trim()}`, 'i');
+      // Setting the filtered film array according the query
+      
+      setFilteredFilms(
+        allActivePublisher.filter((pub) => pub.name.search(regex) >= 0)
+      );
+    } else {
+      // If the query is null then return blank
+      setFilteredFilms([]);
+    }
   };
 
-  const handleItemPress = (item) => {
-    // Handle item selection logic here
-    console.log('Selected item:', item.title);
-    // For example, you can set the selected item in state
-    setSelectedItem(item);
-    // Or navigate to another screen
-    // navigation.navigate('Details', { item });
-    // setShowAutocomplete(false); // Hide autocomplete after selection
-  };
+  
+  
+
+  
 
 
   return (
@@ -85,23 +80,26 @@ export const TopMenu = () => {
         {/* <TextInput style={xStyle.search_bar} onChangeText={handleInputChange} value={query} placeholder='Search by Author, Tittle, ISBN' placeholderTextColor={'#B0B6CC'}></TextInput> */}
         
         <View style={{ flex: 1 }}>
-        {/* <TextInput
-          placeholder="Search..."
-          placeholderTextColor={'#B0B6CC'}
-          
-        /> */}
-        {/* {showAutocomplete && ( */}
-          <Autocomplete
-            data={data}
-            onChangeText={handleInputChange}
-          value={query}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleItemPress(item)}>
-                <Text>{item.title}</Text>
-              </TouchableOpacity>
-            )}
-          />
-        {/* )} */}
+        <Autocomplete
+          autoCapitalize="none"
+          autoCorrect={false}
+          data={filteredFilms}
+          onChangeText={(text) => findPublisher(text)}
+          placeholder="Search by publisher"
+          flatListProps={{
+            renderItem: ({ item }) => (
+            <TouchableOpacity
+              // onPress={() => {
+              //   setSelectedValue(item);
+              // }}
+              >
+              <Text>
+                  {item.name}
+              </Text>
+            </TouchableOpacity>
+            )
+          }}
+        />
       </View>
 
         {/* <View style={xStyle.search_pos}>
