@@ -26,7 +26,8 @@ const UserProvider = ({ children }) => {
   const [allActivePublisher, setAllActivePublisher] = useState([])
   const [allActivePublisher1, setAllActivePublisher1] = useState([])
   const [publisherData, setPublisherData] = useState('')
-  const [publisherId, setPublisherId] = useState(0)
+  const [publisherId, setPublisherId] = useState(2) // init by 2 as Juris Press is 2
+  const [globalCategoryId, setGlobalCategoryId] = useState(0)
   const [categoryByPublisherList, setCategoryByPublisherList] = useState([])
   const [allNewArrival, setallNewArrival] = useState([])
   const [allBestSeller, setAllBestSeller] = useState([])
@@ -49,6 +50,8 @@ const UserProvider = ({ children }) => {
       // cart_items({
       //   deviceid: "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
       // })
+      getAllCategory();
+      category_by_publisher(2);
       get_wishlist_books(1, 5)
       localstorage_price_items_signin()
       // get_wish_books_id()
@@ -69,20 +72,21 @@ const UserProvider = ({ children }) => {
   // ** --------------------- GALLERY API ------------------------------
 
   const getAllCategory = async () => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.ALL_BOOK_CATEGORY,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
+    try {
+      const response = await axios.get(Config.API_URL + Config.ALL_BOOK_CATEGORY,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
 
-    //     })
-    //   return response.data
+        });
+      console.log("Category API : ", response.data);
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("Book_category_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("Book_category_error : ", error)
+    }
   }
 
 
@@ -181,71 +185,61 @@ const UserProvider = ({ children }) => {
     }
   }
 
-
-
   const getBook_by_category = async (currentpageno, record_no, args) => {
-    // console.log(" :", authData)
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.BOOK_BY_GENRE +
-    //     "?currentPage=" + currentpageno + "&recordPerPage=" + record_no, args,
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
-    //       },
-
-    //     })
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("Book_cat_Erget_book_authdataror : ", error)
-    // }
+    try {
+      const response = await axios.post(Config.API_URL + Config.BOOK_BY_GENRE +
+        "?currentPage=" + currentpageno + "&recordPerPage=" + record_no, args,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
+          },
+        })
+      return response.data
+    }
+    catch (error) {
+      console.log("Book_cat_Erget_book_authdataror : ", error)
+    }
   }
 
 
   const category_by_publisher = async (publisher_id) => {
-    // let pub_id=0;
-    // if(publisher_id===undefined || publisher_id===0 || publisher_id==='0')
-    // {
-    //   if(publisherId===0 || publisherId==='0'){
-    //     pub_id=await AsyncStorage.getItem('publisher_id')
-    //     //pub_id=0;
-    //   }
-    //   else{
-    //     pub_id=publisherId
+    let pub_id = 0;
+    if(publisher_id === undefined || publisher_id === 0 || publisher_id === '0')
+    {
+      if(publisherId===0 || publisherId==='0'){
+        pub_id = await AsyncStorage.getItem('publisher_id')
+        //pub_id=0;
+      }
+      else{
+        pub_id = publisherId
+      }
+    }
+    else{
+      pub_id = publisher_id
+    }
 
-    //   }
+    try {
+      const response = await axios.get(Config.API_URL + "publisher/" + pub_id + "/category",
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+      if (response.data.output.length > 0) {
+        setCategoryByPublisherList(response.data.output)
+      }
+      else {
+        setCategoryByPublisherList([])
+      }
+      console.log("Book_cat_by_publisher : ", response);
 
-    // }
-    // else{
-    //   pub_id=publisher_id
-    // }
+      return response.data
 
-    // try {
-    //   const response = await axios.get(Config.API_URL + "publisher/" + pub_id + "/category",
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-
-    //     })
-    //     if(response.data.output.length > 0){
-    //       setCategoryByPublisherList(response.data.output)
-    //     }
-    //     else{
-    //       setCategoryByPublisherList([])
-    //     }
-    //   console.log("Book_cat_by_publisher : ", response);
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("Book_cat_by_publisher_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("Book_cat_by_publisher_error : ", error)
+    }
   }
 
 
@@ -336,8 +330,6 @@ const UserProvider = ({ children }) => {
     }
   }
 
-
-
   const addto_cart = async (json_obj) => {
     // console.log("Before Login cart item context : ", json_obj);
 
@@ -374,9 +366,6 @@ const UserProvider = ({ children }) => {
     // console.log("Cart in context :", basket)
   }
 
-
-
-
   const get_items = async () => {
     console.log("Hello in context")
     let array_item = []
@@ -394,8 +383,6 @@ const UserProvider = ({ children }) => {
     total_price_itemsno()
     console.log("getcartitems", item_no)
   }
-
-
 
   const total_price_itemsno = async () => {
     console.log("executing ")
@@ -443,30 +430,20 @@ const UserProvider = ({ children }) => {
     // }
   }
 
-
-
-
-
   const add_delete_to_wishlist = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.ADD_DELETE_IN_WISHLIST, args,
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-
-    //     })
-
-
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("Add_to_wishlist_error : ", error)
-    // }
+    try {
+      const response = await axios.post(Config.API_URL + Config.ADD_DELETE_IN_WISHLIST, args,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
+        })
+      return response.data
+    }
+    catch (error) {
+      console.log("Add_to_wishlist_error : ", error)
+    }
   }
 
   // *  ------------------  Cart (After Sign-in ) ------------------------- 
@@ -520,31 +497,21 @@ const UserProvider = ({ children }) => {
     // }
   }
 
-
-
   const localstorage_price_items_signin = async () => {
-
-
-
     console.log("Called localstorage_price_items_signin function")
-
     let localstorage_bookids = []
     let localstorage_array_item = []
     let local_storage_data = JSON.parse(await AsyncStorage.getItem("cart_data"))
     let local_storage_uuid = await AsyncStorage.getItem("unique_id")
 
     if (local_storage_data === undefined || local_storage_data === null) {
-
       localstorage_bookids = []
       console.log("My_uuid_1 :", local_storage_uuid)
     }
 
     else {
-
       console.log("My_uuid_2 :", local_storage_uuid)
-
       console.log("See_uuid ", await AsyncStorage.getItem("unique_id"))
-
       const resp = await cart_items({
         deviceid: local_storage_uuid
         // "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
@@ -602,12 +569,7 @@ const UserProvider = ({ children }) => {
     else {
       price_items_signin(response)
     }
-
-
-
-
   }
-
 
   // const g_json = {
   //   deviceid: "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
@@ -628,18 +590,6 @@ const UserProvider = ({ children }) => {
     // setItems(item_no)
     // setprice(tot_price)
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
   const add_multiple_item = async (args) => {
     // try {
@@ -1106,16 +1056,9 @@ const UserProvider = ({ children }) => {
   )
 }
 
-
 function UserProfile() {
   const context = useContext(UserContext)
-
-
-
   return context
 }
 
-
 export { UserContext, UserProvider, UserProfile }
-
-

@@ -688,6 +688,19 @@ export default StyleSheet.create({
     marginVertical: 10
   },
 
+  footerBtn: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+
+  footerIconText: {
+    fontWeight: '500',
+    fontSize: 14,
+    color: '#FFF',
+    marginTop: 3
+  },
+
   bottomnav: {
     position: 'absolute',
     bottom: Dimensions.get('screen').height * 0.1,
@@ -1928,8 +1941,8 @@ export default StyleSheet.create({
   },
 
   list_modal_legend: {
-    fontSize: 12,
-    fontWeight: "500",
+    fontSize: 13,
+    fontWeight: "600",
     textAlign: "center",
     color: 'grey',
   },

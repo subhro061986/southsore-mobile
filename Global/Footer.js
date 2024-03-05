@@ -80,10 +80,10 @@ export const Footer = () => {
   const get_pub_data = (pub_id) => {
     // let pub_id = e.target.value
     navigation.navigate('pubhome',
-        { publisher_id: pub_id }
+      { publisher_id: pub_id }
     )
     setPublisherModalvisibility(false);
-}
+  }
 
   const doLogin = async () => {
     // console.log('Email : ', email);
@@ -111,37 +111,9 @@ export const Footer = () => {
     console.log("login response", resp)
 
     if (resp?.status === 200) {
-      // navigate('/');
       navigation.navigate('mybookshelf');
-
-      // NotificationManager.success(resp.message, 'Success !', 5000,);
-      // console.log("Logged in ")
-      // toast.success("Logged in Successfully", {
-      //     position: "top-right",
-      //     autoClose: 2000,
-      //     hideProgressBar: true,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     closeButton:false,
-      //     theme: "light",
-      //     });
-
-
     }
     else {
-      // NotificationManager.error(resp.message, 'Error !', 5000,);
-      // toast.error("Login Unsuccessful !", {
-      //   position: "top-right",
-      //   autoClose: 4000,
-      //   hideProgressBar: true,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   closeButton: false,
-      //   theme: "light",
-      //   style: { color: "rgb(250, 62, 75)", fontWeight: 'bold', backgroundColor: "rgb(252, 242, 243)" }
-      // });
       alert("Log in failed!");
     }
 
@@ -221,31 +193,46 @@ export const Footer = () => {
     <>
       <View style={xStyle.bottomnav}>
         <TouchableOpacity
+          style={xStyle.footerBtn}
           onPress={() => navigation.navigate('home')}
         >
           <Image
             source={require('../assets/images/home.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Home
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={xStyle.footerBtn}
           // onPress={() => navigation.navigate('pubhome')}
           onPress={publisherModalHandler}
         >
           <Image
             source={require('../assets/images/publisher.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Publisher
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={xStyle.footerBtn}
           onPress={() => navigation.navigate('profile')}
         >
           <Image
             source={require('../assets/images/profile.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            My Profile
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={logInModalHandler}>
+        <TouchableOpacity style={xStyle.footerBtn} onPress={logInModalHandler}>
           <Image
             source={require('../assets/images/login.png')}
           />
+          <Text style={xStyle.footerIconText}>
+            Login
+          </Text>
         </TouchableOpacity>
       </View>
 
