@@ -401,25 +401,19 @@ const UserProvider = ({ children }) => {
   }
 
   const add_delete_to_wishlist = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.ADD_DELETE_IN_WISHLIST, args,
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-
-    //     })
-
-
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("Add_to_wishlist_error : ", error)
-    // }
+    try {
+      const response = await axios.post(Config.API_URL + Config.ADD_DELETE_IN_WISHLIST, args,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
+        })
+      return response.data
+    }
+    catch (error) {
+      console.log("Add_to_wishlist_error : ", error)
+    }
   }
 
   // *  ------------------  Cart (After Sign-in ) ------------------------- 

@@ -24,6 +24,7 @@ import { RadioButton } from 'react-native-paper';
 
 import Config from "../config/Config.json"
 import { UserProfile } from '../Context/Usercontext.js';
+import { useAuth } from '../Context/Authcontext.js';
 
 import BuyStepsPub from '../Global/BuyStepsPub.js';
 import TopMenuPub from '../Global/TopMenuPub.js';
@@ -33,7 +34,9 @@ export const CategoryDetails = ({ route, navigation }) => {
 
     // const navigation = useNavigation();
     // console.log("Category ID : ", route.params.category_id);
-    const { getBook_by_category, publisherId } = UserProfile();
+    const { getBook_by_category, publisherId, add_delete_to_wishlist } = UserProfile();
+    const { wishlistshow } = useAuth();
+
     const [modalvisibility, setmodalvisibility] = useState(false);
     const [sortSelected, setSortSelected] = useState(0);
     const [priceFilter, setPriceFilter] = useState(0);
@@ -117,6 +120,29 @@ export const CategoryDetails = ({ route, navigation }) => {
         setmodalvisibility(false);
     }
 
+    const toggleWishlistHandler = async (book_id) => {
+        let json = {
+            "bookid": book_id,
+            "currentPage": 1,
+            "recordPerPage": 5
+        }
+        const resp = await add_delete_to_wishlist(json);
+        console.log("WISHLIST : ", resp);
+        alert(resp.message);
+        //Best_Selling() 
+    }
+
+    const wishlistHandler = (event, book_id) => {
+        event.stopPropagation();
+        if (wishlistshow === true) {
+            toggleWishlistHandler(book_id);
+        }
+        else {
+            alert("Please login first");
+            navigate('home');
+        }
+    }
+
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.categoryDetailsBodyBg} stickyHeaderIndices={[0]}>
@@ -167,11 +193,11 @@ export const CategoryDetails = ({ route, navigation }) => {
                 <View style={xStyle.categoryDetailsBooksMainDiv}>
                     {
                         books.map((data, index) => (
-                            books && 
+                            books &&
                             <View style={xStyle.pub_home_best_card} key={index}>
                                 <Image
                                     // source={require('../assets/images/bcov1.png')}
-                                    source={{uri:Config.API_URL + Config.PUB_IMAGES + publisherId + "/" + data.image + '?d=' + new Date()}}
+                                    source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherId + "/" + data.image + '?d=' + new Date() }}
                                     style={xStyle.pub_home_best_cover}
                                     height={134}
                                     width={138}
@@ -188,10 +214,18 @@ export const CategoryDetails = ({ route, navigation }) => {
                                                 </Text>
                                             </View>
                                         </View>
-                                        <TouchableOpacity>
-                                            <Image
-                                                source={require('../assets/images/wishblue.png')}
-                                            />
+                                        <TouchableOpacity onPress={(e) => wishlistHandler(e, data.id)}>
+                                            {
+                                                data.isFavourite === 1 ? (
+                                                    <Image
+                                                        source={require('../assets/images/wishblue.png')}
+                                                    />
+                                                ) : (
+                                                    <Image
+                                                        source={require('../assets/images/notWishlist.png')}
+                                                    />
+                                                )
+                                            }
                                         </TouchableOpacity>
                                     </View>
                                     <View style={xStyle.pub_home_best_card_col2_bottom}>
