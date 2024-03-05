@@ -145,7 +145,7 @@ const AuthProvider = ({ children }) => {
       console.log("token", response)
       if (response.status === 200) {
         setAuthData(response.data.token)
-        setWishlistshow(true)
+        // setWishlistshow(true)
         // setAuthUsername(response.data.data[0].username)
         await AsyncStorage.setItem("userid", response.data.token);
         // await AsyncStorage.setItem("username", response.data.data[0].username);

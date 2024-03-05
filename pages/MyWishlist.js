@@ -23,6 +23,7 @@ import { useNavigation } from '@react-navigation/native';
 import TopMenuPub from '../Global/TopMenuPub.js';
 import FooterPub from '../Global/FooterPub.js';
 import Footer from '../Global/Footer.js';
+import TopBar from '../Global/TopBar.js';
 
 export const MyWishlist = () => {
 
@@ -30,7 +31,9 @@ export const MyWishlist = () => {
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.cartPageBodyBg} stickyHeaderIndices={[0]}>
-                <TopMenuPub />
+                {/* <TopMenuPub /> */}
+                <TopBar />
+
                 <View style={xStyle.cartPageHeaderView}>
                     <Text style={xStyle.cartPageHeader}>
                         My Wishlist
