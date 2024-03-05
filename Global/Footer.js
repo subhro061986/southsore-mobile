@@ -77,10 +77,10 @@ export const Footer = () => {
     setPublisherModalvisibility(false);
   }
 
-  const get_pub_data = (e) => {
-    let pub_id = e.target.value
+  const get_pub_data = (pub_id) => {
+    // let pub_id = e.target.value
     navigation.navigate('pubhome',
-      { state: { publisher_id: pub_id } }
+        { publisher_id: pub_id }
     )
     setPublisherModalvisibility(false);
   }
@@ -547,7 +547,7 @@ export const Footer = () => {
                 <TouchableOpacity
                   style={xStyle.list_modal_card_view}
                   key={index}
-                  onPress={(e) => { get_pub_data(e) }}
+                  onPress={() => { get_pub_data(data.id) }}
                 >
                   <View style={xStyle.list_modal_card}>
                     <Image

@@ -14,10 +14,21 @@ import TopMenu from '../Global/TopMenu.js';
 import Footer from '../Global/Footer.js';
 import FooterPub from '../Global/FooterPub.js';
 import { Picker } from '@react-native-picker/picker';
+import { UserProfile } from '../Context/Usercontext.js';
 
 export const BillingAddressPage = () => {
 
     const navigation = useNavigation();
+    const { 
+        place_order,
+        my_profile,
+        get_country_list,
+        get_state_list,
+        change_billing_address,
+        change_contact_details,
+        createOrder,
+        processPayment,
+        applyCoupon } = UserProfile()
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -28,35 +39,140 @@ export const BillingAddressPage = () => {
     const [state, setState] = useState('')
     const [pin, setPin] = useState('')
     const [couponCode, setCouponCode] = useState('')
+    const [countryList, setCountryList] = useState([])
+    const [stateList, setStateList] = useState([])
+    const [selectedCountry, setSelectedCountry] = useState('')
+    const [selectedState, setSelectedState] = useState('')
+    const [orderTotal,setOrderTotal]=useState(0)
+    const [buyNow,setBuyNow]=useState(0)
+    const [togglePayment, setTogglePayment] = useState(true)
+    const [showCoupon, setShowCoupon] = useState(false)
+    const [placeOrderResponse, setPlaceOrderResponse] = useState({})
 
 
-    const countries = [
-        {
-            id: 1,
-            name: 'india'
-        },
-        {
-            id: 2,
-            name: 'england'
-        },
-        {
-            id: 3,
-            name: 'australia'
-        },
-        {
-            id: 4,
-            name: 'spain'
-        },
-        {
-            id: 5,
-            name: 'germany'
-        },
-    ]
+
+
+    const countryHandler = async  (itemValue, itemIndex) => {
+
+    
+        if (selectedCountry == null && selectedCountry == '') {
+            try {
+                const resp = await get_state_list(itemValue)
+
+
+                setStateList(resp.output)
+
+                console.log("getStateList= ", resp.output)
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        else {
+            renderStateList(itemValue)
+        }
+        setSelectedCountry(itemValue)
+    }
+
+    const renderStateList = async (countyId) => {
+        try {
+            console.log("inside statelist")
+            const resp = await get_state_list(countyId)
+            setStateList(resp.output)
+            console.log("getStateList= ", resp.output)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+    const renderCountryList = async () => {
+        try {
+            const resp = await get_country_list()
+            setCountryList(resp.output)
+            console.log("getCountryList= ", resp.output)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    const myProfileApi = async () => {
+
+        const resp = await my_profile()
+        console.log("Response from my profile api", resp)
+        setAddress(resp.output.addressline)
+        setSelectedCountry(resp.output.countryid)
+        setSelectedState(resp.output.stateid)
+        setCity(resp.output.city)
+        setPin(resp.output.pincode)
+        setName(resp.output.name)
+        setEmail(resp.output.email)
+        setPhoneNo(resp.output.contactno)
+
+        if (resp.output.countryid !== null && resp.output.countryid !== '') {
+            renderStateList(resp.output.countryid)
+        }
+    }
+    useEffect(() => {
+        console.log("inside use effect")
+        myProfileApi()
+        renderCountryList()
+    }, []);
+
+
+    const placeOrder = async (data) => {
+
+        // console.log("respPlaceOrder=",respPlaceOrder.output.orderno)
+
+        // console.log("razor pay payment status code= ",respPaymentConfirmed['statuscode'])
+        let changebillingDetails = {
+            addressline: address,
+            city: city,
+            pincode: pin,
+            stateid: selectedState,
+            countryid: selectedCountry,
+        }
+
+        let changecontactDetails = {
+            email: email,
+            contactno: phoneNo,
+        }
+
+        const contactDetailsPesponse = await change_contact_details(changecontactDetails)
+        console.log("contact details=", contactDetailsPesponse)
+
+        const billingDetailsPesponse = await change_billing_address(changebillingDetails)
+        console.log("billing details=", billingDetailsPesponse)
+        
+        const respPlaceOrder = await place_order(buyNow)
+        
+        setPlaceOrderResponse(respPlaceOrder)
+        if(respPlaceOrder.output !== null)
+            setOrderTotal(respPlaceOrder.output.totalAmount)
+        setTogglePayment(false)
+        setShowCoupon(true)
+    
+        // return respPlaceOrder
+    }
+
+    const applyCouponCode = async () => {
+     
+        let json = {
+            couponcode: couponCode,
+            orderid:placeOrderResponse.output.id
+        }
+        // ... applycoupon api endpoint here
+        if(couponCode === "" || couponCode === undefined || couponCode === null)
+            alert("Coupon Code cannot be empty!")
+        else {
+            const res = await applyCoupon(json)
+            setOrderTotal(res.output.totalAmount)
+            console.log(res)
+
+        }
+    }
 
     return (
         <>
 
-            <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]}>
+            <ScrollView style={[xStyle.homeBg,{marginBottom:'45%'}]} stickyHeaderIndices={[0]}>
                 <TopMenu />
                 <View style={xStyle.BillingAddressViewMain}>
                     <Text style={xStyle.BillingAddressMainHeader}>Billing Address</Text>
@@ -143,13 +259,13 @@ export const BillingAddressPage = () => {
                     <View style={[xStyle.BillingAddressDropDown]}>
                         <Picker
                             style={xStyle.categoryDetailsDropDownPicker}
-                            selectedValue={country}
-                            onValueChange={(itemValue, itemIndex) => setCountry(itemValue)}
+                            selectedValue={selectedCountry}
+                            onValueChange={countryHandler}
                         >
 
                             <Picker.Item style={{ color: '#7B8890' }} label="Select Country" value="0" />
                             {
-                                countries.map((data, index) => (
+                                countryList.map((data, index) => (
                                     <Picker.Item label={data.name} value={data.id} key={index} />
                                 ))
                             }
@@ -162,13 +278,13 @@ export const BillingAddressPage = () => {
                     <View style={[xStyle.BillingAddressDropDown]}>
                         <Picker
                             style={xStyle.categoryDetailsDropDownPicker}
-                            selectedValue={state}
-                            onValueChange={(itemValue, itemIndex) => setState(itemValue)}
+                            selectedValue={selectedState}
+                            onValueChange={(itemValue, itemIndex) => setSelectedState(itemValue)}
                         >
 
                             <Picker.Item style={{ color: '#7B8890' }} label="Select State" value="0" />
                             {
-                                countries.map((data, index) => (
+                                stateList.map((data, index) => (
                                     <Picker.Item label={data.name} value={data.id} key={index} />
                                 ))
                             }
@@ -190,7 +306,9 @@ export const BillingAddressPage = () => {
 
                     <View style={xStyle.BillingAddressSaveBtnArea}>
 
-                        <TouchableOpacity style={xStyle.BillingAddressSaveBtn}>
+                        <TouchableOpacity style={xStyle.BillingAddressSaveBtn}
+                            onPress={() => placeOrder() }
+                        >
                             <Text style={xStyle.BillingAddressBtnText}>
                                 Save
                             </Text>
@@ -198,6 +316,8 @@ export const BillingAddressPage = () => {
                     </View>
                 </View>
 
+                {showCoupon && 
+                
                 <View style={xStyle.BillingAddressApplyCouponCard}>
                     <View style={xStyle.BillingAddressApplyCouponView}>
                         <Text style={xStyle.BillingAddressCardHeaderText}>Apply Coupon</Text>
@@ -206,7 +326,7 @@ export const BillingAddressPage = () => {
 
                     <View style={xStyle.BillingAddressOrderTotalDetailsView}>
                         <Text style={xStyle.BillingAddressApplyCouponOrderTotalText}>Order Total</Text>
-                        <Text style={xStyle.BillingAddressApplyCouponPriceText}>  ₹ 625</Text>
+                        <Text style={xStyle.BillingAddressApplyCouponPriceText}>  ₹ {orderTotal}</Text>
                     </View>
 
                     <View style={xStyle.BillingAddressApplyCoupnView}>
@@ -218,7 +338,9 @@ export const BillingAddressPage = () => {
                             placeholder="Insert Coupon Code"
                             placeholderTextColor={'#7B8890'}
                         />
-                        <TouchableOpacity style={xStyle.BillingAddressApplyCoupnBtn}>
+                        <TouchableOpacity style={xStyle.BillingAddressApplyCoupnBtn}
+                            onPress={()=>applyCouponCode()}
+                        >
                             <Text style={xStyle.BillingAddressApplyCouponBtnText}>
                                 Apply
                             </Text>
@@ -228,6 +350,7 @@ export const BillingAddressPage = () => {
 
                         <TouchableOpacity style={xStyle.BillingAddressSaveBtn}
                             onPress={() => navigation.navigate('confirmOrder')}
+                            disabled={togglePayment}
                         >
                             <Text style={xStyle.BillingAddressBtnText}>
                                 Order Now
@@ -235,6 +358,7 @@ export const BillingAddressPage = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
+                }
             </View>
 
         </ScrollView >
