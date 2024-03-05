@@ -1920,6 +1920,7 @@ export default StyleSheet.create({
 
   list_modal_icon: {
     width: 75,
+    height: 75,
     resizeMode: 'contain'
   },
 

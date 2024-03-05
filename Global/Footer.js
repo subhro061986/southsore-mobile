@@ -14,11 +14,14 @@ import { useNavigation } from '@react-navigation/native';
 import Overlay from 'react-native-modal-overlay';
 import { useAuth } from '../Context/Authcontext.js';
 import { ScrollView } from 'react-native-gesture-handler';
+import { UserProfile } from '../Context/Usercontext.js';
+import Config from "../config/Config.json"
 
 export const Footer = () => {
 
   const navigation = useNavigation();
   const { logIn, logOut, authData, forgot_password, Registration } = useAuth()
+  const { category_by_publisher, items, allActivePublisher } = UserProfile()
 
   const [logInModalvisibility, setLogInModalvisibility] = useState(false);
   const [signUpModalvisibility, setSignUpModalvisibility] = useState(false);
@@ -35,7 +38,7 @@ export const Footer = () => {
   const [phone, setPhone] = useState('');
 
   useEffect(() => {
-
+    console.log("allActivePublisher", allActivePublisher)
   }, []);
 
   const logInModalHandler = () => {
@@ -73,6 +76,14 @@ export const Footer = () => {
   const publisherBackButtonHandler = () => {
     setPublisherModalvisibility(false);
   }
+
+  const get_pub_data = (e) => {
+    let pub_id = e.target.value
+    navigation.navigate('pubhome',
+        { state: { publisher_id: pub_id } }
+    )
+    setPublisherModalvisibility(false);
+}
 
   const doLogin = async () => {
     // console.log('Email : ', email);
@@ -531,44 +542,26 @@ export const Footer = () => {
           <ScrollView>
             <View style={xStyle.list_modal_view}>
 
-              <View style={xStyle.list_modal_card_view}>
-                <View style={xStyle.list_modal_card}>
-                  <Image
-                   source={require('../assets/images/demoPubLogo.png')}
-                   style={xStyle.list_modal_icon} 
-                  />
-                </View>
-                <Text style={xStyle.list_modal_legend}>Juris Press</Text>
-              </View>
-              <View style={xStyle.list_modal_card_view}>
-                <View style={xStyle.list_modal_card}>
-                  <Image
-                   source={require('../assets/images/demoPubLogo.png')}
-                   style={xStyle.list_modal_icon} 
-                  />
-                </View>
-                <Text style={xStyle.list_modal_legend}>Juris Press</Text>
-              </View>
-              <View style={xStyle.list_modal_card_view}>
-                <View style={xStyle.list_modal_card}>
-                  <Image
-                   source={require('../assets/images/demoPubLogo.png')}
-                   style={xStyle.list_modal_icon} 
-                  />
-                </View>
-                <Text style={xStyle.list_modal_legend}>Juris Press</Text>
-              </View>
-              <View style={xStyle.list_modal_card_view}>
-                <View style={xStyle.list_modal_card}>
-                  <Image
-                   source={require('../assets/images/demoPubLogo.png')}
-                   style={xStyle.list_modal_icon} 
-                  />
-                </View>
-                <Text style={xStyle.list_modal_legend}>Juris Press</Text>
-              </View>
-              
-              
+              {allActivePublisher.map((data, index) => (
+                data.isactive === 1 &&
+                <TouchableOpacity
+                  style={xStyle.list_modal_card_view}
+                  key={index}
+                  onPress={(e) => { get_pub_data(e) }}
+                >
+                  <View style={xStyle.list_modal_card}>
+                    <Image
+                      // source={require('../assets/images/demoPubLogo.png')}
+                      source={{ uri: Config.API_URL + Config.PUB_IMAGES + data.id + '/' + data.logo }}
+                      style={xStyle.list_modal_icon}
+                    // style={{resizeMode:'contain'}}
+                    />
+                  </View>
+                  <Text style={xStyle.list_modal_legend}>{data.name}</Text>
+                </TouchableOpacity>
+              ))}
+
+
 
             </View>
           </ScrollView>
