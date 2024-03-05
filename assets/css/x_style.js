@@ -1925,8 +1925,8 @@ export default StyleSheet.create({
   },
 
   list_modal_legend: {
-    fontSize: 12,
-    fontWeight: "500",
+    fontSize: 13,
+    fontWeight: "600",
     textAlign: "center",
     color: 'grey',
   },

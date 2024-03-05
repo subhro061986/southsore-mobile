@@ -80,10 +80,10 @@ export const Footer = () => {
   const get_pub_data = (e) => {
     let pub_id = e.target.value
     navigation.navigate('pubhome',
-        { state: { publisher_id: pub_id } }
+      { state: { publisher_id: pub_id } }
     )
     setPublisherModalvisibility(false);
-}
+  }
 
   const doLogin = async () => {
     // console.log('Email : ', email);

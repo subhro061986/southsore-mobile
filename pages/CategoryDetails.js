@@ -18,20 +18,70 @@ import {
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
 import Overlay from 'react-native-modal-overlay';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { RadioButton } from 'react-native-paper';
-// import { UserProfile } from '../context/UserContext.js';
+
+import Config from "../config/Config.json"
+import { UserProfile } from '../Context/Usercontext.js';
 
 import BuyStepsPub from '../Global/BuyStepsPub.js';
 import TopMenuPub from '../Global/TopMenuPub.js';
 import FooterPub from '../Global/FooterPub.js';
 
-export const CategoryDetails = () => {
+export const CategoryDetails = ({ route, navigation }) => {
 
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
+    // console.log("Category ID : ", route.params.category_id);
+    const { getBook_by_category, publisherId } = UserProfile();
+    const [modalvisibility, setmodalvisibility] = useState(false);
     const [sortSelected, setSortSelected] = useState(0);
     const [priceFilter, setPriceFilter] = useState(0);
+    const [tempBooks, setTempBooks] = useState([]);
+    const [books, setBooks] = useState([]);
+    const [allbooks, setAllBooks] = useState([]);
+    const [rawbooksdata, setRawbooksdata] = useState([]);
+    const [noofbooks, setNoofbooks] = useState(0);
+    const [categoryname, setCategoryname] = useState("");
+
+    useEffect(() => {
+        books_by_category(route.params.category_id, publisherId);
+    }, [route.params.category_id,]);
+
+    const books_by_category = async (cat_id, pub_id) => {
+        let json = {
+            categoryid: cat_id,
+            publisherid: pub_id
+        };
+        let current_page_no = 1;
+        let records_per_page = 6;
+        console.log("JSON : ", json);
+
+        const resp = await getBook_by_category(current_page_no, records_per_page, json)
+        console.log("GET BOOK BY CATEGORY : ", resp);
+        if (resp === undefined || resp === null) {
+            setTempBooks([])
+            setBooks([])
+            setRawbooksdata([])
+        }
+        else {
+            if (resp?.output?.books?.length > 0) {
+                setTempBooks(resp?.output?.books)
+                setBooks(resp?.output?.books)
+                setAllBooks(resp?.output?.books)
+                setRawbooksdata(resp?.output?.books)
+                setNoofbooks(resp?.output?.books?.length)
+                setCategoryname(resp.output.books[0].category)
+                // price_ranges(resp?.output?.books)
+            }
+            else {
+                setBooks([])
+                setAllBooks([])
+                setRawbooksdata([])
+            }
+        }
+    }
+
     const sortSelectionChange = (itemValue, itemIndex) => {
         setSortSelected(itemValue);
     }
@@ -59,15 +109,8 @@ export const CategoryDetails = () => {
         },
     ]
 
-    const [modalvisibility, setmodalvisibility] = useState(false);
-
-    useEffect(() => {
-
-    }, []);
-
     const filterModalHandler = () => {
         setmodalvisibility(true);
-
     }
 
     const backbuttonhandler = () => {
@@ -80,10 +123,10 @@ export const CategoryDetails = () => {
                 <TopMenuPub />
                 <View style={xStyle.categoryDetailsHeaderView}>
                     <Text style={xStyle.categoryDetailsHeader}>
-                        Art & Photography
+                        {categoryname}
                     </Text>
                     <Text style={xStyle.categoryDetailsHeaderResults}>
-                        79 Results found
+                        {noofbooks} Results found
                     </Text>
                 </View>
                 <View style={xStyle.categoryDetailsSortingMainView}>
@@ -122,45 +165,55 @@ export const CategoryDetails = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={xStyle.categoryDetailsBooksMainDiv}>
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov1.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Goldfinch</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                    {
+                        books.map((data, index) => (
+                            books && 
+                            <View style={xStyle.pub_home_best_card} key={index}>
+                                <Image
+                                    // source={require('../assets/images/bcov1.png')}
+                                    source={{uri:Config.API_URL + Config.PUB_IMAGES + publisherId + "/" + data.image + '?d=' + new Date()}}
+                                    style={xStyle.pub_home_best_cover}
+                                    height={134}
+                                    width={138}
+                                />
+                                <View style={xStyle.pub_home_best_card_col2}>
+                                    <View style={xStyle.pub_home_best_card_col2_top}>
+                                        <View>
+                                            <Text style={xStyle.pub_home_best_card_title}>{data.title}</Text>
+                                            <View style={xStyle.pub_home_card_author_view}>
+                                                <Text style={xStyle.pub_home_card_author}>
+                                                    Author: <Text style={xStyle.pub_home_card_author_name}>
+                                                        {data.authors}
+                                                    </Text>
+                                                </Text>
+                                            </View>
+                                        </View>
+                                        <TouchableOpacity>
+                                            <Image
+                                                source={require('../assets/images/wishblue.png')}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={xStyle.pub_home_best_card_col2_bottom}>
+                                        <View>
+                                            <Text style={xStyle.pub_home_best_card_price}>
+                                                ₹{data.price}
+                                            </Text>
+                                        </View>
+                                        <View>
+                                            <TouchableOpacity>
+                                                <Image
+                                                    source={require('../assets/images/plusBtn.png')}
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
                                 </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/wishblue.png')}
-                                    />
-                                </TouchableOpacity>
                             </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹149
-                                    </Text>
-                                </View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
+                        ))
+                    }
 
-                    <View style={xStyle.pub_home_best_card}>
+                    {/* <View style={xStyle.pub_home_best_card}>
                         <Image
                             source={require('../assets/images/bcov2.png')}
                             style={xStyle.pub_home_best_cover}
@@ -272,7 +325,7 @@ export const CategoryDetails = () => {
                                 </View>
                             </View>
                         </View>
-                    </View>
+                    </View> */}
 
                     {/* <TouchableOpacity style={xStyle.categoryDetailsViewMore_btn}>
                         <Text style={xStyle.categoryDetailsViewMore}>
