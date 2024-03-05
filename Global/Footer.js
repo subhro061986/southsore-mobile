@@ -13,6 +13,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Overlay from 'react-native-modal-overlay';
 import { useAuth } from '../Context/Authcontext.js';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export const Footer = () => {
 
@@ -22,6 +23,8 @@ export const Footer = () => {
   const [logInModalvisibility, setLogInModalvisibility] = useState(false);
   const [signUpModalvisibility, setSignUpModalvisibility] = useState(false);
   const [forgotPasswordModalvisibility, setForotPasswordModalvisibility] = useState(false);
+  const [publisherModalvisibility, setPublisherModalvisibility] = useState(false);
+
   // Log in
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -61,6 +64,14 @@ export const Footer = () => {
 
   const forgotPasswordBackButtonHandler = () => {
     setForotPasswordModalvisibility(false);
+  }
+
+  const publisherModalHandler = () => {
+    setPublisherModalvisibility(true);
+  }
+
+  const publisherBackButtonHandler = () => {
+    setPublisherModalvisibility(false);
   }
 
   const doLogin = async () => {
@@ -206,7 +217,8 @@ export const Footer = () => {
           />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('pubhome')}
+          // onPress={() => navigation.navigate('pubhome')}
+          onPress={publisherModalHandler}
         >
           <Image
             source={require('../assets/images/publisher.png')}
@@ -482,6 +494,85 @@ export const Footer = () => {
           <View style={xStyle.logInFooter}>
 
           </View>
+        </Overlay>
+      </View>
+
+      {/* --------PUBLISHER LIST MODAL------- */}
+
+      <View>
+        <Overlay
+          // animationType={ZoomIn}
+          // transparent={true}
+          visible={publisherModalvisibility}
+          // // isVisible={modalvisibility}
+          // onRequestClose={backbuttonhandler}
+          // hasBackdrop={true}
+          // backdropColor={'black'}
+          // // statusBarTranslucent={true}
+          // backdropOpacity={0.5}
+          onClose={publisherBackButtonHandler}
+          closeOnTouchOutside
+          containerStyle={{ backgroundColor: 'rgba(38, 37, 37, 0.78)' }}
+          childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
+        >
+          <TouchableOpacity
+            style={xStyle.buy_join_modal_cross}
+            onPress={publisherBackButtonHandler}
+          >
+            <Image
+              source={require('../assets/images/close-circle.png')}
+            />
+          </TouchableOpacity>
+          <View style={xStyle.buy_join_modal_head_view}>
+            <Text style={xStyle.buy_join_modal_head}>Select Publisher</Text>
+          </View>
+
+
+          <ScrollView>
+            <View style={xStyle.list_modal_view}>
+
+              <View style={xStyle.list_modal_card_view}>
+                <View style={xStyle.list_modal_card}>
+                  <Image
+                   source={require('../assets/images/demoPubLogo.png')}
+                   style={xStyle.list_modal_icon} 
+                  />
+                </View>
+                <Text style={xStyle.list_modal_legend}>Juris Press</Text>
+              </View>
+              <View style={xStyle.list_modal_card_view}>
+                <View style={xStyle.list_modal_card}>
+                  <Image
+                   source={require('../assets/images/demoPubLogo.png')}
+                   style={xStyle.list_modal_icon} 
+                  />
+                </View>
+                <Text style={xStyle.list_modal_legend}>Juris Press</Text>
+              </View>
+              <View style={xStyle.list_modal_card_view}>
+                <View style={xStyle.list_modal_card}>
+                  <Image
+                   source={require('../assets/images/demoPubLogo.png')}
+                   style={xStyle.list_modal_icon} 
+                  />
+                </View>
+                <Text style={xStyle.list_modal_legend}>Juris Press</Text>
+              </View>
+              <View style={xStyle.list_modal_card_view}>
+                <View style={xStyle.list_modal_card}>
+                  <Image
+                   source={require('../assets/images/demoPubLogo.png')}
+                   style={xStyle.list_modal_icon} 
+                  />
+                </View>
+                <Text style={xStyle.list_modal_legend}>Juris Press</Text>
+              </View>
+              
+              
+
+            </View>
+          </ScrollView>
+
         </Overlay>
       </View>
     </>

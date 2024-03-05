@@ -17,7 +17,7 @@ import {
     PermissionsAndroid
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
-import { useNavigation, useRoute   } from '@react-navigation/native';
+import { useNavigation} from '@react-navigation/native';
 import { UserProfile } from '../Context/Usercontext';
 import Config from "../config/Config.json"
 import { useAuth } from '../Context/Authcontext';
@@ -33,7 +33,6 @@ import BestSeller from '../Global/BestSeller.js';
 export const PubHomeScreen = () => {
 
     const navigation = useNavigation();
-    const route  = useRoute();
     
     const { getPublishersById, publisherId } = UserProfile();
     const { authData } = useAuth();
