@@ -58,9 +58,9 @@ export const CategoryDetails = ({ route, navigation }) => {
         };
         let current_page_no = 1;
         let records_per_page = 6;
-        console.log("JSON : ", json);
+        // console.log("JSON : ", json);
 
-        const resp = await getBook_by_category(current_page_no, records_per_page, json)
+        const resp = await getBook_by_category(current_page_no, records_per_page, json);
         console.log("GET BOOK BY CATEGORY : ", resp);
         if (resp === undefined || resp === null) {
             setTempBooks([])
@@ -87,30 +87,66 @@ export const CategoryDetails = ({ route, navigation }) => {
 
     const sortSelectionChange = (itemValue, itemIndex) => {
         setSortSelected(itemValue);
+        console.log("Item val", itemValue);
+        console.log("Item index", itemIndex);
+        let sort_val = itemValue
+        if (sort_val === 1) {
+            setLowToHigh();
+        }
+        else if (sort_val === 2) {
+            setHightoLow();
+        }
+        else if (sort_val === 3) {
+            // console.log('A-Z')
+            AtoZ();
+        }
+        else {
+            // console.log('Z-A')
+            ZtoA();
+        }
     }
 
     const sortValue = [
         {
             id: 1,
-            title: 'Best Seller'
-        },
-        {
-            id: 2,
             title: 'Price Low to High'
         },
         {
-            id: 3,
+            id: 2,
             title: 'Price High to Low'
         },
         {
-            id: 4,
+            id: 3,
             title: 'A -> Z'
         },
         {
-            id: 5,
+            id: 4,
             title: 'Z -> A'
         },
     ]
+
+    const setLowToHigh = () => {
+        const sortedProducts = books.sort((a, b) => a.price - b.price);
+        // console.log("sortedproducts", sortedProducts)
+        setBooks([...sortedProducts]);
+    };
+
+    const setHightoLow = () => {
+        const sortedProducts = books.sort((a, b) => b.price - a.price);
+        setBooks([...sortedProducts]);
+    };
+
+    const AtoZ = () => {
+        const sortedProducts = books.sort((a, b) => a.title > b.title ? 1 : -1)
+        // console.log("A-Z", sortedProducts)
+        setBooks([...sortedProducts]);
+    }
+
+    const ZtoA = () => {
+        const sortedProducts = books.sort((a, b) => a.title > b.title ? -1 : 1)
+        // console.log("Z-A", sortedProducts)
+        setBooks([...sortedProducts]);
+    }
 
     const filterModalHandler = () => {
         setmodalvisibility(true);
@@ -127,9 +163,8 @@ export const CategoryDetails = ({ route, navigation }) => {
             "recordPerPage": 5
         }
         const resp = await add_delete_to_wishlist(json);
-        console.log("WISHLIST : ", resp);
+        // console.log("WISHLIST : ", resp);
         alert(resp.message);
-        //Best_Selling() 
     }
 
     const wishlistHandler = (event, book_id) => {
@@ -139,7 +174,6 @@ export const CategoryDetails = ({ route, navigation }) => {
         }
         else {
             alert("Please login first");
-            navigate('home');
         }
     }
 
@@ -205,11 +239,11 @@ export const CategoryDetails = ({ route, navigation }) => {
                                 <View style={xStyle.pub_home_best_card_col2}>
                                     <View style={xStyle.pub_home_best_card_col2_top}>
                                         <View>
-                                            <Text style={xStyle.pub_home_best_card_title}>{data.title}</Text>
+                                            <Text style={xStyle.pub_home_best_card_title}>{data.title.length > 15 ? data.title.substring(0, 15) + ".." : data.title}</Text>
                                             <View style={xStyle.pub_home_card_author_view}>
                                                 <Text style={xStyle.pub_home_card_author}>
                                                     Author: <Text style={xStyle.pub_home_card_author_name}>
-                                                        {data.authors}
+                                                    {data.authors.length > 15 ? data.authors.substring(0, 15) + ".." : data.authors}
                                                     </Text>
                                                 </Text>
                                             </View>
@@ -246,120 +280,6 @@ export const CategoryDetails = ({ route, navigation }) => {
                             </View>
                         ))
                     }
-
-                    {/* <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov2.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Hypocrite..</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/wishblue.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹199
-                                    </Text>
-                                </View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov3.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Swallows</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/wishblue.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹249
-                                    </Text>
-                                </View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov4.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>Dune</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/wishblue.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹149
-                                    </Text>
-                                </View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View> */}
 
                     {/* <TouchableOpacity style={xStyle.categoryDetailsViewMore_btn}>
                         <Text style={xStyle.categoryDetailsViewMore}>

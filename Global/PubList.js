@@ -23,6 +23,7 @@ export const PubList = () => {
     //   }, [])
 
     const goToCatagory = (val) => {
+        console.log('pub_data', val);
         navigation.navigate('pubhome', { publisher_id: val.id })
       }
 

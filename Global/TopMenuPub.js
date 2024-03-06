@@ -8,14 +8,13 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-// import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
 import { UserProfile } from '../Context/Usercontext.js';
 import Config from "../config/Config.json"
 import { useAuth } from '../Context/Authcontext';
 // import { UserProfile } from '../context/UserContext.js';
 
-export const TopMenuPub = ({ route }) => {
+export const TopMenuPub = ({ route}) => {
   const navigation = useNavigation();
 
   const { category_by_publisher, items, getPublishersById, publisherId, getBooksBySearchText, allActivePublisher } = UserProfile()
@@ -27,6 +26,7 @@ export const TopMenuPub = ({ route }) => {
 
   useEffect(() => {
     // console.log("Publisher id in TopMenuPub===>", route.params.publisher_id);
+    console.log("Publisher id in TopMenuPub===>", publisherId);
     getPubById();
   }, [authData])
 
@@ -110,6 +110,15 @@ export const TopMenuPub = ({ route }) => {
     navigate('/productdetails', { BOOK_ID: id })
   }
 
+  const handleWishlist = () => {
+    console.log('Wishlist show : ', wishlistshow);
+    if(wishlistshow === false){
+      alert("Please log in first.");
+    }
+    else{
+      navigation.navigate('wishlist');
+    }
+  }
   return (
     <View style={xStyle.topnav}>
       <View style={xStyle.topnav_top}>
@@ -126,7 +135,7 @@ export const TopMenuPub = ({ route }) => {
             }}
             source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + '/' + publisherDetails.logo }}
           />
-          {/* <Text style={{color:'black'}}>{Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + '/' + publisherDetails.logo}</Text> */}
+          {/* <Text style={{color:'white'}}>{Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + '/' + publisherDetails.logo}</Text> */}
         </TouchableOpacity>
         <View style={xStyle.topnavRight}>
           <TouchableOpacity>
@@ -135,7 +144,7 @@ export const TopMenuPub = ({ route }) => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('wishlist')}
+            onPress={() => handleWishlist()}
           >
             <Image
               source={require('../assets/images/heart.png')}
