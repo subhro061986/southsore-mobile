@@ -10,25 +10,18 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UserProfile } from '../Context/Usercontext.js';
-<<<<<<< HEAD
-import { useAuth } from '../Context/Authcontext.js';
-=======
 import Config from "../config/Config.json"
 import { useAuth } from '../Context/Authcontext';
 // import { UserProfile } from '../context/UserContext.js';
->>>>>>> 923dcddb2a5adcf60237a659da131d2de27dbfac
 
 export const TopMenuPub = ({ route}) => {
   const navigation = useNavigation();
-<<<<<<< HEAD
   // const {cartCount}=UserProfile()
-  const{authData,cartCount} = useAuth()
 
   
-=======
 
   const { category_by_publisher, items, getPublishersById, publisherId, getBooksBySearchText, allActivePublisher } = UserProfile()
-  const { wishlistshow, authData, logOut } = useAuth()
+  const { wishlistshow, authData, logOut,cartCount } = useAuth()
   const [publisherDetails, setPublisherDetails] = useState('')
   const [searchText, setSearchText] = useState('')
   // const [toggleSearch, setToggleSearch] = useState(false)
@@ -130,7 +123,6 @@ export const TopMenuPub = ({ route}) => {
       navigation.navigate('wishlist');
     }
   }
->>>>>>> 923dcddb2a5adcf60237a659da131d2de27dbfac
   return (
     <View style={xStyle.topnav}>
       <View style={xStyle.topnav_top}>
