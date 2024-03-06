@@ -95,6 +95,7 @@ export const Footer = () => {
 
   const get_pub_data = (pub_id) => {
     // let pub_id = e.target.value
+    console.log('pub_data', pub_id);
     navigation.navigate('pubhome',
       { publisher_id: pub_id }
     )

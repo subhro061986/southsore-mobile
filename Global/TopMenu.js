@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-// import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
 import Autocomplete from 'react-native-autocomplete-input';
 import { UserProfile } from '../Context/Usercontext.js';
@@ -16,11 +15,9 @@ import { useAuth } from '../Context/Authcontext.js';
 
 export const TopMenu = () => {
   const navigation = useNavigation();
-  const{authData,cartCount} = useAuth()
-  const {allActivePublisher}=UserProfile()
+  const { allActivePublisher } = UserProfile()
+  const { wishlistshow,authData,cartCount } = useAuth()
   const [filteredFilms, setFilteredFilms] = useState([]);
-
-
 
   useEffect(() => {
     console.log("cart count= ",cartCount)
@@ -42,11 +39,15 @@ export const TopMenu = () => {
     }
   };
 
-
-
-
-
-
+  const handleWishlist = () => {
+    console.log('Wishlist show : ', wishlistshow);
+    if(wishlistshow === false){
+      alert("Please log in first.");
+    }
+    else{
+      navigation.navigate('wishlist');
+    }
+  }
 
   return (
     <View style={xStyle.topnav}>
@@ -63,7 +64,7 @@ export const TopMenu = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('wishlist')}
+            onPress={() => handleWishlist()}
           >
             <Image
               source={require('../assets/images/heart.png')}
@@ -88,9 +89,9 @@ export const TopMenu = () => {
             inputContainerStyle={{
               width: '100%',
               
-              borderColor: 'red',
-              borderWidth: 2,
-              borderRadius: 8,
+              // borderColor: 'red',
+              // borderWidth: 2,
+              // borderRadius: 8,
             }}
             inputStyle={{
               borderWidth:0,

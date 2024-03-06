@@ -19,11 +19,33 @@ import { useNavigation } from '@react-navigation/native';
 export const BestSeller = ({ route }) => {
 
     const navigation = useNavigation();
-    const { best_selling_books, add_delete_to_wishlist, publisherData, allBestSeller } = UserProfile()
+    const { best_selling_books, publisherId, add_delete_to_wishlist, publisherData, allBestSeller } = UserProfile()
+    const { wishlistshow } = useAuth();
 
     useEffect(() => {
 
     }, [])
+
+    const toggleWishlistHandler = async (book_id) => {
+        let json = {
+            "bookid": book_id,
+            "currentPage": 1,
+            "recordPerPage": 5
+        }
+        const resp = await add_delete_to_wishlist(json);
+        // console.log("WISHLIST : ", resp);
+        alert(resp.message);
+    }
+
+    const wishlistHandler = (event, book_id) => {
+        event.stopPropagation();
+        if (wishlistshow === true) {
+            toggleWishlistHandler(book_id);
+        }
+        else {
+            alert("Please login first");
+        }
+    }
 
     return (
         <View style={xStyle.pub_home_best_bg}>
@@ -60,10 +82,18 @@ export const BestSeller = ({ route }) => {
                                         </Text></Text>
                                     </View>
                                 </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/wishblue.png')}
-                                    />
+                                <TouchableOpacity onPress={(e) => wishlistHandler(e, data.id)}>
+                                    {
+                                        data.isFavourite === 1 ? (
+                                            <Image
+                                                source={require('../assets/images/wishblue.png')}
+                                            />
+                                        ) : (
+                                            <Image
+                                                source={require('../assets/images/notWishlist.png')}
+                                            />
+                                        )
+                                    }
                                 </TouchableOpacity>
                             </View>
                             <View style={xStyle.pub_home_best_card_col2_bottom}>
@@ -82,7 +112,7 @@ export const BestSeller = ({ route }) => {
                             </View>
                         </View>
                     </TouchableOpacity>
-            ))}
+                ))}
 
             {/* <TouchableOpacity style={xStyle.pub_home_best_card}>
                 <Image

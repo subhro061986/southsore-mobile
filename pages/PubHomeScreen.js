@@ -14,14 +14,17 @@ import {
     TouchableOpacity,
     ImageBackground,
     Animated,
-    PermissionsAndroid
+    PermissionsAndroid,
+    Dimensions,
+    useWindowDimensions 
 } from 'react-native';
+import RenderHtml from 'react-native-render-html';
 // import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
+
 import { UserProfile } from '../Context/Usercontext';
 import Config from "../config/Config.json"
 import { useAuth } from '../Context/Authcontext';
-// import { UserProfile } from '../context/UserContext.js';
 
 import TopMenu from "../Global/TopMenu.js";
 import Footer from "../Global/Footer.js";
@@ -33,9 +36,10 @@ import BestSeller from '../Global/BestSeller.js';
 export const PubHomeScreen = ({ route, navigation }) => {
 
     // const navigation = useNavigation();
+    const { width } = useWindowDimensions();
 
-    const { getPublishersById, publisherId, getNewArrivals, allNewArrival, publisherData, allBestSeller } = UserProfile();
-    const { authData } = useAuth();
+    const { getPublishersById, publisherId, getNewArrivals, allNewArrival, publisherData, allBestSeller, add_delete_to_wishlist } = UserProfile();
+    const { authData, wishlistshow } = useAuth();
 
     const [publisherDetails, setPublisherDetails] = useState('')
 
@@ -60,6 +64,28 @@ export const PubHomeScreen = ({ route, navigation }) => {
 
     }
 
+    const toggleWishlistHandler = async (book_id) => {
+        let json = {
+            "bookid": book_id,
+            "currentPage": 1,
+            "recordPerPage": 5
+        }
+        const resp = await add_delete_to_wishlist(json);
+        // console.log("WISHLIST : ", resp);
+        alert(resp.message);
+        //Best_Selling() 
+    }
+
+    const wishlistHandler = (event, book_id) => {
+        event.stopPropagation();
+        if (wishlistshow === true) {
+            toggleWishlistHandler(book_id);
+        }
+        else {
+            alert("Please login first");
+        }
+    }
+
 
     return (
         <SafeAreaView>
@@ -72,22 +98,34 @@ export const PubHomeScreen = ({ route, navigation }) => {
                     // source={require('../assets/images/PubBg.png')}
                     // source={{uri:Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date()}}
                     // resizeMode="cover" 
-                    style={xStyle.pub_banner}>
+                    // style={xStyle.pub_banner}
+                    style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        // paddingVertical: '10%',
+                        // height: 285,
+                        // width: Dimensions.get('screen').width,
+                    }}
+                >
 
 
+                    {/* <View> */}
                     <Image
                         // source={require('../assets/images/demoBook.png')}
-                        source={require('../assets/images/PubBg.png')}
-                        // source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date() }}
-                        width={'10%'}
-                        height={200}
+                        // source={require('../assets/images/PubBg.png')}
+                        source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date() }}
+                        // width={'50%'}
+                        // height={200}
                         style={{
-                            resizeMode: 'contain'
+                            height: 230,
+                            width: Dimensions.get('screen').width * 0.5,
+                            resizeMode: 'stretch'
                         }}
 
                     />
+                    {/* </View> */}
 
-                    <View style={xStyle.pub_banner_txt_view}>
+                    <View style={[xStyle.pub_banner_txt_view, { marginLeft: '3%' }]}>
                         <Text style={xStyle.pub_banner_head}>Your Gateway to Excellence</Text>
                         <View style={xStyle.pub_banner_body_view}>
                             <Text style={xStyle.pub_banner_body}>Explore Academic & Professional E-Books with Ease</Text>
@@ -107,9 +145,13 @@ export const PubHomeScreen = ({ route, navigation }) => {
                         width={200}
                     />
                     <View
-                    // style={xStyle.pub_about_body}
+                    style={xStyle.pub_about_body}
                     >
-                        <Text id='pub_about'></Text>
+                        {/* <Text id='pub_about'></Text> */}
+                        <RenderHtml
+                            contentWidth={width}
+                            source={{html: publisherDetails.about}}
+                        />
                         {/* Juris Press is a prominent publisher of law and other professional books
                         , headquartered in Chennai, India. Established with a commitment to providing high-quality
                         , authoritative literature
@@ -212,10 +254,18 @@ export const PubHomeScreen = ({ route, navigation }) => {
                                     // width={154}
                                     // height={130}
                                     />
-                                    <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
-                                        <Image
-                                            source={require('../assets/images/wishlist.png')}
-                                        />
+                                    <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn} onPress={(e) => wishlistHandler(e, data.id)}>
+                                            {
+                                                data.isFavourite === 1 ? (
+                                                    <Image
+                                                        source={require('../assets/images/wishblue.png')}
+                                                    />
+                                                ) : (
+                                                    <Image
+                                                        source={require('../assets/images/notWishlist.png')}
+                                                    />
+                                                )
+                                            }
                                     </TouchableOpacity>
                                     <View
                                         style={xStyle.pub_home_new_card_txtbox}
@@ -261,172 +311,8 @@ export const PubHomeScreen = ({ route, navigation }) => {
                                     </View>
                                 </TouchableOpacity>
 
-                            ))}
-
-                        {/* <TouchableOpacity
-                            style={xStyle.pub_home_new_card}
-                        >
-                            <Image
-                                source={require('../assets/images/cov2.png')}
-                                style={xStyle.pub_home_new_card_img}
-                                width={154}
-                            />
-                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
-                                <Image
-                                    source={require('../assets/images/wishlist.png')}
-                                />
-                            </TouchableOpacity>
-                            <View
-                                style={xStyle.pub_home_new_card_txtbox}
-                            >
-                                <View
-                                    style={xStyle.pub_home_new_card_view_1}
-                                >
-                                    <View
-                                        style={xStyle.pub_home_card_title_view}
-                                    >
-                                        <Text
-                                            style={xStyle.pub_home_card_title}
-                                        >
-                                            Harry Potter and th..
-                                        </Text>
-                                    </View>
-                                    <Text
-                                        style={xStyle.pub_home_card_author}
-                                    >Author:
-                                        <Text
-                                            style={xStyle.pub_home_card_author_name}
-                                        >
-                                            Jeff Keller
-                                        </Text>
-                                    </Text>
-                                </View>
-                                <View
-                                    style={xStyle.pub_home_card_price_view}
-                                >
-                                    <Text
-                                        style={xStyle.pub_home_card_price}
-                                    >
-                                        ₹300
-                                    </Text>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={xStyle.pub_home_new_card}
-                        >
-                            <Image
-                                source={require('../assets/images/cov3.png')}
-                                style={xStyle.pub_home_new_card_img}
-                                width={154}
-                            />
-                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
-                                <Image
-                                    source={require('../assets/images/wishlist.png')}
-                                />
-                            </TouchableOpacity>
-                            <View
-                                style={xStyle.pub_home_new_card_txtbox}
-                            >
-                                <View
-                                    style={xStyle.pub_home_new_card_view_1}
-                                >
-                                    <View
-                                        style={xStyle.pub_home_card_title_view}
-                                    >
-                                        <Text
-                                            style={xStyle.pub_home_card_title}
-                                        >
-                                            Whit by Rock
-                                        </Text>
-                                    </View>
-                                    <Text
-                                        style={xStyle.pub_home_card_author}
-                                    >Author:
-                                        <Text
-                                            style={xStyle.pub_home_card_author_name}
-                                        >
-                                            Jeff Keller
-                                        </Text>
-                                    </Text>
-                                </View>
-                                <View
-                                    style={xStyle.pub_home_card_price_view}
-                                >
-                                    <Text
-                                        style={xStyle.pub_home_card_price}
-                                    >
-                                        ₹149
-                                    </Text>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={xStyle.pub_home_new_card}
-                        >
-                            <Image
-                                source={require('../assets/images/cov4.png')}
-                                style={xStyle.pub_home_new_card_img}
-                                width={154}
-                            />
-                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
-                                <Image
-                                    source={require('../assets/images/wishlist.png')}
-                                />
-                            </TouchableOpacity>
-                            <View
-                                style={xStyle.pub_home_new_card_txtbox}
-                            >
-                                <View
-                                    style={xStyle.pub_home_new_card_view_1}
-                                >
-                                    <View
-                                        style={xStyle.pub_home_card_title_view}
-                                    >
-                                        <Text
-                                            style={xStyle.pub_home_card_title}
-                                        >
-                                            The way of the na..
-                                        </Text>
-                                    </View>
-                                    <Text
-                                        style={xStyle.pub_home_card_author}
-                                    >Author:
-                                        <Text
-                                            style={xStyle.pub_home_card_author_name}
-                                        >
-                                            Jeff Keller
-                                        </Text>
-                                    </Text>
-                                </View>
-                                <View
-                                    style={xStyle.pub_home_card_price_view}
-                                >
-                                    <Text
-                                        style={xStyle.pub_home_card_price}
-                                    >
-                                        ₹179
-                                    </Text>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </TouchableOpacity> */}
+                            ))
+                        }
                     </View>
                 </View>
 
@@ -437,7 +323,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
 
                 {/* Recommendations */}
 
-                <View style={xStyle.pub_home_new_view}>
+                {/* <View style={xStyle.pub_home_new_view}>
                     <Text style={xStyle.pub_home_new_head}>Recommendations</Text>
                     <View
                         style={xStyle.pub_home_rec_body}
@@ -612,7 +498,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
                         </ScrollView>
 
                     </View>
-                </View>
+                </View> */}
 
                 {/* Buying Steps */}
 
