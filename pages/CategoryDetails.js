@@ -175,7 +175,6 @@ export const CategoryDetails = ({ route, navigation }) => {
         }
         else {
             alert("Please login first");
-            navigate('home');
         }
     }
 

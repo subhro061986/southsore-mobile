@@ -51,7 +51,6 @@ export const MyWishlist = () => {
         }
         else {
             alert("Please login first");
-            navigate('home');
         }
     }
 

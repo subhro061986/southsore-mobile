@@ -78,7 +78,6 @@ export const PubHomeScreen = ({ route, navigation }) => {
         }
         else {
             alert("Please login first");
-            navigate('home');
         }
     }
 

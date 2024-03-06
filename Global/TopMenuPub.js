@@ -8,12 +8,23 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-// import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../Context/Authcontext.js';
 // import { UserProfile } from '../context/UserContext.js';
 
 export const TopMenuPub = () => {
   const navigation = useNavigation();
+  const { wishlistshow } = useAuth()
+
+  const handleWishlist = () => {
+    console.log('Wishlist show : ', wishlistshow);
+    if(wishlistshow === false){
+      alert("Please log in first.");
+    }
+    else{
+      navigation.navigate('wishlist');
+    }
+  }
   return (
     <View style={xStyle.topnav}>
       <View style={xStyle.topnav_top}>
@@ -29,7 +40,7 @@ export const TopMenuPub = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('wishlist')}
+            onPress={() => handleWishlist()}
           >
             <Image
               source={require('../assets/images/heart.png')}
