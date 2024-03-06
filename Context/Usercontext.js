@@ -21,18 +21,16 @@ const UserProvider = ({ children }) => {
   const [price, setprice] = useState()
   const [wishlistitems, setWishlistItems] = useState([])
 
-  const [wishbooksid, setWishbooksid] = useState([])
-  const [cartItems, setCartItems] = useState([])
-  const [allActivePublisher, setAllActivePublisher] = useState([])
-  const [allActivePublisher1, setAllActivePublisher1] = useState([])
-  const [publisherData, setPublisherData] = useState('')
-  const [publisherId, setPublisherId] = useState(2) // init by 2 as Juris Press is 2
-  const [globalCategoryId, setGlobalCategoryId] = useState(0)
-  const [categoryByPublisherList, setCategoryByPublisherList] = useState([])
-  const [allNewArrival, setallNewArrival] = useState([])
-  const [allBestSeller, setAllBestSeller] = useState([])
-
-
+  const [wishbooksid, setWishbooksid] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [allActivePublisher, setAllActivePublisher] = useState([]);
+  const [allActivePublisher1, setAllActivePublisher1] = useState([]);
+  const [publisherData, setPublisherData] = useState('');
+  const [publisherId, setPublisherId] = useState(0);
+  const [globalCategoryId, setGlobalCategoryId] = useState(0);
+  const [categoryByPublisherList, setCategoryByPublisherList] = useState([]);
+  const [allNewArrival, setallNewArrival] = useState([]);
+  const [allBestSeller, setAllBestSeller] = useState([]);
 
 
   useEffect(() => {
@@ -52,22 +50,30 @@ const UserProvider = ({ children }) => {
       // })
       getAllCategory();
       category_by_publisher(2);
-      get_wishlist_books(1, 5)
+      get_wishlist_books(1, 5);
       localstorage_price_items_signin()
       // get_wish_books_id()
     }
   }
     , [authData]);
 
+  useEffect(() => {
+    let loc_pub = AsyncStorage.getItem('publisher_id');
+    if (publisherId === 0 || publisherId === '0' || publisherId === '' || publisherId === null || publisherId === undefined) {
+      setPublisherId(loc_pub);
+    }
+  }, [publisherId]);
 
   useEffect(() => {
-    let loc_pub = AsyncStorage.getItem('publisher_id')
-
-    if (publisherId === 0 || publisherId === '0' || publisherId === '' || publisherId === null || publisherId === undefined) {
-      setPublisherId(loc_pub)
+    let loc_category = AsyncStorage.getItem('category_id');
+    if (globalCategoryId === 0
+      || globalCategoryId === '0'
+      || globalCategoryId === ''
+      || globalCategoryId === null
+      || globalCategoryId === undefined) {
+      setGlobalCategoryId(loc_category);
     }
-
-  }, [publisherId]);
+  }, [globalCategoryId]);
 
   // ** --------------------- GALLERY API ------------------------------
 
@@ -89,8 +95,6 @@ const UserProvider = ({ children }) => {
     }
   }
 
-
-
   const getNewArrivals = async (record_no, publisher_id) => {
     let pub_id = 0;
     if (publisher_id === undefined || publisher_id === 0 || publisher_id === '0') {
@@ -107,7 +111,7 @@ const UserProvider = ({ children }) => {
       pub_id = publisher_id
     }
 
-    console.log("NEW ARRIVAL URL===>",Config.API_URL + Config.NEW_ARRIVAL + "/"+ pub_id +  "?recordPerPage=" + record_no)
+    console.log("NEW ARRIVAL URL===>", Config.API_URL + Config.NEW_ARRIVAL + "/" + pub_id + "?recordPerPage=" + record_no)
     try {
       const response = await axios.get(Config.API_URL + Config.NEW_ARRIVAL + "/" + pub_id + "?recordPerPage=" + record_no,
         {
@@ -130,7 +134,7 @@ const UserProvider = ({ children }) => {
       }
       console.log('new arrival', allNewArrival)
       return response.data
-      
+
 
     }
     catch (error) {
@@ -138,25 +142,23 @@ const UserProvider = ({ children }) => {
     }
   }
 
+  const best_selling_books = async (record_per_page, publisher_id) => {
+    let pub_id = 0;
+    if (publisher_id === undefined || publisher_id === 0 || publisher_id === '0') {
+      if (publisherId === 0 || publisherId === '0') {
+        pub_id = await AsyncStorage.getItem('publisher_id')
+      }
+      else {
+        pub_id = publisherId
 
-  const best_selling_books = async (record_per_page,publisher_id) => {
-    let pub_id=0;
-    if(publisher_id===undefined || publisher_id===0 || publisher_id==='0')
-    {
-      if(publisherId===0 || publisherId==='0'){
-        pub_id=await AsyncStorage.getItem('publisher_id')
       }
-      else{
-        pub_id=publisherId
-        
-      }
-      
+
     }
-    else{
-      pub_id=publisher_id
+    else {
+      pub_id = publisher_id
     }
     try {
-      const response = await axios.get(Config.API_URL + Config.BEST_SELLING + "/"+ pub_id + "?recordPerPage=" + record_per_page,
+      const response = await axios.get(Config.API_URL + Config.BEST_SELLING + "/" + pub_id + "?recordPerPage=" + record_per_page,
 
         {
           headers: {
@@ -164,18 +166,18 @@ const UserProvider = ({ children }) => {
           },
 
         })
-        if (response === undefined || response === null) {
-          setAllBestSeller([])
+      if (response === undefined || response === null) {
+        setAllBestSeller([])
       }
       else {
-          if (response.data.statuscode === "0" && response.data.output.length > 0) {
-            setAllBestSeller(response.data.output)
-          }
-          else {
-            setAllBestSeller([])
-          }
+        if (response.data.statuscode === "0" && response.data.output.length > 0) {
+          setAllBestSeller(response.data.output)
+        }
+        else {
+          setAllBestSeller([])
+        }
       }
-      console.log('best seller', response.data.output)  
+      console.log('best seller', response.data.output)
       return response.data
 
     }
@@ -186,6 +188,7 @@ const UserProvider = ({ children }) => {
   }
 
   const getBook_by_category = async (currentpageno, record_no, args) => {
+    console.log("function called !");
     try {
       const response = await axios.post(Config.API_URL + Config.BOOK_BY_GENRE +
         "?currentPage=" + currentpageno + "&recordPerPage=" + record_no, args,
@@ -194,28 +197,30 @@ const UserProvider = ({ children }) => {
             'Content-Type': 'application/json',
             'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
           },
-        })
+        });
+      let cat_id = response.data.output.books[0].categoryid.toString();
+      await AsyncStorage.setItem('category_id', cat_id);
+      setGlobalCategoryId(cat_id);
       return response.data
     }
     catch (error) {
-      console.log("Book_cat_Erget_book_authdataror : ", error)
+      console.log("GET BOOK BY CATEGORY ERROR : ", error)
     }
   }
 
 
   const category_by_publisher = async (publisher_id) => {
     let pub_id = 0;
-    if(publisher_id === undefined || publisher_id === 0 || publisher_id === '0')
-    {
-      if(publisherId===0 || publisherId==='0'){
+    if (publisher_id === undefined || publisher_id === 0 || publisher_id === '0') {
+      if (publisherId === 0 || publisherId === '0') {
         pub_id = await AsyncStorage.getItem('publisher_id')
         //pub_id=0;
       }
-      else{
+      else {
         pub_id = publisherId
       }
     }
-    else{
+    else {
       pub_id = publisher_id
     }
 
@@ -404,33 +409,30 @@ const UserProvider = ({ children }) => {
 
 
   const get_wishlist_books = async (current_page, record_per_page) => {
-
-
-
-    // try {
-
-    //   const response = await axios.get(Config.API_URL + Config.GET_WISHLIST_BOOKS +
-    //     "?currentPage=" + current_page + "&recordPerPage=" + record_per_page,
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-
-    //     })
-
-    //   setWishlistItems(response.data.output.books)
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("wishlist_books_resp_error : ", error)
-    // }
+    try {
+      const response = await axios.get(Config.API_URL + Config.GET_WISHLIST_BOOKS +
+        "?currentPage=" + current_page + "&recordPerPage=" + record_per_page,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
+        });
+      console.log("Wishlisted books : ", response.data.output.books);
+      setWishlistItems(response.data.output.books);
+      return response.data
+    }
+    catch (error) {
+      console.log("wishlist_books_resp_error : ", error)
+    }
   }
 
   const add_delete_to_wishlist = async (args) => {
+    let json = {
+      categoryid: globalCategoryId,
+      publisherid: publisherId
+    };
+
     try {
       const response = await axios.post(Config.API_URL + Config.ADD_DELETE_IN_WISHLIST, args,
         {
@@ -438,8 +440,11 @@ const UserProvider = ({ children }) => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + authData
           },
-        })
-      return response.data
+        });
+      getNewArrivals(4, publisherId);
+      getBook_by_category(1, 6, json);
+      get_wishlist_books(1, 6);
+      return response.data;
     }
     catch (error) {
       console.log("Add_to_wishlist_error : ", error)
@@ -1045,8 +1050,8 @@ const UserProvider = ({ children }) => {
         getCouponByPublisherId,
         sendEmail,
         getBooksBySearchText,
-        allNewArrival
-
+        allNewArrival,
+        globalCategoryId
 
       }}
     >

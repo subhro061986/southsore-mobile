@@ -58,9 +58,9 @@ export const CategoryDetails = ({ route, navigation }) => {
         };
         let current_page_no = 1;
         let records_per_page = 6;
-        console.log("JSON : ", json);
+        // console.log("JSON : ", json);
 
-        const resp = await getBook_by_category(current_page_no, records_per_page, json)
+        const resp = await getBook_by_category(current_page_no, records_per_page, json);
         console.log("GET BOOK BY CATEGORY : ", resp);
         if (resp === undefined || resp === null) {
             setTempBooks([])
@@ -163,7 +163,7 @@ export const CategoryDetails = ({ route, navigation }) => {
             "recordPerPage": 5
         }
         const resp = await add_delete_to_wishlist(json);
-        console.log("WISHLIST : ", resp);
+        // console.log("WISHLIST : ", resp);
         alert(resp.message);
         //Best_Selling() 
     }
@@ -241,11 +241,11 @@ export const CategoryDetails = ({ route, navigation }) => {
                                 <View style={xStyle.pub_home_best_card_col2}>
                                     <View style={xStyle.pub_home_best_card_col2_top}>
                                         <View>
-                                            <Text style={xStyle.pub_home_best_card_title}>{data.title}</Text>
+                                            <Text style={xStyle.pub_home_best_card_title}>{data.title.length > 15 ? data.title.substring(0, 15) + ".." : data.title}</Text>
                                             <View style={xStyle.pub_home_card_author_view}>
                                                 <Text style={xStyle.pub_home_card_author}>
                                                     Author: <Text style={xStyle.pub_home_card_author_name}>
-                                                        {data.authors}
+                                                    {data.authors.length > 15 ? data.authors.substring(0, 15) + ".." : data.authors}
                                                     </Text>
                                                 </Text>
                                             </View>
@@ -282,120 +282,6 @@ export const CategoryDetails = ({ route, navigation }) => {
                             </View>
                         ))
                     }
-
-                    {/* <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov2.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Hypocrite..</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/wishblue.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹199
-                                    </Text>
-                                </View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov3.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Swallows</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/wishblue.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹249
-                                    </Text>
-                                </View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov4.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>Dune</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/wishblue.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹149
-                                    </Text>
-                                </View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={require('../assets/images/plusBtn.png')}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View> */}
 
                     {/* <TouchableOpacity style={xStyle.categoryDetailsViewMore_btn}>
                         <Text style={xStyle.categoryDetailsViewMore}>

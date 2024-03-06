@@ -16,18 +16,45 @@ import {
     Animated,
     PermissionsAndroid
 } from 'react-native';
-// import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
 
-import TopMenuPub from '../Global/TopMenuPub.js';
-import FooterPub from '../Global/FooterPub.js';
+import { useAuth } from '../Context/Authcontext.js';
+import { UserProfile } from '../Context/Usercontext.js';
+import Config from "../config/Config.json";
 import Footer from '../Global/Footer.js';
 import TopBar from '../Global/TopBar.js';
 
 export const MyWishlist = () => {
 
     const navigation = useNavigation();
+    const { wishlistitems, publisherId, add_delete_to_wishlist } = UserProfile();
+    const { wishlistshow } = useAuth();
+
+    const [modalvisibility, setmodalvisibility] = useState(false);
+
+    const toggleWishlistHandler = async (book_id) => {
+        let json = {
+            "bookid": book_id,
+            "currentPage": 1,
+            "recordPerPage": 5
+        }
+        const resp = await add_delete_to_wishlist(json);
+        // console.log("WISHLIST : ", resp);
+        alert(resp.message);
+        //Best_Selling() 
+    }
+
+    const wishlistHandler = (event, book_id) => {
+        event.stopPropagation();
+        if (wishlistshow === true) {
+            toggleWishlistHandler(book_id);
+        }
+        else {
+            alert("Please login first");
+            navigate('home');
+        }
+    }
+
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.cartPageBodyBg} stickyHeaderIndices={[0]}>
@@ -39,245 +66,62 @@ export const MyWishlist = () => {
                         My Wishlist
                     </Text>
                     <Text style={xStyle.cartPageHeaderResults}>
-                        6 items added to the list
+                        {wishlistitems.length} items added to the list
                     </Text>
                 </View>
                 <View style={[xStyle.cartPageBooksMainDiv, {
                     marginBottom: '50%'
                 }]}>
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov1.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Goldfinch</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                    {
+                        wishlistitems.map((data, index) => (
+                            wishlistitems &&
+                            <View style={xStyle.pub_home_best_card} key={index}>
+                                <Image
+                                    // source={require('../assets/images/bcov1.png')}
+                                    source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherId + "/" + data.image + '?d=' + new Date() }}
+                                    style={xStyle.pub_home_best_cover}
+                                    height={134}
+                                    width={138}
+                                />
+                                <View style={xStyle.pub_home_best_card_col2}>
+                                    <View style={xStyle.pub_home_best_card_col2_top}>
+                                        <View>
+                                            <Text style={xStyle.pub_home_best_card_title}>{data.title.length > 15 ? data.title.substring(0, 15) + ".." : data.title}</Text>
+                                            <View style={xStyle.pub_home_card_author_view}>
+                                                <Text style={xStyle.pub_home_card_author}>
+                                                    Author: <Text style={xStyle.pub_home_card_author_name}>
+                                                        {data.authors.length > 15 ? data.authors.substring(0, 15) + ".." : data.authors}
+                                                    </Text>
+                                                </Text>
+                                            </View>
+                                        </View>
+                                        <TouchableOpacity onPress={(e) => wishlistHandler(e, data.id)}>
+                                            <Image
+                                                source={require('../assets/images/close-circle-thin.png')}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={xStyle.pub_home_best_card_col2_bottom}>
+                                        <View>
+                                            <Text style={xStyle.pub_home_best_card_price}>
+                                                ₹{data.price}
+                                            </Text>
+                                        </View>
+                                        <View>
+                                            <TouchableOpacity
+                                                style={xStyle.wishlistMoveToCartBtn}
+                                            // onPress={() => navigation.navigate('wishlist')}
+                                            >
+                                                <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                                    Move to Cart
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
                                 </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/close-circle-thin.png')}
-                                    />
-                                </TouchableOpacity>
                             </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹149
-                                    </Text>
-                                </View>
-                                <TouchableOpacity
-                                    style={xStyle.wishlistMoveToCartBtn}
-                                // onPress={() => navigation.navigate('wishlist')}
-                                >
-                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                        Move to Cart
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov2.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Hypocrite..</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/close-circle-thin.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹199
-                                    </Text>
-                                </View>
-                                <TouchableOpacity
-                                    style={xStyle.wishlistMoveToCartBtn}
-                                // onPress={() => navigation.navigate('wishlist')}
-                                >
-                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                        Move to Cart
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov3.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Swallows</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/close-circle-thin.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹249
-                                    </Text>
-                                </View>
-                                <TouchableOpacity
-                                    style={xStyle.wishlistMoveToCartBtn}
-                                // onPress={() => navigation.navigate('wishlist')}
-                                >
-                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                        Move to Cart
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov1.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Goldfinch</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/close-circle-thin.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹149
-                                    </Text>
-                                </View>
-                                <TouchableOpacity
-                                    style={xStyle.wishlistMoveToCartBtn}
-                                // onPress={() => navigation.navigate('wishlist')}
-                                >
-                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                        Move to Cart
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov2.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Hypocrite..</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/close-circle-thin.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹199
-                                    </Text>
-                                </View>
-                                <TouchableOpacity
-                                    style={xStyle.wishlistMoveToCartBtn}
-                                // onPress={() => navigation.navigate('wishlist')}
-                                >
-                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                        Move to Cart
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov3.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Swallows</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/close-circle-thin.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹249
-                                    </Text>
-                                </View>
-                                <TouchableOpacity
-                                    style={xStyle.wishlistMoveToCartBtn}
-                                // onPress={() => navigation.navigate('wishlist')}
-                                >
-                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                        Move to Cart
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
+                        ))
+                    }
                 </View>
 
             </ScrollView>

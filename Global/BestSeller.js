@@ -19,7 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 export const BestSeller = ({ route }) => {
 
     const navigation = useNavigation();
-    const { best_selling_books, add_delete_to_wishlist, publisherData, allBestSeller } = UserProfile()
+    const { best_selling_books, publisherId, add_delete_to_wishlist, publisherData, allBestSeller } = UserProfile()
 
     useEffect(() => {
 
