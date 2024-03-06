@@ -20,7 +20,7 @@ export const TopMenuPub = ({ route}) => {
 
   
 
-  const { category_by_publisher, items, getPublishersById, publisherId, getBooksBySearchText, allActivePublisher } = UserProfile()
+  const { category_by_publisher, items, getPublishersById, publisherId, getBooksBySearchText, allActivePublisher,publisherData } = UserProfile()
   const { wishlistshow, authData, logOut,cartCount } = useAuth()
   const [publisherDetails, setPublisherDetails] = useState('')
   const [searchText, setSearchText] = useState('')
@@ -28,9 +28,7 @@ export const TopMenuPub = ({ route}) => {
   const [publisherBooks, setPublisherBooks] = useState([])
 
   useEffect(() => {
-    // console.log("Publisher id in TopMenuPub===>", route.params.publisher_id);
-    console.log("Publisher id in TopMenuPub===>", publisherId);
-    getPubById();
+    
   }, [authData])
 
   // const handleToggleSearch = () => {
@@ -137,7 +135,7 @@ export const TopMenuPub = ({ route}) => {
               width:90,
               resizeMode:'contain'
             }}
-            source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + '/' + publisherDetails.logo }}
+            source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherData.id + '/' + publisherData.logo }}
           />
           {/* <Text style={{color:'white'}}>{Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + '/' + publisherDetails.logo}</Text> */}
         </TouchableOpacity>
@@ -156,12 +154,27 @@ export const TopMenuPub = ({ route}) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('cartdetails')}
+            style={{position:'relative'}}
           >
 
             <Image
               source={require('../assets/images/shopping-cart.png')}
               />
-              <Text>{cartCount}</Text>
+            <View 
+              style={{
+                backgroundColor:'#ffffff',
+                width:20,
+                height:20,
+                borderRadius:20,
+                alignItems:'center',
+                position:'absolute',
+                top:-10,
+                right:-10
+              }}
+            >
+                <Text style={{fontWeight:'bold'}}>{cartCount}</Text>
+            </View>
+            
           </TouchableOpacity>
         </View>
       </View>

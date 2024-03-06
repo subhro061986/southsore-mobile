@@ -781,7 +781,7 @@ const UserProvider = ({ children }) => {
         return response;
       }
       catch (error) {
-        console.log("PUBLISHER CONTEXT ERROR: ", error);
+        console.log("ACTIVE PUBLISHER CONTEXT ERROR: ", error);
       }
     }
 
@@ -840,9 +840,11 @@ const UserProvider = ({ children }) => {
     }
 
     const getPublishersById = async (id) => {
+      
       //setPublisherId(0)
       let pub_id = 0;
       if (id === undefined || id === 0 || id === '0') {
+       
         if (publisherId === 0 || publisherId === '0') {
           pub_id = await AsyncStorage.getItem('publisher_id')
         }
@@ -852,12 +854,13 @@ const UserProvider = ({ children }) => {
 
       }
       else {
+       
         pub_id = id
       }
-
+      
     try {
       setActive(true)
-        const response = await axios.get(Config.API_URL + Config.GET_PUB_DETAILS + pub_id,
+        const response = await axios.get(Config.API_URL + Config.GET_PUB_DETAILS + id,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -871,12 +874,11 @@ const UserProvider = ({ children }) => {
       getNewArrivals(4, response?.data?.output?.id)
       best_selling_books(4, response?.data?.output?.id)
       setActive(false)
-        console.log("GET ALL PUBLISHERS BY ID : ", response);
         return response;
       }
       catch (error) {
         setActive(false)
-        console.log("PUBLISHER CONTEXT ERROR: ", error);
+        console.log("PUBLISHER DETAILS CONTEXT ERROR: ", error);
       }
     }
 
