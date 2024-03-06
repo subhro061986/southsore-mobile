@@ -1,4 +1,4 @@
-import React, { Component,useEffect, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import xStyle from '../assets/css/x_style.js';
 
 import {
@@ -17,7 +17,7 @@ import {
     PermissionsAndroid
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
-import { useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { UserProfile } from '../Context/Usercontext';
 import Config from "../config/Config.json"
 import { useAuth } from '../Context/Authcontext';
@@ -30,31 +30,34 @@ import BuyStepsPub from '../Global/BuyStepsPub.js';
 import TopMenuPub from '../Global/TopMenuPub.js';
 import BestSeller from '../Global/BestSeller.js';
 
-export const PubHomeScreen = () => {
+export const PubHomeScreen = ({ route, navigation }) => {
 
-    const navigation = useNavigation();
-    
-    const { getPublishersById, publisherId } = UserProfile();
+    // const navigation = useNavigation();
+
+    const { getPublishersById, publisherId, getNewArrivals, allNewArrival, publisherData, allBestSeller } = UserProfile();
     const { authData } = useAuth();
-    
+
     const [publisherDetails, setPublisherDetails] = useState('')
 
     useEffect(() => {
+        console.log("Publisher id ===>", route.params.publisher_id);
         getPubById();
     }, [authData])
 
     const getPubById = async () => {
-        let pubid = 0;
-        if (route.params === null || route.params === 'null') {
-          pubid = publisherId
-        }
-        else {
-          pubid = route.params.publisher_id
-        }
-        const result = await getPublishersById(pubid)
-        console.log("RESULT from Banner ===>",result);
+        // let pubid = 0;
+        // const about = document.getElementById("pub_about");
+        // if (route.params === null || route.params === 'null') {
+        //   pubid = publisherId
+        // }
+        // else {
+        //   pubid = route.params.publisher_id
+        // }
+        const result = await getPublishersById(route.params.publisher_id)
+        console.log("RESULT from Banner ===>", result);
         setPublisherDetails(result?.data?.output)
-    
+        // about.innerHTML = result?.data?.output?.about;
+
     }
 
 
@@ -65,14 +68,23 @@ export const PubHomeScreen = () => {
 
                 {/* Banner */}
 
-                <ImageBackground 
-                // source={require('../assets/images/PubBg.png')} 
-                source={{uri:Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date()}}
-                resizeMode="cover" style={xStyle.pub_banner}>
+                <View
+                    // source={require('../assets/images/PubBg.png')}
+                    // source={{uri:Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date()}}
+                    // resizeMode="cover" 
+                    style={xStyle.pub_banner}>
 
 
                     <Image
-                        source={require('../assets/images/demoBook.png')}
+                        // source={require('../assets/images/demoBook.png')}
+                        source={require('../assets/images/PubBg.png')}
+                        // source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date() }}
+                        width={'10%'}
+                        height={200}
+                        style={{
+                            resizeMode: 'contain'
+                        }}
+
                     />
 
                     <View style={xStyle.pub_banner_txt_view}>
@@ -82,21 +94,27 @@ export const PubHomeScreen = () => {
                         </View>
                     </View>
 
-                </ImageBackground>
+                </View>
 
                 {/* Publisher About */}
 
                 <View style={xStyle.pub_about}>
                     <Image
-                        source={require('../assets/images/demoPubLogo.png')}
-                        style={xStyle.pub_about_logo}
+                        // source={require('../assets/images/demoPubLogo.png')}
+                        source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + '/' + publisherDetails.logo }}
+                        style={[xStyle.pub_about_logo, { resizeMode: 'contain' }]}
+                        height={50}
+                        width={200}
                     />
-                    <Text style={xStyle.pub_about_body}>
-                        Juris Press is a prominent publisher of law and other professional books
+                    <View
+                    // style={xStyle.pub_about_body}
+                    >
+                        <Text id='pub_about'></Text>
+                        {/* Juris Press is a prominent publisher of law and other professional books
                         , headquartered in Chennai, India. Established with a commitment to providing high-quality
                         , authoritative literature
-                        , Juris Press specializes in catering to the discerning needs of the professional
-                    </Text>
+                        , Juris Press specializes in catering to the discerning needs of the professional */}
+                    </View>
                     <TouchableOpacity style={xStyle.southshoreInnovationsReadMore_btn}>
                         <Text style={xStyle.southshoreInnovationsReadMore}>
                             Read More
@@ -169,64 +187,83 @@ export const PubHomeScreen = () => {
                     <View
                         style={xStyle.pub_home_new_body}
                     >
-                        <TouchableOpacity
-                            style={xStyle.pub_home_new_card}
-                            onPress={() => navigation.navigate('productdetails',{bookId:116})}
-                        >
+                        {
+                            allNewArrival.map((data, index) => (
+                                <TouchableOpacity
+                                    key={index}
+                                    style={[xStyle.pub_home_new_card
+                                        // , {backgroundColor:'pink'}
+                                    ]}
+                                    onPress={() => navigation.navigate('productdetails',{bookId:data.id})}
+                                >
 
-                            <Image
-                                source={require('../assets/images/cov1.png')}
-                                style={xStyle.pub_home_new_card_img}
-                                width={154}
-                            />
-                            <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
-                                <Image
-                                    source={require('../assets/images/wishlist.png')}
-                                />
-                            </TouchableOpacity>
-                            <View
-                                style={xStyle.pub_home_new_card_txtbox}
-                            >
-                                <View
-                                    style={xStyle.pub_home_new_card_view_1}
-                                >
-                                    <View
-                                        style={xStyle.pub_home_card_title_view}
-                                    >
-                                        <Text
-                                            style={xStyle.pub_home_card_title}
-                                        >
-                                            Attitude Is Everyt..
-                                        </Text>
-                                    </View>
-                                    <Text
-                                        style={xStyle.pub_home_card_author}
-                                    >Author:
-                                        <Text
-                                            style={xStyle.pub_home_card_author_name}
-                                        >
-                                            Jeff Keller
-                                        </Text>
-                                    </Text>
-                                </View>
-                                <View
-                                    style={xStyle.pub_home_card_price_view}
-                                >
-                                    <Text
-                                        style={xStyle.pub_home_card_price}
-                                    >
-                                        ₹199
-                                    </Text>
-                                    <TouchableOpacity>
+                                    <Image
+                                        // source={require('../assets/images/cov1.png')}
+                                        source={{ uri: Config.API_URL + Config.PUB_IMAGES + data.publisherid + "/" + data.image + '?d=' + new Date() }}
+                                        // style={xStyle.pub_home_new_card_img}
+                                        style={{
+                                            borderRadius: 13,
+                                            resizeMode: 'contain',
+                                            width: '100%',
+                                            height: 130,
+                                            // borderWidth:1,
+                                            // borderColor:'black'
+                                        }}
+                                    // width={154}
+                                    // height={130}
+                                    />
+                                    <TouchableOpacity style={xStyle.pub_home_new_card_wishbtn}>
                                         <Image
-                                            source={require('../assets/images/plusBtn.png')}
+                                            source={require('../assets/images/wishlist.png')}
                                         />
                                     </TouchableOpacity>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
+                                    <View
+                                        style={xStyle.pub_home_new_card_txtbox}
+                                    >
+                                        <View
+                                            style={xStyle.pub_home_new_card_view_1}
+                                        >
+                                            <View
+                                                style={xStyle.pub_home_card_title_view}
+                                            >
+                                                <Text
+                                                    style={xStyle.pub_home_card_title}
+                                                >
+                                                    {/* Attitude Is Everyt.. */}
+                                                    {data.title.length > 15 ? data.title.substring(0, 15) + ".." : data.title}
+                                                </Text>
+                                            </View>
+                                            <Text
+                                                style={xStyle.pub_home_card_author}
+                                            >Author:
+                                                <Text
+                                                    style={xStyle.pub_home_card_author_name}
+                                                >
+                                                    {/* Jeff Keller */}
+                                                    {data.authors.length > 15 ? data.authors.substring(0, 15) + ".." : data.authors}
+                                                </Text>
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={xStyle.pub_home_card_price_view}
+                                        >
+                                            <Text
+                                                style={xStyle.pub_home_card_price}
+                                            >
+                                                ₹{data.price}
+                                            </Text>
+                                            <TouchableOpacity>
+                                                <Image
+                                                    source={require('../assets/images/plusBtn.png')}
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
 
-                        <TouchableOpacity
+                            ))}
+
+                        {/* <TouchableOpacity
                             style={xStyle.pub_home_new_card}
                         >
                             <Image
@@ -389,13 +426,14 @@ export const PubHomeScreen = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
 
                 {/* Best Seller */}
 
-                <BestSeller/>
+                <BestSeller />
+
 
                 {/* Recommendations */}
 

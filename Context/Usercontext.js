@@ -16,6 +16,7 @@ const UserProvider = ({ children }) => {
   const { authData, wishlistshow, isexpired, uuid } = useAuth();
 
   // const [catrproducts , setCartproducts] = useState([])
+  const [isActive, setActive] = useState(false)
   const [items, setItems] = useState()
   const [price, setprice] = useState()
   const [wishlistitems, setWishlistItems] = useState([])
@@ -28,6 +29,11 @@ const UserProvider = ({ children }) => {
   const [publisherId, setPublisherId] = useState(0)
   const [cartCount, setCartCount] = useState(0)
   const [categoryByPublisherList, setCategoryByPublisherList] = useState([])
+  const [globalCategoryId, setGlobalCategoryId] = useState(0)
+  const [allNewArrival, setallNewArrival] = useState([])
+  const [allBestSeller, setAllBestSeller] = useState([])
+  const [isLogin,setIsLogin]=useState(false)
+
 
 
   useEffect(() => {
@@ -38,7 +44,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     getAllPublishers();
     getAllActivePublishers();
-
+    checkIsLogin();
     if (authData === '' || authData === null || authData === undefined) {
       get_items()
       total_price_itemsno()
@@ -50,6 +56,8 @@ const UserProvider = ({ children }) => {
       // cart_items({
       //   deviceid: "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
       // })
+      getAllCategory();
+      category_by_publisher(2);
       get_wishlist_books(1, 5)
       localstorage_price_items_signin()
       // get_wish_books_id()
@@ -66,16 +74,22 @@ const UserProvider = ({ children }) => {
     }
 
   }, [publisherId]);
-  
-  
-  const clearCartStorage= async()=>{
-    await AsyncStorage.setItem("cartData","")
-  } 
 
+
+  const clearCartStorage = async () => {
+    await AsyncStorage.setItem("cartData", "")
+  }
+
+  const checkIsLogin=() =>{
+    if (authData === '' || authData === null || authData === undefined)
+      setIsLogin(false);
+    setIsLogin(true);
+    
+  }
   const getCartData = async () => {
 
     // -------- Before Login ----------//
-    console.log("authdata in usercontext= ",authData)
+    console.log("authdata in usercontext= ", authData)
     if (authData === '' || authData === null || authData === undefined) {
       let cc = await AsyncStorage.getItem("cartData")
       console.log("cart Data", cc)
@@ -90,7 +104,7 @@ const UserProvider = ({ children }) => {
 
       try {
         clearCartStorage()
-        const response = await axios.post(Config.API_URL + Config.GET_CART_ITEMS, {deviceid: uuid},
+        const response = await axios.post(Config.API_URL + Config.GET_CART_ITEMS, { deviceid: uuid },
 
           {
             headers: {
@@ -117,126 +131,173 @@ const UserProvider = ({ children }) => {
   // ** --------------------- GALLERY API ------------------------------
 
   const getAllCategory = async () => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.ALL_BOOK_CATEGORY,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
+    try {
+      const response = await axios.get(Config.API_URL + Config.ALL_BOOK_CATEGORY,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
 
-    //     })
-    //   return response.data
+        });
+      console.log("Category API : ", response.data);
+      return response.data
 
-    // }
-    // catch (error) {
-    //   console.log("Book_category_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("Book_category_error : ", error)
+    }
   }
 
 
 
-  const getNewArrivals = async (record_no) => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.NEW_ARRIVAL + "/"+ publisherId +  "?recordPerPage=" + record_no,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
-    //       },
+  const getNewArrivals = async (record_no, publisher_id) => {
+    let pub_id = 0;
+    if (publisher_id === undefined || publisher_id === 0 || publisher_id === '0') {
+      if (publisherId === 0 || publisherId === '0') {
+        pub_id = await AsyncStorage.getItem('publisher_id')
+      }
+      else {
+        pub_id = publisherId
 
-    //     })
-    //   return response.data
+      }
 
-    // }
-    // catch (error) {
-    //   console.log("Book_new_arrival error : ", error)
-    // }
+    }
+    else {
+      pub_id = publisher_id
+    }
+
+    console.log("NEW ARRIVAL URL===>", Config.API_URL + Config.NEW_ARRIVAL + "/" + pub_id + "?recordPerPage=" + record_no)
+    try {
+      const response = await axios.get(Config.API_URL + Config.NEW_ARRIVAL + "/" + pub_id + "?recordPerPage=" + record_no,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
+          },
+
+        })
+      if (response === undefined || response === null) {
+        setallNewArrival([])
+      }
+      else {
+        if (response.data.statuscode === "0" && response.data.output.length > 0) {
+          setallNewArrival(response.data.output)
+        }
+        else {
+          setallNewArrival([])
+        }
+      }
+      console.log('new arrival', allNewArrival)
+      return response.data
+
+
+    }
+    catch (error) {
+      console.log("Book_new_arrival error : ", error)
+    }
   }
 
 
-  const best_selling_books = async (record_per_page) => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.BEST_SELLING + "?recordPerPage=" + record_per_page,
+  const best_selling_books = async (record_per_page, publisher_id) => {
+    let pub_id = 0;
+    if (publisher_id === undefined || publisher_id === 0 || publisher_id === '0') {
+      if (publisherId === 0 || publisherId === '0') {
+        pub_id = await AsyncStorage.getItem('publisher_id')
+      }
+      else {
+        pub_id = publisherId
 
-    //     {
-    //       headers: {
-    //         'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
-    //       },
+      }
 
-    //     })
-    //   return response.data
+    }
+    else {
+      pub_id = publisher_id
+    }
+    try {
+      const response = await axios.get(Config.API_URL + Config.BEST_SELLING + "/" + pub_id + "?recordPerPage=" + record_per_page,
 
-    // }
-    // catch (error) {
-    //   console.log("Book_details_error : ", error)
-    // }
+        {
+          headers: {
+            'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
+          },
+
+        })
+      if (response === undefined || response === null) {
+        setAllBestSeller([])
+      }
+      else {
+        if (response.data.statuscode === "0" && response.data.output.length > 0) {
+          setAllBestSeller(response.data.output)
+        }
+        else {
+          setAllBestSeller([])
+        }
+      }
+      console.log('best seller', response.data.output)
+      return response.data
+
+    }
+    catch (error) {
+      setAllBestSeller([])
+      console.log("Book_details_error : ", error)
+    }
   }
-
-
 
   const getBook_by_category = async (currentpageno, record_no, args) => {
-    // console.log(" :", authData)
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.BOOK_BY_GENRE +
-    //     "?currentPage=" + currentpageno + "&recordPerPage=" + record_no, args,
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
-    //       },
-
-    //     })
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("Book_cat_Erget_book_authdataror : ", error)
-    // }
+    try {
+      const response = await axios.post(Config.API_URL + Config.BOOK_BY_GENRE +
+        "?currentPage=" + currentpageno + "&recordPerPage=" + record_no, args,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
+          },
+        })
+      return response.data
+    }
+    catch (error) {
+      console.log("Book_cat_Erget_book_authdataror : ", error)
+    }
   }
 
 
   const category_by_publisher = async (publisher_id) => {
-    // let pub_id=0;
-    // if(publisher_id===undefined || publisher_id===0 || publisher_id==='0')
-    // {
-    //   if(publisherId===0 || publisherId==='0'){
-    //     pub_id=await AsyncStorage.getItem('publisher_id')
-    //     //pub_id=0;
-    //   }
-    //   else{
-    //     pub_id=publisherId
+    let pub_id = 0;
+    if(publisher_id === undefined || publisher_id === 0 || publisher_id === '0')
+    {
+      if(publisherId===0 || publisherId==='0'){
+        pub_id = await AsyncStorage.getItem('publisher_id')
+        //pub_id=0;
+      }
+      else{
+        pub_id = publisherId
+      }
+    }
+    else{
+      pub_id = publisher_id
+    }
 
-    //   }
+    try {
+      const response = await axios.get(Config.API_URL + "publisher/" + pub_id + "/category",
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+      if (response.data.output.length > 0) {
+        setCategoryByPublisherList(response.data.output)
+      }
+      else {
+        setCategoryByPublisherList([])
+      }
+      console.log("Book_cat_by_publisher : ", response);
 
-    // }
-    // else{
-    //   pub_id=publisher_id
-    // }
+      return response.data
 
-    // try {
-    //   const response = await axios.get(Config.API_URL + "publisher/" + pub_id + "/category",
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-
-    //     })
-    //     if(response.data.output.length > 0){
-    //       setCategoryByPublisherList(response.data.output)
-    //     }
-    //     else{
-    //       setCategoryByPublisherList([])
-    //     }
-    //   console.log("Book_cat_by_publisher : ", response);
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("Book_cat_by_publisher_error : ", error)
-    // }
+    }
+    catch (error) {
+      console.log("Book_cat_by_publisher_error : ", error)
+    }
   }
 
 
@@ -327,8 +388,6 @@ const UserProvider = ({ children }) => {
     }
   }
 
-
-
   const addto_cart = async (json_obj) => {
     // console.log("Before Login cart item context : ", json_obj);
 
@@ -365,9 +424,6 @@ const UserProvider = ({ children }) => {
     // console.log("Cart in context :", basket)
   }
 
-
-
-
   const get_items = async () => {
     // console.log("Hello in context")
     // let array_item = []
@@ -385,8 +441,6 @@ const UserProvider = ({ children }) => {
     // total_price_itemsno()
     // console.log("getcartitems", item_no)
   }
-
-
 
   const total_price_itemsno = async () => {
     // console.log("executing " )
@@ -409,781 +463,752 @@ const UserProvider = ({ children }) => {
 
   const get_wishlist_books = async (current_page, record_per_page) => {
 
+    // try {
 
+    //   const response = await axios.get(Config.API_URL + Config.GET_WISHLIST_BOOKS +
+    //     "?currentPage=" + current_page + "&recordPerPage=" + record_per_page,
 
-    try {
+    //     {
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': 'Bearer ' + authData
+    //       },
 
-      const response = await axios.get(Config.API_URL + Config.GET_WISHLIST_BOOKS +
-        "?currentPage=" + current_page + "&recordPerPage=" + record_per_page,
+    //     })
 
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
+    //   setWishlistItems(response.data.output.books)
 
-        })
+    //   return response.data
 
-      setWishlistItems(response.data.output.books)
-
-      return response.data
-
-    }
-    catch (error) {
-      console.log("wishlist_books_resp_error : ", error)
-    }
+    // }
+    // catch (error) {
+    //   console.log("wishlist_books_resp_error : ", error)
+    // }
   }
-
-
-
-
 
   const add_delete_to_wishlist = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.ADD_DELETE_IN_WISHLIST, args,
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-
-    //     })
-
-    //     console.log('wishlist',response)
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("Add_to_wishlist_error : ", error)
-    // }
-  }
-
-  // *  ------------------  Cart (After Sign-in ) ------------------------- 
-
-  const cart_items = async (args) => {
-
-    // try {
-    //   console.log("get_carg_args :", args)
-    //   const response = await axios.post(Config.API_URL + Config.GET_CART_ITEMS, args,
-
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-
-    //     })
-
-    //   console.log("get_cart_items : ", response.data);
-    //   setCartItems(response.data.output)
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("get_cart_items_error : ", error)
-    // }
-  }
-
-
-  const add_single_item = async (args) => {
-    try {
-      const response = await axios.post(Config.API_URL + Config.ADD_SINGLE_ITEM, args,
-
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-
-        })
-
-      await price_items_signin(response.data)
-
-      return response.data
-
-    }
-    catch (error) {
-      console.log("add_single_item_error : ", error)
-    }
-  }
-
-
-
-  const localstorage_price_items_signin = async () => {
-
-
-
-    // console.log("Called localstorage_price_items_signin function")
-
-    // let localstorage_bookids = []
-    // let localstorage_array_item = []
-    // let local_storage_data = JSON.parse(await AsyncStorage.getItem("cart_data"))
-    // let local_storage_uuid = await AsyncStorage.getItem("unique_id")
-
-    // if (local_storage_data === undefined || local_storage_data === null) {
-
-    //   localstorage_bookids = []
-    //   console.log("My_uuid_1 :", local_storage_uuid)
-    // }
-
-    // else {
-
-    //   console.log("My_uuid_2 :", local_storage_uuid)
-
-    //   console.log("See_uuid ", await AsyncStorage.getItem("unique_id"))
-
-    //   const resp = await cart_items({
-    //     deviceid: local_storage_uuid
-    //     // "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
-    //   })
-
-    //   if (resp === undefined || resp === null ) {
-    //     localstorage_bookids = []
-    //     console.log("My_uuid :", local_storage_uuid)
-    //   }
-    //   else {
-    //     console.log("My_uuid :", local_storage_uuid)
-
-    //     let cartitems = resp.output
-
-    //     console.log("cart_items_resp_else ", resp)
-
-    //     localstorage_array_item = [...local_storage_data]
-
-    //     for (let i = 0; i < localstorage_array_item.length; i++) {
-    //       let book_id = localstorage_array_item[i].my_book_id
-
-    //       // let book_is_present = cartItems.find((val) => val.id === book_id)
-    //       let book_is_present = cartitems.find((val) => val.id === book_id)
-
-    //       console.log("book_is_present ", book_is_present)
-
-    //       if (book_is_present === undefined) {
-    //         localstorage_bookids.push(book_id)
-    //       }
-
-
-    //     }
-    //   }
-    // }
-
-    // console.log("localstorage_bookids_aray : ", localstorage_bookids)
-
-    // let mul_json =
-    // {
-    //   deviceid: local_storage_uuid,
-    //   // "9E7C1A59-7473-405F-81A7-11E25C70F0AC",
-    //   bookids: localstorage_bookids
-    // }
-
-    // const response = await add_multiple_item(mul_json)
-    // console.log("Multiple_resp ", response)
-    // await AsyncStorage.removeItem('cart_data')
-
-    // console.log("Token_is_expired :", isexpired)
-
-    // if (response === undefined || response === null || isexpired === true) {
-    //   setItems(0)
-    //   setprice(0)
-    // }
-    // else {
-    //   price_items_signin(response)
-    // }
-
-
-
-
-  }
-
-
-  // const g_json = {
-  //   deviceid: "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
-  // }
-
-  // const response = await cart_items(g_json)
-
-  const price_items_signin = async (response) => {
-    // console.log("price_items_signin response", response)
-    // let item_no = response.output.length
-    // let tot_price = 0
-    // let get_book_arr = response.output
-
-    // for (let i = 0; i < item_no; i++) {
-    //   tot_price = tot_price + get_book_arr[i].price
-    // }
-
-    // setItems(item_no)
-    // setprice(tot_price)
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  const add_multiple_item = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.ADD_MULTIPLE_ITEMS, args,
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-
-    //     })
-
-    //   console.log("add_multiple_item : ", response.data);
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("add_multiple_item_error : ", error)
-    // }
-  }
-
-
-
-  const remove_cart_item = async (args) => {
-
-    // try {
-
-
-    //   const response = await axios.post(Config.API_URL + Config.REMOVE_CART_ITEM,args,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-
-    //     })
-
-    //   await price_items_signin(response.data)
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("remove_cart_item_error : ", error)
-    // }
-  }
-
-
-  const change_personal_details = async (args) => {
-    try {
-      const response = await axios.post(Config.API_URL + Config.CHANGE_PERSONAL_INFO, args,
-
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': 'Bearer ' + authData
-          },
-
-        })
-
-      console.log("change_personal_details : ", response.data);
-
-      return response.data
-
-    }
-    catch (error) {
-      console.log("change_personal_details_error : ", error)
-    }
-  }
-
-
-  const change_contact_details = async (args) => {
-    try {
-      const response = await axios.post(Config.API_URL + Config.CHANGE_CONTACT_INFO, args,
-
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-
-        })
-
-      console.log("change_contact_details : ", response.data);
-
-      return response.data
-
-    }
-    catch (error) {
-      console.log("change_contact_details_error : ", error)
-    }
-  }
-  const change_billing_address = async (args) => {
-    try {
-      const response = await axios.post(Config.API_URL + Config.CHANGE_BILLING_ADDRESS, args,
-
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-
-        })
-
-      console.log("change_billing_address : ", response.data);
-
-      return response.data
-
-    }
-    catch (error) {
-      console.log("change_billing_address_error : ", error)
-    }
-  }
-
-
-  const change_password = async (args) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.CHANGE_PASSWORD, args,
-
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-
-    //     })
-
-    //   console.log("change_password : ", response.data);
-
-    //   return response.data
-
-    // }
-    // catch (error) {
-    //   console.log("change_password_error : ", error)
-    // }
-  }
-
-
-  const my_profile = async () => {
-    try {
-      const response = await axios.get(Config.API_URL + Config.MY_PROFILE,
-
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-
-        })
-
-      console.log("my_profile : ", response.data);
-
-      return response.data
-
-    }
-    catch (error) {
-      console.log("my_profile_error : ", error)
-    }
-  }
-  const get_country_list = async () => {
-    try {
-      const response = await axios.get(Config.API_URL + Config.COUNTRY_LIST,
-
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-
-        })
-
-      console.log("get_country_list : ", response.data);
-
-      return response.data
-
-    }
-    catch (error) {
-      console.log("get_country_list_error : ", error)
-    }
-  }
-  const get_state_list = async (countryId) => {
-    try {
-      const response = await axios.get(Config.API_URL + Config.STATE_LIST + countryId,
-
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-
-        })
-
-      console.log("get_country_list : ", response.data);
-
-      return response.data
-
-    }
-    catch (error) {
-      console.log("get_country_list_error : ", error)
-    }
-  }
-
-  const getAllPublishers = async () => {
-    console.log("RESP FROM CONTEXT", Config.API_URL + Config.ALL_PUBLISHERS)
-    try {
-      const response = await axios.get(Config.API_URL + Config.ALL_PUBLISHERS,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-      console.log("RESP FROM CONTEXT", response)
-      setAllActivePublisher(response.data.output)
-
-      return response;
-    }
-    catch (error) {
-      console.log("PUBLISHER CONTEXT ERROR: ", error);
-    }
-  }
-  const getAllActivePublishers = async () => {
-    try {
-      const response = await axios.get(Config.API_URL + Config.ALL_ACTIVE_PUBLISHERS,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-      setAllActivePublisher1(response.data.output)
-
-      return response;
-    }
-    catch (error) {
-      console.log("PUBLISHER CONTEXT ERROR: ", error);
-    }
-  }
-
-  const getBookShelf = async () => {
-    try {
-      const response = await axios.get(Config.API_URL + Config.BOOK_SHELF + "?currentPage=" + 1 + "&recordPerPage=" + 10,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-        })
-      // setAllActivePublisher(response.data.output)
-      console.log("GET BOOKSHELF RESPONSE : ", response);
-      return response.data;
-    }
-    catch (error) {
-      console.log("BOOKSHELF CONTEXT ERROR: ", error);
-    }
-  }
-
-  /* Razor Pay */
-  const createOrder = async (data) => {
-    try {
-      const response = await axios.post(Config.API_URL + Config.RAZORPAY_CREATE_ORDER, data,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-        })
-
-      console.log("razor pay create order  : ", response);
-      return response.data;
-    }
-    catch (error) {
-      console.log("BOOKSHELF CONTEXT ERROR: ", error);
-    }
-  }
-  const processPayment = async (data) => {
-    try {
-      const response = await axios.post(Config.API_URL + Config.RAZORPAY_PROCESS_PAYMENT, data,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authData
-          },
-        })
-
-      console.log("razor pay payment confirmed  : ", response);
-      return response.data;
-    }
-    catch (error) {
-      console.log("BOOKSHELF CONTEXT ERROR: ", error);
-    }
-  }
-
-  const getPublishersById = async (id) => {
-    console.log("ID GET BY ID", id)
-    console.log("ID GET BY ID==>", publisherId)
-    console.log('ID GET BY ID==>', await AsyncStorage.getItem('publisher_id'))
-    //setPublisherId(0)
-    let pub_id = 0;
-    if (id === undefined || id === 0 || id === '0') {
-      if (publisherId === 0 || publisherId === '0') {
-        pub_id = await AsyncStorage.getItem('publisher_id')
-      }
-      else {
-        pub_id = publisherId
-      }
-
-    }
-    else {
-      pub_id = id
-    }
-    console.log("PUB API", Config.API_URL + Config.GET_PUB_DETAILS + pub_id)
-    try {
-      const response = await axios.get(Config.API_URL + Config.GET_PUB_DETAILS + pub_id,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-
-      setPublisherData(response?.data?.output)
-      setPublisherId(response?.data?.output?.id)
-      await AsyncStorage.setItem('publisher_id', response?.data?.output?.id)
-      category_by_publisher(response?.data?.output?.id)
-      console.log("GET ALL PUBLISHERS BY ID : ", response);
-      return response;
-    }
-    catch (error) {
-      console.log("PUBLISHER CONTEXT ERROR: ", error);
-    }
-  }
-
-
-  const getInvoiceById = async (invoiceId) => {
-    // try {
-    //   const response = await axios.get(Config.API_URL + Config.INVOICE_DETAILS + "/" + invoiceId,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-    //     })
-
-    //   console.log("invoice id details  : ", response);
-    //   return response.data;
-    // }
-    // catch (error) {
-    //   console.log("BOOKSHELF CONTEXT ERROR: ", error);
-    // }
-  }
-
-  const getCouponByPublisherId = async (data) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.GET_COUPON_BY_PUBLISHERID,data,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + authData
-    //       },
-    //     })
-
-    //   console.log("invoice id details  : ", response);
-    //   return response.data;
-    // }
-    // catch (error) {
-    //   console.log("BOOKSHELF CONTEXT ERROR: ", error);
-    // }
-  }
-
-  const sendEmail = async (data) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.NEWSLETTER,data,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         // 'Authorization': 'Bearer ' + authData
-    //       },
-    //     })
-
-    //   console.log("news letter details  : ", response);
-    //   return response.data;
-    // }
-    // catch (error) {
-    //   console.log("Newsletter CONTEXT ERROR: ", error);
-    // }
-  }
-
-  const getBooksBySearchText = async (data) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.SEARCH_BOOKS,data,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         // 'Authorization': 'Bearer ' + authData
-    //       },
-    //     })
-
-    //   console.log("news letter details  : ", response);
-    //   return response.data;
-    // }
-    // catch (error) {
-    //   console.log("Newsletter CONTEXT ERROR: ", error);
-    // }
-  }
-  const add_book_to_storage = async (data) => {
-
-
-    let tempCartArray = []
-
-    // -------- Before Login ----------//
-    if (authData === '' || authData === null || authData === undefined) {
-      const cd = await AsyncStorage.getItem('cartData');
-      console.log("existing cart Data= ", cd)
-      if (cd === null) {
-        setCartCount(1)
-        tempCartArray.push(data)
-        
-        await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
-
-      }
-      else {
-        tempCartArray = JSON.parse(cd)
-        console.log("cartData=", tempCartArray)
-
-        let index = tempCartArray.findIndex((item, i) => {
-          return item.bookid === data.bookid
-        });
-
-        if (index == -1) {
-
-          tempCartArray.push(data)
-          setCartCount(tempCartArray.length)
-          await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
-          
-
-        }
-
-      }
-      setCartItems(tempCartArray)
-
-    }
-    // -------- After Login ----------//
-    else {
       try {
+        const response = await axios.post(Config.API_URL + Config.ADD_DELETE_IN_WISHLIST, args,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+          })
+        return response.data
+      }
+      catch (error) {
+        console.log("Add_to_wishlist_error : ", error)
+      }
+    }
 
-        let index = cartItems.findIndex((item, i) => {
-          return item.id === data.bookid
-        });
-        // console.log("index= ",index)
-        // console.log("cartItems= ",cartItems)
-        // console.log("data book= ",data.bookid)
-        if(index == -1){
-          const response = await axios.post(Config.API_URL + Config.ADD_SINGLE_ITEM, data,
-  
-            {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + authData
-              },
-  
-            })
-  
-          console.log('add Single item resp=', response)
-          getCartData()
-        }
-        else {
-          console.log("Book already present in cart!")
-        }
+    // *  ------------------  Cart (After Sign-in ) ------------------------- 
+
+    const cart_items = async (args) => {
+
+      // try {
+      //   console.log("get_carg_args :", args)
+      //   const response = await axios.post(Config.API_URL + Config.GET_CART_ITEMS, args,
+
+
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Authorization': 'Bearer ' + authData
+      //       },
+
+      //     })
+
+      //   console.log("get_cart_items : ", response.data);
+      //   setCartItems(response.data.output)
+
+      //   return response.data
+
+      // }
+      // catch (error) {
+      //   console.log("get_cart_items_error : ", error)
+      // }
+    }
+
+
+    const add_single_item = async (args) => {
+      try {
+        const response = await axios.post(Config.API_URL + Config.ADD_SINGLE_ITEM, args,
+
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+
+          })
+
+        await price_items_signin(response.data)
+
+        return response.data
 
       }
       catch (error) {
-        console.log('Add single item error=', error)
+        console.log("add_single_item_error : ", error)
       }
+    }
+
+    const localstorage_price_items_signin = async () => {
+
+
+
+      // console.log("Called localstorage_price_items_signin function")
+
+      // let localstorage_bookids = []
+      // let localstorage_array_item = []
+      // let local_storage_data = JSON.parse(await AsyncStorage.getItem("cart_data"))
+      // let local_storage_uuid = await AsyncStorage.getItem("unique_id")
+
+      // if (local_storage_data === undefined || local_storage_data === null) {
+
+      //   localstorage_bookids = []
+      //   console.log("My_uuid_1 :", local_storage_uuid)
+      // }
+
+      // else {
+
+      //   console.log("My_uuid_2 :", local_storage_uuid)
+
+      //   console.log("See_uuid ", await AsyncStorage.getItem("unique_id"))
+
+      //   const resp = await cart_items({
+      //     deviceid: local_storage_uuid
+      //     // "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
+      //   })
+
+      //   if (resp === undefined || resp === null ) {
+      //     localstorage_bookids = []
+      //     console.log("My_uuid :", local_storage_uuid)
+      //   }
+      //   else {
+      //     console.log("My_uuid :", local_storage_uuid)
+
+      //     let cartitems = resp.output
+
+      //     console.log("cart_items_resp_else ", resp)
+
+      //     localstorage_array_item = [...local_storage_data]
+
+      //     for (let i = 0; i < localstorage_array_item.length; i++) {
+      //       let book_id = localstorage_array_item[i].my_book_id
+
+      //       // let book_is_present = cartItems.find((val) => val.id === book_id)
+      //       let book_is_present = cartitems.find((val) => val.id === book_id)
+
+      //       console.log("book_is_present ", book_is_present)
+
+      //       if (book_is_present === undefined) {
+      //         localstorage_bookids.push(book_id)
+      //       }
+
+
+      //     }
+      //   }
+      // }
+
+      // console.log("localstorage_bookids_aray : ", localstorage_bookids)
+
+      // let mul_json =
+      // {
+      //   deviceid: local_storage_uuid,
+      //   // "9E7C1A59-7473-405F-81A7-11E25C70F0AC",
+      //   bookids: localstorage_bookids
+      // }
+
+      // const response = await add_multiple_item(mul_json)
+      // console.log("Multiple_resp ", response)
+      // await AsyncStorage.removeItem('cart_data')
+
+      // console.log("Token_is_expired :", isexpired)
+
+      // if (response === undefined || response === null || isexpired === true) {
+      //   setItems(0)
+      //   setprice(0)
+      // }
+      // else {
+      //   price_items_signin(response)
+      // }
+
+
+
 
     }
 
-    // console.log("cart: ", response);
-    return "item added to cart";
+    // const g_json = {
+    //   deviceid: "9E7C1A59-7473-405F-81A7-11E25C70F0AC"
+    // }
 
+    // const response = await cart_items(g_json)
+
+    const price_items_signin = async (response) => {
+      // console.log("price_items_signin response", response)
+      // let item_no = response.output.length
+      // let tot_price = 0
+      // let get_book_arr = response.output
+
+      // for (let i = 0; i < item_no; i++) {
+      //   tot_price = tot_price + get_book_arr[i].price
+      // }
+
+      // setItems(item_no)
+      // setprice(tot_price)
+    }
+
+    const add_multiple_item = async (args) => {
+      // try {
+      //   const response = await axios.post(Config.API_URL + Config.ADD_MULTIPLE_ITEMS, args,
+
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Authorization': 'Bearer ' + authData
+      //       },
+
+      //     })
+
+      //   console.log("add_multiple_item : ", response.data);
+
+      //   return response.data
+
+      // }
+      // catch (error) {
+      //   console.log("add_multiple_item_error : ", error)
+      // }
+    }
+
+
+
+    const remove_cart_item = async (args) => {
+
+      // try {
+
+
+      //   const response = await axios.post(Config.API_URL + Config.REMOVE_CART_ITEM,args,
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Authorization': 'Bearer ' + authData
+      //       },
+
+      //     })
+
+      //   await price_items_signin(response.data)
+
+      //   return response.data
+
+      // }
+      // catch (error) {
+      //   console.log("remove_cart_item_error : ", error)
+      // }
+    }
+
+
+    const change_personal_details = async (args) => {
+      try {
+        const response = await axios.post(Config.API_URL + Config.CHANGE_PERSONAL_INFO, args,
+
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization': 'Bearer ' + authData
+            },
+
+          })
+
+        console.log("change_personal_details : ", response.data);
+
+        return response.data
+
+      }
+      catch (error) {
+        console.log("change_personal_details_error : ", error)
+      }
+    }
+
+
+    const change_contact_details = async (args) => {
+      try {
+        const response = await axios.post(Config.API_URL + Config.CHANGE_CONTACT_INFO, args,
+
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+
+          })
+
+        console.log("change_contact_details : ", response.data);
+
+        return response.data
+
+      }
+      catch (error) {
+        console.log("change_contact_details_error : ", error)
+      }
+    }
+    const change_billing_address = async (args) => {
+      try {
+        const response = await axios.post(Config.API_URL + Config.CHANGE_BILLING_ADDRESS, args,
+
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+
+          })
+
+        console.log("change_billing_address : ", response.data);
+
+        return response.data
+
+      }
+      catch (error) {
+        console.log("change_billing_address_error : ", error)
+      }
+    }
+
+
+    const change_password = async (args) => {
+      // try {
+      //   const response = await axios.post(Config.API_URL + Config.CHANGE_PASSWORD, args,
+
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Authorization': 'Bearer ' + authData
+      //       },
+
+      //     })
+
+      //   console.log("change_password : ", response.data);
+
+      //   return response.data
+
+      // }
+      // catch (error) {
+      //   console.log("change_password_error : ", error)
+      // }
+    }
+
+
+    const my_profile = async () => {
+      try {
+        const response = await axios.get(Config.API_URL + Config.MY_PROFILE,
+
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+
+          })
+
+        console.log("my_profile : ", response.data);
+
+        return response.data
+
+      }
+      catch (error) {
+        console.log("my_profile_error : ", error)
+      }
+    }
+    const get_country_list = async () => {
+      try {
+        const response = await axios.get(Config.API_URL + Config.COUNTRY_LIST,
+
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+
+          })
+
+        console.log("get_country_list : ", response.data);
+
+        return response.data
+
+      }
+      catch (error) {
+        console.log("get_country_list_error : ", error)
+      }
+    }
+    const get_state_list = async (countryId) => {
+      try {
+        const response = await axios.get(Config.API_URL + Config.STATE_LIST + countryId,
+
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+
+          })
+
+        console.log("get_country_list : ", response.data);
+
+        return response.data
+
+      }
+      catch (error) {
+        console.log("get_country_list_error : ", error)
+      }
+    }
+
+    const getAllPublishers = async () => {
+      console.log("RESP FROM CONTEXT", Config.API_URL + Config.ALL_PUBLISHERS)
+      try {
+        const response = await axios.get(Config.API_URL + Config.ALL_PUBLISHERS,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        console.log("RESP FROM CONTEXT", response)
+        setAllActivePublisher(response.data.output)
+
+        return response;
+      }
+      catch (error) {
+        console.log("PUBLISHER CONTEXT ERROR: ", error);
+      }
+    }
+    const getAllActivePublishers = async () => {
+      try {
+        const response = await axios.get(Config.API_URL + Config.ALL_ACTIVE_PUBLISHERS,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        setAllActivePublisher1(response.data.output)
+
+        return response;
+      }
+      catch (error) {
+        console.log("PUBLISHER CONTEXT ERROR: ", error);
+      }
+    }
+
+    const getBookShelf = async () => {
+      try {
+        const response = await axios.get(Config.API_URL + Config.BOOK_SHELF + "?currentPage=" + 1 + "&recordPerPage=" + 10,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+          })
+        // setAllActivePublisher(response.data.output)
+        console.log("GET BOOKSHELF RESPONSE : ", response);
+        return response.data;
+      }
+      catch (error) {
+        console.log("BOOKSHELF CONTEXT ERROR: ", error);
+      }
+    }
+
+    /* Razor Pay */
+    const createOrder = async (data) => {
+      try {
+        const response = await axios.post(Config.API_URL + Config.RAZORPAY_CREATE_ORDER, data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+          })
+
+        console.log("razor pay create order  : ", response);
+        return response.data;
+      }
+      catch (error) {
+        console.log("BOOKSHELF CONTEXT ERROR: ", error);
+      }
+    }
+    const processPayment = async (data) => {
+      try {
+        const response = await axios.post(Config.API_URL + Config.RAZORPAY_PROCESS_PAYMENT, data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+          })
+
+        console.log("razor pay payment confirmed  : ", response);
+        return response.data;
+      }
+      catch (error) {
+        console.log("BOOKSHELF CONTEXT ERROR: ", error);
+      }
+    }
+
+    const getPublishersById = async (id) => {
+      //setPublisherId(0)
+      let pub_id = 0;
+      if (id === undefined || id === 0 || id === '0') {
+        if (publisherId === 0 || publisherId === '0') {
+          pub_id = await AsyncStorage.getItem('publisher_id')
+        }
+        else {
+          pub_id = publisherId
+        }
+
+      }
+      else {
+        pub_id = id
+      }
+
+    try {
+      setActive(true)
+        const response = await axios.get(Config.API_URL + Config.GET_PUB_DETAILS + pub_id,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+
+        setPublisherData(response?.data?.output)
+        setPublisherId(response?.data?.output?.id)
+      await AsyncStorage.setItem('publisher_id', response?.data?.output?.id.toString())
+      category_by_publisher(response?.data?.output?.id)
+      getNewArrivals(4, response?.data?.output?.id)
+      best_selling_books(4, response?.data?.output?.id)
+      setActive(false)
+        console.log("GET ALL PUBLISHERS BY ID : ", response);
+        return response;
+      }
+      catch (error) {
+        setActive(false)
+        console.log("PUBLISHER CONTEXT ERROR: ", error);
+      }
+    }
+
+
+    const getInvoiceById = async (invoiceId) => {
+      // try {
+      //   const response = await axios.get(Config.API_URL + Config.INVOICE_DETAILS + "/" + invoiceId,
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Authorization': 'Bearer ' + authData
+      //       },
+      //     })
+
+      //   console.log("invoice id details  : ", response);
+      //   return response.data;
+      // }
+      // catch (error) {
+      //   console.log("BOOKSHELF CONTEXT ERROR: ", error);
+      // }
+    }
+
+    const getCouponByPublisherId = async (data) => {
+      // try {
+      //   const response = await axios.post(Config.API_URL + Config.GET_COUPON_BY_PUBLISHERID,data,
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Authorization': 'Bearer ' + authData
+      //       },
+      //     })
+
+      //   console.log("invoice id details  : ", response);
+      //   return response.data;
+      // }
+      // catch (error) {
+      //   console.log("BOOKSHELF CONTEXT ERROR: ", error);
+      // }
+    }
+
+    const sendEmail = async (data) => {
+      // try {
+      //   const response = await axios.post(Config.API_URL + Config.NEWSLETTER,data,
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         // 'Authorization': 'Bearer ' + authData
+      //       },
+      //     })
+
+      //   console.log("news letter details  : ", response);
+      //   return response.data;
+      // }
+      // catch (error) {
+      //   console.log("Newsletter CONTEXT ERROR: ", error);
+      // }
+    }
+
+    const getBooksBySearchText = async (data) => {
+      // try {
+      //   const response = await axios.post(Config.API_URL + Config.SEARCH_BOOKS,data,
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         // 'Authorization': 'Bearer ' + authData
+      //       },
+      //     })
+
+      //   console.log("news letter details  : ", response);
+      //   return response.data;
+      // }
+      // catch (error) {
+      //   console.log("Newsletter CONTEXT ERROR: ", error);
+      // }
+    }
+    const add_book_to_storage = async (data) => {
+
+
+      let tempCartArray = []
+
+      // -------- Before Login ----------//
+      if (!isLogin) {
+        const cd = await AsyncStorage.getItem('cartData');
+        console.log("existing cart Data= ", cd)
+        if (cd === null) {
+          setCartCount(1)
+          tempCartArray.push(data)
+
+          await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
+
+        }
+        else {
+          tempCartArray = JSON.parse(cd)
+          console.log("cartData=", tempCartArray)
+
+          let index = tempCartArray.findIndex((item, i) => {
+            return item.bookid === data.bookid
+          });
+
+          if (index == -1) {
+
+            tempCartArray.push(data)
+            setCartCount(tempCartArray.length)
+            await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
+
+
+          }
+
+        }
+        setCartItems(tempCartArray)
+
+      }
+      // -------- After Login ----------//
+      else {
+        try {
+
+          let index = cartItems.findIndex((item, i) => {
+            return item.id === data.bookid
+          });
+          // console.log("index= ",index)
+          // console.log("cartItems= ",cartItems)
+          // console.log("data book= ",data.bookid)
+          if (index == -1) {
+            const response = await axios.post(Config.API_URL + Config.ADD_SINGLE_ITEM, data,
+
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + authData
+                },
+
+              })
+
+            console.log('add Single item resp=', response)
+            getCartData()
+          }
+          else {
+            console.log("Book already present in cart!")
+          }
+
+        }
+        catch (error) {
+          console.log('Add single item error=', error)
+        }
+
+      }
+
+      // console.log("cart: ", response);
+      return "item added to cart";
+
+    }
+
+
+
+
+    return (
+      <UserContext.Provider
+        value={{
+          getAllCategory,
+          category_by_publisher,
+          getNewArrivals,
+          best_selling_books,
+          getBook_by_category,
+          get_book_details,
+          addto_cart,
+          items,
+          price,
+          get_items,
+          get_wishlist_books,
+          add_delete_to_wishlist,
+          wishlistitems,
+          wishbooksid,
+          cart_items,
+          add_single_item,
+          add_multiple_item,
+          remove_cart_item,
+          change_personal_details,
+          change_contact_details,
+          change_billing_address,
+          change_password,
+          place_order,
+          myorders,
+          applyCoupon,
+          my_profile,
+          get_country_list,
+          get_state_list,
+          getAllPublishers,
+          getAllActivePublishers,
+          allBestSeller,
+          allActivePublisher,
+          allActivePublisher1,
+          getPublishersById,
+          publisherData,
+          publisherId,
+          categoryByPublisherList,
+          getBookShelf,
+          createOrder,
+          processPayment,
+          getInvoiceById,
+          getCouponByPublisherId,
+          sendEmail,
+          getBooksBySearchText,
+          add_book_to_storage,
+          cartCount,
+          cartItems,
+          allNewArrival,
+          isLogin,
+
+
+        }}
+      >
+        {children}
+
+      </UserContext.Provider>
+    )
   }
 
-
-
-
-  return (
-    <UserContext.Provider
-      value={{
-        getAllCategory,
-        category_by_publisher,
-        getNewArrivals,
-        best_selling_books,
-        getBook_by_category,
-        get_book_details,
-        addto_cart,
-        items,
-        price,
-        get_items,
-        get_wishlist_books,
-        add_delete_to_wishlist,
-        wishlistitems,
-        wishbooksid,
-        cart_items,
-        add_single_item,
-        add_multiple_item,
-        remove_cart_item,
-        change_personal_details,
-        change_contact_details,
-        change_billing_address,
-        change_password,
-        place_order,
-        myorders,
-        applyCoupon,
-        my_profile,
-        get_country_list,
-        get_state_list,
-        getAllPublishers,
-        getAllActivePublishers,
-        allActivePublisher,
-        allActivePublisher1,
-        getPublishersById,
-        publisherData,
-        publisherId,
-        categoryByPublisherList,
-        getBookShelf,
-        createOrder,
-        processPayment,
-        getInvoiceById,
-        getCouponByPublisherId,
-        sendEmail,
-        getBooksBySearchText,
-        add_book_to_storage,
-        cartCount,
-        cartItems
-
-
-      }}
-    >
-      {children}
-
-    </UserContext.Provider>
-  )
-}
-
-
-function UserProfile() {
-  const context = useContext(UserContext)
-
-
-
-  return context
-}
-
+  function UserProfile() {
+    const context = useContext(UserContext)
+    return context
+  }
 
 export { UserContext, UserProvider, UserProfile }
-
-

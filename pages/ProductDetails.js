@@ -45,7 +45,8 @@ export const ProductDetails = () => {
         getBookShelf,
         remove_cart_item,
         add_book_to_storage,
-        get_items } = UserProfile()
+        get_items,
+        isLogin } = UserProfile()
     const { wishlistshow, uuid,authData } = useAuth();
     
     const [bookdetail, setBookdetail] = useState({})
@@ -152,8 +153,35 @@ export const ProductDetails = () => {
             bookid:bookdetail.id,
             deviceid:uuid
           }
-        const resp= await add_book_to_storage(json_data)
+        // const resp= await add_book_to_storage(json_data)
 
+        if(!isLogin){
+        const resp= await add_book_to_storage(json_data)
+        if (toCheckout) {
+                Alert.alert("Please Login to Buy this book!",{
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    theme: "dark",
+                })
+            }
+            else {
+                Alert.alert("Item Added to Cart", {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    theme: "green",
+                });
+            }
+        }
         // if (authData === '' || authData === null || authData === undefined) {
       
           

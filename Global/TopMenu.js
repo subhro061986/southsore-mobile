@@ -1,4 +1,4 @@
-import React, { Component, useState,useEffect } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import xStyle from '../assets/css/x_style.js';
 
 import {
@@ -18,10 +18,10 @@ export const TopMenu = () => {
   const {allActivePublisher,cartCount}=UserProfile()
   const [filteredFilms, setFilteredFilms] = useState([]);
 
-  
+
 
   useEffect(() => {
-    
+
   }, []);
 
   const findPublisher = (query) => {
@@ -30,7 +30,7 @@ export const TopMenu = () => {
       // Making a case insensitive regular expression
       const regex = new RegExp(`${query.trim()}`, 'i');
       // Setting the filtered film array according the query
-      
+
       setFilteredFilms(
         allActivePublisher.filter((pub) => pub.name.search(regex) >= 0)
       );
@@ -40,10 +40,10 @@ export const TopMenu = () => {
     }
   };
 
-  
-  
 
-  
+
+
+
 
 
   return (
@@ -80,35 +80,45 @@ export const TopMenu = () => {
       </View>
       <View style={xStyle.topnav_bottom}>
         {/* <TextInput style={xStyle.search_bar} onChangeText={handleInputChange} value={query} placeholder='Search by Author, Tittle, ISBN' placeholderTextColor={'#B0B6CC'}></TextInput> */}
-        
-        <View style={{ flex: 1 }}>
-        <Autocomplete
-          autoCapitalize="none"
-          autoCorrect={false}
-          data={filteredFilms}
-          onChangeText={(text) => findPublisher(text)}
-          placeholder="Search by publisher"
-          flatListProps={{
-            renderItem: ({ item }) => (
-            <TouchableOpacity
-              // onPress={() => {
-              //   setSelectedValue(item);
-              // }}
-              >
-              <Text>
-                  {item.name}
-              </Text>
-            </TouchableOpacity>
-            )
-          }}
-        />
-      </View>
 
-        {/* <View style={xStyle.search_pos}>
+        <View style={{ flex: 1 }}>
+          <Autocomplete
+            inputContainerStyle={{
+              width: '100%',
+              
+              borderColor: 'red',
+              borderWidth: 2,
+              borderRadius: 8,
+            }}
+            inputStyle={{
+              borderWidth:0,
+            }}
+            autoCapitalize="none"
+            autoCorrect={false}
+            data={filteredFilms}
+            onChangeText={(text) => findPublisher(text)}
+            placeholder="Search by publisher"
+            flatListProps={{
+              renderItem: ({ item }) => (
+                <TouchableOpacity
+                // onPress={() => {
+                //   setSelectedValue(item);
+                // }}
+                >
+                  <Text>
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              )
+            }}
+          />
+        </View>
+
+        <View style={xStyle.search_pos}>
           <Image
             source={require('../assets/images/search-normal.png')}
           />
-        </View> */}
+        </View>
       </View>
 
 

@@ -688,6 +688,19 @@ export default StyleSheet.create({
     marginVertical: 10
   },
 
+  footerBtn: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+
+  footerIconText: {
+    fontWeight: '500',
+    fontSize: 14,
+    color: '#FFF',
+    marginTop: 3
+  },
+
   bottomnav: {
     position: 'absolute',
     bottom: Dimensions.get('screen').height * 0.1,
@@ -1916,18 +1929,20 @@ export default StyleSheet.create({
     height: 80,
     width: 80,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '3%'
   },
 
   list_modal_icon: {
-    width: 75,
-    height: 75,
+    width: 70,
+    height: 70,
     resizeMode: 'contain'
   },
 
   list_modal_legend: {
-    fontSize: 12,
-    fontWeight: "500",
+    fontSize: 13,
+    fontWeight: "600",
     textAlign: "center",
     color: 'grey',
   },
