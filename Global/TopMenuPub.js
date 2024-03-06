@@ -107,7 +107,8 @@ export const TopMenuPub = ({ route}) => {
 
 
   const goToProductDetailsPage = (id) => {
-    navigate('/productdetails', { BOOK_ID: id })
+    console.log('product id : ', id);
+    navigation.navigate('productdetails', { BOOK_ID: id })
   }
 
   const handleWishlist = () => {
@@ -195,12 +196,13 @@ export const TopMenuPub = ({ route}) => {
               publisherBooks.length > 0 &&
               publisherBooks.map((book, index) => (
 
-                <View
+                <TouchableOpacity
                   style={{
                     paddingHorizontal: '5%',
                     paddingVertical: '5%'
                   }}
                   key={index}
+                  onPress={() => goToProductDetailsPage(book.id)}
                 >
 
                   <View style={{ marginBottom: '2%' }}>
@@ -211,7 +213,7 @@ export const TopMenuPub = ({ route}) => {
                   </View>
                   <Text>Author: {book.authors}</Text>
 
-                </View>
+                </TouchableOpacity>
               ))
             }
 
