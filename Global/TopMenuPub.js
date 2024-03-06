@@ -11,11 +11,14 @@ import {
 // import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
 import { UserProfile } from '../Context/Usercontext.js';
+import { useAuth } from '../Context/Authcontext.js';
 
 export const TopMenuPub = () => {
   const navigation = useNavigation();
-  const {cartCount}=UserProfile()
+  // const {cartCount}=UserProfile()
+  const{authData,cartCount} = useAuth()
 
+  
   return (
     <View style={xStyle.topnav}>
       <View style={xStyle.topnav_top}>

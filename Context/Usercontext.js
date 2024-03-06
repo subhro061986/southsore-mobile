@@ -22,29 +22,21 @@ const UserProvider = ({ children }) => {
   const [wishlistitems, setWishlistItems] = useState([])
 
   const [wishbooksid, setWishbooksid] = useState([])
-  const [cartItems, setCartItems] = useState([])
   const [allActivePublisher, setAllActivePublisher] = useState([])
   const [allActivePublisher1, setAllActivePublisher1] = useState([])
   const [publisherData, setPublisherData] = useState('')
   const [publisherId, setPublisherId] = useState(0)
-  const [cartCount, setCartCount] = useState(0)
   const [categoryByPublisherList, setCategoryByPublisherList] = useState([])
   const [globalCategoryId, setGlobalCategoryId] = useState(0)
   const [allNewArrival, setallNewArrival] = useState([])
   const [allBestSeller, setAllBestSeller] = useState([])
-  const [isLogin,setIsLogin]=useState(false)
 
 
-
-  useEffect(() => {
-    // clearCartStorage()
-    getCartData()
-  }, [cartCount])
 
   useEffect(() => {
     getAllPublishers();
     getAllActivePublishers();
-    checkIsLogin();
+    
     if (authData === '' || authData === null || authData === undefined) {
       get_items()
       total_price_itemsno()
@@ -60,6 +52,7 @@ const UserProvider = ({ children }) => {
       category_by_publisher(2);
       get_wishlist_books(1, 5)
       localstorage_price_items_signin()
+      
       // get_wish_books_id()
     }
   }
@@ -76,58 +69,7 @@ const UserProvider = ({ children }) => {
   }, [publisherId]);
 
 
-  const clearCartStorage = async () => {
-    await AsyncStorage.setItem("cartData", "")
-  }
-
-  const checkIsLogin=() =>{
-    if (authData === '' || authData === null || authData === undefined)
-      setIsLogin(false);
-    setIsLogin(true);
-    
-  }
-  const getCartData = async () => {
-
-    // -------- Before Login ----------//
-    console.log("authdata in usercontext= ", authData)
-    if (authData === '' || authData === null || authData === undefined) {
-      let cc = await AsyncStorage.getItem("cartData")
-      console.log("cart Data", cc)
-      if (cc !== null) {
-        let tempCartItems = JSON.parse(cc)
-        setCartCount(tempCartItems.length)
-        setCartItems(tempCartItems)
-      }
-    }
-    // -------- After Login ----------//
-    else {
-
-      try {
-        clearCartStorage()
-        const response = await axios.post(Config.API_URL + Config.GET_CART_ITEMS, { deviceid: uuid },
-
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + authData
-            },
-
-          })
-
-        console.log("get_cart_items : ", response.data);
-        setCartItems(response.data.output)
-        setCartCount(response.data.output.length)
-
-        return response.data
-
-      }
-      catch (error) {
-        console.log("get_cart_items_error : ", error)
-      }
-
-
-    }
-  }
+ 
   // ** --------------------- GALLERY API ------------------------------
 
   const getAllCategory = async () => {
@@ -1064,83 +1006,7 @@ const UserProvider = ({ children }) => {
       //   console.log("Newsletter CONTEXT ERROR: ", error);
       // }
     }
-    const add_book_to_storage = async (data) => {
-
-
-      let tempCartArray = []
-
-      // -------- Before Login ----------//
-      if (!isLogin) {
-        const cd = await AsyncStorage.getItem('cartData');
-        console.log("existing cart Data= ", cd)
-        if (cd === null) {
-          setCartCount(1)
-          tempCartArray.push(data)
-
-          await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
-
-        }
-        else {
-          tempCartArray = JSON.parse(cd)
-          console.log("cartData=", tempCartArray)
-
-          let index = tempCartArray.findIndex((item, i) => {
-            return item.bookid === data.bookid
-          });
-
-          if (index == -1) {
-
-            tempCartArray.push(data)
-            setCartCount(tempCartArray.length)
-            await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
-
-
-          }
-
-        }
-        setCartItems(tempCartArray)
-
-      }
-      // -------- After Login ----------//
-      else {
-        try {
-
-          let index = cartItems.findIndex((item, i) => {
-            return item.id === data.bookid
-          });
-          // console.log("index= ",index)
-          // console.log("cartItems= ",cartItems)
-          // console.log("data book= ",data.bookid)
-          if (index == -1) {
-            const response = await axios.post(Config.API_URL + Config.ADD_SINGLE_ITEM, data,
-
-              {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + authData
-                },
-
-              })
-
-            console.log('add Single item resp=', response)
-            getCartData()
-          }
-          else {
-            console.log("Book already present in cart!")
-          }
-
-        }
-        catch (error) {
-          console.log('Add single item error=', error)
-        }
-
-      }
-
-      // console.log("cart: ", response);
-      return "item added to cart";
-
-    }
-
+    
 
 
 
@@ -1191,11 +1057,7 @@ const UserProvider = ({ children }) => {
           getCouponByPublisherId,
           sendEmail,
           getBooksBySearchText,
-          add_book_to_storage,
-          cartCount,
-          cartItems,
-          allNewArrival,
-          isLogin,
+          allNewArrival
 
 
         }}

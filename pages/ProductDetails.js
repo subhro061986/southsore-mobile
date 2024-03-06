@@ -44,10 +44,9 @@ export const ProductDetails = () => {
         add_delete_to_wishlist,
         getBookShelf,
         remove_cart_item,
-        add_book_to_storage,
         get_items,
-        isLogin } = UserProfile()
-    const { wishlistshow, uuid,authData } = useAuth();
+         } = UserProfile()
+    const { wishlistshow, uuid,authData,add_book_to_storage } = useAuth();
     
     const [bookdetail, setBookdetail] = useState({})
     const [images, setImages] = useState([])
@@ -153,63 +152,23 @@ export const ProductDetails = () => {
             bookid:bookdetail.id,
             deviceid:uuid
           }
-        // const resp= await add_book_to_storage(json_data)
 
-        if(!isLogin){
-        const resp= await add_book_to_storage(json_data)
-        if (toCheckout) {
-                Alert.alert("Please Login to Buy this book!",{
-                    position: "bottom-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    closeButton: false,
-                    theme: "dark",
-                })
+        if(authData === '' || authData === null || authData === undefined){
+        
+            const resp= await add_book_to_storage(json_data)
+            if (toCheckout) {
+                alert("Please Login to Buy this book!")
             }
             else {
-                Alert.alert("Item Added to Cart", {
-                    position: "bottom-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    closeButton: false,
-                    theme: "green",
-                });
+                alert("Item Added to Cart");
             }
         }
-        // if (authData === '' || authData === null || authData === undefined) {
-      
-          
-        //     console.log("added to cart" ,bookdetail)
+        else {
+        const resp= await add_book_to_storage(json_data)
 
+        }
 
-        //     add_book_to_storage(bookdetail)
-        //     // if (toCheckout) {
-        //     //     navigate("/login")
-        //     // }
-            
-        //     // else {
-
-        //         // Alert.alert("Item Added to Cart", {
-        //         //     position: "bottom-center",
-        //         //     autoClose: 2000,
-        //         //     hideProgressBar: true,
-        //         //     closeOnClick: true,
-        //         //     pauseOnHover: true,
-        //         //     draggable: true,
-        //         //     closeButton: false,
-        //         //     theme: "dark",
-        //         // });
-        //     // }
-        //     // navigation("/cartpage")
-
-            
-        // }
+       
         // else {
         //     const get_json =
         //     {
@@ -488,7 +447,7 @@ export const ProductDetails = () => {
                             />
                         </TouchableOpacity>
                         <TouchableOpacity style={xStyle.prod_det_buy_btn}
-                            onPress={() =>add_to_cart(bookdetail.id,false)}
+                            onPress={() =>add_to_cart(bookdetail.id,true)}
                         >
                             <Text style={xStyle.prod_det_add_buy_txt}>Buy Now</Text>
                             <Image

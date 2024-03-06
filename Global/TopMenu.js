@@ -12,17 +12,19 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Autocomplete from 'react-native-autocomplete-input';
 import { UserProfile } from '../Context/Usercontext.js';
+import { useAuth } from '../Context/Authcontext.js';
 
 export const TopMenu = () => {
   const navigation = useNavigation();
-  const {allActivePublisher,cartCount}=UserProfile()
+  const{authData,cartCount} = useAuth()
+  const {allActivePublisher}=UserProfile()
   const [filteredFilms, setFilteredFilms] = useState([]);
 
 
 
   useEffect(() => {
-
-  }, []);
+    console.log("cart count= ",cartCount)
+  }, [authData]);
 
   const findPublisher = (query) => {
     // Method called every time when we change the value of the input

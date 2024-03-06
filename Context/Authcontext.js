@@ -9,6 +9,7 @@ import Config from '../config/Config.json'
 import { jwtDecode } from "jwt-decode";
 import { v4 as uuidv4 } from 'uuid';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import DeviceInfo from 'react-native-device-info';
 //import Cookies from "js-cookie";
 
 
@@ -23,6 +24,9 @@ const AuthProvider = ({ children }) => {
   const [wishlistshow, setWishlistshow] = useState(false)
   const [isexpired, setIsexpired] = useState(false)
   const [uuid,SetUuid] = useState()
+  const [cartItems, setCartItems] = useState([])
+  const [cartCount, setCartCount] = useState(0)
+
 
   // !  wishlistshow === isLoggedin
 
@@ -95,7 +99,8 @@ const AuthProvider = ({ children }) => {
     if (my_unique_id === "" || my_unique_id === null || my_unique_id === undefined ){
 
      
-      let system_uuid = uuidv4()
+      // let system_uuid = uuidv4()
+      let system_uuid = DeviceInfo.getDeviceId();
       console.log("in If ", system_uuid)
       await AsyncStorage.setItem('unique_id', system_uuid)
       SetUuid(system_uuid)
@@ -116,8 +121,16 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     getDataFromStorage();
     wishlist_hide_show()
+    getCartData(authData)
 
   }, [authData])
+
+  
+  useEffect(() => {
+    // clearCartStorage()
+    getCartData()
+  }, [cartCount])
+
 
 
   const wishlist_hide_show = async () => {
@@ -148,12 +161,14 @@ const AuthProvider = ({ children }) => {
         // setWishlistshow(true)
         // setAuthUsername(response.data.data[0].username)
         await AsyncStorage.setItem("userid", response.data.token);
+        getCartData(response.data.token)
         // await AsyncStorage.setItem("username", response.data.data[0].username);
       }
       else {
         setAuthData('')
         // setAuthUsername('')
         await AsyncStorage.setItem("userid", '');
+        await AsyncStorage.setItem("cartData", '');
         // await AsyncStorage.setItem("username", '');
       }
       return response
@@ -176,6 +191,9 @@ const AuthProvider = ({ children }) => {
     setWishlistshow(false)
     // setAuthUsername('')
     await AsyncStorage.setItem("userid", '');
+    await AsyncStorage.setItem("unique_id", '');
+    clearCartStorage()
+    getCartData('')
     // await AsyncStorage.setItem("username", '');
 
     return 'Success';
@@ -207,6 +225,143 @@ const AuthProvider = ({ children }) => {
 
   }
 
+  const getCartData = async (token) => {
+    console.log("authdata in usercontext= ", token)
+    let tok=''
+    if (authData === '' || authData === null || authData === undefined) {
+      tok=token
+    }
+    else {
+      tok=authData
+    }
+    // -------- Before Login ----------//
+    if (tok === '' || tok === null || tok === undefined) {
+      let cc = await AsyncStorage.getItem("cartData")
+      console.log("cart Data", cc)
+      if (cc !== null) {
+        let tempCartItems = JSON.parse(cc)
+        setCartCount(tempCartItems.length)
+        setCartItems(tempCartItems)
+      }
+    }
+    // -------- After Login ----------//
+    else {
+      console.log("device id= ",uuid)
+      console.log("token inside auth context= ",tok)
+      try {
+        clearCartStorage()
+        const response = await axios.post(Config.API_URL + Config.GET_CART_ITEMS, { deviceid: uuid },
+
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + tok
+            },
+
+          })
+
+        console.log("get_cart_items : ", response.data);
+        setCartItems(response.data.output)
+        setCartCount(response.data.output.length)
+
+        return response.data
+
+      }
+      catch (error) {
+        console.log("get_cart_items_error : ", error)
+      }
+
+
+    }
+  }
+
+  const add_book_to_storage = async (data) => {
+
+
+    let tempCartArray = []
+
+    // -------- Before Login ----------//
+    if (authData === '' || authData === null || authData === undefined) {
+      const cd = await AsyncStorage.getItem('cartData');
+      console.log("existing cart Data= ", cd)
+      if (cd === null) {
+        setCartCount(1)
+        tempCartArray.push(data)
+
+        await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
+
+      }
+      else {
+        tempCartArray = JSON.parse(cd)
+        console.log("cartData=", tempCartArray)
+
+        let index = tempCartArray.findIndex((item, i) => {
+          return item.bookid === data.bookid
+        });
+
+        if (index == -1) {
+
+          tempCartArray.push(data)
+          setCartCount(tempCartArray.length)
+          await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
+
+
+        }
+        else {
+          console.log("Book already present in cart")
+        }
+
+      }
+      setCartItems(tempCartArray)
+
+    }
+    // -------- After Login ----------//
+    else {
+      try {
+
+        let index = cartItems.findIndex((item, i) => {
+          return item.id === data.bookid
+        });
+        // console.log("index= ",index)
+        // console.log("cartItems= ",cartItems)
+        // console.log("data book= ",data.bookid)
+        if (index == -1) {
+          const response = await axios.post(Config.API_URL + Config.ADD_SINGLE_ITEM, data,
+
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + authData
+              },
+
+            })
+
+          console.log('add Single item resp=', response)
+          getCartData(authData)
+        }
+        else {
+          console.log("Book already present in cart!")
+        }
+
+      }
+      catch (error) {
+        console.log('Add single item error=', error)
+      }
+
+    }
+
+    // console.log("cart: ", response);
+    return "item added to cart";
+
+  }
+
+  
+  const clearCartStorage = async () => {
+    await AsyncStorage.setItem("cartData", "")
+  }
+
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -216,7 +371,10 @@ const AuthProvider = ({ children }) => {
         wishlistshow,
         isexpired,
         uuid,
-        Registration
+        Registration,
+        add_book_to_storage,
+        cartCount,
+        cartItems,
         // authUsername
       }}
     >

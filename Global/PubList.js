@@ -23,7 +23,7 @@ export const PubList = () => {
     //   }, [])
 
     const goToCatagory = (val) => {
-        navigation.navigate('pubhome', { state: { publisher_id: val.id } })
+        navigation.navigate('pubhome', { publisher_id: val.id  })
       }
 
     return (
