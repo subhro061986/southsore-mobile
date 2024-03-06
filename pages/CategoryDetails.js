@@ -87,30 +87,66 @@ export const CategoryDetails = ({ route, navigation }) => {
 
     const sortSelectionChange = (itemValue, itemIndex) => {
         setSortSelected(itemValue);
+        console.log("Item val", itemValue);
+        console.log("Item index", itemIndex);
+        let sort_val = itemValue
+        if (sort_val === 1) {
+            setLowToHigh();
+        }
+        else if (sort_val === 2) {
+            setHightoLow();
+        }
+        else if (sort_val === 3) {
+            // console.log('A-Z')
+            AtoZ();
+        }
+        else {
+            // console.log('Z-A')
+            ZtoA();
+        }
     }
 
     const sortValue = [
         {
             id: 1,
-            title: 'Best Seller'
-        },
-        {
-            id: 2,
             title: 'Price Low to High'
         },
         {
-            id: 3,
+            id: 2,
             title: 'Price High to Low'
         },
         {
-            id: 4,
+            id: 3,
             title: 'A -> Z'
         },
         {
-            id: 5,
+            id: 4,
             title: 'Z -> A'
         },
     ]
+
+    const setLowToHigh = () => {
+        const sortedProducts = books.sort((a, b) => a.price - b.price);
+        // console.log("sortedproducts", sortedProducts)
+        setBooks([...sortedProducts]);
+    };
+
+    const setHightoLow = () => {
+        const sortedProducts = books.sort((a, b) => b.price - a.price);
+        setBooks([...sortedProducts]);
+    };
+
+    const AtoZ = () => {
+        const sortedProducts = books.sort((a, b) => a.title > b.title ? 1 : -1)
+        // console.log("A-Z", sortedProducts)
+        setBooks([...sortedProducts]);
+    }
+
+    const ZtoA = () => {
+        const sortedProducts = books.sort((a, b) => a.title > b.title ? -1 : 1)
+        // console.log("Z-A", sortedProducts)
+        setBooks([...sortedProducts]);
+    }
 
     const filterModalHandler = () => {
         setmodalvisibility(true);
