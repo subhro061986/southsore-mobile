@@ -84,9 +84,9 @@ export const TopMenu = () => {
             inputContainerStyle={{
               width: '100%',
               
-              borderColor: 'red',
-              borderWidth: 2,
-              borderRadius: 8,
+              // borderColor: 'red',
+              // borderWidth: 2,
+              // borderRadius: 8,
             }}
             inputStyle={{
               borderWidth:0,

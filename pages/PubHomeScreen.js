@@ -14,8 +14,11 @@ import {
     TouchableOpacity,
     ImageBackground,
     Animated,
-    PermissionsAndroid
+    PermissionsAndroid,
+    Dimensions,
+    useWindowDimensions 
 } from 'react-native';
+import RenderHtml from 'react-native-render-html';
 // import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
 import { UserProfile } from '../Context/Usercontext';
@@ -33,6 +36,7 @@ import BestSeller from '../Global/BestSeller.js';
 export const PubHomeScreen = ({ route, navigation }) => {
 
     // const navigation = useNavigation();
+    const { width } = useWindowDimensions();
 
     const { getPublishersById, publisherId, getNewArrivals, allNewArrival, publisherData, allBestSeller } = UserProfile();
     const { authData } = useAuth();
@@ -72,22 +76,34 @@ export const PubHomeScreen = ({ route, navigation }) => {
                     // source={require('../assets/images/PubBg.png')}
                     // source={{uri:Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date()}}
                     // resizeMode="cover" 
-                    style={xStyle.pub_banner}>
+                    // style={xStyle.pub_banner}
+                    style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        // paddingVertical: '10%',
+                        // height: 285,
+                        // width: Dimensions.get('screen').width,
+                    }}
+                >
 
 
+                    {/* <View> */}
                     <Image
                         // source={require('../assets/images/demoBook.png')}
-                        source={require('../assets/images/PubBg.png')}
-                        // source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date() }}
-                        width={'10%'}
-                        height={200}
+                        // source={require('../assets/images/PubBg.png')}
+                        source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherDetails.id + "/" + publisherDetails.banner + '?d=' + new Date() }}
+                        // width={'50%'}
+                        // height={200}
                         style={{
-                            resizeMode: 'contain'
+                            height: 230,
+                            width: Dimensions.get('screen').width * 0.5,
+                            resizeMode: 'stretch'
                         }}
 
                     />
+                    {/* </View> */}
 
-                    <View style={xStyle.pub_banner_txt_view}>
+                    <View style={[xStyle.pub_banner_txt_view, { marginLeft: '3%' }]}>
                         <Text style={xStyle.pub_banner_head}>Your Gateway to Excellence</Text>
                         <View style={xStyle.pub_banner_body_view}>
                             <Text style={xStyle.pub_banner_body}>Explore Academic & Professional E-Books with Ease</Text>
@@ -107,9 +123,13 @@ export const PubHomeScreen = ({ route, navigation }) => {
                         width={200}
                     />
                     <View
-                    // style={xStyle.pub_about_body}
+                    style={xStyle.pub_about_body}
                     >
-                        <Text id='pub_about'></Text>
+                        {/* <Text id='pub_about'></Text> */}
+                        <RenderHtml
+                            contentWidth={width}
+                            source={{html: publisherDetails.about}}
+                        />
                         {/* Juris Press is a prominent publisher of law and other professional books
                         , headquartered in Chennai, India. Established with a commitment to providing high-quality
                         , authoritative literature

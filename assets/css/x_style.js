@@ -1012,7 +1012,7 @@ export default StyleSheet.create({
 
   pub_banner_txt_view: {
     width: '45%',
-    paddingVertical: '5%',
+    paddingVertical: '7%',
   },
 
   pub_banner_head: {

@@ -26,7 +26,7 @@ const UserProvider = ({ children }) => {
   const [allActivePublisher, setAllActivePublisher] = useState([])
   const [allActivePublisher1, setAllActivePublisher1] = useState([])
   const [publisherData, setPublisherData] = useState('')
-  const [publisherId, setPublisherId] = useState(2) // init by 2 as Juris Press is 2
+  const [publisherId, setPublisherId] = useState(0) // init by 2 as Juris Press is 2
   const [globalCategoryId, setGlobalCategoryId] = useState(0)
   const [categoryByPublisherList, setCategoryByPublisherList] = useState([])
   const [allNewArrival, setallNewArrival] = useState([])
@@ -107,7 +107,7 @@ const UserProvider = ({ children }) => {
       pub_id = publisher_id
     }
 
-    console.log("NEW ARRIVAL URL===>",Config.API_URL + Config.NEW_ARRIVAL + "/"+ pub_id +  "?recordPerPage=" + record_no)
+    console.log("NEW ARRIVAL URL===>", Config.API_URL + Config.NEW_ARRIVAL + "/" + pub_id + "?recordPerPage=" + record_no)
     try {
       const response = await axios.get(Config.API_URL + Config.NEW_ARRIVAL + "/" + pub_id + "?recordPerPage=" + record_no,
         {
@@ -130,7 +130,7 @@ const UserProvider = ({ children }) => {
       }
       console.log('new arrival', allNewArrival)
       return response.data
-      
+
 
     }
     catch (error) {
@@ -139,24 +139,23 @@ const UserProvider = ({ children }) => {
   }
 
 
-  const best_selling_books = async (record_per_page,publisher_id) => {
-    let pub_id=0;
-    if(publisher_id===undefined || publisher_id===0 || publisher_id==='0')
-    {
-      if(publisherId===0 || publisherId==='0'){
-        pub_id=await AsyncStorage.getItem('publisher_id')
+  const best_selling_books = async (record_per_page, publisher_id) => {
+    let pub_id = 0;
+    if (publisher_id === undefined || publisher_id === 0 || publisher_id === '0') {
+      if (publisherId === 0 || publisherId === '0') {
+        pub_id = await AsyncStorage.getItem('publisher_id')
       }
-      else{
-        pub_id=publisherId
-        
+      else {
+        pub_id = publisherId
+
       }
-      
+
     }
-    else{
-      pub_id=publisher_id
+    else {
+      pub_id = publisher_id
     }
     try {
-      const response = await axios.get(Config.API_URL + Config.BEST_SELLING + "/"+ pub_id + "?recordPerPage=" + record_per_page,
+      const response = await axios.get(Config.API_URL + Config.BEST_SELLING + "/" + pub_id + "?recordPerPage=" + record_per_page,
 
         {
           headers: {
@@ -164,18 +163,18 @@ const UserProvider = ({ children }) => {
           },
 
         })
-        if (response === undefined || response === null) {
-          setAllBestSeller([])
+      if (response === undefined || response === null) {
+        setAllBestSeller([])
       }
       else {
-          if (response.data.statuscode === "0" && response.data.output.length > 0) {
-            setAllBestSeller(response.data.output)
-          }
-          else {
-            setAllBestSeller([])
-          }
+        if (response.data.statuscode === "0" && response.data.output.length > 0) {
+          setAllBestSeller(response.data.output)
+        }
+        else {
+          setAllBestSeller([])
+        }
       }
-      console.log('best seller', response.data.output)  
+      console.log('best seller', response.data.output)
       return response.data
 
     }
@@ -205,17 +204,16 @@ const UserProvider = ({ children }) => {
 
   const category_by_publisher = async (publisher_id) => {
     let pub_id = 0;
-    if(publisher_id === undefined || publisher_id === 0 || publisher_id === '0')
-    {
-      if(publisherId===0 || publisherId==='0'){
+    if (publisher_id === undefined || publisher_id === 0 || publisher_id === '0') {
+      if (publisherId === 0 || publisherId === '0') {
         pub_id = await AsyncStorage.getItem('publisher_id')
         //pub_id=0;
       }
-      else{
+      else {
         pub_id = publisherId
       }
     }
-    else{
+    else {
       pub_id = publisher_id
     }
 
@@ -980,21 +978,21 @@ const UserProvider = ({ children }) => {
   }
 
   const getBooksBySearchText = async (data) => {
-    // try {
-    //   const response = await axios.post(Config.API_URL + Config.SEARCH_BOOKS,data,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         // 'Authorization': 'Bearer ' + authData
-    //       },
-    //     })
+    try {
+      const response = await axios.post(Config.API_URL + Config.SEARCH_BOOKS, data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ' + authData
+          },
+        })
 
-    //   console.log("news letter details  : ", response);
-    //   return response.data;
-    // }
-    // catch (error) {
-    //   console.log("Newsletter CONTEXT ERROR: ", error);
-    // }
+      console.log("news letter details  : ", response);
+      return response.data;
+    }
+    catch (error) {
+      console.log("Newsletter CONTEXT ERROR: ", error);
+    }
   }
 
 
