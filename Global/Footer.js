@@ -23,6 +23,8 @@ export const Footer = () => {
   const { logIn, logOut, authData, forgot_password, Registration } = useAuth()
   const { category_by_publisher, items, allActivePublisher } = UserProfile()
 
+  const [logInText, setLogInText] = useState('');
+
   const [logInModalvisibility, setLogInModalvisibility] = useState(false);
   const [signUpModalvisibility, setSignUpModalvisibility] = useState(false);
   const [forgotPasswordModalvisibility, setForotPasswordModalvisibility] = useState(false);
@@ -41,9 +43,23 @@ export const Footer = () => {
     console.log("allActivePublisher", allActivePublisher)
   }, []);
 
+  useEffect(()=>{
+    if(authData === '' || authData === null || authData === undefined){
+      setLogInText('Login')
+    }
+    else{
+      setLogInText("Logout")
+    }
+  }, [authData])
+
   const logInModalHandler = () => {
-    setLogInModalvisibility(true);
-    setSignUpModalvisibility(false);
+    if(authData === '' || authData === null || authData === undefined){
+      setLogInModalvisibility(true);
+      setSignUpModalvisibility(false);
+    }
+    else{
+      doLogout();
+    }
   }
 
   const logInBackButtonHandler = () => {
@@ -119,6 +135,15 @@ export const Footer = () => {
 
     // }
 
+  }
+
+  const doLogout = async () => {
+    const resp = await logOut();
+    if (resp === "Success") {
+      console.log('logout_response', resp);
+      navigate("home");
+      alert("Logged out successfully");
+    }
   }
 
   const user_registration = async () => {
@@ -231,7 +256,7 @@ export const Footer = () => {
             source={require('../assets/images/login.png')}
           />
           <Text style={xStyle.footerIconText}>
-            Login
+            {logInText}
           </Text>
         </TouchableOpacity>
       </View>
