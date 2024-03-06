@@ -15,7 +15,7 @@ import { UserProfile } from '../Context/Usercontext.js';
 
 export const TopMenu = () => {
   const navigation = useNavigation();
-  const {allActivePublisher}=UserProfile()
+  const {allActivePublisher,cartCount}=UserProfile()
   const [filteredFilms, setFilteredFilms] = useState([]);
 
   
@@ -73,6 +73,8 @@ export const TopMenu = () => {
             <Image
               source={require('../assets/images/shopping-cart.png')}
             />
+
+            <Text>{cartCount}</Text>
           </TouchableOpacity>
         </View>
       </View>

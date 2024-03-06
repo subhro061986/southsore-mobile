@@ -171,7 +171,7 @@ export const PubHomeScreen = () => {
                     >
                         <TouchableOpacity
                             style={xStyle.pub_home_new_card}
-                            onPress={() => navigation.navigate('productdetails')}
+                            onPress={() => navigation.navigate('productdetails',{bookId:116})}
                         >
 
                             <Image

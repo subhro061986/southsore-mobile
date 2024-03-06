@@ -10,10 +10,12 @@ import {
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
+import { UserProfile } from '../Context/Usercontext.js';
 
 export const TopMenuPub = () => {
   const navigation = useNavigation();
+  const {cartCount}=UserProfile()
+
   return (
     <View style={xStyle.topnav}>
       <View style={xStyle.topnav_top}>
@@ -38,9 +40,11 @@ export const TopMenuPub = () => {
           <TouchableOpacity
             onPress={() => navigation.navigate('cartdetails')}
           >
+
             <Image
               source={require('../assets/images/shopping-cart.png')}
-            />
+              />
+              <Text>{cartCount}</Text>
           </TouchableOpacity>
         </View>
       </View>
