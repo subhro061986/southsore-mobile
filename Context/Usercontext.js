@@ -442,6 +442,7 @@ const UserProvider = ({ children }) => {
           },
         });
       getNewArrivals(4, publisherId);
+      best_selling_books(6, publisherId);
       getBook_by_category(1, 6, json);
       get_wishlist_books(1, 6);
       return response.data;

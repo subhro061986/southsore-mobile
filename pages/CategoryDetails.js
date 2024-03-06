@@ -165,7 +165,6 @@ export const CategoryDetails = ({ route, navigation }) => {
         const resp = await add_delete_to_wishlist(json);
         // console.log("WISHLIST : ", resp);
         alert(resp.message);
-        //Best_Selling() 
     }
 
     const wishlistHandler = (event, book_id) => {
