@@ -50,15 +50,15 @@ export const AboutSouthshore = () => {
           Read More
         </Text>
       </TouchableOpacity>
-      <Button 
+      {/* <Button 
       title="Confirm Order Button"
       onPress={() => navigation.navigate('confirmOrder')}
-      />
-      <Button 
+      /> */}
+      {/* <Button 
       title="BillingAddress Button"
       onPress={() => navigation.navigate('billingAddress')}
       style= {{marginTop:'5%'}}
-      />
+      /> */}
        
      
     </View>

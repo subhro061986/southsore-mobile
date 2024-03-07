@@ -331,12 +331,12 @@ export const Footer = () => {
           <TouchableOpacity style={xStyle.logInBtn} onPress={doLogin}>
             <Text style={[xStyle.logInBtnText]}>Sign In</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={xStyle.signInWithGoogleBtn}>
+          {/* <TouchableOpacity style={xStyle.signInWithGoogleBtn}>
             <Text style={[xStyle.signInWithGoogleBtnTxt]}>Sign in with </Text>
             <Image
               source={require('../assets/images/google.png')}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={xStyle.logInFooter}>
             <Text style={xStyle.logInFooterTxt}>
               Don't have an account?
@@ -446,12 +446,12 @@ export const Footer = () => {
           <TouchableOpacity style={xStyle.logInBtn} onPress={do_registration}>
             <Text style={[xStyle.logInBtnText]}>Sign Up</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={xStyle.signInWithGoogleBtn}>
+          {/* <TouchableOpacity style={xStyle.signInWithGoogleBtn}>
             <Text style={[xStyle.signInWithGoogleBtnTxt]}>Sign up with </Text>
             <Image
               source={require('../assets/images/google.png')}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={xStyle.signUpFooter}>
             <Text style={xStyle.logInFooterTxt}>
               I have already account!
@@ -544,7 +544,7 @@ export const Footer = () => {
             />
           </TouchableOpacity>
           <View style={xStyle.buy_join_modal_head_view}>
-            <Text style={xStyle.buy_join_modal_head}>Select Publisher</Text>
+            <Text style={xStyle.buy_join_modal_head}>Publishers</Text>
           </View>
 
 

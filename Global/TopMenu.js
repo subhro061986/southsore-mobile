@@ -48,7 +48,9 @@ export const TopMenu = () => {
       navigation.navigate('wishlist');
     }
   }
-
+  const gotoPublisher=(data)=>{
+    navigation.navigate('pubhome',{publisher_id:data.id})
+  }
   return (
     <View style={xStyle.topnav}>
       <View style={xStyle.topnav_top}>
@@ -77,24 +79,40 @@ export const TopMenu = () => {
               source={require('../assets/images/shopping-cart.png')}
             />
 
-            <Text>{cartCount}</Text>
+          <View 
+              style={{
+                backgroundColor:'#ffffff',
+                width:20,
+                height:20,
+                borderRadius:20,
+                alignItems:'center',
+                position:'absolute',
+                top:-10,
+                right:-10
+              }}
+            >
+                <Text style={{fontWeight:'bold'}}>{cartCount}</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
       <View style={xStyle.topnav_bottom}>
         {/* <TextInput style={xStyle.search_bar} onChangeText={handleInputChange} value={query} placeholder='Search by Author, Tittle, ISBN' placeholderTextColor={'#B0B6CC'}></TextInput> */}
 
-        <View style={{ flex: 1 }}>
+        <View style={{ 
+          flex: 1 
+          }}
+          >
           <Autocomplete
             inputContainerStyle={{
-              width: '100%',
-              
-              // borderColor: 'red',
-              // borderWidth: 2,
-              // borderRadius: 8,
+              //width: '100%',
+              paddingHorizontal:20,
+              backgroundColor:'#ffffff',
+              borderRadius:10,
             }}
-            inputStyle={{
-              borderWidth:0,
+            listContainerStyle={{
+              width:'100%',
+              borderRadius:5
             }}
             autoCapitalize="none"
             autoCorrect={false}
@@ -104,9 +122,14 @@ export const TopMenu = () => {
             flatListProps={{
               renderItem: ({ item }) => (
                 <TouchableOpacity
-                // onPress={() => {
-                //   setSelectedValue(item);
-                // }}
+                onPress={() => {
+                  gotoPublisher(item);
+                }}
+                style={{
+                  width:'100%',
+                  paddingHorizontal:20,
+                  paddingVertical:10,
+                }}
                 >
                   <Text>
                     {item.name}
@@ -117,11 +140,11 @@ export const TopMenu = () => {
           />
         </View>
 
-        <View style={xStyle.search_pos}>
+        {/* <View style={xStyle.search_pos}>
           <Image
             source={require('../assets/images/search-normal.png')}
           />
-        </View>
+        </View> */}
       </View>
 
 
