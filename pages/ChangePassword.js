@@ -97,7 +97,7 @@ export const ChangePassword = () => {
                 </View>
 
             </ScrollView >
-            <FooterPub />
+            <Footer />
 
         </SafeAreaView>
     )
