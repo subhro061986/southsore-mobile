@@ -170,7 +170,7 @@ export const TopMenuPub = ({ route}) => {
                 right:-10
               }}
             >
-                <Text style={{fontWeight:'bold'}}>{cartCount}</Text>
+                <Text style={{fontWeight:'bold',color:'black'}}>{cartCount}</Text>
             </View>
             
           </TouchableOpacity>

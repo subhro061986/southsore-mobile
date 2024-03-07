@@ -189,8 +189,10 @@ const AuthProvider = ({ children }) => {
     // setAuthUsername('')
     await AsyncStorage.setItem("userid", '');
     await AsyncStorage.setItem("unique_id", '');
+    setCartCount(0)
+    setCartItems([])
     clearCartStorage()
-    getCartData('')
+    // getCartData('')
     // await AsyncStorage.setItem("username", '');
 
     return 'Success';
@@ -278,11 +280,14 @@ const AuthProvider = ({ children }) => {
 
 
     let tempCartArray = []
+    let isPresent=false
 
     // -------- Before Login ----------//
     if (authData === '' || authData === null || authData === undefined) {
       const cd = await AsyncStorage.getItem('cartData');
       console.log("existing cart Data= ", cd)
+
+      // nothing present in async storage i.e first entry
       if (cd === null) {
         setCartCount(1)
         tempCartArray.push(data)
@@ -290,23 +295,27 @@ const AuthProvider = ({ children }) => {
         await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
 
       }
+      // if data already present in async storage
       else {
         tempCartArray = JSON.parse(cd)
-        console.log("cartData=", tempCartArray)
-
+        
+        // check if book already present in list of data
         let index = tempCartArray.findIndex((item, i) => {
           return item.bookid === data.bookid
         });
 
+        // if book is not present 
         if (index == -1) {
-
+          //add the new book to cart and update the count
           tempCartArray.push(data)
           setCartCount(tempCartArray.length)
           await AsyncStorage.setItem("cartData", JSON.stringify(tempCartArray));
 
 
         }
+        // book already present in cart and do nothing 
         else {
+          isPresent=true
           console.log("Book already present in cart")
         }
 
@@ -318,13 +327,14 @@ const AuthProvider = ({ children }) => {
     else {
       try {
 
+        // check if book already present in cart or not
         let index = cartItems.findIndex((item, i) => {
           return item.id === data.bookid
         });
-        // console.log("index= ",index)
-        // console.log("cartItems= ",cartItems)
-        // console.log("data book= ",data.bookid)
+      
+       // if book not present in cart
         if (index == -1) {
+          // save data to backend 
           const response = await axios.post(Config.API_URL + Config.ADD_SINGLE_ITEM, data,
 
             {
@@ -336,9 +346,12 @@ const AuthProvider = ({ children }) => {
             })
 
           console.log('add Single item resp=', response)
+
+          // get new updated cart items
           getCartData(authData)
         }
         else {
+          isPresent=true
           console.log("Book already present in cart!")
         }
 
@@ -350,8 +363,10 @@ const AuthProvider = ({ children }) => {
     }
 
     // console.log("cart: ", response);
-    return "item added to cart";
-
+    if (isPresent) {
+      return {message :"Book already present in cart",isPresent : true}
+    }
+    return {message :"Item added to cart",isPresent : false}
   }
 
   
@@ -359,6 +374,27 @@ const AuthProvider = ({ children }) => {
     await AsyncStorage.setItem("cartData", "")
   }
 
+  const remove_cart_item = async (args) => {
+
+    try {
+      const response = await axios.post(Config.API_URL + Config.REMOVE_CART_ITEM,args,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authData
+          },
+
+        })
+
+      // await price_items_signin(response.data)
+
+      return response.data
+
+    }
+    catch (error) {
+      console.log("remove_cart_item_error : ", error)
+    }
+  }
 
 
   return (
@@ -374,6 +410,7 @@ const AuthProvider = ({ children }) => {
         add_book_to_storage,
         cartCount,
         cartItems,
+        remove_cart_item
         // authUsername
       }}
     >
