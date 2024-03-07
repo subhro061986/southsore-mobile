@@ -55,7 +55,7 @@ export const Footer = () => {
     else {
       setLogInText("Logout")
     }
-  }, [])
+  }, [authData])
 
   const logInModalHandler = () => {
 
