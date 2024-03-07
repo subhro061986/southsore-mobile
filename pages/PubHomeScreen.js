@@ -296,23 +296,15 @@ export const PubHomeScreen = ({ route, navigation }) => {
                                         </View>
                                     </View>
                                 </TouchableOpacity>
-
                             ))
                         }
                     </View>
                 </View>
-
                 {/* Best Seller */}
-
                 <BestSeller />
-
-
-                
-
                 <BuyStepsPub />
-
             </ScrollView>
-            <FooterPub />
+            <Footer />
         </SafeAreaView>
     )
 }

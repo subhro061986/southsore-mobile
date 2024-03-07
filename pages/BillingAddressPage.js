@@ -362,7 +362,7 @@ export const BillingAddressPage = () => {
             </View>
 
         </ScrollView >
-            <FooterPub />
+            <Footer />
 
         </>
     )
