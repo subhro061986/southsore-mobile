@@ -370,7 +370,7 @@ export const BillingAddressPage = ({route,navigation}) => {
             </View>
 
         </ScrollView >
-            <FooterPub />
+            <Footer />
 
         </>
     )

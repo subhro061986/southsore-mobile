@@ -321,7 +321,7 @@ export const ProductDetails = ({route,navigation}) => {
                 <BuyStepsPub />
 
             </ScrollView>
-            <FooterPub />
+            <Footer />
         </SafeAreaView>
     )
 }

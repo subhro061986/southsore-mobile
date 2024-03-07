@@ -29,6 +29,7 @@ import { useAuth } from '../Context/Authcontext.js';
 import BuyStepsPub from '../Global/BuyStepsPub.js';
 import TopMenuPub from '../Global/TopMenuPub.js';
 import FooterPub from '../Global/FooterPub.js';
+import Footer from '../Global/Footer.js';
 
 export const CategoryDetails = ({ route, navigation }) => {
 
@@ -289,7 +290,7 @@ export const CategoryDetails = ({ route, navigation }) => {
                 </View>
                 <BuyStepsPub />
             </ScrollView>
-            <FooterPub />
+            <Footer />
 
             <View>
                 <Overlay

@@ -15,7 +15,7 @@ import { useAuth } from '../Context/Authcontext.js';
 
 export const TopMenu = () => {
   const navigation = useNavigation();
-  const { allActivePublisher } = UserProfile()
+  const { allActivePublisher , allActivePublisher1} = UserProfile()
   const { wishlistshow,authData,cartCount } = useAuth()
   const [filteredFilms, setFilteredFilms] = useState([]);
 
@@ -31,7 +31,7 @@ export const TopMenu = () => {
       // Setting the filtered film array according the query
 
       setFilteredFilms(
-        allActivePublisher.filter((pub) => pub.name.search(regex) >= 0)
+        allActivePublisher1.filter((pub) => pub.name.search(regex) >= 0)
       );
     } else {
       // If the query is null then return blank

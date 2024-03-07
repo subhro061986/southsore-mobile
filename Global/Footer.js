@@ -10,7 +10,7 @@ import {
 
 } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import Overlay from 'react-native-modal-overlay';
 import { useAuth } from '../Context/Authcontext.js';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -20,8 +20,10 @@ import Config from "../config/Config.json"
 export const Footer = () => {
 
   const navigation = useNavigation();
+  const route = useRoute();
+  console.log(route.name);
   const { logIn, logOut, authData, forgot_password, Registration } = useAuth()
-  const { category_by_publisher, items, allActivePublisher } = UserProfile()
+  const { category_by_publisher, items, allActivePublisher, categoryByPublisherList } = UserProfile()
 
   const [logInText, setLogInText] = useState('');
 
@@ -29,6 +31,7 @@ export const Footer = () => {
   const [signUpModalvisibility, setSignUpModalvisibility] = useState(false);
   const [forgotPasswordModalvisibility, setForotPasswordModalvisibility] = useState(false);
   const [publisherModalvisibility, setPublisherModalvisibility] = useState(false);
+  const [categoryModalvisibility, setCategoryModalvisibility] = useState(false);
 
   // Log in
   const [email, setEmail] = useState('');
@@ -39,27 +42,29 @@ export const Footer = () => {
   const [userName, setUserName] = useState('');
   const [phone, setPhone] = useState('');
 
+  const [secureText, setSecureText] = useState(true);
+
   useEffect(() => {
-    
+
   }, [authData]);
 
-  useEffect(()=>{
-    if(authData === '' || authData === null || authData === undefined){
+  useEffect(() => {
+    if (authData === '' || authData === null || authData === undefined) {
       setLogInText('Login')
     }
-    else{
+    else {
       setLogInText("Logout")
     }
-  }, [])
+  }, [authData])
 
   const logInModalHandler = () => {
-    
-    if(authData === '' || authData === null || authData === undefined){
+
+    if (authData === '' || authData === null || authData === undefined) {
       setLogInModalvisibility(true);
       setSignUpModalvisibility(false);
     }
-    else{
-      
+    else {
+
       doLogout();
     }
   }
@@ -95,8 +100,24 @@ export const Footer = () => {
     setPublisherModalvisibility(false);
   }
 
+  const categoryModalHandler = () => {
+    setCategoryModalvisibility(true);
+  }
+
+  const cateoryBackButtonHandler = () => {
+    setCategoryModalvisibility(false);
+  }
+
+  const getCatgegoryData = (data) => {
+    // console.log("data : ", data.id);
+    navigation.navigate('categorydetails',
+      { category_id: data.id }
+    )
+    setCategoryModalvisibility(false);
+  }
+
   const get_pub_data = (pub_id) => {
-    navigation.navigate('pubhome',{ publisher_id: pub_id })
+    navigation.navigate('pubhome', { publisher_id: pub_id })
     setPublisherModalvisibility(false);
   }
 
@@ -228,18 +249,40 @@ export const Footer = () => {
             Home
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={xStyle.footerBtn}
-          // onPress={() => navigation.navigate('pubhome')}
-          onPress={publisherModalHandler}
-        >
-          <Image
-            source={require('../assets/images/publisher.png')}
-          />
-          <Text style={xStyle.footerIconText}>
-            Publisher
-          </Text>
-        </TouchableOpacity>
+        {
+          route.name === 'home'
+            || route.name === 'profile'
+            || route.name === 'wishlist'
+            || route.name === 'myorders'
+            || route.name === 'mybookshelf'
+            ? (
+              <TouchableOpacity
+                style={xStyle.footerBtn}
+                // onPress={() => navigation.navigate('pubhome')}
+                onPress={publisherModalHandler}
+              >
+                <Image
+                  source={require('../assets/images/publisher.png')}
+                />
+                <Text style={xStyle.footerIconText}>
+                  Publisher
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={xStyle.footerBtn}
+                // onPress={() => navigation.navigate('pubhome')}
+                onPress={categoryModalHandler}
+              >
+                <Image
+                  source={require('../assets/images/categoryicon.png')}
+                />
+                <Text style={xStyle.footerIconText}>
+                  Category
+                </Text>
+              </TouchableOpacity>
+            )
+        }
         <TouchableOpacity
           style={xStyle.footerBtn}
           onPress={() => navigation.navigate('profile')}
@@ -317,12 +360,31 @@ export const Footer = () => {
                 placeholderTextColor={'#7B8890'}
                 value={password}
                 onChangeText={(e) => setPassword(e)}
-                secureTextEntry={true}
+                secureTextEntry={secureText}
               />
-              <Image
-                source={require('../assets/images/eye-slash.png')}
+              <TouchableOpacity
                 style={xStyle.buy_join_modal_input_icon}
-              />
+                onPress={() => {
+                  if (secureText === true) {
+                    setSecureText(false);
+                  }
+                  else {
+                    setSecureText(true);
+                  }
+                }}
+              >
+                {
+                  secureText === true ? (
+                    <Image
+                      source={require('../assets/images/eye-slash.png')}
+                    />
+                  ) : (
+                    <Image
+                      source={require('../assets/images/eye-open.png')}
+                    />
+                  )
+                }
+              </TouchableOpacity>
             </View>
             <TouchableOpacity
               style={xStyle.forgotPasswordView}
@@ -438,12 +500,31 @@ export const Footer = () => {
                 placeholderTextColor={'#7B8890'}
                 value={signUpPassword}
                 onChangeText={(e) => setSignUpPassword(e)}
-                secureTextEntry={true}
+                secureTextEntry={secureText}
               />
-              <Image
-                source={require('../assets/images/eye-slash.png')}
+              <TouchableOpacity
                 style={xStyle.buy_join_modal_input_icon}
-              />
+                onPress={() => {
+                  if (secureText === true) {
+                    setSecureText(false);
+                  }
+                  else {
+                    setSecureText(true);
+                  }
+                }}
+              >
+                {
+                  secureText === true ? (
+                    <Image
+                      source={require('../assets/images/eye-slash.png')}
+                    />
+                  ) : (
+                    <Image
+                      source={require('../assets/images/eye-open.png')}
+                    />
+                  )
+                }
+              </TouchableOpacity>
             </View>
           </View>
           <TouchableOpacity style={xStyle.logInBtn} onPress={do_registration}>
@@ -578,6 +659,61 @@ export const Footer = () => {
             </View>
           </ScrollView>
 
+        </Overlay>
+      </View>
+
+      {/* --------CATEGORY LIST MODAL------- */}
+
+      <View>
+        <Overlay
+          // animationType={ZoomIn}
+          // transparent={true}
+          visible={categoryModalvisibility}
+          // // isVisible={modalvisibility}
+          // onRequestClose={backbuttonhandler}
+          // hasBackdrop={true}
+          // backdropColor={'black'}
+          // // statusBarTranslucent={true}
+          // backdropOpacity={0.5}
+          onClose={cateoryBackButtonHandler}
+          closeOnTouchOutside
+          containerStyle={{ backgroundColor: 'rgba(38, 37, 37, 0.78)' }}
+          childrenWrapperStyle={{ backgroundColor: '#FFFFFF', borderRadius: 30 }}
+        >
+          <TouchableOpacity
+            style={xStyle.buy_join_modal_cross}
+            onPress={cateoryBackButtonHandler}
+          >
+            <Image
+              source={require('../assets/images/close-circle.png')}
+            />
+          </TouchableOpacity>
+          <View style={xStyle.buy_join_modal_head_view}>
+            <Text style={xStyle.buy_join_modal_head}>Select Category</Text>
+          </View>
+          <ScrollView>
+            <View style={xStyle.list_modal_view}>
+              {
+                categoryByPublisherList.map((data, index) => (
+                  <TouchableOpacity
+                    style={[xStyle.list_modal_card_view, { alignItems: 'center' }]}
+                    key={index}
+                    onPress={() => getCatgegoryData(data)}
+                  >
+                    <View style={[xStyle.list_modal_card, { width: 50, height: 50, alignItems: 'center' }]}>
+                      <Image
+                        source={require('../assets/images/categoryimg.png')}
+                        // width={90}
+                        style={[xStyle.list_modal_icon, { height: 25, width: 25 }]}
+                      // style={{resizeMode:'contain'}}
+                      />
+                    </View>
+                    <Text style={xStyle.list_modal_legend}>{data.name}</Text>
+                  </TouchableOpacity>
+                ))
+              }
+            </View>
+          </ScrollView>
         </Overlay>
       </View>
     </>
