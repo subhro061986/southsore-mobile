@@ -24,19 +24,54 @@ import { useNavigation } from '@react-navigation/native';
 
 import TopBar from "../Global/TopBar.js";
 import Footer from "../Global/Footer.js";
+import { UserProfile } from '../Context/Usercontext.js';
 
 export const Profile = () => {
 
     const navigation = useNavigation();
+    const { my_profile } = UserProfile();
+
 
     const [contactInfoModalVisibility, setmodalvisibility] = useState(false);
     const [personalInfoModalVisibility, setPersonalmodalvisibility] = useState(false);
     const [sortCountrySelected, setSortSelected] = useState(0);
     const [sortStateSelected, setSortStateSelected] = useState(0);
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [address, setAddress] = useState('')
+    const [selectedCountry, setSelectedCountry] = useState('')
+    const [selectedState, setSelectedState] = useState('')
+    const [city, setCity] = useState('')
+    const [pin, setPin] = useState('')
+    const [profileImage, setProfileImage] = useState('')
+
+    const [countryList, setCountryList] = useState([])
+    const [stateList, setStateList] = useState([])
 
     useEffect(() => {
-
+        myProfileApi()
     }, []);
+
+    const myProfileApi = async () => {
+
+        const resp = await my_profile()
+
+        setName(resp.output.name)
+        setEmail(resp.output.email)
+        setPhone(resp.output.contactno)
+        setAddress(resp.output.addressline)
+        setSelectedCountry(resp.output.countryid)
+        setSelectedState(resp.output.stateid)
+        setCity(resp.output.city)
+        setPin(resp.output.pincode)
+
+        setProfileImage(Config.API_URL + Config.UPLOAD_URL + resp.output.profileimage + '?d=' + new Date())
+
+        if (resp.output.countryid !== null && resp.output.countryid !== '') {
+            renderStateList(resp.output.countryid)
+        }
+    }
 
     const contactInfoModalHandler = () => {
         setmodalvisibility(true);
@@ -99,21 +134,32 @@ export const Profile = () => {
                     <View style={xStyle.prof_contact_view}>
                         <View style={xStyle.prof_user_contact_info_view}>
                             <View style={xStyle.prof_user_img_view}>
-                                <Image
-                                    source={require('../assets/images/user_big.png')}
-                                // style={xStyle.topbar_btn_mb}
-                                />
+                                {profileImage === null || profileImage === '' || profileImage === undefined ?
+                                    (
+                                        <Image
+                                            source={require('../assets/images/user_big.png')}
+                                            style={{ height: 60, width: 60, resizeMode: 'contain' }}
+                                        />
+                                    ) : (
+                                        <Image
+                                            source={profileImage}
+                                            style={{ height: 60, width: 60, resizeMode: 'contain' }}
+                                        // style={xStyle.topbar_btn_mb}
+                                        />
+                                    )
+                                }
                             </View>
                             <View>
-                                <Text style={xStyle.prof_user_name}>Bryan Roberson</Text>
+                                <Text style={xStyle.prof_user_name}>{name}</Text>
                                 <View style={xStyle.prof_user_contact_info_txt_view}>
-                                    <Text style={xStyle.prof_user_contact_info}>bryan29@gmail.com</Text>
+                                    <Text style={xStyle.prof_user_contact_info}>{email}</Text>
                                 </View>
-                                <Text style={xStyle.prof_user_contact_info}>+91 7044 0648 63</Text>
+                                <Text style={xStyle.prof_user_contact_info}>{phone}</Text>
                             </View>
                         </View>
                         <TouchableOpacity onPress={contactInfoModalHandler}>
                             <Image
+
                                 source={require('../assets/images/editicon.png')}
                             // style={xStyle.topbar_btn_mb}
                             />
@@ -121,11 +167,11 @@ export const Profile = () => {
                     </View>
                     <View style={xStyle.prof_personal_view}>
                         <View style={xStyle.prof_personal_text_view}>
-                            <Text style={xStyle.prof_user_personal_info_title}>Address: <Text style={xStyle.prof_user_contact_info}>Sealdah</Text></Text>
-                            <Text style={xStyle.prof_user_personal_info_title}>Country: <Text style={xStyle.prof_user_contact_info}>India</Text></Text>
-                            <Text style={xStyle.prof_user_personal_info_title}>State: <Text style={xStyle.prof_user_contact_info}>West Bengal</Text></Text>
-                            <Text style={xStyle.prof_user_personal_info_title}>City: <Text style={xStyle.prof_user_contact_info}>Kolkata</Text></Text>
-                            <Text style={xStyle.prof_user_personal_info_title}>Pin: <Text style={xStyle.prof_user_contact_info}>700009</Text></Text>
+                            <Text style={xStyle.prof_user_personal_info_title}>Address: <Text style={xStyle.prof_user_contact_info}>{address}</Text></Text>
+                            <Text style={xStyle.prof_user_personal_info_title}>Country: <Text style={xStyle.prof_user_contact_info}></Text></Text>
+                            <Text style={xStyle.prof_user_personal_info_title}>State: <Text style={xStyle.prof_user_contact_info}></Text></Text>
+                            <Text style={xStyle.prof_user_personal_info_title}>City: <Text style={xStyle.prof_user_contact_info}>{city}</Text></Text>
+                            <Text style={xStyle.prof_user_personal_info_title}>Pin: <Text style={xStyle.prof_user_contact_info}>{pin}</Text></Text>
                         </View>
                         <TouchableOpacity onPress={personalInfoModalHandler}>
                             <Image
