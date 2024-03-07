@@ -662,25 +662,25 @@ const UserProvider = ({ children }) => {
 
 
     const change_password = async (args) => {
-      // try {
-      //   const response = await axios.post(Config.API_URL + Config.CHANGE_PASSWORD, args,
+      try {
+        const response = await axios.post(Config.API_URL + Config.CHANGE_PASSWORD, args,
 
-      //     {
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //         'Authorization': 'Bearer ' + authData
-      //       },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
 
-      //     })
+          })
 
-      //   console.log("change_password : ", response.data);
+        console.log("change_password : ", response.data);
 
-      //   return response.data
+        return response.data
 
-      // }
-      // catch (error) {
-      //   console.log("change_password_error : ", error)
-      // }
+      }
+      catch (error) {
+        console.log("change_password_error : ", error)
+      }
     }
 
 

@@ -150,9 +150,9 @@ export const Profile = () => {
                                 }
                             </View>
                             <View>
-                                <Text style={xStyle.prof_user_name}>{name}</Text>
+                                <Text style={xStyle.prof_user_name}>{name.length>15 ? name.substring(0,15)+'...' : name}</Text>
                                 <View style={xStyle.prof_user_contact_info_txt_view}>
-                                    <Text style={xStyle.prof_user_contact_info}>{email}</Text>
+                                    <Text style={xStyle.prof_user_contact_info}>{email.length>15 ? email.substring(0,15)+'...' : email}</Text>
                                 </View>
                                 <Text style={xStyle.prof_user_contact_info}>{phone}</Text>
                             </View>
