@@ -87,7 +87,6 @@ const UserProvider = ({ children }) => {
           },
 
         });
-      console.log("Category API : ", response.data);
       return response.data
 
     }
@@ -238,7 +237,6 @@ const UserProvider = ({ children }) => {
       else {
         setCategoryByPublisherList([])
       }
-      console.log("Book_cat_by_publisher : ", response);
 
       return response.data
 
@@ -419,7 +417,7 @@ const UserProvider = ({ children }) => {
             'Authorization': 'Bearer ' + authData
           },
         });
-      console.log("Wishlisted books : ", response.data.output.books);
+      
       setWishlistItems(response.data.output.books);
       return response.data
     }
@@ -751,7 +749,6 @@ const UserProvider = ({ children }) => {
     }
 
     const getAllPublishers = async () => {
-      console.log("RESP FROM CONTEXT", Config.API_URL + Config.ALL_PUBLISHERS)
       try {
         const response = await axios.get(Config.API_URL + Config.ALL_PUBLISHERS,
           {
@@ -759,7 +756,6 @@ const UserProvider = ({ children }) => {
               'Content-Type': 'application/json',
             },
           })
-        console.log("RESP FROM CONTEXT", response)
         setAllActivePublisher(response.data.output)
 
         return response;

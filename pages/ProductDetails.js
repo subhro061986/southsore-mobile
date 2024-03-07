@@ -1,6 +1,5 @@
 import React, { Component,useState, useEffect } from 'react';
 import xStyle from '../assets/css/x_style.js';
-import { useRoute } from "@react-navigation/native"
 import { UserProfile } from '../Context/Usercontext.js';
 import { useAuth } from "../Context/Authcontext";
 import Config from "../config/Config.json";
@@ -22,7 +21,7 @@ import {
     Alert
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
-import { useNavigation } from '@react-navigation/native';
+
 // import { UserProfile } from '../context/UserContext.js';
 
 import TopMenu from "../Global/TopMenu.js";
@@ -32,10 +31,9 @@ import BuyStepsPub from '../Global/BuyStepsPub.js';
 import TopMenuPub from '../Global/TopMenuPub.js';
 import BestSeller from '../Global/BestSeller.js';
 
-export const ProductDetails = () => {
+export const ProductDetails = ({route,navigation}) => {
 
-    const navigation = useNavigation();
-    const route = useRoute()
+    
 
     const { get_book_details,
         addto_cart,
@@ -65,10 +63,7 @@ export const ProductDetails = () => {
 
 
     useEffect(() => {
-        console.log("p_detail : ", route?.params ? route?.params?.bookId : 2)
         book_detail(route.params.bookId)
-
-        console.log("bookid= ", route.params?.bookId)
         getbookshelfData(route.params.bookId)
 
     },[route.params?.bookId])
@@ -76,13 +71,10 @@ export const ProductDetails = () => {
     const getbookshelfData = async (bookid) => {
 
         const booklistResp = await getBookShelf()
-        console.log("bookList Resp:",booklistResp)
         if (booklistResp?.output?.books != null) {
             let booklist_arr = booklistResp?.output?.books?.filter((val) => {
                 return (val.id === bookid)
             })
-            console.log("booklistarr=", booklist_arr)
-
             if (booklist_arr.length > 0) {
                 setIsBookPresent(true)
             }

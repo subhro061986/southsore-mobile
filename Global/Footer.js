@@ -40,8 +40,8 @@ export const Footer = () => {
   const [phone, setPhone] = useState('');
 
   useEffect(() => {
-    console.log("allActivePublisher", allActivePublisher)
-  }, []);
+    
+  }, [authData]);
 
   useEffect(()=>{
     if(authData === '' || authData === null || authData === undefined){
@@ -50,14 +50,16 @@ export const Footer = () => {
     else{
       setLogInText("Logout")
     }
-  }, [authData])
+  }, [])
 
   const logInModalHandler = () => {
+    
     if(authData === '' || authData === null || authData === undefined){
       setLogInModalvisibility(true);
       setSignUpModalvisibility(false);
     }
     else{
+      
       doLogout();
     }
   }
@@ -119,10 +121,9 @@ export const Footer = () => {
       email: email,
       password: password
     }
-
+    setLogInModalvisibility(false);
+    setSignUpModalvisibility(false);
     const resp = await logIn(sendLoginData) // API CALL
-    console.log("login response", resp)
-
     if (resp?.status === 200) {
       navigation.navigate('mybookshelf');
     }
@@ -135,10 +136,12 @@ export const Footer = () => {
   }
 
   const doLogout = async () => {
+    setLogInModalvisibility(false);
+    setSignUpModalvisibility(false);
     const resp = await logOut();
     if (resp === "Success") {
-      console.log('logout_response', resp);
-      navigate("home");
+      // console.log('logout_response', resp);
+      navigation.navigate("home");
       alert("Logged out successfully");
     }
   }

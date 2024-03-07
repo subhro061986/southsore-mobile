@@ -43,15 +43,13 @@ const AuthProvider = ({ children }) => {
       else {
         setAuthData(userToken)
         decode_token(userToken)
-        detect_unique_id()
-        console.log("Token available")
+        
       }
     }
     else {
-      console.log("Authdata_is_not_null")
       setIsexpired(false)
       decode_token(userToken)
-      detect_unique_id()
+      
     }
 
 
@@ -97,8 +95,6 @@ const AuthProvider = ({ children }) => {
     let my_unique_id = await AsyncStorage.getItem("unique_id")
 
     if (my_unique_id === "" || my_unique_id === null || my_unique_id === undefined ){
-
-     
       // let system_uuid = uuidv4()
       let system_uuid = DeviceInfo.getDeviceId();
       console.log("in If ", system_uuid)
@@ -112,6 +108,7 @@ const AuthProvider = ({ children }) => {
       SetUuid(my_unique_id)
 
     }
+    
   }
 
   
@@ -119,6 +116,7 @@ const AuthProvider = ({ children }) => {
 
 
   useEffect(() => {
+    detect_unique_id()
     getDataFromStorage();
     wishlist_hide_show()
     getCartData(authData)
@@ -127,8 +125,7 @@ const AuthProvider = ({ children }) => {
 
   
   useEffect(() => {
-    // clearCartStorage()
-    getCartData()
+   
   }, [cartCount])
 
 
@@ -146,7 +143,6 @@ const AuthProvider = ({ children }) => {
 
 
   const logIn = async (arg) => {
-    console.log(arg)
     try {
       const response = await axios.post(Config.API_URL + Config.LOGIN_API, arg,
         {
@@ -161,6 +157,7 @@ const AuthProvider = ({ children }) => {
         // setWishlistshow(true)
         // setAuthUsername(response.data.data[0].username)
         await AsyncStorage.setItem("userid", response.data.token);
+        console.log("UUID FRM LOGIN 159",uuid)
         getCartData(response.data.token)
         // await AsyncStorage.setItem("username", response.data.data[0].username);
       }
@@ -226,7 +223,10 @@ const AuthProvider = ({ children }) => {
   }
 
   const getCartData = async (token) => {
-    console.log("authdata in usercontext= ", token)
+    let sendUUid={
+      deviceid: uuid
+    }
+    console.log("SEND UUID",sendUUid)
     let tok=''
     if (authData === '' || authData === null || authData === undefined) {
       tok=token
@@ -237,7 +237,7 @@ const AuthProvider = ({ children }) => {
     // -------- Before Login ----------//
     if (tok === '' || tok === null || tok === undefined) {
       let cc = await AsyncStorage.getItem("cartData")
-      console.log("cart Data", cc)
+      
       if (cc !== null) {
         let tempCartItems = JSON.parse(cc)
         setCartCount(tempCartItems.length)
@@ -246,11 +246,10 @@ const AuthProvider = ({ children }) => {
     }
     // -------- After Login ----------//
     else {
-      console.log("device id= ",uuid)
-      console.log("token inside auth context= ",tok)
+      
       try {
         clearCartStorage()
-        const response = await axios.post(Config.API_URL + Config.GET_CART_ITEMS, { deviceid: uuid },
+        const response = await axios.post(Config.API_URL + Config.GET_CART_ITEMS, sendUUid,
 
           {
             headers: {

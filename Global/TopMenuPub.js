@@ -108,12 +108,10 @@ export const TopMenuPub = ({ route}) => {
 
 
   const goToProductDetailsPage = (id) => {
-    console.log('product id : ', id);
-    navigation.navigate('productdetails', { BOOK_ID: id })
+    navigation.navigate('productdetails', { bookId: id })
   }
 
   const handleWishlist = () => {
-    console.log('Wishlist show : ', wishlistshow);
     if(wishlistshow === false){
       alert("Please log in first.");
     }

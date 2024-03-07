@@ -40,7 +40,7 @@ export const TopMenu = () => {
   };
 
   const handleWishlist = () => {
-    console.log('Wishlist show : ', wishlistshow);
+    
     if(wishlistshow === false){
       alert("Please log in first.");
     }
