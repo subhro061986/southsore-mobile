@@ -717,7 +717,7 @@ const UserProvider = ({ children }) => {
 
           })
 
-        console.log("get_country_list : ", response.data);
+        // console.log("get_country_list : ", response.data);
 
         return response.data
 
@@ -738,7 +738,7 @@ const UserProvider = ({ children }) => {
 
           })
 
-        console.log("get_country_list : ", response.data);
+        // console.log("get_country_list : ", response.data);
 
         return response.data
 

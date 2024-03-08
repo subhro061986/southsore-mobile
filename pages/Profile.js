@@ -18,24 +18,23 @@ import {
 } from 'react-native';
 import Overlay from 'react-native-modal-overlay';
 import { Picker } from '@react-native-picker/picker';
-// import { useAuth } from '../context/AuthContext.js';
 import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
 
 import TopBar from "../Global/TopBar.js";
 import Footer from "../Global/Footer.js";
+// import { useAuth } from '../context/AuthContext.js';
 import { UserProfile } from '../Context/Usercontext.js';
+import Config from "../config/Config.json"
 
 export const Profile = () => {
 
     const navigation = useNavigation();
-    const { my_profile } = UserProfile();
-
+    const { my_profile, get_country_list, get_state_list, change_personal_details, change_contact_details, change_billing_address } = UserProfile();
 
     const [contactInfoModalVisibility, setmodalvisibility] = useState(false);
     const [personalInfoModalVisibility, setPersonalmodalvisibility] = useState(false);
-    const [sortCountrySelected, setSortSelected] = useState(0);
-    const [sortStateSelected, setSortStateSelected] = useState(0);
+    const [countryIdSelected, setCountryIdSelected] = useState(0);
+    const [stateIdSelected, setStateIdSelected] = useState(0);
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
@@ -51,7 +50,27 @@ export const Profile = () => {
 
     useEffect(() => {
         myProfileApi()
+        renderCountryList();
     }, []);
+
+    const renderStateList = async (countyId) => {
+        try {
+            const resp = await get_state_list(countyId)
+            setStateList(resp.output)
+            // console.log("getStateList= ", resp.output)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+    const renderCountryList = async () => {
+        try {
+            const resp = await get_country_list()
+            setCountryList(resp.output)
+            // console.log("getCountryList= ", resp.output)
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     const myProfileApi = async () => {
 
@@ -61,12 +80,14 @@ export const Profile = () => {
         setEmail(resp.output.email)
         setPhone(resp.output.contactno)
         setAddress(resp.output.addressline)
-        setSelectedCountry(resp.output.countryid)
-        setSelectedState(resp.output.stateid)
+        setSelectedCountry(resp.output.country)
+        setSelectedState(resp.output.state)
+        setCountryIdSelected(resp.output.countryid)
+        setStateIdSelected(resp.output.stateid)
         setCity(resp.output.city)
         setPin(resp.output.pincode)
 
-        setProfileImage(Config.API_URL + Config.UPLOAD_URL + resp.output.profileimage + '?d=' + new Date())
+        // setProfileImage(Config.API_URL + Config.UPLOAD_URL + resp.output.profileimage + '?d=' + new Date())
 
         if (resp.output.countryid !== null && resp.output.countryid !== '') {
             renderStateList(resp.output.countryid)
@@ -91,36 +112,93 @@ export const Profile = () => {
         setPersonalmodalvisibility(false);
     }
 
-    const sortCountrySelectionChange = (itemValue, itemIndex) => {
-        setSortSelected(itemValue);
+    const sortCountrySelectionChange = async (itemValue, itemIndex) => {
+        setCountryIdSelected(itemValue);
+        if (itemValue === 0 || itemValue === '0') {
+            console.log("Item val IF : ", itemValue);
+        }
+        else{
+            console.log("Item val ELSE : ", itemValue);
+            let countryName = countryList.find((data) => data.id === itemValue).name;
+            console.log("country= ", countryName);
+            setSelectedCountry(countryName);
+        }
+        // setSelectedCountry(countryName);
+        if (itemValue === 0 || itemValue === '0') {
+            setStateList([]);
+        }
+        else {
+            const resp = await get_state_list(itemValue);
+            setStateList(resp.output);
+        }
+        // if (selectedCountry == null || selectedCountry == '') {
+        //     try {
+
+        //         // console.log("getStateList= ", resp.output)
+        //     } catch (err) {
+        //         console.error(err);
+        //     }
+        // }
     }
 
     const sortStateSelectionChange = (itemValue, itemIndex) => {
-        setSortStateSelected(itemValue);
+        let stateName = stateList.find((data) => data.id === itemValue).name;
+        setStateIdSelected(itemValue);
+        setSelectedState(stateName);
+        // console.log("State ID", stateIdSelected);
+        // console.log("State name", selectedState);
     }
 
-    const sortCountryValue = [
-        {
-            id: 1,
-            title: 'Best Seller'
-        },
-        {
-            id: 2,
-            title: 'Price Low to High'
-        },
-        {
-            id: 3,
-            title: 'Price High to Low'
-        },
-        {
-            id: 4,
-            title: 'A -> Z'
-        },
-        {
-            id: 5,
-            title: 'Z -> A'
-        },
-    ]
+    const savePersonalData = async () => {
+        // console.log("profileimg=", profileImage)
+        const userDetails = new FormData();
+        // userDetails.append('profileimage', profileImage);
+        userDetails.append('name', name)
+
+        let changecontactDetails = {
+            email: email,
+            contactno: phone,
+        }
+
+        const personalDetailsPesponse = await change_personal_details(userDetails)
+        // console.log("personal details=", personalDetailsPesponse)
+
+        const contactDetailsPesponse = await change_contact_details(changecontactDetails)
+        // console.log("contact details=", contactDetailsPesponse)
+        if (personalDetailsPesponse.statuscode === '0' && contactDetailsPesponse.statuscode === '0') {
+            alert("Details updated successfully!");
+            personalBackbuttonhandler();
+        }
+        else {
+            alert("Error in updating!");
+            personalBackbuttonhandler();
+        }
+        // personalBackbuttonhandler();
+    }
+
+    const saveContactdata = async () => {
+        let changebillingDetails = {
+            addressline: address,
+            city: city,
+            pincode: pin,
+            stateid: stateIdSelected,
+            countryid: countryIdSelected,
+        }
+
+        console.log("OBJECT : ", changebillingDetails);
+
+        const billingDetailsPesponse = await change_billing_address(changebillingDetails)
+        console.log("billing details=", billingDetailsPesponse)
+        if (billingDetailsPesponse.statuscode === '0') {
+            alert("Details updated successfully!");
+            contactBackbuttonhandler();
+        }
+        else {
+            alert("Error in updating!");
+            contactBackbuttonhandler()
+        }
+        // contactBackbuttonhandler();
+    }
 
 
     return (
@@ -159,7 +237,6 @@ export const Profile = () => {
                         </View>
                         <TouchableOpacity onPress={contactInfoModalHandler}>
                             <Image
-
                                 source={require('../assets/images/editicon.png')}
                             // style={xStyle.topbar_btn_mb}
                             />
@@ -168,8 +245,8 @@ export const Profile = () => {
                     <View style={xStyle.prof_personal_view}>
                         <View style={xStyle.prof_personal_text_view}>
                             <Text style={xStyle.prof_user_personal_info_title}>Address: <Text style={xStyle.prof_user_contact_info}>{address}</Text></Text>
-                            <Text style={xStyle.prof_user_personal_info_title}>Country: <Text style={xStyle.prof_user_contact_info}></Text></Text>
-                            <Text style={xStyle.prof_user_personal_info_title}>State: <Text style={xStyle.prof_user_contact_info}></Text></Text>
+                            <Text style={xStyle.prof_user_personal_info_title}>Country: <Text style={xStyle.prof_user_contact_info}>{selectedCountry}</Text></Text>
+                            <Text style={xStyle.prof_user_personal_info_title}>State: <Text style={xStyle.prof_user_contact_info}>{selectedState}</Text></Text>
                             <Text style={xStyle.prof_user_personal_info_title}>City: <Text style={xStyle.prof_user_contact_info}>{city}</Text></Text>
                             <Text style={xStyle.prof_user_personal_info_title}>Pin: <Text style={xStyle.prof_user_contact_info}>{pin}</Text></Text>
                         </View>
@@ -239,8 +316,13 @@ export const Profile = () => {
                     <View style={xStyle.buy_join_modal_body}>
                         <Text style={xStyle.buy_join_modal_legend}>Name</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder="Your Name" placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput
+                                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder="Your Name"
+                                placeholderTextColor={'#7B8890'}
+                                value={name}
+                                onChangeText={(e) => setName(e)}
+                            />
                             <Image
                                 source={require('../assets/images/profile-circle.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -248,8 +330,14 @@ export const Profile = () => {
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>Email</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder='Your email address' placeholderTextColor={'#7B8890'} editable={false}></TextInput>
+                            <TextInput
+                                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder='Your email address'
+                                placeholderTextColor={'#7B8890'}
+                                value={email}
+                                onChangeText={(e) => setEmail(e)}
+                                editable={false}
+                            />
                             <Image
                                 source={require('../assets/images/smsbox.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -257,15 +345,20 @@ export const Profile = () => {
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>Phone no</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder='Your phone number' placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput
+                                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder='Your phone number'
+                                placeholderTextColor={'#7B8890'}
+                                value={phone}
+                                onChangeText={(e) => setPhone(e)}
+                            />
                             <Image
                                 source={require('../assets/images/call.png')}
                                 style={xStyle.buy_join_modal_input_icon}
                             />
                         </View>
                     </View>
-                    <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn}>
+                    <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn} onPress={savePersonalData}>
                         <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Save</Text>
                     </TouchableOpacity>
 
@@ -301,14 +394,16 @@ export const Profile = () => {
                             source={require('../assets/images/close-circle.png')}
                         />
                     </TouchableOpacity>
-
-
-
                     <View style={xStyle.buy_join_modal_body}>
                         <Text style={xStyle.buy_join_modal_legend}>Address</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder="Your Address" placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput
+                                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder="Your Address"
+                                placeholderTextColor={'#7B8890'}
+                                value={address}
+                                onChangeText={(e) => setAddress(e)}
+                            />
                             <Image
                                 source={require('../assets/images/profile-circle.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -316,18 +411,23 @@ export const Profile = () => {
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>Country</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
+                            {/* <Text style={xStyle.buy_join_modal_legend}>ID : {countryIdSelected}</Text> */}
+                            {/* <Text style={xStyle.buy_join_modal_legend}>Name : {selectedCountry}</Text> */}
                             <View style={xStyle.prof_picker_view}>
                                 <Picker
                                     style={xStyle.categoryDetailsDropDownPicker}
-                                    selectedValue={sortCountrySelected}
-                                    onValueChange={(itemValue, itemIndex) =>
+                                    selectedValue={countryIdSelected}
+                                    onValueChange={(itemValue, itemIndex) => {
                                         sortCountrySelectionChange(itemValue, itemIndex)
-                                    }
+                                        // setCountryIdSelected(itemValue)
+                                    }}
                                 >
                                     <Picker.Item label="Please Select" value="0" />
                                     {
-                                        sortCountryValue.map((data, index) => (
-                                            <Picker.Item label={data.title} value={data.id} key={index} />
+                                        countryList.map((data, index) => (
+                                            // NOTE - WE CAN SEND OBJECT VALUE IN PICKER
+                                            // <Picker.Item label={data.name} value={{ id: data.id, name: data.name }} key={index} />
+                                            <Picker.Item label={data.name} value={data.id} key={index} />
                                         ))
                                     }
                                 </Picker>
@@ -338,15 +438,17 @@ export const Profile = () => {
                             <View style={xStyle.prof_picker_view}>
                                 <Picker
                                     style={xStyle.categoryDetailsDropDownPicker}
-                                    selectedValue={sortStateSelected}
+                                    selectedValue={stateIdSelected}
                                     onValueChange={(itemValue, itemIndex) =>
                                         sortStateSelectionChange(itemValue, itemIndex)
                                     }
                                 >
                                     <Picker.Item label="Please Select" value="0" />
                                     {
-                                        sortCountryValue.map((data, index) => (
-                                            <Picker.Item label={data.title} value={data.id} key={index} />
+                                        stateList.map((data, index) => (
+                                            // NOTE - WE CAN SEND OBJECT VALUE IN PICKER
+                                            // <Picker.Item label={data.name} value={{ id: data.id, name: data.name }} key={index} />
+                                            <Picker.Item label={data.name} value={data.id} key={index} />
                                         ))
                                     }
                                 </Picker>
@@ -354,8 +456,13 @@ export const Profile = () => {
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>City</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder='Your City' placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput
+                                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder='Your City'
+                                placeholderTextColor={'#7B8890'}
+                                value={city}
+                                onChangeText={(e) => setCity(e)}
+                            />
                             <Image
                                 source={require('../assets/images/call.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -363,20 +470,22 @@ export const Profile = () => {
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>Pin</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder='Your Pin' placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput
+                                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder='Your Pin'
+                                placeholderTextColor={'#7B8890'}
+                                value={pin}
+                                onChangeText={(e) => setPin(e)}
+                            />
                             <Image
                                 source={require('../assets/images/call.png')}
                                 style={xStyle.buy_join_modal_input_icon}
                             />
                         </View>
                     </View>
-                    <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn}>
+                    <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn} onPress={saveContactdata}>
                         <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Save</Text>
                     </TouchableOpacity>
-
-
-
                 </Overlay>
             </View>
 

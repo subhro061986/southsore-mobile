@@ -21,7 +21,7 @@ export const Footer = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
-  console.log(route.name);
+  // console.log(route.name);
   const { logIn, logOut, authData, forgot_password, Registration } = useAuth()
   const { category_by_publisher, items, allActivePublisher, categoryByPublisherList } = UserProfile()
 

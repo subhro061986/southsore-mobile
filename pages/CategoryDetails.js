@@ -219,11 +219,11 @@ export const CategoryDetails = ({ route, navigation }) => {
                             </Picker>
                         </View>
                     </View>
-                    <TouchableOpacity onPress={filterModalHandler}>
+                    {/* <TouchableOpacity onPress={filterModalHandler}>
                         <Image
                             source={require('../assets/images/filterBtn.png')}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
                 <View style={xStyle.categoryDetailsBooksMainDiv}>
                     {
