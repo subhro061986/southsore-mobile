@@ -131,10 +131,15 @@ export const PubHomeScreen = ({ route, navigation }) => {
                         width={200}
                     />
                     <View
-                    style={xStyle.pub_about_body}
+                    style={[xStyle.pub_about_body, {color:'red'}]}
                     >
                         {/* <Text id='pub_about'></Text> */}
                         <RenderHtml
+                            tagsStyles={
+                                {body: {
+                                    color: 'grey'
+                                  }}
+                            }
                             contentWidth={width}
                             source={{html: publisherDetails.about}}
                         />
