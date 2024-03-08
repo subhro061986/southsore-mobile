@@ -19,6 +19,7 @@ import {
 import Overlay from 'react-native-modal-overlay';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 import TopBar from "../Global/TopBar.js";
 import Footer from "../Global/Footer.js";
@@ -27,7 +28,14 @@ import { UserProfile } from '../Context/Usercontext.js';
 import Config from "../config/Config.json"
 
 export const Profile = () => {
-
+    const optionsImg = {
+        mediaType: 'photo',
+        selectionLimit: 5,
+        storageOptions: {
+            skipBackup: true,
+            path: 'images'
+        }
+    };
     const navigation = useNavigation();
     const { my_profile, get_country_list, get_state_list, change_personal_details, change_contact_details, change_billing_address } = UserProfile();
 
@@ -35,6 +43,8 @@ export const Profile = () => {
     const [personalInfoModalVisibility, setPersonalmodalvisibility] = useState(false);
     const [countryIdSelected, setCountryIdSelected] = useState(0);
     const [stateIdSelected, setStateIdSelected] = useState(0);
+    const [buildImgArr, setBuildImgArr] = useState('');
+    const [campPicModal, setCampPicModal] = useState(false);
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
@@ -87,7 +97,7 @@ export const Profile = () => {
         setCity(resp.output.city)
         setPin(resp.output.pincode)
 
-        // setProfileImage(Config.API_URL + Config.UPLOAD_URL + resp.output.profileimage + '?d=' + new Date())
+        setProfileImage(Config.API_URL + Config.UPLOAD_URL + resp.output.profileimage + '?d=' + new Date())
 
         if (resp.output.countryid !== null && resp.output.countryid !== '') {
             renderStateList(resp.output.countryid)
@@ -117,7 +127,7 @@ export const Profile = () => {
         if (itemValue === 0 || itemValue === '0') {
             console.log("Item val IF : ", itemValue);
         }
-        else{
+        else {
             console.log("Item val ELSE : ", itemValue);
             let countryName = countryList.find((data) => data.id === itemValue).name;
             console.log("country= ", countryName);
@@ -149,9 +159,38 @@ export const Profile = () => {
         // console.log("State name", selectedState);
     }
 
+    const handleUploadGalPhoto = () => {
+        // let tempArr = this.state.buildImgArr;
+        // let tempArr = buildImgArr;
+
+        launchImageLibrary(optionsImg, (response) => {
+            if (response.didCancel === true) {
+                setProfileImage('');
+                // this.setState({buildImgArr:tempArr})
+                setBuildImgArr('');
+            }
+            else {
+                // this.setState({buildImgArr:tempArr})
+                setBuildImgArr(response.assets[0]);
+                console.log("IMAGE OBJ : ", response.assets[0]);
+                setProfileImage(response.assets[0].uri);
+            }
+            //   this.setState({
+            //     campPicModal:false
+            //   })
+            setCampPicModal(false);
+        });
+    }
+
     const savePersonalData = async () => {
-        // console.log("profileimg=", profileImage)
+        console.log("profileimg=", buildImgArr)
         const userDetails = new FormData();
+        userDetails.append('profileimage',{
+            name: buildImgArr.fileName,
+            type: buildImgArr.type,
+            uri:
+              Platform.OS === 'android' ? buildImgArr.uri : buildImgArr.uri.replace('file://', ''),
+        });
         // userDetails.append('profileimage', profileImage);
         userDetails.append('name', name)
 
@@ -220,7 +259,7 @@ export const Profile = () => {
                                         />
                                     ) : (
                                         <Image
-                                            source={profileImage}
+                                            source={{ uri: profileImage }}
                                             style={{ height: 60, width: 60, resizeMode: 'contain' }}
                                         // style={xStyle.topbar_btn_mb}
                                         />
@@ -228,9 +267,9 @@ export const Profile = () => {
                                 }
                             </View>
                             <View>
-                                <Text style={xStyle.prof_user_name}>{name.length>15 ? name.substring(0,15)+'...' : name}</Text>
+                                <Text style={xStyle.prof_user_name}>{name.length > 15 ? name.substring(0, 15) + '...' : name}</Text>
                                 <View style={xStyle.prof_user_contact_info_txt_view}>
-                                    <Text style={xStyle.prof_user_contact_info}>{email.length>15 ? email.substring(0,15)+'...' : email}</Text>
+                                    <Text style={xStyle.prof_user_contact_info}>{email.length > 15 ? email.substring(0, 15) + '...' : email}</Text>
                                 </View>
                                 <Text style={xStyle.prof_user_contact_info}>{phone}</Text>
                             </View>
@@ -300,12 +339,27 @@ export const Profile = () => {
 
                     <View style={xStyle.buy_join_modal_head_view}>
                         <View style={xStyle.prof_upload_img_sec}>
-                            <Image
-                                source={require('../assets/images/profgrey.png')}
+                            {/* <Image
+                                // source={require('../assets/images/profgrey.png')}
+                                source={{ uri: profileImage }}
                                 style={xStyle.prof_upload_img_margin}
-                            />
+                            /> */}
+                            {profileImage === null || profileImage === '' || profileImage === undefined ?
+                                (
+                                    <Image
+                                        source={require('../assets/images/profgrey.png')}
+                                        style={{ height: 60, width: 60, resizeMode: 'contain' }}
+                                    />
+                                ) : (
+                                    <Image
+                                        source={{ uri: profileImage }}
+                                        style={{ height: 60, width: 60, resizeMode: 'contain' }}
+                                    // style={xStyle.topbar_btn_mb}
+                                    />
+                                )
+                            }
                             <Text style={xStyle.prof_upload_img_txt}>Upload your Image</Text>
-                            <TouchableOpacity style={xStyle.prof_upload_camera_btn}>
+                            <TouchableOpacity style={xStyle.prof_upload_camera_btn} onPress={handleUploadGalPhoto}>
                                 <Image
                                     source={require('../assets/images/camera.png')}
                                 />
