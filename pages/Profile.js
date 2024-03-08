@@ -185,11 +185,11 @@ export const Profile = () => {
     const savePersonalData = async () => {
         console.log("profileimg=", buildImgArr)
         const userDetails = new FormData();
-        userDetails.append('profileimage',{
+        userDetails.append('profileimage', {
             name: buildImgArr.fileName,
             type: buildImgArr.type,
             uri:
-              Platform.OS === 'android' ? buildImgArr.uri : buildImgArr.uri.replace('file://', ''),
+                Platform.OS === 'android' ? buildImgArr.uri : buildImgArr.uri.replace('file://', ''),
         });
         // userDetails.append('profileimage', profileImage);
         userDetails.append('name', name)
@@ -255,12 +255,12 @@ export const Profile = () => {
                                     (
                                         <Image
                                             source={require('../assets/images/user_big.png')}
-                                            style={{ height: 60, width: 60, resizeMode: 'contain' }}
+                                            style={{ height: 60, width: 60, resizeMode: 'contain', borderRadius:100 }}
                                         />
                                     ) : (
                                         <Image
                                             source={{ uri: profileImage }}
-                                            style={{ height: 60, width: 60, resizeMode: 'contain' }}
+                                            style={{ height: 60, width: 60, resizeMode: 'contain', borderRadius:100 }}
                                         // style={xStyle.topbar_btn_mb}
                                         />
                                     )
@@ -348,22 +348,25 @@ export const Profile = () => {
                                 (
                                     <Image
                                         source={require('../assets/images/profgrey.png')}
-                                        style={{ height: 60, width: 60, resizeMode: 'contain' }}
+                                        style={xStyle.prof_upload_img_margin}
                                     />
                                 ) : (
                                     <Image
                                         source={{ uri: profileImage }}
-                                        style={{ height: 60, width: 60, resizeMode: 'contain' }}
+                                        style={xStyle.prof_upload_img_margin}
                                     // style={xStyle.topbar_btn_mb}
                                     />
                                 )
                             }
-                            <Text style={xStyle.prof_upload_img_txt}>Upload your Image</Text>
+                            
                             <TouchableOpacity style={xStyle.prof_upload_camera_btn} onPress={handleUploadGalPhoto}>
                                 <Image
                                     source={require('../assets/images/camera.png')}
                                 />
                             </TouchableOpacity>
+                            <View style={{marginTop:'8%'}}>
+                                <Text style={xStyle.prof_upload_img_txt}>Upload your Image</Text>
+                            </View>
                         </View>
                     </View>
 

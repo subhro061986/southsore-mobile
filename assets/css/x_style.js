@@ -1759,7 +1759,10 @@ export default StyleSheet.create({
   },
 
   prof_upload_img_margin: {
-    marginBottom: '4%'
+    marginBottom: '6%',
+    height: 60, width: 60,
+    resizeMode: 'contain',
+    borderRadius:100,
   },
 
   prof_upload_img_txt: {
@@ -1770,8 +1773,8 @@ export default StyleSheet.create({
 
   prof_upload_camera_btn: {
     position: 'absolute',
-    bottom: '26%',
-    right: '15%'
+    bottom: '30%',
+    right: '20%'
   },
 
   prof_picker_view: {
