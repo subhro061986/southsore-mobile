@@ -461,10 +461,10 @@ export const Profile = () => {
                                 value={address}
                                 onChangeText={(e) => setAddress(e)}
                             />
-                            <Image
+                            {/* <Image
                                 source={require('../assets/images/profile-circle.png')}
                                 style={xStyle.buy_join_modal_input_icon}
-                            />
+                            /> */}
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>Country</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
@@ -520,10 +520,10 @@ export const Profile = () => {
                                 value={city}
                                 onChangeText={(e) => setCity(e)}
                             />
-                            <Image
+                            {/* <Image
                                 source={require('../assets/images/call.png')}
                                 style={xStyle.buy_join_modal_input_icon}
-                            />
+                            /> */}
                         </View>
                         <Text style={xStyle.buy_join_modal_legend}>Pin</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
@@ -534,10 +534,10 @@ export const Profile = () => {
                                 value={pin}
                                 onChangeText={(e) => setPin(e)}
                             />
-                            <Image
+                            {/* <Image
                                 source={require('../assets/images/call.png')}
                                 style={xStyle.buy_join_modal_input_icon}
-                            />
+                            /> */}
                         </View>
                     </View>
                     <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn} onPress={saveContactdata}>
