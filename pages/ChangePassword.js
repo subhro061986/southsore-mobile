@@ -14,14 +14,53 @@ import TopMenu from '../Global/TopMenu.js';
 import Footer from '../Global/Footer.js';
 import FooterPub from '../Global/FooterPub.js';
 import { Picker } from '@react-native-picker/picker';
+import { UserProfile } from '../Context/Usercontext.js';
 
 export const ChangePassword = () => {
 
     const navigation = useNavigation();
 
+    const { change_password } = UserProfile()
+
     const [oldPassWord, setOldPassWord] = useState('')
     const [newPassWord, setNewPassWord] = useState('')
     const [confirmPassWord, setConfirmPassWord] = useState('')
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState('')
+    const [passwordVerified, setPasswordVerified] = useState(false)
+    const [confirmPasswordErrorMessage, setConfirmPasswordErrorMEssage] = useState('')
+
+
+    // const oldPasswordHandler = (e) => {
+    //     setOldPassWord(e.target.value)
+    // }
+
+    // const newPasswordHandler = (e) => {
+    //     let new_pass = e.target.value
+    //     setNewPassWord(e.target.value)
+    //     // let pass_verify=validatePassword(new_pass)
+    //     // setPasswordVerified(pass_verify)
+    // }
+
+    // const confirmPasswordHandler = (e) => {
+    //     setConfirmPassWord(e.target.value)
+    // }
+
+    const saveData = async () => {
+        let data = {
+            password: oldPassWord,
+            newpassword: newPassWord
+        }
+        if (newPassWord === confirmPassWord) {
+            const response = await change_password(data)
+            console.log(response)
+            alert("Password Changed Successfully");
+            navigation.navigate('profile')
+        }
+        else{
+            alert("New Password and Confirm Password do not Match");
+        }
+
+    }
 
 
 
@@ -45,7 +84,7 @@ export const ChangePassword = () => {
                                 placeholderTextColor={'#7B8890'}
                                 value={oldPassWord}
                                 keyboardType="text"
-                                onChangeText={(e)=>setOldPassWord(e)}
+                                onChangeText={(e) => setOldPassWord(e)}
                             />
                             {/* <Image style={xStyle.BillingAddressIcon} source={require('../assets/images/profile-circle.png')} height={24} width={24} /> */}
 
@@ -60,7 +99,7 @@ export const ChangePassword = () => {
                                 placeholderTextColor={'#7B8890'}
                                 value={newPassWord}
                                 keyboardType="text"
-                                onChangeText={(e)=>setNewPassWord(e)}
+                                onChangeText={(e) => setNewPassWord(e)}
                             />
                             {/* <Image style={xStyle.BillingAddressIcon} source={require('../assets/images/smsbox.png')} height={24} width={24} /> */}
 
@@ -73,9 +112,9 @@ export const ChangePassword = () => {
                                 style={xStyle.BillingAddressFormTextInput}
                                 placeholder="Confirm Password"
                                 placeholderTextColor={'#7B8890'}
-                                value={confirmPassWord}
+                                // value={confirmPassWord}
                                 keyboardType="text"
-                                onChangeText={(e)=>setConfirmPassWord(e)}
+                                onChangeText={(e) => setConfirmPassWord(e)}
                             />
                             {/* <Image style={xStyle.BillingAddressIcon} source={require('../assets/images/smsbox.png')} height={24} width={24} /> */}
 
@@ -83,7 +122,10 @@ export const ChangePassword = () => {
 
                         <View style={xStyle.BillingAddressSaveBtnArea}>
 
-                            <TouchableOpacity style={xStyle.BillingAddressSaveBtn}>
+                            <TouchableOpacity
+                                style={xStyle.BillingAddressSaveBtn}
+                                onPress={saveData}
+                            >
                                 <Text style={xStyle.BillingAddressBtnText}>
                                     Save
                                 </Text>

@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import xStyle from '../assets/css/x_style.js';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import {
     Text,
     View,
@@ -15,10 +15,11 @@ import Footer from '../Global/Footer.js';
 import FooterPub from '../Global/FooterPub.js';
 import { Picker } from '@react-native-picker/picker';
 import { UserProfile } from '../Context/Usercontext.js';
+import { useAuth } from '../Context/Authcontext.js';
 
-export const BillingAddressPage = () => {
+export const BillingAddressPage = ({route,navigation}) => {
 
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
     const { 
         place_order,
         my_profile,
@@ -29,6 +30,8 @@ export const BillingAddressPage = () => {
         createOrder,
         processPayment,
         applyCoupon } = UserProfile()
+
+    const {authData,getCartData}=useAuth();
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -50,7 +53,17 @@ export const BillingAddressPage = () => {
     const [placeOrderResponse, setPlaceOrderResponse] = useState({})
 
 
+    useEffect(() => {
+        console.log("inside use effect")
+        myProfileApi()
+        renderCountryList()
+    }, []);
 
+    useEffect(() =>{
+
+        console.log("buynow status= ",route.params.buynow)
+        setBuyNow(route.params.buynow)
+    },[route.params.buynow])
 
     const countryHandler = async  (itemValue, itemIndex) => {
 
@@ -110,11 +123,7 @@ export const BillingAddressPage = () => {
             renderStateList(resp.output.countryid)
         }
     }
-    useEffect(() => {
-        console.log("inside use effect")
-        myProfileApi()
-        renderCountryList()
-    }, []);
+
 
 
     const placeOrder = async (data) => {
@@ -141,11 +150,16 @@ export const BillingAddressPage = () => {
         const billingDetailsPesponse = await change_billing_address(changebillingDetails)
         console.log("billing details=", billingDetailsPesponse)
         
+        console.log("Buynow before sending=",buyNow)
         const respPlaceOrder = await place_order(buyNow)
+        console.log("place order response= ",respPlaceOrder)
         
         setPlaceOrderResponse(respPlaceOrder)
+
         if(respPlaceOrder.output !== null)
             setOrderTotal(respPlaceOrder.output.totalAmount)
+            // const cartDataresp=await getCartData(authData)
+            // console.log("card data response after place order= ",cartDataresp)
         setTogglePayment(false)
         setShowCoupon(true)
     

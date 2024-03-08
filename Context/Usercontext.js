@@ -268,9 +268,9 @@ const UserProvider = ({ children }) => {
       console.log("Book_details_error : ", error)
     }
   }
-  const place_order = async () => {
+  const place_order = async (buyNow) => {
     try {
-      const response = await axios.get(Config.API_URL + Config.PLACE_ORDER,
+      const response = await axios.get(Config.API_URL +Config.PLACE_ORDER+ `?buynow=${buyNow}` ,
 
         {
           headers: {
@@ -280,7 +280,7 @@ const UserProvider = ({ children }) => {
 
         })
 
-      console.log("place_order_resp : ", response);
+      
 
       return response.data
 
@@ -569,29 +569,29 @@ const UserProvider = ({ children }) => {
 
 
 
-    const remove_cart_item = async (args) => {
+    // const remove_cart_item = async (args) => {
 
-      // try {
+    //   try {
 
 
-      //   const response = await axios.post(Config.API_URL + Config.REMOVE_CART_ITEM,args,
-      //     {
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //         'Authorization': 'Bearer ' + authData
-      //       },
+    //     const response = await axios.post(Config.API_URL + Config.REMOVE_CART_ITEM,args,
+    //       {
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //           'Authorization': 'Bearer ' + authData
+    //         },
 
-      //     })
+    //       })
 
-      //   await price_items_signin(response.data)
+    //     await price_items_signin(response.data)
 
-      //   return response.data
+    //     return response.data
 
-      // }
-      // catch (error) {
-      //   console.log("remove_cart_item_error : ", error)
-      // }
-    }
+    //   }
+    //   catch (error) {
+    //     console.log("remove_cart_item_error : ", error)
+    //   }
+    // }
 
 
     const change_personal_details = async (args) => {
@@ -662,25 +662,25 @@ const UserProvider = ({ children }) => {
 
 
     const change_password = async (args) => {
-      // try {
-      //   const response = await axios.post(Config.API_URL + Config.CHANGE_PASSWORD, args,
+      try {
+        const response = await axios.post(Config.API_URL + Config.CHANGE_PASSWORD, args,
 
-      //     {
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //         'Authorization': 'Bearer ' + authData
-      //       },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
 
-      //     })
+          })
 
-      //   console.log("change_password : ", response.data);
+        console.log("change_password : ", response.data);
 
-      //   return response.data
+        return response.data
 
-      // }
-      // catch (error) {
-      //   console.log("change_password_error : ", error)
-      // }
+      }
+      catch (error) {
+        console.log("change_password_error : ", error)
+      }
     }
 
 
@@ -977,7 +977,7 @@ const UserProvider = ({ children }) => {
         cart_items,
         add_single_item,
         add_multiple_item,
-        remove_cart_item,
+        // remove_cart_item,
         change_personal_details,
         change_contact_details,
         change_billing_address,
