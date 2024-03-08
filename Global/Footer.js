@@ -43,6 +43,7 @@ export const Footer = () => {
   const [phone, setPhone] = useState('');
 
   const [secureText, setSecureText] = useState(true);
+  const [showProfileIcon, setShowProfileIcon] = useState(true);
 
   useEffect(() => {
 
@@ -50,10 +51,12 @@ export const Footer = () => {
 
   useEffect(() => {
     if (authData === '' || authData === null || authData === undefined) {
-      setLogInText('Login')
+      setLogInText('Login');
+      setShowProfileIcon(false);
     }
     else {
-      setLogInText("Logout")
+      setLogInText("Logout");
+      setShowProfileIcon(true);
     }
   }, [authData])
 
@@ -283,17 +286,21 @@ export const Footer = () => {
               </TouchableOpacity>
             )
         }
-        <TouchableOpacity
-          style={xStyle.footerBtn}
-          onPress={() => navigation.navigate('profile')}
-        >
-          <Image
-            source={require('../assets/images/profile.png')}
-          />
-          <Text style={xStyle.footerIconText}>
-            My Profile
-          </Text>
-        </TouchableOpacity>
+        {
+          showProfileIcon && (
+            <TouchableOpacity
+              style={xStyle.footerBtn}
+              onPress={() => navigation.navigate('profile')}
+            >
+              <Image
+                source={require('../assets/images/profile.png')}
+              />
+              <Text style={xStyle.footerIconText}>
+                My Profile
+              </Text>
+            </TouchableOpacity>
+          )
+        }
         <TouchableOpacity style={xStyle.footerBtn} onPress={logInModalHandler}>
           <Image
             source={require('../assets/images/login.png')}
