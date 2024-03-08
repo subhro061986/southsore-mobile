@@ -16,18 +16,20 @@ import {
     Animated,
     PermissionsAndroid
 } from 'react-native';
-// import { useAuth } from '../context/AuthContext.js';
-import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
-
-
 import FooterPub from '../Global/FooterPub.js';
 import TopBar from '../Global/TopBar.js';
 import Footer from '../Global/Footer.js';
+import { useAuth } from '../Context/Authcontext.js';
+import { UserProfile } from '../Context/Usercontext.js';
+import Config from "../config/Config.json"
+export const MyBookshelf = ({navigation}) => {
 
-export const MyBookshelf = () => {
+const {authData} = useAuth()
+const { getBookShelf,myBookList} = UserProfile()
+useEffect(() => {
 
-    const navigation = useNavigation();
+}, [authData]);
+
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.cartPageBodyBg} stickyHeaderIndices={[0]}>
@@ -37,15 +39,17 @@ export const MyBookshelf = () => {
                         My BookShelf
                     </Text>
                     <Text style={xStyle.cartPageHeaderResults}>
-                        5 items found
+                        {myBookList.length} items
                     </Text>
                 </View>
                 <View style={[xStyle.cartPageBooksMainDiv, {
                     marginBottom: '50%'
                 }]}>
+                    {
+                    myBookList.length > 0 && myBookList.map((book, index) => (
                     <View style={[xStyle.pub_home_best_card]}>
                         <Image
-                            source={require('../assets/images/bcov1.png')}
+                            source={{uri:Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.image + '?d=' + new Date()}}
                             style={xStyle.pub_home_best_cover}
                             height={134}
                             width={138}
@@ -53,19 +57,23 @@ export const MyBookshelf = () => {
                         <View style={xStyle.MyBookshelfMainView}>
                             <View style={xStyle.MyBookshelfMainTextView}>
                                 <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Goldfinch</Text>
+                                    <Text style={xStyle.pub_home_best_card_title}>{book.title}</Text>
                                     <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                                        <Text style={xStyle.pub_home_card_author}>Author: 
+                                            <Text style={xStyle.pub_home_card_author_name}>{book.authors}</Text>
+                                        </Text>
                                     </View>
                                     <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Purchased: <Text style={xStyle.pub_home_card_author_name}>11 Feb,2024</Text></Text>
+                                        <Text style={xStyle.pub_home_card_author}>Purchased: 
+                                            <Text style={xStyle.pub_home_card_author_name}>{book.invoicedate?.split(" ")[0]}</Text>
+                                        </Text>
                                     </View>
                                 </View>
-                                <TouchableOpacity>
+                                {/* <TouchableOpacity>
                                     <Image
                                         source={require('../assets/images/greenTick.png')}
                                     />
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                             </View>
                             <View >
                                
@@ -80,80 +88,7 @@ export const MyBookshelf = () => {
                             </View>
                         </View>
                     </View>
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov2.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.MyBookshelfMainView}>
-                            <View style={xStyle.MyBookshelfMainTextView}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Hypocrite..</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Purchased: <Text style={xStyle.pub_home_card_author_name}>11 Feb,2024</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/greenTick.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View >
-                               
-                                <TouchableOpacity
-                                    style={[xStyle.wishlistMoveToCartBtn,{width:'50%'}]}
-                                // onPress={() => navigation.navigate('wishlist')}
-                                >
-                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                       Read Now
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov2.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.MyBookshelfMainView}>
-                            <View style={xStyle.MyBookshelfMainTextView}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Hypocrite..</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Purchased: <Text style={xStyle.pub_home_card_author_name}>11 Feb,2024</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/greenTick.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View >
-                               
-                                <TouchableOpacity
-                                    style={[xStyle.wishlistMoveToCartBtn,{width:'50%'}]}
-                                // onPress={() => navigation.navigate('wishlist')}
-                                >
-                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                       Read Now
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
+                ))}
 
                   
                 </View>

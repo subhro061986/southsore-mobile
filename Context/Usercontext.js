@@ -30,6 +30,7 @@ const UserProvider = ({ children }) => {
   const [categoryByPublisherList, setCategoryByPublisherList] = useState([])
   const [allNewArrival, setallNewArrival] = useState([])
   const [allBestSeller, setAllBestSeller] = useState([])
+  const [myBookList, setMyBookList] = useState([])
 
   useEffect(() => {
     getAllPublishers();
@@ -50,7 +51,7 @@ const UserProvider = ({ children }) => {
       category_by_publisher(2);
       get_wishlist_books(1, 5);
       localstorage_price_items_signin()
-      
+      getBookShelf();
       // get_wish_books_id()
     }
   }
@@ -792,9 +793,17 @@ const UserProvider = ({ children }) => {
           })
         // setAllActivePublisher(response.data.output)
         console.log("GET BOOKSHELF RESPONSE : ", response);
+        if(response.data.output.books===null || response.data.output.books==='null')
+        {
+            setMyBookList([])
+        }
+        else{
+          setMyBookList(response.data.output.books)
+        }
         return response.data;
       }
       catch (error) {
+        setMyBookList([])
         console.log("BOOKSHELF CONTEXT ERROR: ", error);
       }
     }
@@ -998,6 +1007,7 @@ const UserProvider = ({ children }) => {
         publisherId,
         categoryByPublisherList,
         getBookShelf,
+        myBookList,
         createOrder,
         processPayment,
         getInvoiceById,

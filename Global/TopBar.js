@@ -8,11 +8,12 @@ import {
     TouchableOpacity,
     TextInput
 } from 'react-native';
-import { wishlistshow, authData, cartCount } from '../Context/Authcontext.js';
+import {useAuth} from '../Context/Authcontext.js';
 import { useNavigation } from '@react-navigation/native';
 // import { UserProfile } from '../context/UserContext.js';
 
 export const TopBar = () => {
+    const { wishlistshow,authData,cartCount } = useAuth()
     useEffect(() => {
         console.log("cart count from top bar = ", cartCount)
     }, [authData]);
@@ -55,7 +56,7 @@ export const TopBar = () => {
                                 right: -10
                             }}
                         >
-                            <Text style={{ fontWeight: '500', color: 'black', fontSize: 12 }}>{cartCount}</Text>
+                            <Text style={{ fontWeight: '500', fontSize: 12 }}>{cartCount}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
