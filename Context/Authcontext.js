@@ -386,6 +386,14 @@ const AuthProvider = ({ children }) => {
 
         })
 
+        setCartCount(cartCount-1)
+        let index = cartItems.findIndex((item, i) => {
+          return item.id === args.bookid
+        });
+        let tempArr=cartItems
+        tempArr.splice(index,1)
+        setCartItems(tempArr)
+
       // await price_items_signin(response.data)
 
       return response.data

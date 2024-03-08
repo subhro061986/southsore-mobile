@@ -268,9 +268,9 @@ const UserProvider = ({ children }) => {
       console.log("Book_details_error : ", error)
     }
   }
-  const place_order = async () => {
+  const place_order = async (buyNow) => {
     try {
-      const response = await axios.get(Config.API_URL + Config.PLACE_ORDER,
+      const response = await axios.get(Config.API_URL +Config.PLACE_ORDER+ `?buynow=${buyNow}` ,
 
         {
           headers: {
@@ -280,7 +280,7 @@ const UserProvider = ({ children }) => {
 
         })
 
-      console.log("place_order_resp : ", response);
+      
 
       return response.data
 

@@ -145,6 +145,8 @@ export const ProductDetails = ({route,navigation}) => {
             deviceid:uuid
           }
 
+          // before login
+
         if(authData === '' || authData === null || authData === undefined){
         
             const resp= await add_book_to_storage(json_data)
@@ -157,7 +159,10 @@ export const ProductDetails = ({route,navigation}) => {
                 alert(resp.message);
             }
         }
+
+        // after login
         else {
+        
         const resp= await add_book_to_storage(json_data)
 
         // for buy now
@@ -165,9 +170,9 @@ export const ProductDetails = ({route,navigation}) => {
 
                 if(resp.isPresent){
                     // remove data from backend
-                    remove_item(json_data)
+                    remove_item_and_add(json_data)
                     // add book again to the cart such that it is the last item added
-                    await add_book_to_storage(json_data)
+                    // await add_book_to_storage(json_data)
                 }
                 navigation.navigate('billingAddress', {buynow : 1})
             }
@@ -217,9 +222,18 @@ export const ProductDetails = ({route,navigation}) => {
 
     // }
 
-    const remove_item = async (remove_json) => {
+    const remove_item_and_add = async (remove_json) => {
+
+        console.log("remove json:",remove_json)
         const resp = await remove_cart_item(remove_json)
         console.log("Remove_cart :", resp) 
+        if(resp.statuscode === "0"){
+
+            const response = await add_book_to_storage(remove_json)
+            console.log("response after removing= ",response)
+        }
+
+
     }
 
 

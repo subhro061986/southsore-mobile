@@ -15,6 +15,7 @@ import Footer from '../Global/Footer.js';
 import FooterPub from '../Global/FooterPub.js';
 import { Picker } from '@react-native-picker/picker';
 import { UserProfile } from '../Context/Usercontext.js';
+import { useAuth } from '../Context/Authcontext.js';
 
 export const BillingAddressPage = ({route,navigation}) => {
 
@@ -29,6 +30,8 @@ export const BillingAddressPage = ({route,navigation}) => {
         createOrder,
         processPayment,
         applyCoupon } = UserProfile()
+
+    const {authData,getCartData}=useAuth();
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -147,6 +150,7 @@ export const BillingAddressPage = ({route,navigation}) => {
         const billingDetailsPesponse = await change_billing_address(changebillingDetails)
         console.log("billing details=", billingDetailsPesponse)
         
+        console.log("Buynow before sending=",buyNow)
         const respPlaceOrder = await place_order(buyNow)
         console.log("place order response= ",respPlaceOrder)
         
@@ -154,6 +158,8 @@ export const BillingAddressPage = ({route,navigation}) => {
 
         if(respPlaceOrder.output !== null)
             setOrderTotal(respPlaceOrder.output.totalAmount)
+            // const cartDataresp=await getCartData(authData)
+            // console.log("card data response after place order= ",cartDataresp)
         setTogglePayment(false)
         setShowCoupon(true)
     
