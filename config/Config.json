@@ -34,7 +34,8 @@
     "INVOICE_DETAILS": "user/customer-invoice-details",
     "NEWSLETTER": "newsletter",
     "SEARCH_BOOKS":"book/search",
-    "home_links" : "http://ebooksjunction.com/demo/"
+    "home_links" : "http://ebooksjunction.com/demo/",
+    "FORGOT_PASSWORD" : "user/forgot-password"
 
 
     

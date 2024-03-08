@@ -430,6 +430,26 @@ const AuthProvider = ({ children }) => {
   }
 
 
+
+
+  //=========================FORGOT PASSWORD===============//
+
+  const forgot_password = async (args) => {
+    console.log("API URL",Config.API_URL + Config.FORGOT_PASSWORD)
+    try {
+      const response = await axios.post(Config.API_URL + Config.FORGOT_PASSWORD, args,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
+      return response.data.message;
+    }
+    catch (error) {
+      console.log("ForgotPassword_error : ", error)
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -447,7 +467,8 @@ const AuthProvider = ({ children }) => {
         getCartData,
         removeBookFromState,
         clearCartStorage,
-        image_path
+        image_path,
+        forgot_password
         // authUsername
       }}
     >

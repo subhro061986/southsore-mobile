@@ -6,8 +6,8 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  TextInput
-
+  TextInput,
+  Alert
 } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -21,7 +21,7 @@ export const Footer = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
-  console.log(route.name);
+  // console.log(route.name);
   const { logIn, logOut, authData, forgot_password, Registration } = useAuth()
   const { category_by_publisher, items, allActivePublisher, categoryByPublisherList } = UserProfile()
 
@@ -43,6 +43,8 @@ export const Footer = () => {
   const [phone, setPhone] = useState('');
 
   const [secureText, setSecureText] = useState(true);
+  const [showProfileIcon, setShowProfileIcon] = useState(true);
+  const [forgotEmail, setForgotEmail] = useState('');
 
   useEffect(() => {
 
@@ -50,10 +52,12 @@ export const Footer = () => {
 
   useEffect(() => {
     if (authData === '' || authData === null || authData === undefined) {
-      setLogInText('Login')
+      setLogInText('Login');
+      setShowProfileIcon(false);
     }
     else {
-      setLogInText("Logout")
+      setLogInText("Logout");
+      setShowProfileIcon(true);
     }
   }, [authData])
 
@@ -234,7 +238,31 @@ export const Footer = () => {
     user_registration()
     // }
   }
-
+  const sendEmail = async () => {
+  setLogInModalvisibility(false);
+  setSignUpModalvisibility(false);
+  setForotPasswordModalvisibility(false);
+    if(forgotEmail !== ""){
+        const args = {
+            "email" : forgotEmail
+        };
+        const resp = await forgot_password(args);
+        Alert.alert('Message', resp, [
+        
+          {text: 'OK', onPress: () => {
+              setForgotEmail('')
+          }},
+        ]);
+    }
+    else{
+      Alert.alert('Message', "Email should not be blank", [
+        
+        {text: 'OK', onPress: () => {
+          setForgotEmail('')
+        }},
+      ]);
+    }
+}
   return (
     <>
       <View style={xStyle.bottomnav}>
@@ -283,17 +311,21 @@ export const Footer = () => {
               </TouchableOpacity>
             )
         }
-        <TouchableOpacity
-          style={xStyle.footerBtn}
-          onPress={() => navigation.navigate('profile')}
-        >
-          <Image
-            source={require('../assets/images/profile.png')}
-          />
-          <Text style={xStyle.footerIconText}>
-            My Profile
-          </Text>
-        </TouchableOpacity>
+        {
+          showProfileIcon && (
+            <TouchableOpacity
+              style={xStyle.footerBtn}
+              onPress={() => navigation.navigate('profile')}
+            >
+              <Image
+                source={require('../assets/images/profile.png')}
+              />
+              <Text style={xStyle.footerIconText}>
+                My Profile
+              </Text>
+            </TouchableOpacity>
+          )
+        }
         <TouchableOpacity style={xStyle.footerBtn} onPress={logInModalHandler}>
           <Image
             source={require('../assets/images/login.png')}
@@ -583,15 +615,22 @@ export const Footer = () => {
           <View style={xStyle.logInModalBody}>
             <Text style={xStyle.buy_join_modal_legend}>Enter Your Registered Email</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your registered email address' placeholderTextColor={'#7B8890'}></TextInput>
+              <TextInput 
+                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder='Your registered email address' 
+                placeholderTextColor={'#7B8890'}
+                value={forgotEmail}
+                onChangeText={(e)=>setForgotEmail(e)}
+                />
               {/* <Image
                 source={require('../assets/images/smsbox.png')}
                 style={xStyle.buy_join_modal_input_icon}
               /> */}
             </View>
           </View>
-          <TouchableOpacity style={xStyle.logInBtn}>
+          <TouchableOpacity style={xStyle.logInBtn}
+            onPress={sendEmail}
+          >
             <Text style={[xStyle.logInBtnText]}>Send Request</Text>
           </TouchableOpacity>
 

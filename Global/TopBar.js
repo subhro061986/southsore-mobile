@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import xStyle from '../assets/css/x_style.js';
 
 import {
@@ -8,18 +8,22 @@ import {
     TouchableOpacity,
     TextInput
 } from 'react-native';
-// import { useAuth } from '../context/AuthContext.js';
+import { wishlistshow, authData, cartCount } from '../Context/Authcontext.js';
 import { useNavigation } from '@react-navigation/native';
 // import { UserProfile } from '../context/UserContext.js';
 
 export const TopBar = () => {
+    useEffect(() => {
+        console.log("cart count from top bar = ", cartCount)
+    }, [authData]);
+
     const navigation = useNavigation();
 
     return (
         <>
             <View style={xStyle.topbar}>
-                <View style={xStyle.topnav_top}>
-                    <TouchableOpacity style={xStyle.topbar_back_btn}>
+                <View style={[xStyle.topnav_top, { justifyContent: 'flex-end' }]}>
+                    {/* <TouchableOpacity style={xStyle.topbar_back_btn}>
                         <Image
                             source={require('../assets/images/backbtn.png')}
                         />
@@ -31,12 +35,34 @@ export const TopBar = () => {
                             height={30}
                             width={30}
                         />
+                    </TouchableOpacity> */}
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('cartdetails')}
+                    >
+                        <Image
+                            source={require('../assets/images/shopping-cart.png')}
+                        />
+
+                        <View
+                            style={{
+                                backgroundColor: '#ffffff',
+                                width: 20,
+                                height: 20,
+                                borderRadius: 20,
+                                alignItems: 'center',
+                                position: 'absolute',
+                                top: -10,
+                                right: -10
+                            }}
+                        >
+                            <Text style={{ fontWeight: '500', color: 'black', fontSize: 12 }}>{cartCount}</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={xStyle.topbar_bottom}>
                 <TouchableOpacity
-                onPress={() =>navigation.navigate('mybookshelf')}
+                    onPress={() => navigation.navigate('mybookshelf')}
                 >
                     <Image
                         source={require('../assets/images/bookshelf.png')}
@@ -54,7 +80,7 @@ export const TopBar = () => {
                     <Text style={xStyle.topbar_btn_txt}>Wishlist</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                 onPress={() =>navigation.navigate('myorders')}
+                    onPress={() => navigation.navigate('myorders')}
                 >
                     <Image
                         source={require('../assets/images/orders.png')}
@@ -63,7 +89,7 @@ export const TopBar = () => {
                     <Text style={xStyle.topbar_btn_txt}>Orders</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                 onPress={() =>navigation.navigate('profile')}
+                    onPress={() => navigation.navigate('profile')}
 
                 >
                     <Image
