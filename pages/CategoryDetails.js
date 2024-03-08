@@ -14,7 +14,9 @@ import {
     TouchableOpacity,
     ImageBackground,
     Animated,
-    PermissionsAndroid
+    PermissionsAndroid,
+    Alert
+
 } from 'react-native';
 // import { useAuth } from '../context/AuthContext.js';
 import Overlay from 'react-native-modal-overlay';
@@ -36,7 +38,7 @@ export const CategoryDetails = ({ route, navigation }) => {
     // const navigation = useNavigation();
     // console.log("Category ID : ", route.params.category_id);
     const { getBook_by_category, publisherId, add_delete_to_wishlist } = UserProfile();
-    const { wishlistshow } = useAuth();
+    const { wishlistshow,add_book_to_storage,uuid,image_path } = useAuth();
 
     const [modalvisibility, setmodalvisibility] = useState(false);
     const [sortSelected, setSortSelected] = useState(0);
@@ -178,6 +180,26 @@ export const CategoryDetails = ({ route, navigation }) => {
         }
     }
 
+    const add_to_cart = async (book) => {
+        console.log("book=",book)
+
+        let json_data = {
+        title: book.title,
+        author: book.authors,
+        price: book.price,
+        publisher: book.publisher,
+        items_no: 1,
+        image: image_path + book.publisherid + '/' + book.image + '?d=' + new Date(), 
+        category: book.category,
+        publisherid: book.publisherid,
+        bookid:book.id,
+        deviceid:uuid
+        }
+
+        const resp= await add_book_to_storage(json_data)
+        Alert.alert(resp.message) 
+    }
+
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.categoryDetailsBodyBg} stickyHeaderIndices={[0]}>
@@ -270,7 +292,8 @@ export const CategoryDetails = ({ route, navigation }) => {
                                             </Text>
                                         </View>
                                         <View>
-                                            <TouchableOpacity>
+                                                
+                                            <TouchableOpacity onPress={()=> add_to_cart(data)}>
                                                 <Image
                                                     source={require('../assets/images/plusBtn.png')}
                                                 />

@@ -14,7 +14,9 @@ import {
     TouchableOpacity,
     ImageBackground,
     Animated,
-    PermissionsAndroid
+    PermissionsAndroid,
+    Alert
+
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -28,7 +30,7 @@ export const MyWishlist = () => {
 
     const navigation = useNavigation();
     const { wishlistitems, publisherId, add_delete_to_wishlist } = UserProfile();
-    const { wishlistshow } = useAuth();
+    const { wishlistshow,add_book_to_storage,uuid,image_path } = useAuth();
 
     const [modalvisibility, setmodalvisibility] = useState(false);
 
@@ -52,6 +54,26 @@ export const MyWishlist = () => {
         else {
             alert("Please login first");
         }
+    }
+
+    const add_to_cart = async (book) => {
+        console.log("book=",book)
+
+        let json_data = {
+        title: book.title,
+        author: book.authors,
+        price: book.price,
+        publisher: book.publisher,
+        items_no: 1,
+        image: image_path + book.publisherid + '/' + book.image + '?d=' + new Date(), 
+        category: book.category,
+        publisherid: book.publisherid,
+        bookid:book.id,
+        deviceid:uuid
+        }
+
+        const resp= await add_book_to_storage(json_data)
+        Alert.alert(resp.message) 
     }
 
     return (
@@ -109,7 +131,7 @@ export const MyWishlist = () => {
                                         <View>
                                             <TouchableOpacity
                                                 style={xStyle.wishlistMoveToCartBtn}
-                                            // onPress={() => navigation.navigate('wishlist')}
+                                                onPress={()=> add_to_cart(data)}
                                             >
                                                 <Text style={xStyle.wishlistMoveToCartBtnTxt}>
                                                     Move to Cart

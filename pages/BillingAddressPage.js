@@ -158,8 +158,8 @@ export const BillingAddressPage = ({route,navigation}) => {
 
         if(respPlaceOrder.output !== null)
             setOrderTotal(respPlaceOrder.output.totalAmount)
-            // const cartDataresp=await getCartData(authData)
-            // console.log("card data response after place order= ",cartDataresp)
+            const cartDataresp=await getCartData(authData)
+            console.log("cart data response after place order= ",cartDataresp)
         setTogglePayment(false)
         setShowCoupon(true)
     

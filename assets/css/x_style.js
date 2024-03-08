@@ -1946,5 +1946,22 @@ export default StyleSheet.create({
     textAlign: "center",
     color: 'grey',
   },
+
+  cartCountNumber: {
+      backgroundColor:'#ffffff',
+      width:20,
+      height:20,
+      borderRadius:20,
+      alignItems:'center',
+      position:'absolute',
+      top:-10,
+      right:-10
+  },
+
+  cartCountNumberText :{
+    fontWeight:'bold',
+    color:'#26252C'
+  }
 });
+
 

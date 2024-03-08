@@ -158,19 +158,8 @@ export const TopMenuPub = ({ route}) => {
             <Image
               source={require('../assets/images/shopping-cart.png')}
               />
-            <View 
-              style={{
-                backgroundColor:'#ffffff',
-                width:20,
-                height:20,
-                borderRadius:20,
-                alignItems:'center',
-                position:'absolute',
-                top:-10,
-                right:-10
-              }}
-            >
-                <Text style={{fontWeight:'bold',color:'black'}}>{cartCount}</Text>
+             <View style={xStyle.cartCountNumber}>
+                <Text style={xStyle.cartCountNumberText}>{cartCount}</Text>
             </View>
             
           </TouchableOpacity>

@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
   const [uuid,SetUuid] = useState()
   const [cartItems, setCartItems] = useState([])
   const [cartCount, setCartCount] = useState(0)
+  const image_path = Config.API_URL + Config.PUB_IMAGES;
 
 
   // !  wishlistshow === isLoggedin
@@ -262,7 +263,15 @@ const AuthProvider = ({ children }) => {
           })
 
         console.log("get_cart_items : ", response.data);
-        setCartItems(response.data.output)
+
+        let cd=response.data.output
+        cd.map((item,index) =>{
+          item.image = image_path + item.publisherid + '/' + item.image + '?d=' + new Date();
+        })
+        // console.log("items after change= ",cd)
+        // let frontCover = image_path + pub_obj.publisherid + '/' + pub_obj.front_cover + '?d=' + new Date();
+
+        setCartItems(cd)
         setCartCount(response.data.output.length)
 
         return response.data
@@ -281,7 +290,7 @@ const AuthProvider = ({ children }) => {
 
     let tempCartArray = []
     let isPresent=false
-
+    console.log("inside add book to storage")
     // -------- Before Login ----------//
     if (authData === '' || authData === null || authData === undefined) {
       const cd = await AsyncStorage.getItem('cartData');
@@ -372,9 +381,11 @@ const AuthProvider = ({ children }) => {
   
   const clearCartStorage = async () => {
     await AsyncStorage.setItem("cartData", "")
+    setCartCount(0)
+    setCartItems([])
   }
 
-  const remove_cart_item = async (args) => {
+  const remove_cart_item = async (args,buyNow) => {
 
     try {
       const response = await axios.post(Config.API_URL + Config.REMOVE_CART_ITEM,args,
@@ -386,13 +397,16 @@ const AuthProvider = ({ children }) => {
 
         })
 
-        setCartCount(cartCount-1)
-        let index = cartItems.findIndex((item, i) => {
-          return item.id === args.bookid
-        });
-        let tempArr=cartItems
-        tempArr.splice(index,1)
-        setCartItems(tempArr)
+        //if the function is called from buynow button then the state needs to be change quickly hence the manual state change
+        if(buyNow){
+          removeBookFromState(args.bookid)
+        }
+        // if it gets called from another place like cart page then we can call the getCardData api to fix it
+        else{
+          getCartData(authData)
+
+        }
+
 
       // await price_items_signin(response.data)
 
@@ -402,6 +416,17 @@ const AuthProvider = ({ children }) => {
     catch (error) {
       console.log("remove_cart_item_error : ", error)
     }
+  }
+
+  const removeBookFromState=(bookid) =>{
+    
+    setCartCount(cartCount-1)
+    let index = cartItems.findIndex((item, i) => {
+      return item.id === bookid
+    });
+    let tempArr=cartItems
+    tempArr.splice(index,1)
+    setCartItems(tempArr)
   }
 
 
@@ -418,7 +443,11 @@ const AuthProvider = ({ children }) => {
         add_book_to_storage,
         cartCount,
         cartItems,
-        remove_cart_item
+        remove_cart_item,
+        getCartData,
+        removeBookFromState,
+        clearCartStorage,
+        image_path
         // authUsername
       }}
     >

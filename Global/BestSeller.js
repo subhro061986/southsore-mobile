@@ -6,6 +6,7 @@ import {
     Text,
     Image,
     TouchableOpacity,
+    Alert
 
 } from 'react-native';
 
@@ -20,7 +21,7 @@ export const BestSeller = ({ route }) => {
 
     const navigation = useNavigation();
     const { best_selling_books, publisherId, add_delete_to_wishlist, publisherData, allBestSeller } = UserProfile()
-    const { wishlistshow } = useAuth();
+    const { wishlistshow,add_book_to_storage,uuid,image_path } = useAuth();
 
     useEffect(() => {
 
@@ -34,7 +35,7 @@ export const BestSeller = ({ route }) => {
         }
         const resp = await add_delete_to_wishlist(json);
         // console.log("WISHLIST : ", resp);
-        alert(resp.message);
+        Alert.alert(resp.message);
     }
 
     const wishlistHandler = (event, book_id) => {
@@ -43,8 +44,28 @@ export const BestSeller = ({ route }) => {
             toggleWishlistHandler(book_id);
         }
         else {
-            alert("Please login first");
+            Alert.alert("Please login first");
         }
+    }
+
+    const add_to_cart = async (book) => {
+        console.log("book=",book)
+
+        let json_data = {
+        title: book.title,
+        author: book.authors,
+        price: book.price,
+        publisher: book.publisher,
+        items_no: 1,
+        image: image_path + book.publisherid + '/' + book.image + '?d=' + new Date(), 
+        category: book.category,
+        publisherid: book.publisherid,
+        bookid:book.id,
+        deviceid:uuid
+        }
+
+        const resp= await add_book_to_storage(json_data)
+        Alert.alert(resp.message) 
     }
 
     return (
@@ -103,7 +124,7 @@ export const BestSeller = ({ route }) => {
                                     </Text>
                                 </View>
                                 <View>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={()=> add_to_cart(data)}>
                                         <Image
                                             source={require('../assets/images/plusBtn.png')}
                                         />

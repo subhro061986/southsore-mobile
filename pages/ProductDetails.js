@@ -131,7 +131,7 @@ export const ProductDetails = ({route,navigation}) => {
 
     const add_to_cart = async (bookid, toCheckout) => {
         console.log('bookDetails',bookdetail)
-
+        console.log("default image=",defaultimg)
         let json_data = {
             title: bookdetail.title,
             author: bookdetail.authors,
@@ -171,8 +171,6 @@ export const ProductDetails = ({route,navigation}) => {
                 if(resp.isPresent){
                     // remove data from backend
                     remove_item_and_add(json_data)
-                    // add book again to the cart such that it is the last item added
-                    // await add_book_to_storage(json_data)
                 }
                 navigation.navigate('billingAddress', {buynow : 1})
             }
@@ -183,54 +181,15 @@ export const ProductDetails = ({route,navigation}) => {
         }
     }
 
-
-    // const Remove_Cart_Item = async (book_id) => {
-    //     console.log("remove", book_id)
-
-    //     if (wishlistshow === true) {
-    //         let remove_json = {
-    //             deviceid: uuid,
-    //             // "9E7C1A59-7473-405F-81A7-11E25C70F0AC",
-    //             bookid: book_id
-    //         }
-
-    //         console.log("Remove_json ", remove_json)
-
-    //         const resp = await remove_item(remove_json)
-            
-    //     }
-    //     else {
-    //         let cartItems=JSON.parse(localStorage.getItem("cart_data")) || []
-            
-    //         let is_book_exists = cartItems.find((val) => val.my_book_id === book_id)
-    //         if (is_book_exists !== undefined) {
-
-
-
-    //             let localstorage_array = [...cartItems]
-    //             let arr_index = cartItems.indexOf(is_book_exists)
-    //             // console.log("index", arr_index)
-
-    //             localstorage_array.splice(arr_index, 1)
-    //             localStorage.setItem("cart_data", JSON.stringify(localstorage_array))
-    //             // console.log("localarray_after_remove :", JSON.parse(localStorage.getItem("cart_data")))
-    //             setDependencyvar(!dependencyvar)
-    //             get_items()
-    //         }
-    //     }
-
-
-    // }
-
     const remove_item_and_add = async (remove_json) => {
 
         console.log("remove json:",remove_json)
-        const resp = await remove_cart_item(remove_json)
+        const resp = await remove_cart_item(remove_json,1)
         console.log("Remove_cart :", resp) 
         if(resp.statuscode === "0"){
 
             const response = await add_book_to_storage(remove_json)
-            console.log("response after removing= ",response)
+            console.log("response after adding= ",response)
         }
 
 

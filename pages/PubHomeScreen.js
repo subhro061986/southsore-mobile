@@ -16,7 +16,8 @@ import {
     Animated,
     PermissionsAndroid,
     Dimensions,
-    useWindowDimensions 
+    useWindowDimensions ,
+    Alert
 } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 // import { useAuth } from '../context/AuthContext.js';
@@ -32,14 +33,13 @@ import FooterPub from '../Global/FooterPub.js';
 import BuyStepsPub from '../Global/BuyStepsPub.js';
 import TopMenuPub from '../Global/TopMenuPub.js';
 import BestSeller from '../Global/BestSeller.js';
-
 export const PubHomeScreen = ({ route, navigation }) => {
 
     // const navigation = useNavigation();
     const { width } = useWindowDimensions();
 
     const { getPublishersById, publisherId, getNewArrivals, allNewArrival, publisherData, allBestSeller, add_delete_to_wishlist } = UserProfile();
-    const { authData, wishlistshow } = useAuth();
+    const { authData, wishlistshow,add_book_to_storage,uuid,image_path } = useAuth();
 
     const [publisherDetails, setPublisherDetails] = useState('')
 
@@ -76,6 +76,25 @@ export const PubHomeScreen = ({ route, navigation }) => {
         }
     }
 
+    const add_to_cart = async (book) => {
+        console.log("book=",book)
+
+        let json_data = {
+        title: book.title,
+        author: book.authors,
+        price: book.price,
+        publisher: book.publisher,
+        items_no: 1,
+        image: image_path + book.publisherid + '/' + book.image + '?d=' + new Date(), 
+        category: book.category,
+        publisherid: book.publisherid,
+        bookid:book.id,
+        deviceid:uuid
+        }
+
+        const resp= await add_book_to_storage(json_data)
+        Alert.alert(resp.message) 
+    }
 
     return (
         <SafeAreaView>
@@ -293,7 +312,7 @@ export const PubHomeScreen = ({ route, navigation }) => {
                                             >
                                                 ₹{data.price}
                                             </Text>
-                                            <TouchableOpacity>
+                                            <TouchableOpacity onPress={() => add_to_cart(data)}>
                                                 <Image
                                                     source={require('../assets/images/plusBtn.png')}
                                                 />

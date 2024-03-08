@@ -14,19 +14,69 @@ import {
     TouchableOpacity,
     ImageBackground,
     Animated,
-    PermissionsAndroid
+    PermissionsAndroid,
+    Alert
 } from 'react-native';
-// import { useAuth } from '../context/AuthContext.js';
-import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
 
 import TopMenuPub from '../Global/TopMenuPub.js';
 import FooterPub from '../Global/FooterPub.js';
 import Footer from '../Global/Footer.js';
+import { useAuth } from '../Context/Authcontext.js';
+import Config from "../config/Config.json"
 
-export const CartPage = () => {
+export const CartPage = ({route,navigation}) => {
+    const {
+        authData,
+        getCartData,
+        cartItems,
+        cartCount,
+        remove_cart_item,
+        removeBookFromState,
+        clearCartStorage,
+        uuid} = useAuth()
+    const [subtotal,setSubTotal] = useState(0)
 
-    const navigation = useNavigation();
+    useEffect(() =>{
+        // clearCartStorage()
+        findSubtotal()
+        console.log("cart items= ",cartItems)
+    },[cartCount])
+
+    const findSubtotal= () => {
+        let subtotal = 0;
+        cartItems.map((data,index) => {
+            subtotal = subtotal + data.price
+        })
+        setSubTotal(subtotal)
+    }
+
+    const proceedToCheckout =() =>{
+        if (authData === '' || authData === null || authData === undefined) {
+            Alert.alert("Please Login to Buy!")
+        }
+        else {
+            navigation.navigate("billingAddress", {buynow:0})
+
+        }
+    }
+    const removeCartItems= async (item) =>{
+
+        console.log("Data to be removed= ",cartItems)
+        if(item["bookid"] === undefined)
+            item.bookid=item.id
+        item.deviceid=uuid
+        // check before login
+        if (authData === '' || authData === null || authData === undefined) {
+            
+            console.log("item to be removed= ",item)
+            removeBookFromState()
+        }
+        // after login
+        else {
+            const response= await remove_cart_item(item,0)
+            console.log("response after removal= ",response)
+        }
+    }
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.cartPageBodyBg} stickyHeaderIndices={[0]}>
@@ -36,75 +86,18 @@ export const CartPage = () => {
                         My Cart
                     </Text>
                     <Text style={xStyle.cartPageHeaderResults}>
-                        3 items added to the list
+                        {cartCount} items added to the list
                     </Text>
                 </View>
                 <View style={xStyle.cartPageBooksMainDiv}>
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov1.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Goldfinch</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/close-circle-thin.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹149
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
+                    {
+                        cartItems.map((data,index) =>(
 
-                    <View style={xStyle.pub_home_best_card}>
+                        <View style={xStyle.pub_home_best_card} key={index}>
+                            {/* <Text style={{color:'black'}}> {data.image }</Text> */}
                         <Image
-                            source={require('../assets/images/bcov2.png')}
-                            style={xStyle.pub_home_best_cover}
-                            height={134}
-                            width={138}
-                        />
-                        <View style={xStyle.pub_home_best_card_col2}>
-                            <View style={xStyle.pub_home_best_card_col2_top}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Hypocrite..</Text>
-                                    <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                    </View>
-                                </View>
-                                <TouchableOpacity>
-                                    <Image
-                                        source={require('../assets/images/close-circle-thin.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={xStyle.pub_home_best_card_col2_bottom}>
-                                <View>
-                                    <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹199
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
+                            source={{ uri: data.image }}
 
-                    <View style={xStyle.pub_home_best_card}>
-                        <Image
-                            source={require('../assets/images/bcov3.png')}
                             style={xStyle.pub_home_best_cover}
                             height={134}
                             width={138}
@@ -112,12 +105,12 @@ export const CartPage = () => {
                         <View style={xStyle.pub_home_best_card_col2}>
                             <View style={xStyle.pub_home_best_card_col2_top}>
                                 <View>
-                                    <Text style={xStyle.pub_home_best_card_title}>The Swallows</Text>
+                                    <Text style={xStyle.pub_home_best_card_title}>{data.title}</Text>
                                     <View style={xStyle.pub_home_card_author_view}>
-                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                                        <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>{data.authors}</Text></Text>
                                     </View>
                                 </View>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => removeCartItems(data)}>
                                     <Image
                                         source={require('../assets/images/close-circle-thin.png')}
                                     />
@@ -126,12 +119,16 @@ export const CartPage = () => {
                             <View style={xStyle.pub_home_best_card_col2_bottom}>
                                 <View>
                                     <Text style={xStyle.pub_home_best_card_price}>
-                                        ₹249
+                                        {data.price}
                                     </Text>
                                 </View>
                             </View>
                         </View>
-                    </View>
+                        </View>
+                        ))
+                    }
+
+                    
                 </View>
 
                 <View style={xStyle.cartPageOrderSummaryView}>
@@ -139,25 +136,25 @@ export const CartPage = () => {
                         <Text style={[xStyle.cartPageHeader,{fontSize:20}]}>Order Summary</Text>
                     </View>
                     <View style={xStyle.cartPageOrderSummaryBody}>
-                        <View style={xStyle.cartPageOrderSummaryBodyItems}>
+                        {/* <View style={xStyle.cartPageOrderSummaryBodyItems}>
                             <Text style={xStyle.cartPageOrderSummaryBodyItemsLabelText}>Subtotal</Text>
-                            <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹597</Text>
-                        </View>
-                        <View style={xStyle.cartPageOrderSummaryBodyItems}>
+                            <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹ {subtotal} </Text>
+                        </View> */}
+                        {/* <View style={xStyle.cartPageOrderSummaryBodyItems}>
                             <Text style={xStyle.cartPageOrderSummaryBodyItemsLabelText}>GST</Text>
                             <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>5%</Text>
-                        </View>
+                        </View> */}
                     </View>
                     <View style={[xStyle.cartPageOrderSummaryTotal, xStyle.cartPageOrderSummaryBodyItems]}>
                         <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>Total</Text>
-                        <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹625</Text>
+                        <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹ {subtotal} </Text>
                     </View>
-                    <View style={xStyle.cartPageOrderSummaryBtns}>
-                        <TouchableOpacity style={xStyle.cartPageOrderSummaryCancelBtn}>
-                            <Text style={xStyle.cartPageOrderSummaryCancelBtnTxt}>Cancel</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={xStyle.cartPageOrderSummaryCheckoutBtn}>
+                    <View >
+                        <TouchableOpacity style={[xStyle.cartPageOrderSummaryCheckoutBtn,{marginVertical:'5%'}]} onPress={() =>proceedToCheckout()}>
                             <Text style={xStyle.cartPageOrderSummaryCheckoutBtnTxT}>Checkout</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={xStyle.cartPageOrderSummaryCancelBtn} onPress={()=> navigation.navigate("home")}>
+                            <Text style={xStyle.cartPageOrderSummaryCancelBtnTxt}>Continue Shopping</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
