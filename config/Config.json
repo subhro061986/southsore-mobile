@@ -35,7 +35,12 @@
     "NEWSLETTER": "newsletter",
     "SEARCH_BOOKS":"book/search",
     "home_links" : "http://ebooksjunction.com/demo/",
-    "FORGOT_PASSWORD" : "user/forgot-password"
+    "FORGOT_PASSWORD" : "user/forgot-password",
+    
+    "RAZORPAY_TEST_KEY":"rzp_test_onx4fvZbYNcUMB",
+    "RAZORPAY_LIVE_KEY":"rzp_live_gXUYrgWkg9i2Fl",
+    "RAZORPAY_LIVE_KEY_SECRET":"jIoieogOsKkSFTna9gX5r0rJ"
+
 
 
     
