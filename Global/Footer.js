@@ -153,7 +153,7 @@ export const Footer = () => {
       navigation.navigate('mybookshelf');
     }
     else {
-      alert("Log in failed!");
+      Alert.alert("Log in failed!");
     }
 
     // }
@@ -167,7 +167,7 @@ export const Footer = () => {
     if (resp === "Success") {
       // console.log('logout_response', resp);
       navigation.navigate("home");
-      alert("Logged out successfully");
+      Alert.alert("Logged out successfully");
     }
   }
 
@@ -188,7 +188,7 @@ export const Footer = () => {
     else {
       if (resp.statuscode === '0') {
         // let prof_img = resp.output['profileimage'] !== null ? resp.output['profileimage'] : profile
-        alert("Registered successfully!")
+        Alert.alert("Registered successfully!")
         // setProfilePic(prof_img)
         setSignUpModalvisibility(false);
         setLogInModalvisibility(false);
@@ -197,13 +197,14 @@ export const Footer = () => {
 
       else {
         // setEmailError('Account already exist with this email!')
-        alert('Account already exist with this email!')
+        Alert.alert('Account already exist with this email!')
       }
     }
   }
 
 
   const do_registration = () => {
+    user_registration();
     // if (username === '' && password === '' && email === '' && phone === '') {
     //     setUserNameError('Please enter username')
     //     setPhoneError('Please enter phone number')
@@ -235,34 +236,36 @@ export const Footer = () => {
     //     setPasswordError('')
     // }
     // else {
-    user_registration()
+    // user_registration()
     // }
   }
   const sendEmail = async () => {
-  setLogInModalvisibility(false);
-  setSignUpModalvisibility(false);
-  setForotPasswordModalvisibility(false);
-    if(forgotEmail !== ""){
-        const args = {
-            "email" : forgotEmail
-        };
-        const resp = await forgot_password(args);
-        Alert.alert('Message', resp, [
-        
-          {text: 'OK', onPress: () => {
-              setForgotEmail('')
-          }},
-        ]);
-    }
-    else{
-      Alert.alert('Message', "Email should not be blank", [
-        
-        {text: 'OK', onPress: () => {
-          setForgotEmail('')
-        }},
+    setLogInModalvisibility(false);
+    setSignUpModalvisibility(false);
+    setForotPasswordModalvisibility(false);
+    if (forgotEmail !== "") {
+      const args = {
+        "email": forgotEmail
+      };
+      const resp = await forgot_password(args);
+      Alert.alert('Message', resp, [
+        {
+          text: 'OK', onPress: () => {
+            setForgotEmail('')
+          }
+        },
       ]);
     }
-}
+    else {
+      Alert.alert('Message', "Email should not be blank", [
+        {
+          text: 'OK', onPress: () => {
+            setForgotEmail('')
+          }
+        },
+      ]);
+    }
+  }
   return (
     <>
       <View style={xStyle.bottomnav}>
@@ -615,13 +618,13 @@ export const Footer = () => {
           <View style={xStyle.logInModalBody}>
             <Text style={xStyle.buy_join_modal_legend}>Enter Your Registered Email</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput 
+              <TextInput
                 style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your registered email address' 
+                placeholder='Your registered email address'
                 placeholderTextColor={'#7B8890'}
                 value={forgotEmail}
-                onChangeText={(e)=>setForgotEmail(e)}
-                />
+                onChangeText={(e) => setForgotEmail(e)}
+              />
               {/* <Image
                 source={require('../assets/images/smsbox.png')}
                 style={xStyle.buy_join_modal_input_icon}
