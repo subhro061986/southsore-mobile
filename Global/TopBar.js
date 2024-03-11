@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 // import { UserProfile } from '../context/UserContext.js';
 
 export const TopBar = () => {
-    const { wishlistshow,authData,cartCount } = useAuth()
+    const { wishlistshow, authData, cartCount } = useAuth()
     useEffect(() => {
         console.log("cart count from top bar = ", cartCount)
     }, [authData]);
@@ -44,19 +44,8 @@ export const TopBar = () => {
                             source={require('../assets/images/shopping-cart.png')}
                         />
 
-                        <View
-                            style={{
-                                backgroundColor: '#ffffff',
-                                width: 20,
-                                height: 20,
-                                borderRadius: 20,
-                                alignItems: 'center',
-                                position: 'absolute',
-                                top: -10,
-                                right: -10
-                            }}
-                        >
-                            <Text style={{ fontWeight: '500', fontSize: 12 }}>{cartCount}</Text>
+                        <View style={xStyle.cartCountNumber}>
+                            <Text style={xStyle.cartCountNumberText}>{cartCount}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

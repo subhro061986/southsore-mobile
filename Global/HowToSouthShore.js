@@ -7,14 +7,16 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native';
 import Overlay from 'react-native-modal-overlay';
 // import { useAuth } from '../context/AuthContext.js';
 // import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
+import { UserProfile } from '../Context/Usercontext.js';
 
 export const HowToSouthShore = () => {
+  const { sendEmail } = UserProfile();
 
   const [modalvisibility, setmodalvisibility] = useState(false);
   const [name, setName] = useState('');
@@ -33,6 +35,79 @@ export const HowToSouthShore = () => {
 
   const backbuttonhandler = () => {
     setmodalvisibility(false);
+  }
+
+  const isValidEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+
+  const isValidPhone = (phone) => {
+    return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(phone);
+  }
+
+  // const handleName = (e) => {
+  //   setContactUsName(e.target.value)
+  // }
+
+  // const handleEmail = (e) => {
+  //   // if(!isValidEmail(e.target.value))
+  //   // {
+  //   //     setEmailErrorMessage('Email is invalid');
+
+  //   // }
+  //   // else{
+  //   setContactUsEmail(e.target.value)
+  //   //     setEmailErrorMessage('');
+  //   // }
+  // }
+
+  // const handlePhNo = (e) => {
+  //   // if(!isValidPhone(e.target.value)){
+  //   //     setPhoneErrorMessage('Phone number is invalid');
+  //   // }
+  //   // else{
+  //   setContactUsPhNo(e.target.value)
+  //   //     setPhoneErrorMessage('')
+  //   // }
+  // }
+
+  // const handleMessage = (e) => {
+  //   setContactUsMessage(e.target.value)
+  // }
+
+  const toggleModal = () => {
+    setMessage('')
+    setEmail('')
+    setPhoneNumber('')
+    setName('')
+    if(modalvisibility === true){
+      setmodalvisibility(false);
+    }
+    else{
+      setmodalvisibility(true);
+    }
+  };
+
+  const triggerEmail = async () => {
+    if (!isValidPhone(phoneNumber)) {
+      Alert.alert('Phone number is invalid!');
+    }
+    else if (!isValidEmail(email)) {
+      Alert.alert('Email is invalid!');
+    }
+    else {
+      let data = {
+        "email": email,
+        "name": name,
+        "phno": phoneNumber,
+        "message": message
+      }
+      let resp = await sendEmail(data);
+      console.log("Email resp : ", resp);
+      toggleModal();
+      Alert.alert(resp.toUpperCase() + "!\n\nAdmin will contact you shortly.");
+    }
   }
 
 
@@ -140,8 +215,13 @@ export const HowToSouthShore = () => {
           <View style={xStyle.buy_join_modal_body}>
             <Text style={xStyle.buy_join_modal_legend}>Name</Text>
             <View style={xStyle.buy_join_modal_input_view}>
-              <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder="Your Publisher's Name" placeholderTextColor={'#7B8890'}></TextInput>
+              <TextInput
+                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                placeholder="Your Publisher's Name"
+                placeholderTextColor={'#7B8890'}
+                value={name}
+                onChangeText={(e) => setName(e)}
+              />
               <Image
                 source={require('../assets/images/profile-circle.png')}
                 style={xStyle.buy_join_modal_input_icon}
@@ -150,7 +230,11 @@ export const HowToSouthShore = () => {
             <Text style={xStyle.buy_join_modal_legend}>Email</Text>
             <View style={xStyle.buy_join_modal_input_view}>
               <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your email address' placeholderTextColor={'#7B8890'}></TextInput>
+                placeholder='Your email address'
+                placeholderTextColor={'#7B8890'}
+                value={email}
+                onChangeText={(e) => setEmail(e)}
+              />
               <Image
                 source={require('../assets/images/smsbox.png')}
                 style={xStyle.buy_join_modal_input_icon}
@@ -159,7 +243,11 @@ export const HowToSouthShore = () => {
             <Text style={xStyle.buy_join_modal_legend}>Phone no</Text>
             <View style={xStyle.buy_join_modal_input_view}>
               <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                placeholder='Your phone number' placeholderTextColor={'#7B8890'}></TextInput>
+                placeholder='Your phone number'
+                placeholderTextColor={'#7B8890'}
+                value={phoneNumber}
+                onChangeText={(e) => setPhoneNumber(e)}
+              />
               <Image
                 source={require('../assets/images/call.png')}
                 style={xStyle.buy_join_modal_input_icon}
@@ -173,11 +261,12 @@ export const HowToSouthShore = () => {
                 multiline={true}
                 numberOfLines={4}
                 textAlignVertical='top'
-              >
-              </TextInput>
+                value={message}
+                onChangeText={(e) => setMessage(e)}
+              />
             </View>
           </View>
-          <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn}>
+          <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn} onPress={triggerEmail}>
             <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Submit</Text>
           </TouchableOpacity>
         </Overlay>
