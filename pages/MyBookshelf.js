@@ -47,7 +47,7 @@ useEffect(() => {
                 }]}>
                     {
                     myBookList.length > 0 && myBookList.map((book, index) => (
-                    <View style={[xStyle.pub_home_best_card]}>
+                    <View style={[xStyle.pub_home_best_card]} key={index}>
                         <Image
                             source={{uri:Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.image + '?d=' + new Date()}}
                             style={xStyle.pub_home_best_cover}
@@ -79,10 +79,19 @@ useEffect(() => {
                                
                                 <TouchableOpacity
                                     style={[xStyle.wishlistMoveToCartBtn,{width:'50%'}]}
-                                // onPress={() => navigation.navigate('wishlist')}
+                                    onPress={() => navigation.navigate('pdf',{epdf:Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epdf_link})}
                                 >
                                     <Text style={xStyle.wishlistMoveToCartBtnTxt}>
                                        Read Now
+                                    </Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={[xStyle.wishlistMoveToCartBtn,{width:'50%'}]}
+                                    onPress={() => navigation.navigate('epub')}
+                                >
+                                    <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                       Epub
                                     </Text>
                                 </TouchableOpacity>
                             </View>

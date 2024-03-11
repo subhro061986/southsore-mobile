@@ -14,6 +14,8 @@ import BillingAddressPage from '../pages/BillingAddressPage';
 import MyBookshelf from '../pages/MyBookshelf';
 import MyOrders from '../pages/MyOrders';
 import ChangePassword from '../pages/ChangePassword';
+import PdfScreen from '../pages/PdfScreen';
+import EpubScreen from '../pages/EpubScreen';
 
 
 
@@ -35,6 +37,8 @@ const Navigation=()=>{
           <Stack.Screen name="myorders" component={MyOrders} options={{title: 'myorders',headerShown: false}}/>
           <Stack.Screen name="billingAddress" component={BillingAddressPage} options={{title:'billingAddress', headerShown:false }}/>
           <Stack.Screen name="changepassword" component={ChangePassword} options={{title:'changepassword', headerShown:false }}/>
+          <Stack.Screen name="pdf" component={PdfScreen} options={{title:'pdf', headerShown:false }}/>
+          <Stack.Screen name="epub" component={EpubScreen} options={{title:'pdf', headerShown:false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
