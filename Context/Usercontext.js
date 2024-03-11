@@ -925,21 +925,21 @@ const UserProvider = ({ children }) => {
     }
 
     const sendEmail = async (data) => {
-      // try {
-      //   const response = await axios.post(Config.API_URL + Config.NEWSLETTER,data,
-      //     {
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //         // 'Authorization': 'Bearer ' + authData
-      //       },
-      //     })
+      try {
+        const response = await axios.post(Config.API_URL + Config.NEWSLETTER, data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              // 'Authorization': 'Bearer ' + authData
+            },
+          })
 
-      //   console.log("news letter details  : ", response);
-      //   return response.data;
-      // }
-      // catch (error) {
-      //   console.log("Newsletter CONTEXT ERROR: ", error);
-      // }
+        console.log("News letter details  : ", response);
+        return response.data;
+      }
+      catch (error) {
+        console.log("Newsletter CONTEXT ERROR: ", error);
+      }
     }
 
   

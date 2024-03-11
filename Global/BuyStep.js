@@ -16,18 +16,25 @@ import {
     Animated,
     PermissionsAndroid,
     Linking,
-    Modal
+    Modal,
+    Alert
 } from 'react-native';
 
 import Overlay from 'react-native-modal-overlay';
 import { ZoomIn } from 'react-native-reanimated';
 // import { useAuth } from '../context/AuthContext.js';
 // import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
+import { UserProfile } from '../Context/Usercontext.js';
 
 export const BuyStep = () => {
 
+    const { sendEmail } = UserProfile();
     const [modalvisibility, setmodalvisibility] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [message, setMessage] = useState('');
+
 
     useEffect(() => {
 
@@ -40,6 +47,79 @@ export const BuyStep = () => {
 
     const backbuttonhandler = () => {
         setmodalvisibility(false);
+    }
+
+    const isValidEmail = (email) => {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+
+    const isValidPhone = (phone) => {
+        return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(phone);
+    }
+
+    // const handleName = (e) => {
+    //   setContactUsName(e.target.value)
+    // }
+
+    // const handleEmail = (e) => {
+    //   // if(!isValidEmail(e.target.value))
+    //   // {
+    //   //     setEmailErrorMessage('Email is invalid');
+
+    //   // }
+    //   // else{
+    //   setContactUsEmail(e.target.value)
+    //   //     setEmailErrorMessage('');
+    //   // }
+    // }
+
+    // const handlePhNo = (e) => {
+    //   // if(!isValidPhone(e.target.value)){
+    //   //     setPhoneErrorMessage('Phone number is invalid');
+    //   // }
+    //   // else{
+    //   setContactUsPhNo(e.target.value)
+    //   //     setPhoneErrorMessage('')
+    //   // }
+    // }
+
+    // const handleMessage = (e) => {
+    //   setContactUsMessage(e.target.value)
+    // }
+
+    const toggleModal = () => {
+        setMessage('')
+        setEmail('')
+        setPhoneNumber('')
+        setName('')
+        if (modalvisibility === true) {
+            setmodalvisibility(false);
+        }
+        else {
+            setmodalvisibility(true);
+        }
+    };
+
+    const triggerEmail = async () => {
+        if (!isValidPhone(phoneNumber)) {
+            Alert.alert('Phone number is invalid!');
+        }
+        else if (!isValidEmail(email)) {
+            Alert.alert('Email is invalid!');
+        }
+        else {
+            let data = {
+                "email": email,
+                "name": name,
+                "phno": phoneNumber,
+                "message": message
+            }
+            let resp = await sendEmail(data);
+            console.log("Email resp : ", resp);
+            toggleModal();
+            Alert.alert(resp.toUpperCase() + "!\n\nAdmin will contact you shortly.");
+        }
     }
 
     return (
@@ -82,7 +162,7 @@ export const BuyStep = () => {
                             <Text style={xStyle.buy_card_head}>Select and <Text style={xStyle.buy_card_head_sec}>Buy</Text></Text>
                         </View>
                         <Text style={xStyle.buy_card_body}>
-                        Make your selection(s) across publishers, genres and add to the shopping cart, log in with your credentials and complete the purchase. You have a range of options to pay through our secure payment gateway.
+                            Make your selection(s) across publishers, genres and add to the shopping cart, log in with your credentials and complete the purchase. You have a range of options to pay through our secure payment gateway.
                         </Text>
                     </View>
                     <View style={xStyle.buy_card}>
@@ -93,7 +173,7 @@ export const BuyStep = () => {
                             <Text style={xStyle.buy_card_head}>Download and <Text style={xStyle.buy_card_head_sec}>Read</Text></Text>
                         </View>
                         <Text style={xStyle.buy_card_body}>
-                        Once you make a purchase, the selected book(s) come to your dashboard and are available in your ‘MyBookshelf section”. As a next step download the e-book reader to your device and the book as well for you to enjoy a simple and seamless offline reading.
+                            Once you make a purchase, the selected book(s) come to your dashboard and are available in your ‘MyBookshelf section”. As a next step download the e-book reader to your device and the book as well for you to enjoy a simple and seamless offline reading.
                         </Text>
                     </View>
                 </ScrollView>
@@ -137,8 +217,13 @@ export const BuyStep = () => {
                     <View style={xStyle.buy_join_modal_body}>
                         <Text style={xStyle.buy_join_modal_legend}>Name</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
-                            <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder="Your Name" placeholderTextColor={'#7B8890'}></TextInput>
+                            <TextInput
+                                style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
+                                placeholder="Your Publisher's Name"
+                                placeholderTextColor={'#7B8890'}
+                                value={name}
+                                onChangeText={(e) => setName(e)}
+                            />
                             <Image
                                 source={require('../assets/images/profile-circle.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -147,7 +232,11 @@ export const BuyStep = () => {
                         <Text style={xStyle.buy_join_modal_legend}>Email</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
                             <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder='Your email address' placeholderTextColor={'#7B8890'}></TextInput>
+                                placeholder='Your email address'
+                                placeholderTextColor={'#7B8890'}
+                                value={email}
+                                onChangeText={(e) => setEmail(e)}
+                            />
                             <Image
                                 source={require('../assets/images/smsbox.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -156,7 +245,11 @@ export const BuyStep = () => {
                         <Text style={xStyle.buy_join_modal_legend}>Phone no</Text>
                         <View style={xStyle.buy_join_modal_input_view}>
                             <TextInput style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
-                                placeholder='Your phone number' placeholderTextColor={'#7B8890'}></TextInput>
+                                placeholder='Your phone number'
+                                placeholderTextColor={'#7B8890'}
+                                value={phoneNumber}
+                                onChangeText={(e) => setPhoneNumber(e)}
+                            />
                             <Image
                                 source={require('../assets/images/call.png')}
                                 style={xStyle.buy_join_modal_input_icon}
@@ -170,16 +263,14 @@ export const BuyStep = () => {
                                 multiline={true}
                                 numberOfLines={4}
                                 textAlignVertical='top'
-                            >
-                            </TextInput>
+                                value={message}
+                                onChangeText={(e) => setMessage(e)}
+                            />
                         </View>
                     </View>
-                    <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn}>
+                    <TouchableOpacity style={xStyle.howToSouthShoreJoinNowBtn} onPress={triggerEmail}>
                         <Text style={[xStyle.howToSouthShoreJoinNowBtnText, xStyle.buy_submit_font]}>Submit</Text>
                     </TouchableOpacity>
-
-
-
                 </Overlay>
             </View>
         </>
