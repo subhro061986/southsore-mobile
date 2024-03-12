@@ -167,11 +167,11 @@ export const PubHomeScreen = ({ route, navigation }) => {
                         , authoritative literature
                         , Juris Press specializes in catering to the discerning needs of the professional */}
                     </View>
-                    <TouchableOpacity style={xStyle.southshoreInnovationsReadMore_btn}>
+                    {/* <TouchableOpacity style={xStyle.southshoreInnovationsReadMore_btn}>
                         <Text style={xStyle.southshoreInnovationsReadMore}>
                             Read More
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
 
                 {/* Category List */}

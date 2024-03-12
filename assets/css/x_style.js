@@ -221,7 +221,8 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 15
+    paddingHorizontal: 15,
+    paddingVertical:35
   },
 
   aboutSouthShoreHeadView: {

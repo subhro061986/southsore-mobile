@@ -45,11 +45,11 @@ export const AboutSouthshore = () => {
       </Text>
       </View>
       
-      <TouchableOpacity style={xStyle.aboutSouthShoreReadMoreBtn}>
+      {/* <TouchableOpacity style={xStyle.aboutSouthShoreReadMoreBtn}>
         <Text style={xStyle.aboutSouthShoreReadMore}>
           Read More
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {/* <Button 
       title="Confirm Order Button"
       onPress={() => navigation.navigate('confirmOrder')}
