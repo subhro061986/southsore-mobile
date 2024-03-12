@@ -16,20 +16,228 @@ import {
     Animated,
     PermissionsAndroid
 } from 'react-native';
-// import { useAuth } from '../context/AuthContext.js';
-import { useNavigation } from '@react-navigation/native';
-// import { UserProfile } from '../context/UserContext.js';
-
 
 import FooterPub from '../Global/FooterPub.js';
 import TopBar from '../Global/TopBar.js';
 import Footer from '../Global/Footer.js';
-
+import { UserProfile } from '../Context/Usercontext.js';
+import { useAuth } from '../Context/Authcontext.js';
+import Config from "../config/Config.json"
+import reactNativeHTMLtoPdf from 'react-native-html-to-pdf';
+import RNFS from 'react-native-fs';
+import RNFetchBlob from 'rn-fetch-blob';
 export const MyOrders = () => {
 
-    const navigation = useNavigation();
+    const { authData } = useAuth()
+    const { myorders, getInvoiceById,myOrderList } = UserProfile()
 
-    const downloadBook=(id) =>{
+    useEffect(() => {
+        //RNFS.DownloadDirectoryPath
+        //var path = RNFS.DocumentDirectoryPath + '/test.txt';
+        // var path = RNFS.DownloadDirectoryPath + '/test.pdf';
+        // console.log(path)
+        // RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
+        // .then((success) => {
+        //     console.log('FILE WRITTEN!');
+        // })
+        // .catch((err) => {
+        //     console.log(err.message);
+        // });
+        //getMyOrders()
+    }, [])
+
+    const calculateTotalCGST =(invoices) =>{
+        let totalCGST = 0;
+        invoices.map((invoice) => {
+            totalCGST += invoice.cgst
+        })
+        return totalCGST
+       }
+       const calculateTotalSGST =(invoices) =>{
+        let totalSGST = 0;
+        invoices.map((invoice) => {
+            totalSGST += invoice.sgst
+        })
+        return totalSGST
+       }
+       const calculateTotalIGST =(invoices) =>{
+        let totalIGST = 0;
+        invoices.map((invoice) => {
+            totalIGST += invoice.igst
+        })
+        return totalIGST
+       }
+
+    const downloadBook=async(id) =>{
+
+        const getInvdet=await getInvoiceById(id)
+        let invoice=getInvdet.output
+        console.log("INVOICE DET",invoice.invoiceno)
+        let options = {
+            html: `
+            <html>
+                <body >
+                    <table width="100%" style="border:none;font-family:verdana;font-size:9px;">
+                        <tr>
+                            <td colspan="2" style="text-align:center;" width="33%">
+                                <div style="border:0;border-bottom:1px solid #333;">
+        
+                                    <h6 style="margin:8px 5px;">TAX INVOICE</h6>
+                                </div>
+                            </td>
+                            <td colspan="2" style="text-align:center;" width="33%">
+                                <div style="padding: 3px 5px 5px 5px;text-align:left;border:0;border-bottom:1px solid #333;">
+                                    Order #: <strong> ${invoice.orderno}</strong>
+                                    <br/>
+                                    Order Date: <strong>${invoice.ordedate?.split(" ")[0]} </strong>
+                                </div>
+                            </td>
+                            <td colspan="2" style="text-align:center;" width="33%">
+                                <div style="padding: 3px 5px 5px 5px;text-align:left;border:0;border-bottom:1px solid #333;">
+                                Invoice #: <strong>${invoice.invoiceno}</strong>
+                                <br/>
+                                Invoice Date: <strong>${invoice.invoicedate?.split(" ")[0]}</strong>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="3" width="50%">
+                                <div style="text-align:left;padding:5px;border:0;">
+                                    <h4 style="margin:5px 0;border-bottom:1px solid #333;">Sold By</h4>
+                                    <address>
+                                        E-Books Junction <br/>
+                                        ${invoice.companyname}<br/>
+                                        ${invoice.companyaddressline} <br/>
+                                        ${invoice.companycity} , ${invoice.companypincode}<br/>
+                                        ${invoice.companystate} , ${invoice.companycountry}<br/>
+                                        GSTIN: <strong> ${invoice.companygstin}</strong>
+                                    </address>
+                                </div>
+                                
+                            </td>
+                            <td colspan="3" width="50%" style="vertical-align:top;">
+                                <div style="text-align:right;padding:5px 20px 5px 5px;border:0;">
+                                    <h4 style="margin:5px 0;border-bottom:1px solid #333;">Billing Address</h4>
+                                    <address>
+                                        ${invoice.username}<br/>
+                                        ${invoice.useraddressline}<br/>
+                                        ${invoice.usercity} , ${invoice.userpincode} <br/>
+                                        ${invoice.userstate} , ${invoice.usercountry} <br/>
+                                        ${invoice.usergstin !== "" ? `GSTIN: <strong>${invoice.usergstin}</strong>` : ''}
+                                       
+                                    </address>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <hr style="border:0;border-bottom:1px solid #333;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <table width="100%" style="border-collapse: collapse;font-family:verdana;font-size:9px;">
+                                    <thead>
+                                    <tr style="border-bottom:1px solid #333;">
+                                        <th style="text-align:left;">Particular</th>
+                                        <th style="text-align:left;">Publisher</th>
+                                        <th style="text-align:left;">Qty</th>
+                                        <th style="text-align:left;">Base Amount</th>
+                                        <th style="text-align:left;">Discount</th>
+                                        ${invoice.userstateid == invoice.companystateid ?
+                `<th style="text-align:left;">CGST</th>
+                                             <th style="text-align:left;">SGST</th>` :
+                `<th style="text-align:left;">IGST</th>`
+              }
+                                        <th style="text-align:left;">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    ${invoice.invoiceitems.map((invoiceItem, index) => (
+                `<tr key=${index} style="border-bottom:1px solid #333;">
+                                                <td style="text-align:left;">
+                                                ${invoiceItem.booktitle}<br/>
+                                                    <small>${invoiceItem.isbn13}</small>
+                                                </td>
+                                                <td style="text-align:left;">${invoiceItem.publishername}</td>
+                                                <td style="text-align:left;">${invoiceItem.quantity}</td>
+                                                <td style="text-align:left;"> ${invoiceItem.amount}</td>
+                                                <td style="text-align:left;"> ${invoiceItem.discount}</td>
+                                                ${invoice.userstateid == invoice.companystateid ?
+                  `<td style="text-align:left;">${invoiceItem.cgst}</td>
+                                                    <td style="text-align:left;">${invoiceItem.sgst}</td>` :
+                  `<td style="text-align:left;">${invoiceItem.igst}</td>`
+                }
+                                                <td style="text-align:left;">${invoiceItem.linetotal}</td>
+                                            </tr>`
+              ))}
+                                    </tbody>
+                                    <tfoot style="border-top:1px solid #333;">
+                                        <tr style="border-bottom:1px solid #333;">
+                                       
+                                            ${invoice.userstateid == invoice.companystateid ?
+                `
+                                              <td colspan="5" style="text-align:left;font-weight:bold;">Total</td>
+                                              <td style="text-align:left;">${calculateTotalCGST(invoice.invoiceitems)}</td>
+                                               <td style="text-align:left;">${calculateTotalSGST(invoice.invoiceitems)}</td>` :
+                `<td colspan="5" style="text-align:left;font-weight:bold;">Total</td>
+                                              <td style="text-align:left;">${calculateTotalIGST(invoice.invoiceitems)}</td>`
+              }
+                                            <td style="text-align:left; font-weight:bold;"> ${invoice.total}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </body>
+            </html>`,
+            
+            fileName: 'invoice',
+            directory: '',
+            base64: true
+            
+          };
+        // let options={
+        //     html: '<h1>Heading 1</h1>',
+        //     fileName: 'invoice',
+        //     directory: '',
+        //     base64: true
+        // }
+        let file = await reactNativeHTMLtoPdf.convert(options)
+        console.log("DOWNLOAD",file)
+        // let orgPath1 = RNFS.DownloadDirectoryPath + '/invoice.pdf';
+        // let orgPath = RNFetchBlob.fs.dirs.DownloadDir+'/invoice.pdf';
+       
+        // RNFS.moveFile(file.filePath, orgPath1)
+        //     .then((success) => {
+        //     console.log('file moved!',success);
+        //     })
+        //     .catch((err) => {
+        //     console.log("Error: " + err.message);
+        //     });
+        // try {
+        //     await RNFS.copyFile(file.filePath, orgPath);
+        //     console.log("dobro", dest)
+        //   } catch(err) {
+        //     console.log("greska", err)
+        //   } 
+        // try {
+        //     await RNFetchBlob.fs.writeFile(orgPath,file.base64,'base64');
+        //     console.log("file downloaded")
+        //   } catch(err) {
+        //     console.log("greska", err)
+        //   } 
+        // RNFetchBlob.fs.writeFile(orgPath,file.base64,'base64')
+        //     .then((success) => {
+        //     console.log('file moved!',success);
+        //     })
+        //     .catch((err) => {
+        //     console.log("BASE",file.base64)
+        //     console.log("Error: " + err);
+        //     });
+        
 
     }
     return (
@@ -44,12 +252,13 @@ export const MyOrders = () => {
                 <View style={[xStyle.cartPageBooksMainDiv, {
                     marginBottom: '50%'
                 }]}>
-                    <View style={xStyle.MyOrdersCard}>
+                    {myOrderList.map((order, index) => (
+                    <View style={xStyle.MyOrdersCard} key={index}>
 
                         <View style={xStyle.MyOrdersProductDetailsMainView}>
 
                             <Image
-                                source={require('../assets/images/bcov5.png')}
+                                source={{ uri: Config.API_URL + Config.PUB_IMAGES + order.publisherid + "/" + order.image + '?d=' + new Date() }}
                                 style={xStyle.pub_home_best_cover}
                                 height={134}
                                 width={138}
@@ -58,7 +267,7 @@ export const MyOrders = () => {
                                 
                                 <View style={xStyle.MyOrdersProductDetailsHeadersView}>
 
-                                    <Text style={xStyle.pub_home_best_card_title}>The Lion King</Text>
+                                    <Text style={xStyle.pub_home_best_card_title}>{order.title}</Text>
 
                                     <TouchableOpacity >
                                         <Image
@@ -69,21 +278,25 @@ export const MyOrders = () => {
                                 </View>
 
                                 <View style={xStyle.pub_home_card_author_view}>
-                                    <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
+                                    <Text style={xStyle.pub_home_card_author}>Author: 
+                                        <Text style={xStyle.pub_home_card_author_name}>{order.authors}</Text>
+                                    </Text>
                                 </View>
 
                                 <View style={[xStyle.pub_home_card_author_view, { marginBottom: '5%' }]}>
-                                    <Text style={xStyle.pub_home_card_author}>Publisher: <Text style={xStyle.pub_home_card_author_name}>Modern Publishing House</Text></Text>
+                                    <Text style={xStyle.pub_home_card_author}>Publisher: 
+                                    <Text style={xStyle.pub_home_card_author_name}>{order.publisher}</Text>
+                                    </Text>
                                 </View>
 
                                 <View style={xStyle.MyOrderPriceView}>
 
                                     <Text style={xStyle.MyOrderMainPriceText}>
-                                        ₹149
+                                        ₹ {order.price}
                                     </Text>
-                                    <Text style={xStyle.MyOrderDiscountedPriceText}>
+                                    {/* <Text style={xStyle.MyOrderDiscountedPriceText}>
                                         ₹199
-                                    </Text>
+                                    </Text> */}
 
                                 </View>
 
@@ -92,17 +305,18 @@ export const MyOrders = () => {
 
                         <View style={xStyle.MyOrdersFooter}>
                             <View>
-                                <Text style={[xStyle.MyOrderFooterText,{paddingBottom:'5%'}]}>
-                                    Payment Status: <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>Complete</Text>
-                                </Text>
+                                {/* <Text style={[xStyle.MyOrderFooterText,{paddingBottom:'5%'}]}>
+                                    Payment Status: 
+                                    <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>{order.price}</Text>
+                                </Text> */}
                                 <Text style={xStyle.MyOrderFooterText}>
-                                    Order No: <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>EP8585092299</Text>
+                                    Order No: <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>{order.orderno}</Text>
                                 </Text>
 
                             </View>
 
                             <TouchableOpacity style={xStyle.MyOrderFooterDownloadBtn}
-                                onPress={() =>{downloadBook(1)}}
+                                onPress={() =>{downloadBook(order.invoiceid)}}
                             
                             >
 
@@ -118,154 +332,8 @@ export const MyOrders = () => {
 
                         </View>
                     </View>
-                    <View style={xStyle.MyOrdersCard}>
-
-                        <View style={xStyle.MyOrdersProductDetailsMainView}>
-
-                            <Image
-                                source={require('../assets/images/bcov3.png')}
-                                style={xStyle.pub_home_best_cover}
-                                height={134}
-                                width={138}
-                            />
-                            <View style={xStyle.MyOrdersProductDetailsView}>
-                                
-                                <View style={xStyle.MyOrdersProductDetailsHeadersView}>
-
-                                    <Text style={xStyle.pub_home_best_card_title}>The Swallows</Text>
-
-                                    <TouchableOpacity >
-                                        <Image
-                                            source={require('../assets/images/greenTick.png')}
-                                        />
-                                    </TouchableOpacity>
-
-                                </View>
-
-                                <View style={xStyle.pub_home_card_author_view}>
-                                    <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                </View>
-
-                                <View style={[xStyle.pub_home_card_author_view, { marginBottom: '5%' }]}>
-                                    <Text style={xStyle.pub_home_card_author}>Publisher: <Text style={xStyle.pub_home_card_author_name}>Modern Publishing House</Text></Text>
-                                </View>
-
-                                <View style={xStyle.MyOrderPriceView}>
-
-                                    <Text style={xStyle.MyOrderMainPriceText}>
-                                        ₹223
-                                    </Text>
-                                    <Text style={xStyle.MyOrderDiscountedPriceText}>
-                                        ₹249
-                                    </Text>
-
-                                </View>
-
-                            </View>
-                        </View>
-
-                        <View style={xStyle.MyOrdersFooter}>
-                            <View>
-                                <Text style={[xStyle.MyOrderFooterText,{paddingBottom:'5%'}]}>
-                                    Payment Status: <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>Complete</Text>
-                                </Text>
-                                <Text style={xStyle.MyOrderFooterText}>
-                                    Order No: <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>EP8585092299</Text>
-                                </Text>
-
-                            </View>
-
-                            <TouchableOpacity style={xStyle.MyOrderFooterDownloadBtn}
-                                onPress={() =>{downloadBook(1)}}
-                            
-                            >
-
-                                <Text style={xStyle.MyOrderFooterDownloadBtnText}>Download</Text>
-
-                                <Image
-                                    source={require('../assets/images/import.png')}
-                                    style={xStyle.MyOrderFooterDownloadBtnImg}
-                                    height={16}
-                                    width={16}
-                                    />
-                            </TouchableOpacity>
-
-                        </View>
-                    </View>
-                    <View style={xStyle.MyOrdersCard}>
-
-                        <View style={xStyle.MyOrdersProductDetailsMainView}>
-
-                            <Image
-                                source={require('../assets/images/bcov4.png')}
-                                style={xStyle.pub_home_best_cover}
-                                height={134}
-                                width={138}
-                            />
-                            <View style={xStyle.MyOrdersProductDetailsView}>
-                                
-                                <View style={xStyle.MyOrdersProductDetailsHeadersView}>
-
-                                    <Text style={xStyle.pub_home_best_card_title}>Dune</Text>
-
-                                    <TouchableOpacity >
-                                        <Image
-                                            source={require('../assets/images/greenTick.png')}
-                                        />
-                                    </TouchableOpacity>
-
-                                </View>
-
-                                <View style={xStyle.pub_home_card_author_view}>
-                                    <Text style={xStyle.pub_home_card_author}>Author: <Text style={xStyle.pub_home_card_author_name}>Jeff Keller</Text></Text>
-                                </View>
-
-                                <View style={[xStyle.pub_home_card_author_view, { marginBottom: '5%' }]}>
-                                    <Text style={xStyle.pub_home_card_author}>Publisher: <Text style={xStyle.pub_home_card_author_name}>Modern Publishing House</Text></Text>
-                                </View>
-
-                                <View style={xStyle.MyOrderPriceView}>
-
-                                    <Text style={xStyle.MyOrderMainPriceText}>
-                                        ₹185
-                                    </Text>
-                                    <Text style={xStyle.MyOrderDiscountedPriceText}>
-                                        ₹230
-                                    </Text>
-
-                                </View>
-
-                            </View>
-                        </View>
-
-                        <View style={xStyle.MyOrdersFooter}>
-                            <View>
-                                <Text style={[xStyle.MyOrderFooterText,{paddingBottom:'5%'}]}>
-                                    Payment Status: <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>Complete</Text>
-                                </Text>
-                                <Text style={xStyle.MyOrderFooterText}>
-                                    Order No: <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>EP8585092299</Text>
-                                </Text>
-
-                            </View>
-
-                            <TouchableOpacity style={xStyle.MyOrderFooterDownloadBtn}
-                                onPress={() =>{downloadBook(1)}}
-                            
-                            >
-
-                                <Text style={xStyle.MyOrderFooterDownloadBtnText}>Download</Text>
-
-                                <Image
-                                    source={require('../assets/images/import.png')}
-                                    style={xStyle.MyOrderFooterDownloadBtnImg}
-                                    height={16}
-                                    width={16}
-                                    />
-                            </TouchableOpacity>
-
-                        </View>
-                    </View>
+                    ))}
+                    
 
 
 

@@ -31,6 +31,10 @@ const UserProvider = ({ children }) => {
   const [allNewArrival, setallNewArrival] = useState([])
   const [allBestSeller, setAllBestSeller] = useState([])
   const [myBookList, setMyBookList] = useState([])
+  const [myOrderList, setMyOrderList] = useState([])
+  const [currentpageno, setCurrentpageno] = useState(1)
+  const [record_no, setRecord_no] = useState(100)
+
 
   useEffect(() => {
     getAllPublishers();
@@ -52,6 +56,7 @@ const UserProvider = ({ children }) => {
       get_wishlist_books(1, 5);
       localstorage_price_items_signin()
       getBookShelf();
+      myorders();
       // get_wish_books_id()
     }
   }
@@ -291,7 +296,8 @@ const UserProvider = ({ children }) => {
     }
   }
 
-  const myorders = async (currentpageno, record_no) => {
+  const myorders = async () => {
+
     try {
       const response = await axios.get(Config.API_URL + Config.MY_ORDERS + "?currentPage=" + currentpageno + "&recordPerPage=" + record_no,
 
@@ -302,13 +308,21 @@ const UserProvider = ({ children }) => {
           },
 
         })
-
+      if(response.data.output.books===null || response.data.output.books==='null')
+      {
+        setMyOrderList([])
+      }
+      else{
+        setMyOrderList(response.data.output.books)
+      }
+      
       console.log("myorders_resp : ", response);
 
       return response.data
 
     }
     catch (error) {
+      setMyOrderList([])
       console.log("myorders_error : ", error)
     }
   }
@@ -889,21 +903,19 @@ const UserProvider = ({ children }) => {
 
 
     const getInvoiceById = async (invoiceId) => {
-      // try {
-      //   const response = await axios.get(Config.API_URL + Config.INVOICE_DETAILS + "/" + invoiceId,
-      //     {
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //         'Authorization': 'Bearer ' + authData
-      //       },
-      //     })
-
-      //   console.log("invoice id details  : ", response);
-      //   return response.data;
-      // }
-      // catch (error) {
-      //   console.log("BOOKSHELF CONTEXT ERROR: ", error);
-      // }
+      try {
+        const response = await axios.get(Config.API_URL + Config.INVOICE_DETAILS + "/" + invoiceId,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+          })
+        return response.data;
+      }
+      catch (error) {
+        console.log("INVOICE CONTEXT ERROR: ", error);
+      }
     }
 
     const getCouponByPublisherId = async (data) => {
@@ -993,6 +1005,7 @@ const UserProvider = ({ children }) => {
         change_password,
         place_order,
         myorders,
+        myOrderList,
         applyCoupon,
         my_profile,
         get_country_list,
