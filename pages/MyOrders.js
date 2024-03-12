@@ -14,7 +14,8 @@ import {
     TouchableOpacity,
     ImageBackground,
     Animated,
-    PermissionsAndroid
+    PermissionsAndroid,
+    Alert
 } from 'react-native';
 
 import FooterPub from '../Global/FooterPub.js';
@@ -29,7 +30,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 export const MyOrders = () => {
 
     const { authData } = useAuth()
-    const { myorders, getInvoiceById,myOrderList } = UserProfile()
+    const { myorders, getInvoiceById, myOrderList } = UserProfile()
 
     useEffect(() => {
         //RNFS.DownloadDirectoryPath
@@ -46,33 +47,35 @@ export const MyOrders = () => {
         //getMyOrders()
     }, [])
 
-    const calculateTotalCGST =(invoices) =>{
+    const calculateTotalCGST = (invoices) => {
         let totalCGST = 0;
         invoices.map((invoice) => {
             totalCGST += invoice.cgst
         })
         return totalCGST
-       }
-       const calculateTotalSGST =(invoices) =>{
+    }
+    const calculateTotalSGST = (invoices) => {
         let totalSGST = 0;
         invoices.map((invoice) => {
             totalSGST += invoice.sgst
         })
         return totalSGST
-       }
-       const calculateTotalIGST =(invoices) =>{
+    }
+    const calculateTotalIGST = (invoices) => {
         let totalIGST = 0;
         invoices.map((invoice) => {
             totalIGST += invoice.igst
         })
         return totalIGST
-       }
+    }
 
-    const downloadBook=async(id) =>{
+    const downloadBook = async (id) => {
 
-        const getInvdet=await getInvoiceById(id)
-        let invoice=getInvdet.output
-        console.log("INVOICE DET",invoice.invoiceno)
+        const getInvdet = await getInvoiceById(id)
+        let invoice = getInvdet.output;
+        let inv_id = invoice.invoiceno;
+        console.log("INVOICE DET", invoice.invoiceno);
+        console.log("INVOICE DET type ", typeof inv_id);
         let options = {
             html: `
             <html>
@@ -146,16 +149,16 @@ export const MyOrders = () => {
                                         <th style="text-align:left;">Base Amount</th>
                                         <th style="text-align:left;">Discount</th>
                                         ${invoice.userstateid == invoice.companystateid ?
-                `<th style="text-align:left;">CGST</th>
+                    `<th style="text-align:left;">CGST</th>
                                              <th style="text-align:left;">SGST</th>` :
-                `<th style="text-align:left;">IGST</th>`
-              }
+                    `<th style="text-align:left;">IGST</th>`
+                }
                                         <th style="text-align:left;">Total</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     ${invoice.invoiceitems.map((invoiceItem, index) => (
-                `<tr key=${index} style="border-bottom:1px solid #333;">
+                    `<tr key=${index} style="border-bottom:1px solid #333;">
                                                 <td style="text-align:left;">
                                                 ${invoiceItem.booktitle}<br/>
                                                     <small>${invoiceItem.isbn13}</small>
@@ -165,25 +168,25 @@ export const MyOrders = () => {
                                                 <td style="text-align:left;"> ${invoiceItem.amount}</td>
                                                 <td style="text-align:left;"> ${invoiceItem.discount}</td>
                                                 ${invoice.userstateid == invoice.companystateid ?
-                  `<td style="text-align:left;">${invoiceItem.cgst}</td>
+                        `<td style="text-align:left;">${invoiceItem.cgst}</td>
                                                     <td style="text-align:left;">${invoiceItem.sgst}</td>` :
-                  `<td style="text-align:left;">${invoiceItem.igst}</td>`
-                }
+                        `<td style="text-align:left;">${invoiceItem.igst}</td>`
+                    }
                                                 <td style="text-align:left;">${invoiceItem.linetotal}</td>
                                             </tr>`
-              ))}
+                ))}
                                     </tbody>
                                     <tfoot style="border-top:1px solid #333;">
                                         <tr style="border-bottom:1px solid #333;">
                                        
                                             ${invoice.userstateid == invoice.companystateid ?
-                `
+                    `
                                               <td colspan="5" style="text-align:left;font-weight:bold;">Total</td>
                                               <td style="text-align:left;">${calculateTotalCGST(invoice.invoiceitems)}</td>
                                                <td style="text-align:left;">${calculateTotalSGST(invoice.invoiceitems)}</td>` :
-                `<td colspan="5" style="text-align:left;font-weight:bold;">Total</td>
+                    `<td colspan="5" style="text-align:left;font-weight:bold;">Total</td>
                                               <td style="text-align:left;">${calculateTotalIGST(invoice.invoiceitems)}</td>`
-              }
+                }
                                             <td style="text-align:left; font-weight:bold;"> ${invoice.total}</td>
                                         </tr>
                                     </tfoot>
@@ -193,12 +196,12 @@ export const MyOrders = () => {
                     </table>
                 </body>
             </html>`,
-            
+
             fileName: 'invoice',
             directory: '',
             base64: true
-            
-          };
+
+        };
         // let options={
         //     html: '<h1>Heading 1</h1>',
         //     fileName: 'invoice',
@@ -206,10 +209,10 @@ export const MyOrders = () => {
         //     base64: true
         // }
         let file = await reactNativeHTMLtoPdf.convert(options)
-        console.log("DOWNLOAD",file)
+        console.log("DOWNLOAD", file)
         // let orgPath1 = RNFS.DownloadDirectoryPath + '/invoice.pdf';
-        // let orgPath = RNFetchBlob.fs.dirs.DownloadDir+'/invoice.pdf';
-       
+        let orgPath = RNFetchBlob.fs.dirs.DownloadDir+'/invoice.pdf';
+
         // RNFS.moveFile(file.filePath, orgPath1)
         //     .then((success) => {
         //     console.log('file moved!',success);
@@ -224,20 +227,21 @@ export const MyOrders = () => {
         //     console.log("greska", err)
         //   } 
         // try {
-        //     await RNFetchBlob.fs.writeFile(orgPath,file.base64,'base64');
+        //     await RNFetchBlob.fs.writeFile(orgPath, file.base64, 'base64');
         //     console.log("file downloaded")
-        //   } catch(err) {
+        // } catch (err) {
         //     console.log("greska", err)
-        //   } 
-        // RNFetchBlob.fs.writeFile(orgPath,file.base64,'base64')
-        //     .then((success) => {
-        //     console.log('file moved!',success);
-        //     })
-        //     .catch((err) => {
-        //     console.log("BASE",file.base64)
-        //     console.log("Error: " + err);
-        //     });
-        
+        // }
+        RNFetchBlob.fs.writeFile(orgPath, file.base64, 'base64')
+            .then((success) => {
+                console.log('file moved!', success);
+                Alert.alert("File downloaded successfully");
+            })
+            .catch((err) => {
+                console.log("BASE", file.base64)
+                console.log("Error: " + err);
+            });
+
 
     }
     return (
@@ -253,87 +257,87 @@ export const MyOrders = () => {
                     marginBottom: '50%'
                 }]}>
                     {myOrderList.map((order, index) => (
-                    <View style={xStyle.MyOrdersCard} key={index}>
+                        <View style={xStyle.MyOrdersCard} key={index}>
 
-                        <View style={xStyle.MyOrdersProductDetailsMainView}>
+                            <View style={xStyle.MyOrdersProductDetailsMainView}>
 
-                            <Image
-                                source={{ uri: Config.API_URL + Config.PUB_IMAGES + order.publisherid + "/" + order.image + '?d=' + new Date() }}
-                                style={xStyle.pub_home_best_cover}
-                                height={134}
-                                width={138}
-                            />
-                            <View style={xStyle.MyOrdersProductDetailsView}>
-                                
-                                <View style={xStyle.MyOrdersProductDetailsHeadersView}>
+                                <Image
+                                    source={{ uri: Config.API_URL + Config.PUB_IMAGES + order.publisherid + "/" + order.image + '?d=' + new Date() }}
+                                    style={xStyle.pub_home_best_cover}
+                                    height={134}
+                                    width={138}
+                                />
+                                <View style={xStyle.MyOrdersProductDetailsView}>
 
-                                    <Text style={xStyle.pub_home_best_card_title}>{order.title}</Text>
+                                    <View style={xStyle.MyOrdersProductDetailsHeadersView}>
 
-                                    <TouchableOpacity >
-                                        <Image
-                                            source={require('../assets/images/greenTick.png')}
-                                        />
-                                    </TouchableOpacity>
+                                        <Text style={xStyle.pub_home_best_card_title}>{order.title}</Text>
 
-                                </View>
+                                        <TouchableOpacity >
+                                            <Image
+                                                source={require('../assets/images/greenTick.png')}
+                                            />
+                                        </TouchableOpacity>
 
-                                <View style={xStyle.pub_home_card_author_view}>
-                                    <Text style={xStyle.pub_home_card_author}>Author: 
-                                        <Text style={xStyle.pub_home_card_author_name}>{order.authors}</Text>
-                                    </Text>
-                                </View>
+                                    </View>
 
-                                <View style={[xStyle.pub_home_card_author_view, { marginBottom: '5%' }]}>
-                                    <Text style={xStyle.pub_home_card_author}>Publisher: 
-                                    <Text style={xStyle.pub_home_card_author_name}>{order.publisher}</Text>
-                                    </Text>
-                                </View>
+                                    <View style={xStyle.pub_home_card_author_view}>
+                                        <Text style={xStyle.pub_home_card_author}>Author:
+                                            <Text style={xStyle.pub_home_card_author_name}>{order.authors}</Text>
+                                        </Text>
+                                    </View>
 
-                                <View style={xStyle.MyOrderPriceView}>
+                                    <View style={[xStyle.pub_home_card_author_view, { marginBottom: '5%' }]}>
+                                        <Text style={xStyle.pub_home_card_author}>Publisher:
+                                            <Text style={xStyle.pub_home_card_author_name}>{order.publisher}</Text>
+                                        </Text>
+                                    </View>
 
-                                    <Text style={xStyle.MyOrderMainPriceText}>
-                                        ₹ {order.price}
-                                    </Text>
-                                    {/* <Text style={xStyle.MyOrderDiscountedPriceText}>
+                                    <View style={xStyle.MyOrderPriceView}>
+
+                                        <Text style={xStyle.MyOrderMainPriceText}>
+                                            ₹ {order.price}
+                                        </Text>
+                                        {/* <Text style={xStyle.MyOrderDiscountedPriceText}>
                                         ₹199
                                     </Text> */}
 
+                                    </View>
+
                                 </View>
-
                             </View>
-                        </View>
 
-                        <View style={xStyle.MyOrdersFooter}>
-                            <View>
-                                {/* <Text style={[xStyle.MyOrderFooterText,{paddingBottom:'5%'}]}>
+                            <View style={xStyle.MyOrdersFooter}>
+                                <View>
+                                    {/* <Text style={[xStyle.MyOrderFooterText,{paddingBottom:'5%'}]}>
                                     Payment Status: 
                                     <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>{order.price}</Text>
                                 </Text> */}
-                                <Text style={xStyle.MyOrderFooterText}>
-                                    Order No: <Text  style={[xStyle.MyOrderFooterText,{fontWeight:'500'}]}>{order.orderno}</Text>
-                                </Text>
+                                    <Text style={xStyle.MyOrderFooterText}>
+                                        Order No: <Text style={[xStyle.MyOrderFooterText, { fontWeight: '500' }]}>{order.orderno}</Text>
+                                    </Text>
+
+                                </View>
+
+                                <TouchableOpacity style={xStyle.MyOrderFooterDownloadBtn}
+                                    onPress={() => { downloadBook(order.invoiceid) }}
+
+                                >
+
+                                    <Text style={xStyle.MyOrderFooterDownloadBtnText}>Download</Text>
+
+                                    <Image
+                                        source={require('../assets/images/import.png')}
+                                        style={xStyle.MyOrderFooterDownloadBtnImg}
+                                        height={16}
+                                        width={16}
+                                    />
+                                </TouchableOpacity>
 
                             </View>
-
-                            <TouchableOpacity style={xStyle.MyOrderFooterDownloadBtn}
-                                onPress={() =>{downloadBook(order.invoiceid)}}
-                            
-                            >
-
-                                <Text style={xStyle.MyOrderFooterDownloadBtnText}>Download</Text>
-
-                                <Image
-                                    source={require('../assets/images/import.png')}
-                                    style={xStyle.MyOrderFooterDownloadBtnImg}
-                                    height={16}
-                                    width={16}
-                                    />
-                            </TouchableOpacity>
-
                         </View>
-                    </View>
                     ))}
-                    
+
 
 
 
