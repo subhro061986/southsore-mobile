@@ -188,7 +188,7 @@ export const MyBookshelf = ({ navigation }) => {
                                 <View style={xStyle.MyBookshelfMainView}>
                                     <View style={xStyle.MyBookshelfMainTextView}>
                                         <View>
-                                            <Text style={xStyle.pub_home_best_card_title}>{book.title.length > 20 ? book.title.substring(0, 20) + ".." : book.title}</Text>
+                                            <Text style={xStyle.pub_home_best_card_title}>{book.title.length > 15 ? book.title.substring(0, 15) + ".." : book.title}</Text>
                                             <View style={xStyle.pub_home_card_author_view}>
                                                 <Text style={xStyle.pub_home_card_author}>Author:
                                                     <Text style={xStyle.pub_home_card_author_name}>{book.authors.length > 15 ? book.authors.substring(0, 15) + ".." : book.authors}</Text>
