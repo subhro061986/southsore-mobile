@@ -194,7 +194,7 @@ const UserProvider = ({ children }) => {
   }
 
   const getBook_by_category = async (currentpageno, record_no, args) => {
-    console.log("function called !");
+    
     try {
       const response = await axios.post(Config.API_URL + Config.BOOK_BY_GENRE +
         "?currentPage=" + currentpageno + "&recordPerPage=" + record_no, args,
@@ -204,9 +204,11 @@ const UserProvider = ({ children }) => {
             'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
           },
         });
+        console.log("function called !");
       let cat_id = response.data.output.books[0].categoryid.toString();
       await AsyncStorage.setItem('category_id', cat_id);
       setGlobalCategoryId(cat_id);
+      console.log("GET BOOK BY CAT", response.data)
       return response.data
     }
     catch (error) {

@@ -170,14 +170,22 @@ export const CategoryDetails = ({ route, navigation }) => {
         alert(resp.message);
     }
 
-    const wishlistHandler = (event, book_id) => {
+    const wishlistHandler = (event, book_id, index) => {
         event.stopPropagation();
+        let tempArr = books;
         if (wishlistshow === true) {
+            if(tempArr[index].isFavourite === 1){
+                tempArr[index].isFavourite = 0;
+            }
+            else{
+                tempArr[index].isFavourite = 1;
+            }
             toggleWishlistHandler(book_id);
         }
         else {
             alert("Please login first");
         }
+        setBooks(tempArr);
     }
 
     const add_to_cart = async (book) => {
@@ -271,7 +279,7 @@ export const CategoryDetails = ({ route, navigation }) => {
                                                 </Text>
                                             </View>
                                         </View>
-                                        <TouchableOpacity onPress={(e) => wishlistHandler(e, data.id)}>
+                                        <TouchableOpacity onPress={(e) => wishlistHandler(e, data.id, index)}>
                                             {
                                                 data.isFavourite === 1 ? (
                                                     <Image
