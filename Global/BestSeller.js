@@ -79,7 +79,7 @@ export const BestSeller = ({ route }) => {
                     <TouchableOpacity
                         key={index}
                         style={xStyle.pub_home_best_card}
-                        onPress={() => navigation.navigate('productdetails')}
+                        onPress={() => navigation.navigate('productdetails', {"bookId" : data.id})}
                     >
                         <Image
                             // source={require('../assets/images/bcov1.png')}
