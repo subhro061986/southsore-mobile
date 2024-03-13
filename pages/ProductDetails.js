@@ -228,12 +228,13 @@ export const ProductDetails = ({route,navigation}) => {
 
                     {isBookPresent ?
                     <View style={xStyle.prod_det_btn_view}>
-                        <TouchableOpacity style={xStyle.prod_det_add_btn}
+                        <TouchableOpacity style={[xStyle.prod_det_add_btn,{width:'65%'}]}
                             onPress={() =>navigation.navigate('mybookshelf')}
                         >
-                            <Text style={xStyle.prod_det_add_btn_txt}>Go To Boofshelf</Text>
+                            <Text style={xStyle.prod_det_add_btn_txt}>Go To Bookshelf</Text>
                             <Image
                                 source={require('../assets/images/cartblack.png')}
+                                style={{marginLeft:10}}
                             />
                         </TouchableOpacity>
                     

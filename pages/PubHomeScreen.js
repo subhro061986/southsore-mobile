@@ -38,12 +38,15 @@ export const PubHomeScreen = ({ route, navigation }) => {
     // const navigation = useNavigation();
     const { width } = useWindowDimensions();
 
-    const { getPublishersById, publisherId, getNewArrivals, allNewArrival, publisherData, allBestSeller, add_delete_to_wishlist } = UserProfile();
+    const { getPublishersById, publisherId, getNewArrivals, 
+        allNewArrival, publisherData, allBestSeller, 
+        add_delete_to_wishlist ,categoryByPublisherList} = UserProfile();
     const { authData, wishlistshow,add_book_to_storage,uuid,image_path } = useAuth();
 
     const [publisherDetails, setPublisherDetails] = useState('')
 
     useEffect(() => {
+        console.log("CAT LIST",categoryByPublisherList)
         getPubById();
     }, [authData])
 
@@ -95,7 +98,11 @@ export const PubHomeScreen = ({ route, navigation }) => {
         const resp= await add_book_to_storage(json_data)
         Alert.alert(resp.message) 
     }
-
+    const getCatgegoryData = (data) => {
+        navigation.navigate('categorydetails',
+          { category_id: data.id }
+        )
+      }
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]} keyboardShouldPersistTaps='always'>
@@ -181,54 +188,19 @@ export const PubHomeScreen = ({ route, navigation }) => {
                         <Text style={xStyle.publist_head}>Categories</Text>
                     </View>
                     <ScrollView horizontal={true}>
-                        <View>
-                            <TouchableOpacity style={xStyle.pub_cat_cards}>
+                    {
+                        categoryByPublisherList.map((data, index) => (
+                        <TouchableOpacity  key={index}>
+                            <TouchableOpacity style={xStyle.pub_cat_cards} onPress={() => getCatgegoryData(data)}>
                                 <Image
                                     source={require('../assets/images/art.png')}
                                 />
                             </TouchableOpacity>
-                            <Text style={xStyle.pub_name}>Art & Photo..</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={xStyle.pub_cat_cards}>
-                                <Image
-                                    source={require('../assets/images/eng.png')}
-                                />
-                            </TouchableOpacity>
-                            <Text style={xStyle.pub_name}>English L..</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={xStyle.pub_cat_cards}>
-                                <Image
-                                    source={require('../assets/images/bio.png')}
-                                />
-                            </TouchableOpacity>
-                            <Text style={xStyle.pub_name}>Biographies..</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={xStyle.pub_cat_cards}>
-                                <Image
-                                    source={require('../assets/images/art.png')}
-                                />
-                            </TouchableOpacity>
-                            <Text style={xStyle.pub_name}>Art & Photo..</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={xStyle.pub_cat_cards}>
-                                <Image
-                                    source={require('../assets/images/eng.png')}
-                                />
-                            </TouchableOpacity>
-                            <Text style={xStyle.pub_name}>English L..</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={xStyle.pub_cat_cards}>
-                                <Image
-                                    source={require('../assets/images/bio.png')}
-                                />
-                            </TouchableOpacity>
-                            <Text style={xStyle.pub_name}>Biographies..</Text>
-                        </View>
+                            <Text style={xStyle.pub_name}>{data.name}</Text>
+                        </TouchableOpacity>
+                        ))}
+                        
+                        
                     </ScrollView>
                 </View>
 

@@ -147,9 +147,15 @@ export const CartPage = ({ route, navigation }) => {
                 </View>
 
                 <View style={xStyle.cartPageOrderSummaryView}>
+                {cartCount >0 ?(
                     <View style={xStyle.cartPageOrderSummaryHeaderView}>
                         <Text style={[xStyle.cartPageHeader, { fontSize: 20 }]}>Order Summary</Text>
                     </View>
+                ):(
+                    <View style={xStyle.cartPageOrderSummaryHeaderView}>
+                        <Text style={[xStyle.cartPageHeader, { fontSize: 20 }]}>Your cart is empty</Text>
+                    </View>
+                )}
                     <View style={xStyle.cartPageOrderSummaryBody}>
                         {/* <View style={xStyle.cartPageOrderSummaryBodyItems}>
                             <Text style={xStyle.cartPageOrderSummaryBodyItemsLabelText}>Subtotal</Text>
@@ -160,10 +166,12 @@ export const CartPage = ({ route, navigation }) => {
                             <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>5%</Text>
                         </View> */}
                     </View>
+                    {cartCount >0 &&
                     <View style={[xStyle.cartPageOrderSummaryTotal, xStyle.cartPageOrderSummaryBodyItems]}>
                         <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>Total</Text>
                         <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹ {subtotal} </Text>
                     </View>
+                    }
                     <View >
                         {
                         cartCount >0 &&

@@ -316,11 +316,11 @@ export const BillingAddressPage = ({ route, navigation }) => {
     }
 
     return (
-        <>
+        <SafeAreaView>
 
-            <ScrollView style={[xStyle.homeBg, { marginBottom: '45%' }]} stickyHeaderIndices={[0]}>
+            <ScrollView style={[ { paddingBottom: '75%' }]} stickyHeaderIndices={[0]}>
                 <TopMenu />
-                <View style={xStyle.BillingAddressViewMain}>
+                <View style={[xStyle.BillingAddressViewMain,{marginBottom:'20%'}]}>
                     <Text style={xStyle.BillingAddressMainHeader}>Billing Address</Text>
                     <View style={xStyle.BillingAddressCard}>
 
@@ -464,7 +464,7 @@ export const BillingAddressPage = ({ route, navigation }) => {
 
                     {showCoupon &&
 
-                        <View style={xStyle.BillingAddressApplyCouponCard}>
+                        <View style={[xStyle.BillingAddressApplyCouponCard,{marginBottom: '45%'}]}>
                             <View style={xStyle.BillingAddressApplyCouponView}>
                                 <Text style={xStyle.BillingAddressCardHeaderText}>Apply Coupon</Text>
 
@@ -508,9 +508,12 @@ export const BillingAddressPage = ({ route, navigation }) => {
                 </View>
 
             </ScrollView >
+            <View style={{marginTop:'20%'}}>
             <Footer />
+            </View>
+            
 
-        </>
+        </SafeAreaView>
     )
 }
 
