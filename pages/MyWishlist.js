@@ -96,7 +96,7 @@ export const MyWishlist = () => {
                     {
                         wishlistitems.map((data, index) => (
                             wishlistitems &&
-                            <View style={xStyle.pub_home_best_card} key={index}>
+                            <TouchableOpacity style={xStyle.pub_home_best_card} key={index}  onPress={() => navigation.navigate('productdetails',{bookId:data.id})}>
                                 <Image
                                     // source={require('../assets/images/bcov1.png')}
                                     source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherId + "/" + data.image + '?d=' + new Date() }}
@@ -129,18 +129,18 @@ export const MyWishlist = () => {
                                             </Text>
                                         </View>
                                         <View>
-                                            <TouchableOpacity
+                                            {/* <TouchableOpacity
                                                 style={xStyle.wishlistMoveToCartBtn}
                                                 onPress={()=> add_to_cart(data)}
                                             >
                                                 <Text style={xStyle.wishlistMoveToCartBtnTxt}>
                                                     Move to Cart
                                                 </Text>
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         ))
                     }
                 </View>

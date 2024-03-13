@@ -403,6 +403,7 @@ const AuthProvider = ({ children }) => {
         }
         // if it gets called from another place like cart page then we can call the getCardData api to fix it
         else{
+          console.log("inside if of get cart adter removal")
           getCartData(authData)
 
         }

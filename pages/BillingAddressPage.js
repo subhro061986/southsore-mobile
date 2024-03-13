@@ -289,7 +289,7 @@ export const BillingAddressPage = ({ route, navigation }) => {
         var respPaymentConfirmed = await processPayment(newData)
         console.log("resp confirmed= ", respPaymentConfirmed)
         if (respPaymentConfirmed['statuscode'] === "0") {
-
+ 
             navigation.navigate('confirmOrder')
         }
         else {

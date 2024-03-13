@@ -124,11 +124,11 @@ export const BestSeller = ({ route }) => {
                                     </Text>
                                 </View>
                                 <View>
-                                    <TouchableOpacity onPress={()=> add_to_cart(data)}>
+                                    {/* <TouchableOpacity onPress={()=> add_to_cart(data)}>
                                         <Image
                                             source={require('../assets/images/plusBtn.png')}
                                         />
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
                                 </View>
                             </View>
                         </View>

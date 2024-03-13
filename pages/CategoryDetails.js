@@ -259,7 +259,7 @@ export const CategoryDetails = ({ route, navigation }) => {
                     {
                         books.map((data, index) => (
                             books &&
-                            <View style={xStyle.pub_home_best_card} key={index}>
+                            <TouchableOpacity style={xStyle.pub_home_best_card} key={index}  onPress={() => navigation.navigate('productdetails',{bookId:data.id})}>
                                 <Image
                                     // source={require('../assets/images/bcov1.png')}
                                     source={{ uri: Config.API_URL + Config.PUB_IMAGES + publisherId + "/" + data.image + '?d=' + new Date() }}
@@ -301,15 +301,15 @@ export const CategoryDetails = ({ route, navigation }) => {
                                         </View>
                                         <View>
                                                 
-                                            <TouchableOpacity onPress={()=> add_to_cart(data)}>
+                                            {/* <TouchableOpacity onPress={()=> add_to_cart(data)}>
                                                 <Image
                                                     source={require('../assets/images/plusBtn.png')}
                                                 />
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         ))
                     }
 

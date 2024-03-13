@@ -38,16 +38,31 @@ export const CartPage = ({ route, navigation }) => {
 
     useEffect(() => {
         // clearCartStorage()
-        findSubtotal()
+
+        if(cartCount ==0){
+            setSubTotal(0)
+        }
+        else {
+            findSubtotal()
+
+        }
         console.log("cart items= ", cartItems)
     }, [cartCount])
 
     const findSubtotal = () => {
         let subtotal = 0;
-        cartItems.map((data, index) => {
-            subtotal = subtotal + data.price
-        })
+        if(cartItems.length>0){
+            cartItems.map((data, index) => {
+                subtotal = subtotal + data.price
+            })
+            
+        console.log("subtotal function=",subtotal)
         setSubTotal(subtotal)
+
+        } else {
+            setSubTotal(0)
+        }
+
     }
 
     const proceedToCheckout = () => {
@@ -150,9 +165,13 @@ export const CartPage = ({ route, navigation }) => {
                         <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹ {subtotal} </Text>
                     </View>
                     <View >
+                        {
+                        cartCount >0 &&
                         <TouchableOpacity style={[xStyle.cartPageOrderSummaryCheckoutBtn, { marginVertical: '5%' }]} onPress={() => proceedToCheckout()}>
                             <Text style={xStyle.cartPageOrderSummaryCheckoutBtnTxT}>Checkout</Text>
                         </TouchableOpacity>
+                        
+                    }
                         <TouchableOpacity style={xStyle.cartPageOrderSummaryCancelBtn} onPress={() => navigation.navigate("home")}>
                             <Text style={xStyle.cartPageOrderSummaryCancelBtnTxt}>Continue Shopping</Text>
                         </TouchableOpacity>

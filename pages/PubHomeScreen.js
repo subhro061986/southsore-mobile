@@ -312,11 +312,11 @@ export const PubHomeScreen = ({ route, navigation }) => {
                                             >
                                                 ₹{data.price}
                                             </Text>
-                                            <TouchableOpacity onPress={() => add_to_cart(data)}>
+                                            {/* <TouchableOpacity onPress={() => add_to_cart(data)}>
                                                 <Image
                                                     source={require('../assets/images/plusBtn.png')}
                                                 />
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
                                         </View>
                                     </View>
                                 </TouchableOpacity>

@@ -8,6 +8,7 @@ import Config from '../config/Config.json'
 import axios from "axios";
 import { useAuth } from "./Authcontext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import MyBookshelf from "../pages/MyBookshelf";
 
 const UserContext = createContext();
 
@@ -853,6 +854,8 @@ const UserProvider = ({ children }) => {
           })
 
         console.log("razor pay payment confirmed  : ", response);
+        getBookShelf();
+        myorders();
         return response.data;
       }
       catch (error) {
