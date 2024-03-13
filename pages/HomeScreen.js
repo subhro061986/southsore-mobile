@@ -37,7 +37,7 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     requestStoragePermission();
-    requestReadStoragePermission();
+    //requestReadStoragePermission();
   }, []);
 
   const requestStoragePermission = async () => {
@@ -63,28 +63,28 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
-  const requestReadStoragePermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        {
-          title: "Ebooksjunction Storage",
-          message:
-            "Ebooksjunction need access of your storage ",
-          buttonNeutral: "Ask Me Later",
-          buttonNegative: "Cancel",
-          buttonPositive: "OK"
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the storage");
-      } else {
-        console.log("Storage permission denied");
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
+  // const requestReadStoragePermission = async () => {
+  //   try {
+  //     const granted = await PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+  //       {
+  //         title: "Ebooksjunction Storage",
+  //         message:
+  //           "Ebooksjunction need access of your storage ",
+  //         buttonNeutral: "Ask Me Later",
+  //         buttonNegative: "Cancel",
+  //         buttonPositive: "OK"
+  //       }
+  //     );
+  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //       console.log("You can use the storage");
+  //     } else {
+  //       console.log("Storage permission denied");
+  //     }
+  //   } catch (err) {
+  //     console.warn(err);
+  //   }
+  // };
 
   return (
     <SafeAreaView>

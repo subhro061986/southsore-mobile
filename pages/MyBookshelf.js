@@ -33,7 +33,7 @@ export const MyBookshelf = ({ navigation }) => {
     const [bookReadType, setBookReadType] = useState(0)
     const [readerModalvisibility, setReaderModalvisibility] = useState(false);
     useEffect(() => {
-
+        
     }, [authData]);
 
     const bookTypeValue = [
@@ -66,7 +66,7 @@ export const MyBookshelf = ({ navigation }) => {
         else if (book_type_val === 2) {
             // open epub book
             if(bookReading !== null){
-                navigation.navigate('pdf', { epdf: Config.API_URL + Config.PUB_IMAGES + bookReading.publisherid + "/" + bookReading.epub_link })
+                navigation.navigate('epub', { epub: Config.API_URL + Config.PUB_IMAGES + bookReading.publisherid + "/" + bookReading.epub_link })
             }
         }
         else {
@@ -145,6 +145,7 @@ export const MyBookshelf = ({ navigation }) => {
         if ((book.epdf_link !== null && book.epdf_link !== 'null') && (book.epub_link !== null && book.epub_link !== 'null')) {
             console.log("Inside both");
             setReaderModalvisibility(true);
+            setBookReadType(0)
             setBookReading(book);
         }
         else if (book.epdf_link !== null || book.epdf_link !== 'null') {
@@ -153,7 +154,7 @@ export const MyBookshelf = ({ navigation }) => {
         }
         else if (book.epub_link !== null || book.epub_link !== 'null') {
             console.log("Inside epub");
-            navigation.navigate('pdf', { epdf: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epub_link })
+            navigation.navigate('epub', { epub: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epub_link })
         }
         else {
 

@@ -31,11 +31,11 @@ export const SouthshoreInnovations = () => {
           Southshore Innovations Private Limited is a technology focused company headquartered at Chennai. The company is promoted by techno functional professionals with deep domain experience in different areas such as book production, sales, customer experience, distribution with specific focus on the publishing industry.
         </Text>
       </View>
-      <TouchableOpacity style={xStyle.southshoreInnovationsReadMore_btn}>
+      {/* <TouchableOpacity style={xStyle.southshoreInnovationsReadMore_btn}>
         <Text style={xStyle.southshoreInnovationsReadMore}>
           Read More
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   )
 }
