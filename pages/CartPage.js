@@ -23,6 +23,7 @@ import FooterPub from '../Global/FooterPub.js';
 import Footer from '../Global/Footer.js';
 import { useAuth } from '../Context/Authcontext.js';
 import Config from "../config/Config.json"
+import TopMenu from '../Global/TopMenu.js';
 
 export const CartPage = ({ route, navigation }) => {
     const {
@@ -95,7 +96,7 @@ export const CartPage = ({ route, navigation }) => {
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.cartPageBodyBg} stickyHeaderIndices={[0]}>
-                <TopMenuPub />
+                <TopMenu />
                 <View style={xStyle.cartPageHeaderView}>
                     <Text style={xStyle.cartPageHeader}>
                         My Cart

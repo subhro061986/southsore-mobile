@@ -235,7 +235,7 @@ export const MyOrders = () => {
         RNFetchBlob.fs.writeFile(orgPath, file.base64, 'base64')
             .then((success) => {
                 console.log('file moved!', success);
-                Alert.alert("File downloaded successfully");
+                alert("File downloaded successfully");
             })
             .catch((err) => {
                 console.log("BASE", file.base64)
