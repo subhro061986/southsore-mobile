@@ -108,7 +108,7 @@ export const TopMenu = () => {
       let resp = await sendEmail(data);
       console.log("Email resp : ", resp);
       toggleModal();
-      Alert.alert(resp.toUpperCase() + "!\n\nAdmin will contact you shortly.");
+      Alert.alert(resp.toUpperCase() + "! Admin will contact you shortly.");
     }
   }
 
