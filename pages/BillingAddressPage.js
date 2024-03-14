@@ -146,21 +146,15 @@ export const BillingAddressPage = ({ route, navigation }) => {
         }
 
         const contactDetailsPesponse = await change_contact_details(changecontactDetails)
-        console.log("contact details=", contactDetailsPesponse)
-
         const billingDetailsPesponse = await change_billing_address(changebillingDetails)
-        console.log("billing details=", billingDetailsPesponse)
-
-        console.log("Buynow before sending=", buyNow)
         const respPlaceOrder = await place_order(buyNow)
-        console.log("place order response= ", respPlaceOrder)
+        
 
         setPlaceOrderResponse(respPlaceOrder)
 
         if (respPlaceOrder.output !== null)
             setOrderTotal(respPlaceOrder.output.totalAmount)
         const cartDataresp = await getCartData(authData)
-        console.log("cart data response after place order= ", cartDataresp)
         setTogglePayment(false)
         setShowCoupon(true)
 

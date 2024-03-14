@@ -67,7 +67,7 @@ export const Profile = () => {
         try {
             const resp = await get_state_list(countyId)
             setStateList(resp.output)
-            // console.log("getStateList= ", resp.output)
+            
         } catch (err) {
             console.error(err);
         }
@@ -76,7 +76,7 @@ export const Profile = () => {
         try {
             const resp = await get_country_list()
             setCountryList(resp.output)
-            // console.log("getCountryList= ", resp.output)
+            
         } catch (err) {
             console.error(err);
         }
@@ -125,12 +125,12 @@ export const Profile = () => {
     const sortCountrySelectionChange = async (itemValue, itemIndex) => {
         setCountryIdSelected(itemValue);
         if (itemValue === 0 || itemValue === '0') {
-            console.log("Item val IF : ", itemValue);
+            
         }
         else {
-            console.log("Item val ELSE : ", itemValue);
+            
             let countryName = countryList.find((data) => data.id === itemValue).name;
-            console.log("country= ", countryName);
+            
             setSelectedCountry(countryName);
         }
         // setSelectedCountry(countryName);
@@ -141,22 +141,14 @@ export const Profile = () => {
             const resp = await get_state_list(itemValue);
             setStateList(resp.output);
         }
-        // if (selectedCountry == null || selectedCountry == '') {
-        //     try {
-
-        //         // console.log("getStateList= ", resp.output)
-        //     } catch (err) {
-        //         console.error(err);
-        //     }
-        // }
+        
     }
 
     const sortStateSelectionChange = (itemValue, itemIndex) => {
         let stateName = stateList.find((data) => data.id === itemValue).name;
         setStateIdSelected(itemValue);
         setSelectedState(stateName);
-        // console.log("State ID", stateIdSelected);
-        // console.log("State name", selectedState);
+        
     }
 
     const handleUploadGalPhoto = () => {
@@ -172,7 +164,7 @@ export const Profile = () => {
             else {
                 // this.setState({buildImgArr:tempArr})
                 setBuildImgArr(response.assets[0]);
-                console.log("IMAGE OBJ : ", response.assets[0]);
+                
                 setProfileImage(response.assets[0].uri);
             }
             //   this.setState({
@@ -183,7 +175,7 @@ export const Profile = () => {
     }
 
     const savePersonalData = async () => {
-        console.log("profileimg=", buildImgArr)
+        
         const userDetails = new FormData();
         userDetails.append('profileimage', {
             name: buildImgArr.fileName,
@@ -200,17 +192,19 @@ export const Profile = () => {
         }
 
         const personalDetailsPesponse = await change_personal_details(userDetails)
-        // console.log("personal details=", personalDetailsPesponse)
+        
 
         const contactDetailsPesponse = await change_contact_details(changecontactDetails)
-        // console.log("contact details=", contactDetailsPesponse)
+        
         if (personalDetailsPesponse.statuscode === '0' && contactDetailsPesponse.statuscode === '0') {
             alert("Details updated successfully!");
-            personalBackbuttonhandler();
+            setmodalvisibility(false);
+            setPersonalmodalvisibility(false)
         }
         else {
             alert("Error in updating!");
-            personalBackbuttonhandler();
+            setmodalvisibility(false);
+            setPersonalmodalvisibility(false)
         }
         // personalBackbuttonhandler();
     }
@@ -224,17 +218,21 @@ export const Profile = () => {
             countryid: countryIdSelected,
         }
 
-        console.log("OBJECT : ", changebillingDetails);
+        
 
         const billingDetailsPesponse = await change_billing_address(changebillingDetails)
-        console.log("billing details=", billingDetailsPesponse)
+       
         if (billingDetailsPesponse.statuscode === '0') {
             alert("Details updated successfully!");
-            contactBackbuttonhandler();
+            //contactBackbuttonhandler();
+            setmodalvisibility(false);
+            setPersonalmodalvisibility(false)
         }
         else {
             alert("Error in updating!");
-            contactBackbuttonhandler()
+            setmodalvisibility(false);
+            setPersonalmodalvisibility(false)
+            //contactBackbuttonhandler()
         }
         // contactBackbuttonhandler();
     }

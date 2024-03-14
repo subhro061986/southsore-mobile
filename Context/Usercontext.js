@@ -4,7 +4,8 @@ import React, {
   useContext,
   useEffect
 } from "react";
-import Config from '../config/Config.json'
+import Config from '../config/Config.json';
+import ActivityLoader from '../Common/ActivityLoader'
 import axios from "axios";
 import { useAuth } from "./Authcontext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -35,6 +36,8 @@ const UserProvider = ({ children }) => {
   const [myOrderList, setMyOrderList] = useState([])
   const [currentpageno, setCurrentpageno] = useState(1)
   const [record_no, setRecord_no] = useState(100)
+  const [loaderOn, setLoaderOn] = useState(false)
+  
 
 
   useEffect(() => {
@@ -195,7 +198,7 @@ const UserProvider = ({ children }) => {
   }
 
   const getBook_by_category = async (currentpageno, record_no, args) => {
-    
+    setLoaderOn(true)
     try {
       const response = await axios.post(Config.API_URL + Config.BOOK_BY_GENRE +
         "?currentPage=" + currentpageno + "&recordPerPage=" + record_no, args,
@@ -205,14 +208,15 @@ const UserProvider = ({ children }) => {
             'Authorization': wishlistshow === true ? ('Bearer ' + authData) : null
           },
         });
-        console.log("function called !");
+       
       let cat_id = response.data.output.books[0].categoryid.toString();
       await AsyncStorage.setItem('category_id', cat_id);
       setGlobalCategoryId(cat_id);
-      console.log("GET BOOK BY CAT", response.data)
+      setLoaderOn(false)
       return response.data
     }
     catch (error) {
+      setLoaderOn(false)
       console.log("GET BOOK BY CATEGORY ERROR : ", error)
     }
   }
@@ -257,6 +261,7 @@ const UserProvider = ({ children }) => {
 
 
   const get_book_details = async (book_id) => {
+    setLoaderOn(true)
     try {
       const response = await axios.get(Config.API_URL + "book/" + book_id,
 
@@ -268,16 +273,18 @@ const UserProvider = ({ children }) => {
 
         })
 
-      console.log("Book_details_resp : ", response);
+        setLoaderOn(false)
 
       return response.data
 
     }
     catch (error) {
+      setLoaderOn(false)
       console.log("Book_details_error : ", error)
     }
   }
   const place_order = async (buyNow) => {
+    setLoaderOn(true)
     try {
       const response = await axios.get(Config.API_URL +Config.PLACE_ORDER+ `?buynow=${buyNow}` ,
 
@@ -288,13 +295,12 @@ const UserProvider = ({ children }) => {
           },
 
         })
-
-      
-
+        setLoaderOn(false)
       return response.data
 
     }
     catch (error) {
+      setLoaderOn(false)
       console.log("place_order_error : ", error)
     }
   }
@@ -864,7 +870,7 @@ const UserProvider = ({ children }) => {
     }
 
     const getPublishersById = async (id) => {
-      
+      setLoaderOn(true)
       //setPublisherId(0)
       let pub_id = 0;
       if (id === undefined || id === 0 || id === '0') {
@@ -898,10 +904,12 @@ const UserProvider = ({ children }) => {
       getNewArrivals(4, response?.data?.output?.id)
       best_selling_books(4, response?.data?.output?.id)
       setActive(false)
+      setLoaderOn(false)
         return response;
       }
       catch (error) {
         setActive(false)
+        setLoaderOn(false)
         console.log("PUBLISHER DETAILS CONTEXT ERROR: ", error);
       }
     }
@@ -1038,7 +1046,7 @@ const UserProvider = ({ children }) => {
       }}
     >
       {children}
-
+      <ActivityLoader isLoaderShow ={loaderOn}/>
     </UserContext.Provider>
   )
 }
