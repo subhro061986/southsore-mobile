@@ -616,7 +616,7 @@ export const Footer = () => {
           </View>
 
           <View style={xStyle.logInModalBody}>
-            <Text style={xStyle.buy_join_modal_legend}>Enter Your Registered Email</Text>
+            <Text style={xStyle.buy_join_modal_legend}>Your Registered Email</Text>
             <View style={xStyle.buy_join_modal_input_view}>
               <TextInput
                 style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
@@ -631,7 +631,7 @@ export const Footer = () => {
               /> */}
             </View>
           </View>
-          <TouchableOpacity style={xStyle.logInBtn}
+          <TouchableOpacity style={[xStyle.logInBtn,{paddingHorizontal:10,width:190, paddingVertical:15}]}
             onPress={sendEmail}
           >
             <Text style={[xStyle.logInBtnText]}>Send Request</Text>

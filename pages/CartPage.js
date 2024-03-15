@@ -40,7 +40,7 @@ export const CartPage = ({ route, navigation }) => {
     useEffect(() => {
         // clearCartStorage()
 
-        if(cartCount ==0){
+        if (cartCount == 0) {
             setSubTotal(0)
         }
         else {
@@ -52,13 +52,13 @@ export const CartPage = ({ route, navigation }) => {
 
     const findSubtotal = () => {
         let subtotal = 0;
-        if(cartItems.length>0){
+        if (cartItems.length > 0) {
             cartItems.map((data, index) => {
                 subtotal = subtotal + data.price
             })
-            
-        console.log("subtotal function=",subtotal)
-        setSubTotal(subtotal)
+
+            console.log("subtotal function=", subtotal)
+            setSubTotal(subtotal)
 
         } else {
             setSubTotal(0)
@@ -148,15 +148,15 @@ export const CartPage = ({ route, navigation }) => {
                 </View>
 
                 <View style={xStyle.cartPageOrderSummaryView}>
-                {cartCount >0 ?(
-                    <View style={xStyle.cartPageOrderSummaryHeaderView}>
-                        <Text style={[xStyle.cartPageHeader, { fontSize: 20 }]}>Order Summary</Text>
-                    </View>
-                ):(
-                    <View style={xStyle.cartPageOrderSummaryHeaderView}>
-                        <Text style={[xStyle.cartPageHeader, { fontSize: 20 }]}>Your cart is empty</Text>
-                    </View>
-                )}
+                    {cartCount > 0 ? (
+                        <View style={xStyle.cartPageOrderSummaryHeaderView}>
+                            <Text style={[xStyle.cartPageHeader, { fontSize: 20 }]}>Order Summary</Text>
+                        </View>
+                    ) : (
+                        <View style={xStyle.cartPageOrderSummaryHeaderView}>
+                            <Text style={[xStyle.cartPageHeader, { fontSize: 20 }]}>Your cart is empty</Text>
+                        </View>
+                    )}
                     <View style={xStyle.cartPageOrderSummaryBody}>
                         {/* <View style={xStyle.cartPageOrderSummaryBodyItems}>
                             <Text style={xStyle.cartPageOrderSummaryBodyItemsLabelText}>Subtotal</Text>
@@ -167,29 +167,35 @@ export const CartPage = ({ route, navigation }) => {
                             <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>5%</Text>
                         </View> */}
                     </View>
-                    {cartCount >0 &&
-                    <View style={[xStyle.cartPageOrderSummaryTotal, xStyle.cartPageOrderSummaryBodyItems]}>
-                        <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>Total</Text>
-                        <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹ {subtotal} </Text>
-                    </View>
+                    {cartCount > 0 &&
+                        <View style={[xStyle.cartPageOrderSummaryTotal, xStyle.cartPageOrderSummaryBodyItems]}>
+                            <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>Total</Text>
+                            <Text style={xStyle.cartPageOrderSummaryBodyItemsValueText}>₹ {subtotal} </Text>
+                        </View>
                     }
                     <View >
                         {
-                        cartCount >0 &&
-                        <TouchableOpacity style={[xStyle.cartPageOrderSummaryCheckoutBtn, { marginVertical: '5%' }]} onPress={() => proceedToCheckout()}>
-                            <Text style={xStyle.cartPageOrderSummaryCheckoutBtnTxT}>Checkout</Text>
-                        </TouchableOpacity>
-                        
-                    }
-                        <TouchableOpacity style={xStyle.cartPageOrderSummaryCancelBtn} onPress={() => navigation.navigate("home")}>
+                            cartCount > 0 &&
+                            // <TouchableOpacity style={[xStyle.cartPageOrderSummaryCheckoutBtn, { marginVertical: '5%' }]} onPress={() => proceedToCheckout()}>
+                            //     <Text style={xStyle.cartPageOrderSummaryCheckoutBtnTxT}>Checkout</Text>
+                            // </TouchableOpacity>
+                            <TouchableOpacity style={[xStyle.howToSouthShoreJoinNowBtn, {marginBottom:0}]} onPress={() => proceedToCheckout()}>
+                                <Text style={xStyle.howToSouthShoreJoinNowBtnText}>Checkout</Text>
+                            </TouchableOpacity>
+
+                        }
+                        {/* <TouchableOpacity style={xStyle.cartPageOrderSummaryCancelBtn} onPress={() => navigation.navigate("home")}>
                             <Text style={xStyle.cartPageOrderSummaryCancelBtnTxt}>Continue Shopping</Text>
+                        </TouchableOpacity> */}
+                        <TouchableOpacity style={[xStyle.howToSouthShoreJoinNowBtn, {backgroundColor:'white', borderWidth: 0.5, borderColor: '#26252C', marginTop:'8%', paddingHorizontal:0}]} onPress={() => navigation.navigate("home")}>
+                            <Text style={[xStyle.howToSouthShoreJoinNowBtnText, {fontWeight: '600',fontSize: 16,color: '#26252C'}]}>Continue Shopping</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
 
             </ScrollView>
             <Footer />
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 export default CartPage;

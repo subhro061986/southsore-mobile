@@ -124,7 +124,7 @@ export default StyleSheet.create({
   howToSouthShoreJoinNowBtn: {
     borderRadius: 100,
     paddingVertical: 20,
-    paddingHorizontal: 45,
+    paddingHorizontal: 50,
     marginHorizontal: 46,
     marginVertical: 35,
     backgroundColor: '#007FE3',
@@ -621,15 +621,15 @@ export default StyleSheet.create({
 
   logInBtn: {
     borderRadius: 100,
-    paddingVertical: 13,
+    paddingVertical: 15,
     paddingHorizontal: 40,
-    width: 200,
+    width: 150,
     marginHorizontal: 46,
     backgroundColor: '#007FE3',
   },
 
   logInBtnText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '500',
     textAlign: 'center',
     color: '#FFFFFF',
@@ -697,7 +697,7 @@ export default StyleSheet.create({
 
   footerIconText: {
     fontWeight: '500',
-    fontSize: 14,
+    fontSize: 13,
     color: '#FFF',
     marginTop: 3
   },
@@ -712,7 +712,7 @@ export default StyleSheet.create({
     backgroundColor: '#03142C',
     borderRadius: 100,
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 15,
     //height:100,
     marginHorizontal: 20,
     marginVertical: 10
@@ -747,7 +747,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: '10%',
-    height: 285,
+    height: 270,
   },
 
   paddingTop10: {
@@ -941,7 +941,7 @@ export default StyleSheet.create({
   },
 
   buy_join_modal_head_view: {
-    marginBottom: 10
+    marginBottom: 30
   },
 
   buy_join_modal_head: {
@@ -981,7 +981,7 @@ export default StyleSheet.create({
   buy_join_modal_input: {
     borderColor: '#3F4556',
     borderWidth: 0.5,
-    borderRadius: 10,
+    borderRadius: 6,
     fontSize: 14,
     fontWeight: '400',
     color: '#7B8890',
@@ -1000,7 +1000,7 @@ export default StyleSheet.create({
   },
 
   buy_submit_font: {
-    fontSize: 16,
+    fontSize: 20,
   },
 
   pub_banner: {
@@ -1037,11 +1037,12 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: '10%',
-    paddingVertical: '15%',
+    paddingTop: '15%',
+    // paddingBottom: '8%',
   },
 
   pub_about_logo: {
-    marginBottom: '12%'
+    // marginBottom: '8%'
   },
 
   pub_about_body: {
@@ -1101,7 +1102,7 @@ export default StyleSheet.create({
   },
 
   pub_home_new_body: {
-    marginVertical: '8%',
+    marginVertical: '10%',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -1122,7 +1123,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 14,
     display: 'flex',
-    marginBottom: '3%',
+    marginBottom: '5%',
     position: 'relative',
   },
 
@@ -1599,9 +1600,9 @@ export default StyleSheet.create({
   BillingAddressSaveBtn: {
     backgroundColor: '#007FE3',
     borderRadius: 40,
-    paddingHorizontal: 30,
-    paddingVertical: 13,
-    marginVertical: 10
+    paddingHorizontal: 40,
+    paddingVertical: 15,
+    marginVertical: 20
   },
   BillingAddressApplyCoupnBtn: {
 
