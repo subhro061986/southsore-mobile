@@ -30,7 +30,8 @@ import RNFetchBlob from 'rn-fetch-blob';
 export const MyOrders = () => {
 
     const { authData } = useAuth()
-    const { myorders, getInvoiceById, myOrderList } = UserProfile()
+    const { myorders, getInvoiceById, myOrderList,getInvoiceByIdMobile,
+        DeleteInvoiceByIdMobile } = UserProfile()
 
     useEffect(() => {
         //RNFS.DownloadDirectoryPath
@@ -244,6 +245,43 @@ export const MyOrders = () => {
 
 
     }
+    const downloadContent=async (id)=>{
+        console.log("START")
+
+        const getInvdet = await getInvoiceByIdMobile(id)
+
+        console.log("invoice return= ",getInvdet)
+        //var urlDwn='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+
+        let urlDwn=Config.API_URL+Config.UPLOAD_URL_INVOICES+getInvdet.filePath
+        // let urlDwn  = 'https://springandriver.com/img/island.pdf'  
+        // let urlDwn  = 'https://ebooksjunction.com/api/uploads/invoices/45.pdf'  
+        console.log("urlDwn:",urlDwn)
+            
+            RNFetchBlob.config({
+            // add this option that makes response data to be stored as a file,
+            // this is much more performant.
+            fileCache : true,
+            appendExt: 'pdf',
+            addAndroidDownloads: {
+              useDownloadManager: true,
+              notification: true,
+              title: 'invoice',
+              path: RNFetchBlob.fs.dirs.DownloadDir +'/invoice.pdf', // Android platform
+              description: 'Downloading the file',
+            },
+          })
+          
+          .fetch('GET', urlDwn, {
+            //some headers ..
+          })
+          .then((res) => {
+            // the temp file path
+            console.log('The file saved to ', res);
+          })
+      }
+
+    
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.cartPageBodyBg} stickyHeaderIndices={[0]}>
@@ -320,7 +358,7 @@ export const MyOrders = () => {
                                 </View>
 
                                 <TouchableOpacity style={xStyle.MyOrderFooterDownloadBtn}
-                                    onPress={() => { downloadBook(order.invoiceid) }}
+                                    onPress={() => { downloadContent(order.invoiceid) }}
 
                                 >
 

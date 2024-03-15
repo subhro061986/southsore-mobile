@@ -931,6 +931,40 @@ const UserProvider = ({ children }) => {
       }
     }
 
+    // for mobile
+    const getInvoiceByIdMobile = async (invoiceId) => {
+      try {
+        const response = await axios.get(Config.API_URL + Config.INVOICE_DETAILS_MOBILE + "/" + invoiceId,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+          })
+        return response.data;
+      }
+      catch (error) {
+        console.log("INVOICE CONTEXT ERROR: ", error);
+      }
+    }
+
+    // for mobile
+    const DeleteInvoiceByIdMobile = async (invoiceId) => {
+      try {
+        const response = await axios.get(Config.API_URL + Config.INVOICE_DETAILS_DELETE + "/" + invoiceId,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authData
+            },
+          })
+        return response.data;
+      }
+      catch (error) {
+        console.log("INVOICE CONTEXT ERROR: ", error);
+      }
+    }
+
     const getCouponByPublisherId = async (data) => {
       // try {
       //   const response = await axios.post(Config.API_URL + Config.GET_COUPON_BY_PUBLISHERID,data,
@@ -1041,7 +1075,9 @@ const UserProvider = ({ children }) => {
         sendEmail,
         getBooksBySearchText,
         allNewArrival,
-        globalCategoryId
+        globalCategoryId,
+        getInvoiceByIdMobile,
+        DeleteInvoiceByIdMobile
 
       }}
     >
