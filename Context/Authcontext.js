@@ -428,6 +428,7 @@ const AuthProvider = ({ children }) => {
     let tempArr=cartItems
     tempArr.splice(index,1)
     setCartItems(tempArr)
+    AsyncStorage.setItem("cartData", JSON.stringify(tempArr));
   }
 
 

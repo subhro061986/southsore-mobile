@@ -134,7 +134,7 @@ export const ProductDetails = ({route,navigation}) => {
         console.log("default image=",defaultimg)
         let json_data = {
             title: bookdetail.title,
-            author: bookdetail.authors,
+            authors: bookdetail.authors,
             price: bookdetail.price,
             publisher: bookdetail.publisher,
             items_no: 1,
