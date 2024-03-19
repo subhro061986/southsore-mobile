@@ -1,4 +1,4 @@
-import React, { Component,useState, useEffect } from 'react';
+import React, { Component,useState, useEffect,useRef } from 'react';
 import xStyle from '../assets/css/x_style.js';
 import { UserProfile } from '../Context/Usercontext.js';
 import { useAuth } from "../Context/Authcontext";
@@ -33,7 +33,7 @@ import BestSeller from '../Global/BestSeller.js';
 
 export const ProductDetails = ({route,navigation}) => {
 
-    
+    const scrollRef = useRef();
 
     const { get_book_details,
         addto_cart,
@@ -63,6 +63,10 @@ export const ProductDetails = ({route,navigation}) => {
 
 
     useEffect(() => {
+        scrollRef.current?.scrollTo({
+            y: 0,
+            animated: true,
+          });
         book_detail(route.params.bookId)
         getbookshelfData(route.params.bookId)
 
@@ -198,7 +202,7 @@ export const ProductDetails = ({route,navigation}) => {
 
     return (
         <SafeAreaView>
-            <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]}>
+            <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]} ref={scrollRef}>
                 <TopMenuPub />
 
                 {/* Product Details */}
