@@ -38,10 +38,6 @@ export const MyBookshelf = ({ navigation }) => {
 
     const bookTypeValue = [
         {
-            id: 0,
-            title: 'Please select a type'
-        },
-        {
             id: 1,
             title: 'PDF'
         },
@@ -141,19 +137,15 @@ export const MyBookshelf = ({ navigation }) => {
     }
 
     const navigateToReadScreen = async (book) => {
-        console.log("Reading : ", book);
         if ((book.epdf_link !== null && book.epdf_link !== 'null') && (book.epub_link !== null && book.epub_link !== 'null')) {
-            console.log("Inside both");
             setReaderModalvisibility(true);
             setBookReadType(0)
             setBookReading(book);
         }
         else if (book.epdf_link !== null || book.epdf_link !== 'null') {
-            console.log("Inside pdf");
             navigation.navigate('pdf', { epdf: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epdf_link })
         }
         else if (book.epub_link !== null || book.epub_link !== 'null') {
-            console.log("Inside epub");
             navigation.navigate('epub', { epub: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epub_link })
         }
         else {
@@ -240,15 +232,7 @@ export const MyBookshelf = ({ navigation }) => {
             <Footer />
             <View>
                 <Overlay
-                    // animationType={ZoomIn}
-                    // transparent={true}
                     visible={readerModalvisibility}
-                    // // isVisible={modalvisibility}
-                    // onRequestClose={backbuttonhandler}
-                    // hasBackdrop={true}
-                    // backdropColor={'black'}
-                    // // statusBarTranslucent={true}
-                    // backdropOpacity={0.5}
                     onClose={backbuttonhandler}
                     closeOnTouchOutside
                     containerStyle={{ backgroundColor: 'rgba(38, 37, 37, 0.78)' }}
@@ -266,8 +250,8 @@ export const MyBookshelf = ({ navigation }) => {
                         <Text style={xStyle.buy_join_modal_head}>Select Book Type</Text>
                     </View>
 
-                    <View style={xStyle.logInModalBody}>
-                        <View style={{
+                    <View style={[xStyle.logInModalBody,{marginVertical:'5%'}]}>
+                        {/* <View style={{
                             width: 200,
                             borderWidth: 1,
                             borderColor: 'grey',
@@ -292,6 +276,22 @@ export const MyBookshelf = ({ navigation }) => {
                                     ))
                                 }
                             </Picker>
+                        </View> */}
+                        <View style={{
+                            display:'flex',
+                            flexDirection:'row',
+                            justifyContent:'space-between'
+                        }}>
+                        {bookTypeValue.map((data, index) => (
+                        <TouchableOpacity style={xStyle.BillingAddressApplyCoupnBtn}
+                            onPress={() => handleBookReadType(data.id,index)}
+                            key={index}
+                        >
+                            <Text style={xStyle.BillingAddressApplyCouponBtnText}>
+                                {data.title}
+                            </Text>
+                        </TouchableOpacity>
+                        ))}
                         </View>
                     </View>
                     {/* <TouchableOpacity style={xStyle.logInBtn}

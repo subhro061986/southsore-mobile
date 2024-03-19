@@ -258,7 +258,7 @@ export const MyOrders = () => {
         let urlDwn=Config.API_URL+Config.UPLOAD_URL_INVOICES+getInvdet.filePath
         // let urlDwn  = 'https://springandriver.com/img/island.pdf'  
         // let urlDwn  = 'https://ebooksjunction.com/api/uploads/invoices/45.pdf'  
-        console.log("urlDwn:",urlDwn)
+        
         var timer = setTimeout(async()=> {
             await RNFetchBlob.config({
             // add this option that makes response data to be stored as a file,
@@ -279,6 +279,7 @@ export const MyOrders = () => {
           })
           .then((res) => {
             // the temp file path
+            alert("File downloaded successfully")
             console.log('The file saved to ', res);
           })
         },1000)

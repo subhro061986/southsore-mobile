@@ -1,6 +1,13 @@
 PODS:
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
+  - CryptoSwift (1.5.1)
+  - DifferenceKit (1.3.0):
+    - DifferenceKit/Core (= 1.3.0)
+    - DifferenceKit/UIKitExtension (= 1.3.0)
+  - DifferenceKit/Core (1.3.0)
+  - DifferenceKit/UIKitExtension (1.3.0):
+    - DifferenceKit/Core
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.69.7)
   - FBReactNativeSpec (0.69.7):
@@ -72,9 +79,32 @@ PODS:
     - FlipperKit/Core
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
+  - Fuzi (3.1.3)
+  - GCDWebServer (3.7.5):
+    - GCDWebServer/Core (= 3.7.5)
+  - GCDWebServer/Core (3.7.5)
   - glog (0.3.5)
   - libevent (2.1.12)
+  - Minizip (1.0.0)
   - OpenSSL-Universal (1.1.1100)
+  - R2Navigator (2.6.1):
+    - DifferenceKit (~> 1.0)
+    - R2Shared
+    - ReadiumInternal
+    - SwiftSoup (<= 2.5.3)
+  - R2Shared (2.6.1):
+    - Fuzi (~> 3.0)
+    - Minizip (~> 1.0)
+    - ReadiumInternal
+    - SwiftSoup (<= 2.5.3)
+  - R2Streamer (2.6.1):
+    - CryptoSwift (<= 1.5.1)
+    - Fuzi (~> 3.0)
+    - GCDWebServer (~> 3.0)
+    - Minizip (~> 1.0)
+    - R2Shared
+    - ReadiumInternal
+  - razorpay-pod (1.3.6)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -284,6 +314,20 @@ PODS:
   - React-jsinspector (0.69.7)
   - React-logger (0.69.7):
     - glog
+  - react-native-html-to-pdf (0.12.0):
+    - React-Core
+  - react-native-image-picker (7.1.0):
+    - React-Core
+  - react-native-razorpay (2.3.0):
+    - razorpay-pod
+    - React
+  - react-native-readium (1.2.1):
+    - R2Navigator
+    - R2Shared
+    - R2Streamer
+    - React-Core
+  - react-native-render-html (6.3.4):
+    - React-Core
   - react-native-safe-area-context (4.7.2):
     - React-Core
   - React-perflogger (0.69.7)
@@ -352,12 +396,21 @@ PODS:
     - React-jsi (= 0.69.7)
     - React-logger (= 0.69.7)
     - React-perflogger (= 0.69.7)
+  - ReadiumInternal (2.6.1)
+  - rn-fetch-blob (0.12.0):
+    - React-Core
   - RNCAsyncStorage (1.18.2):
     - React-Core
   - RNCPicker (2.6.1):
     - React-Core
+  - RNDeviceInfo (10.13.1):
+    - React-Core
+  - RNFS (2.20.0):
+    - React-Core
   - RNGestureHandler (2.13.1):
     - React-Core
+  - RNPDF (0.14.0):
+    - React
   - RNReanimated (3.5.4):
     - DoubleConversion
     - FBLazyVector
@@ -389,6 +442,7 @@ PODS:
     - React-Core
     - React-RCTImage
   - SocketRocket (0.6.1)
+  - SwiftSoup (2.5.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -419,8 +473,13 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitReactPlugin (= 0.125.0)
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.125.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
+  - GCDWebServer (from `https://raw.githubusercontent.com/readium/GCDWebServer/3.7.5/GCDWebServer.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - Minizip
   - OpenSSL-Universal (= 1.1.1100)
+  - R2Navigator (from `https://raw.githubusercontent.com/readium/swift-toolkit/develop/Support/CocoaPods/ReadiumNavigator.podspec`)
+  - R2Shared (from `https://raw.githubusercontent.com/readium/swift-toolkit/develop/Support/CocoaPods/ReadiumShared.podspec`)
+  - R2Streamer (from `https://raw.githubusercontent.com/readium/swift-toolkit/develop/Support/CocoaPods/ReadiumStreamer.podspec`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -437,6 +496,11 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-html-to-pdf (from `../node_modules/react-native-html-to-pdf`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-razorpay (from `../node_modules/react-native-razorpay`)
+  - react-native-readium (from `../node_modules/react-native-readium`)
+  - react-native-render-html (from `../node_modules/react-native-render-html`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -450,9 +514,14 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - ReadiumInternal (from `https://raw.githubusercontent.com/readium/swift-toolkit/develop/Support/CocoaPods/ReadiumInternal.podspec`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPDF (from `../node_modules/react-native-view-pdf`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -460,6 +529,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - CocoaAsyncSocket
+    - CryptoSwift
+    - DifferenceKit
     - Flipper
     - Flipper-Boost-iOSX
     - Flipper-DoubleConversion
@@ -470,9 +541,13 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - fmt
+    - Fuzi
     - libevent
+    - Minizip
     - OpenSSL-Universal
+    - razorpay-pod
     - SocketRocket
+    - SwiftSoup
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -484,8 +559,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
+  GCDWebServer:
+    :podspec: https://raw.githubusercontent.com/readium/GCDWebServer/3.7.5/GCDWebServer.podspec
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  R2Navigator:
+    :podspec: https://raw.githubusercontent.com/readium/swift-toolkit/develop/Support/CocoaPods/ReadiumNavigator.podspec
+  R2Shared:
+    :podspec: https://raw.githubusercontent.com/readium/swift-toolkit/develop/Support/CocoaPods/ReadiumShared.podspec
+  R2Streamer:
+    :podspec: https://raw.githubusercontent.com/readium/swift-toolkit/develop/Support/CocoaPods/ReadiumStreamer.podspec
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -514,6 +597,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-html-to-pdf:
+    :path: "../node_modules/react-native-html-to-pdf"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
+  react-native-razorpay:
+    :path: "../node_modules/react-native-razorpay"
+  react-native-readium:
+    :path: "../node_modules/react-native-readium"
+  react-native-render-html:
+    :path: "../node_modules/react-native-render-html"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -540,12 +633,22 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReadiumInternal:
+    :podspec: https://raw.githubusercontent.com/readium/swift-toolkit/develop/Support/CocoaPods/ReadiumInternal.podspec
+  rn-fetch-blob:
+    :path: "../node_modules/rn-fetch-blob"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPDF:
+    :path: "../node_modules/react-native-view-pdf"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -553,9 +656,25 @@ EXTERNAL SOURCES:
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
+CHECKOUT OPTIONS:
+  R2Navigator:
+    :commit: 0573d3296ffbca7aa78cbf98d97c4461d7fbc30f
+    :git: https://github.com/readium/swift-toolkit.git
+  R2Shared:
+    :commit: 0573d3296ffbca7aa78cbf98d97c4461d7fbc30f
+    :git: https://github.com/readium/swift-toolkit.git
+  R2Streamer:
+    :commit: 0573d3296ffbca7aa78cbf98d97c4461d7fbc30f
+    :git: https://github.com/readium/swift-toolkit.git
+  ReadiumInternal:
+    :commit: 0573d3296ffbca7aa78cbf98d97c4461d7fbc30f
+    :git: https://github.com/readium/swift-toolkit.git
+
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  CryptoSwift: c4f2debceb38bf44c80659afe009f71e23e4a082
+  DifferenceKit: ab185c4d7f9cef8af3fcf593e5b387fb81e999ca
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 6b7f5692909b4300d50e7359cdefbcd09dd30faa
   FBReactNativeSpec: affcf71d996f6b0c01f68883482588297b9d5e6e
@@ -569,9 +688,16 @@ SPEC CHECKSUMS:
   Flipper-RSocket: d9d9ade67cbecf6ac10730304bf5607266dd2541
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
+  Fuzi: 4c10d6449c0b49a85cd75b13844c559c0fc71220
+  GCDWebServer: 5e989dbe6795b9975f378cc0eeeee49ef2c51b6f
   glog: 3d02b25ca00c2d456734d0bcff864cbc62f6ae1a
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  Minizip: 188cb3e39a1195c283ae03bf673d182596fefd0b
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  R2Navigator: 576042785dc9bafe2a857ecbcc57778f9bd05f35
+  R2Shared: cc94c055f3f5ebd5b730994350ae7c2d832ce319
+  R2Streamer: c0f0491cd71e423e0f454718c5904665e75aafb4
+  razorpay-pod: 29b4d9e0a868a9234eaa7be0fbd09484bbfa9973
   RCT-Folly: b9d9fe1fc70114b751c076104e52f3b1b5e5a95a
   RCTRequired: 54bff6aa61efd9598ab59d2a823c382b4fe13d27
   RCTTypeSafety: 47632bfa768df7befde08e339a9847e6cff6ff78
@@ -586,6 +712,11 @@ SPEC CHECKSUMS:
   React-jsiexecutor: a73bec0218ba959fc92f811b581ad6c2270c6b6f
   React-jsinspector: 8134ee22182b8dd98dc0973db6266c398103ce6c
   React-logger: 1e7ac909607ee65fd5c4d8bea8c6e644f66b8843
+  react-native-html-to-pdf: 4c5c6e26819fe202971061594058877aa9b25265
+  react-native-image-picker: a82b781c14f1f5c16953290bee2039db43822517
+  react-native-razorpay: 0272dd684bc9148828c54a72e05059e3e2e8b813
+  react-native-readium: 7f71dab8b9c3eff510a2b7527e7a249691637215
+  react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe
   react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
   React-perflogger: 8e832d4e21fdfa613033c76d58d7e617341e804b
   React-RCTActionSheet: 9ca778182a9523991bff6381045885b6e808bb73
@@ -599,15 +730,21 @@ SPEC CHECKSUMS:
   React-RCTVibration: 600a9f8b3537db360563d50fab3d040c262567d4
   React-runtimeexecutor: 65cd2782a57e1d59a68aa5d504edf94278578e41
   ReactCommon: 1e783348b9aa73ae68236271df972ba898560a95
+  ReadiumInternal: 661c823f445c704184647fb557bce455f3a41173
+  rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: ddc4ee162bfd41b0d2c68bf2d95acd81dd7f1f93
   RNCPicker: b18aaf30df596e9b1738e7c1f9ee55402a229dca
+  RNDeviceInfo: 4f9c7cfd6b9db1b05eb919620a001cf35b536423
+  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 38aa38413896620338948fbb5c90579a7b1c3fde
+  RNPDF: 8526c7210ff375c29d2461c51945e2f5480f7b60
   RNReanimated: 3624e6395630f5ecf4e85e4dbbaed002f25a9cd0
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  SwiftSoup: 33e8d374021a6c332788f78fa29a93227d8a7699
   Yoga: 0b84a956f7393ef1f37f3bb213c516184e4a689d
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: f97cf4c7c0afb3b0d64d394c023cc8c07e513f47
+PODFILE CHECKSUM: a5f7db1b8f219a6c308cd49af0d58120bcf681fa
 
 COCOAPODS: 1.15.2

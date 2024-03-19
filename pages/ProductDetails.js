@@ -1,8 +1,9 @@
-import React, { Component,useState, useEffect } from 'react';
+import React, { Component,useState, useEffect,useRef } from 'react';
 import xStyle from '../assets/css/x_style.js';
 import { UserProfile } from '../Context/Usercontext.js';
 import { useAuth } from "../Context/Authcontext";
 import Config from "../config/Config.json";
+import { useScrollToTop } from '@react-navigation/native';
 
 import {
     SafeAreaView,
@@ -33,7 +34,7 @@ import BestSeller from '../Global/BestSeller.js';
 
 export const ProductDetails = ({route,navigation}) => {
 
-    
+    const scrollRef = useRef();
 
     const { get_book_details,
         addto_cart,
@@ -63,6 +64,10 @@ export const ProductDetails = ({route,navigation}) => {
 
 
     useEffect(() => {
+        scrollRef.current?.scrollTo({
+            y: 0,
+            animated: true,
+          });
         book_detail(route.params.bookId)
         getbookshelfData(route.params.bookId)
 
@@ -84,7 +89,7 @@ export const ProductDetails = ({route,navigation}) => {
 
     const book_detail = async (book_id) => {
         const resp = await get_book_details(book_id)
-        console.log("book=",resp)
+        
         if (resp === undefined || resp === null) {
             setBookdetail({})
             setImages([])
@@ -92,7 +97,7 @@ export const ProductDetails = ({route,navigation}) => {
             setBackCover('')
         }
         else {
-            console.log("det_resp", resp)
+            
             if (resp.statuscode === "0" && JSON.stringify(resp.output) !== "{}" && resp.output !== null && resp.output !== undefined) {
                 setBookdetail(resp.output)
                 // setImages(resp.output.images?.length > 0 ? resp.output.images : dummy);
@@ -122,19 +127,17 @@ export const ProductDetails = ({route,navigation}) => {
     const default_img = async (pub_obj) => {
         let frontCover = image_path + pub_obj.publisherid + '/' + pub_obj.front_cover + '?d=' + new Date();
         let backCover = image_path + pub_obj.publisherid + '/' + pub_obj.back_cover + '?d=' + new Date();
-        console.log("PUB OBJ FC IMAGE : ", frontCover);
-        console.log("PUB OBJ BC IMAGE : ", backCover);
+        
         setDefaultimg(frontCover);
         setNondefaultimg(backCover);
 
     }
 
     const add_to_cart = async (bookid, toCheckout) => {
-        console.log('bookDetails',bookdetail)
-        console.log("default image=",defaultimg)
+        
         let json_data = {
             title: bookdetail.title,
-            author: bookdetail.authors,
+            authors: bookdetail.authors,
             price: bookdetail.price,
             publisher: bookdetail.publisher,
             items_no: 1,
@@ -198,7 +201,7 @@ export const ProductDetails = ({route,navigation}) => {
 
     return (
         <SafeAreaView>
-            <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]}>
+            <ScrollView style={xStyle.homeBg} stickyHeaderIndices={[0]} ref={scrollRef}>
                 <TopMenuPub />
 
                 {/* Product Details */}

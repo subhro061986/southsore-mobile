@@ -709,6 +709,7 @@ const UserProvider = ({ children }) => {
 
 
     const my_profile = async () => {
+      setLoaderOn(true)
       try {
         const response = await axios.get(Config.API_URL + Config.MY_PROFILE,
 
@@ -719,13 +720,12 @@ const UserProvider = ({ children }) => {
             },
 
           })
-
-        console.log("my_profile : ", response.data);
-
+          setLoaderOn(false)
         return response.data
 
       }
       catch (error) {
+        setLoaderOn(false)
         console.log("my_profile_error : ", error)
       }
     }
