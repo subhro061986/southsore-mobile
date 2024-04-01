@@ -39,9 +39,9 @@ const [loadingContent, setLoadingContent] = useState(true);
 const EPUB_URL = route.params.epub;
 const fileName=EPUB_URL.split("/");
 const latFname=fileName[fileName.length-1]
-console.log("FILE NAME",latFname)
+
 const EPUB_PATH = `${RNFS.DocumentDirectoryPath}/`+latFname;
-console.log(EPUB_PATH);
+
   const [urifile, setFile] = useState();
   const INITIAL_LOCATION = {
     href: '/OPS/main3.xml',

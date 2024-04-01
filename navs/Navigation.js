@@ -16,6 +16,8 @@ import MyOrders from '../pages/MyOrders';
 import ChangePassword from '../pages/ChangePassword';
 import PdfScreen from '../pages/PdfScreen';
 import EpubScreen from '../pages/EpubScreen';
+import MyBookshelfOffline from '../pages/MyBookshelfOffline';
+import PdfScreenOffline from '../pages/PdfScreenOffline';
 
 
 
@@ -39,6 +41,8 @@ const Navigation=()=>{
           <Stack.Screen name="changepassword" component={ChangePassword} options={{title:'changepassword', headerShown:false }}/>
           <Stack.Screen name="pdf" component={PdfScreen} options={{title:'pdf', headerShown:false }}/>
           <Stack.Screen name="epub" component={EpubScreen} options={{title:'pdf', headerShown:false }}/>
+          <Stack.Screen name="offlinebookshelf" component={MyBookshelfOffline} options={{title:'pdf', headerShown:false }}/>
+          <Stack.Screen name="offpdf" component={PdfScreenOffline} options={{title:'pdf', headerShown:false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

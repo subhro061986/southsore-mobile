@@ -24,14 +24,27 @@ import Footer from '../Global/Footer.js';
 import { useAuth } from '../Context/Authcontext.js';
 import { UserProfile } from '../Context/Usercontext.js';
 import Config from "../config/Config.json";
+import RNFS from 'react-native-fs';
 
 export const MyBookshelf = ({ navigation }) => {
 
-    const { authData } = useAuth()
+    const { authData ,storedOfflineData} = useAuth()
     const { getBookShelf, myBookList } = UserProfile()
     const [bookReading, setBookReading] = useState('')
     const [bookReadType, setBookReadType] = useState(0)
     const [readerModalvisibility, setReaderModalvisibility] = useState(false);
+    const [urifile, setFile] = useState();
+    const INITIAL_LOCATION = {
+        href: '/OPS/main3.xml',
+        title: 'Chapter 2 - The Carpet-Bag',
+        type: 'application/xhtml+xml',
+        target: 27,
+        locations: {
+          position: 24,
+          progression: 0,
+          totalProgression: 0.03392330383480826
+        },
+      };
     useEffect(() => {
         
     }, [authData]);
@@ -83,63 +96,7 @@ export const MyBookshelf = ({ navigation }) => {
         setReaderModalvisibility(false);
     }
 
-    // const navigateToReadScreen = async (book) => {
-
-
-
-    //     if (bookReadType === "epub") {
-    //         navigation.navigate("epub",
-    //             // {
-    //             //     state: {
-    //             //         url: book.epub_link,
-    //             //         publisher_id: book.publisherid
-    //             //     }
-    //             // }
-    //             { epub: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epub_link }
-    //         )
-    //     }
-    //     else if (bookReadType === "pdf") {
-    //         navigation.navigate("pdf",
-    //             //  {
-    //             //     state: {
-    //             //         url: book.epdf_link,
-    //             //         publisher_id: book.publisherid
-    //             //     }
-    //             // }
-    //             { epdf: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epdf_link }
-    //         )
-    //     }
-    //     else {
-    //         if (book.epub_link !== "" && book.epub_link != undefined && book.epub_link != "null")
-    //             navigation.navigate("epub",
-    //                 // {
-    //                 //     state:
-    //                 //     {
-    //                 //     url: book.epub_link,
-    //                 //     publisher_id: book.publisherid
-    //                 //     }
-    //                 // }
-    //                 { epub: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epub_link }
-    //             )
-    //         else if (book.epdf_link !== "" && book.epdf_link != undefined && book.epdf_link != "null")
-    //             navigation.navigate("pdf",
-    //                 // {
-    //                 //     state: {
-    //                 //         url: book.epdf_link,
-    //                 //         publisher_id: book.publisherid
-    //                 //     }
-    //                 // }
-    //                 { epdf: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epdf_link }
-    //             )
-    //     }
-    // }
-
-    const getExt = (url) => {
-        // navigation.navigate("/pdf")
-        let text = "How are you doing today?";
-        const myArray = text.split(" ");
-    }
-
+    
     const navigateToReadScreen = async (book) => {
         console.log("Reading : ", book);
         if ((book.epdf_link !== null && book.epdf_link !== 'null') && (book.epub_link !== null && book.epub_link !== 'null')) {
@@ -160,6 +117,41 @@ export const MyBookshelf = ({ navigation }) => {
 
         }
     }
+const downloadBooks=async(book)=>{
+    console.log("DATA BOOKS",book)
+    const EPUB_URL=Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epdf_link
+    const fileName=EPUB_URL.split("/");
+    const latFname=fileName[fileName.length-1]
+    const EPUB_PATH = `${RNFS.DocumentDirectoryPath}/`+latFname;
+
+    const { promise } = RNFS.downloadFile({
+        fromUrl: EPUB_URL,
+        toFile: EPUB_PATH,
+        background: true,
+        discretionary: true,
+      });
+      console.log("DOWNLOADING....")
+      // wait for the download to complete
+      await promise;
+      alert("DOWNLOAD COMPLETE")
+  
+      setFile({
+        url: EPUB_PATH,
+        initialLocation: INITIAL_LOCATION,
+      });
+
+      let offlineData={
+        id:book.id,
+        authors:book.authors,
+        title:book.title,
+        epdf_link:{
+            url: EPUB_PATH,
+            initialLocation: INITIAL_LOCATION
+        }
+      }
+      let dwnresp=await storedOfflineData(offlineData)
+}
+
 
     return (
         <SafeAreaView>
@@ -222,14 +214,14 @@ export const MyBookshelf = ({ navigation }) => {
                                                 Read Now
                                             </Text>
                                         </TouchableOpacity>
-                                        {/* <TouchableOpacity
-                                            style={[xStyle.wishlistMoveToCartBtn, { width: '50%' }]}
-                                            onPress={() => navigation.navigate('epub')}
+                                        <TouchableOpacity
+                                            style={[xStyle.wishlistMoveToCartBtn, { width: '50%',marginLeft:'3%' }]}
+                                            onPress={() => downloadBooks(book)}
                                         >
                                             <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                                Epub
+                                                Download
                                             </Text>
-                                        </TouchableOpacity> */}
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>

@@ -10,6 +10,7 @@ import { jwtDecode } from "jwt-decode";
 import { v4 as uuidv4 } from 'uuid';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DeviceInfo from 'react-native-device-info';
+import NetInfo from "@react-native-community/netinfo";
 //import Cookies from "js-cookie";
 
 
@@ -25,6 +26,7 @@ const AuthProvider = ({ children }) => {
   const [isexpired, setIsexpired] = useState(false)
   const [uuid,SetUuid] = useState()
   const [cartItems, setCartItems] = useState([])
+  const [offlineData, setOfflineData] = useState([])
   const [cartCount, setCartCount] = useState(0)
   const image_path = Config.API_URL + Config.PUB_IMAGES;
 
@@ -121,6 +123,7 @@ const AuthProvider = ({ children }) => {
     getDataFromStorage();
     wishlist_hide_show()
     getCartData(authData)
+    getNetStatus()
 
   }, [authData])
 
@@ -451,7 +454,30 @@ const AuthProvider = ({ children }) => {
       console.log("ForgotPassword_error : ", error)
     }
   }
-
+  const storedOfflineData=async(args)=>{
+    let tempArr=offlineData
+    tempArr.push(args)
+    setOfflineData(tempArr)
+    await AsyncStorage.setItem("offlineData", JSON.stringify(tempArr));
+    console.log("STORED",tempArr)
+    return "Stored"
+  }
+  const getNetStatus=async()=>{
+    const  getnetInfo  = await NetInfo.fetch();
+    if(getnetInfo.isInternetReachable===true){
+      console.log("net available no action required")
+    }
+    else{
+      let offData=await AsyncStorage.getItem("offlineData");
+      if(offData==='' || offData===null || offData===undefined){
+        setOfflineData([])
+      }
+      else{
+        let parsedData=JSON.parse(offData)
+        setOfflineData(parsedData)
+      }
+    }
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -470,7 +496,9 @@ const AuthProvider = ({ children }) => {
         removeBookFromState,
         clearCartStorage,
         image_path,
-        forgot_password
+        forgot_password,
+        storedOfflineData,
+        offlineData
         // authUsername
       }}
     >

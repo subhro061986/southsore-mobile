@@ -16,16 +16,35 @@ import {
   Animated,
   PermissionsAndroid
 } from 'react-native';
-
-
+import NetInfo from "@react-native-community/netinfo";
+import { useAuth } from '../Context/Authcontext';
 
 const SplashScreen =({navigation})=> {
-
+  
   useEffect(() => {
-    var timer = setTimeout(()=> {
-      navigation.navigate('home');
-    }, 3000);
+    getNetStatus()
+    
   }, []);
+
+  const getNetStatus=async()=>{
+    // NetInfo.fetch().then(state => {
+    //   console.log("Connection type", state.type);
+    //   console.log("Is connected?", state.isConnected);
+    //   console.log("Is internet reachable?", state.isInternetReachable);
+    //   console.log("Details", state);
+    // });
+    const  getnetInfo  = await NetInfo.fetch();
+    if(getnetInfo.isInternetReachable===true){
+      var timer = setTimeout(()=> {
+        navigation.navigate('home');
+      }, 3000);
+    }
+    else{
+      var timer = setTimeout(()=> {
+        navigation.navigate('offlinebookshelf');
+      }, 3000);
+    }
+  }
   
     return(
       <SafeAreaView style={{flex:1}}>
