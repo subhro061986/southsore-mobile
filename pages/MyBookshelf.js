@@ -58,7 +58,7 @@ export const MyBookshelf = ({ navigation }) => {
     }, [authData]);
     useEffect(() => {
         console.log("offline Data1 =",offlineData)
-        checkDownload(offlineData)
+        // checkDownload(offlineData)
     }, [offlineData]);
 
     const bookTypeValue = [
