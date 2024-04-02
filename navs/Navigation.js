@@ -18,6 +18,7 @@ import PdfScreen from '../pages/PdfScreen';
 import EpubScreen from '../pages/EpubScreen';
 import MyBookshelfOffline from '../pages/MyBookshelfOffline';
 import PdfScreenOffline from '../pages/PdfScreenOffline';
+import EpubScreenOffline from '../pages/EpubScreenOffline';
 
 
 
@@ -43,6 +44,7 @@ const Navigation=()=>{
           <Stack.Screen name="epub" component={EpubScreen} options={{title:'pdf', headerShown:false }}/>
           <Stack.Screen name="offlinebookshelf" component={MyBookshelfOffline} options={{title:'pdf', headerShown:false }}/>
           <Stack.Screen name="offpdf" component={PdfScreenOffline} options={{title:'pdf', headerShown:false }}/>
+          <Stack.Screen name="offepub" component={EpubScreenOffline} options={{title:'epub', headerShown:false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

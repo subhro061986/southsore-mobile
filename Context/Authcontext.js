@@ -115,7 +115,9 @@ const AuthProvider = ({ children }) => {
   }
 
   
-
+  useEffect(() => {
+    console.log("offline Data2 =",offlineData)
+}, [offlineData]);
 
 
   useEffect(() => {
@@ -460,14 +462,14 @@ const AuthProvider = ({ children }) => {
     setOfflineData(tempArr)
     await AsyncStorage.setItem("offlineData", JSON.stringify(tempArr));
     console.log("STORED",tempArr)
-    return "Stored"
+    return offlineData
   }
   const getNetStatus=async()=>{
     const  getnetInfo  = await NetInfo.fetch();
-    if(getnetInfo.isInternetReachable===true){
-      console.log("net available no action required")
-    }
-    else{
+    // if(getnetInfo.isInternetReachable===true){
+    //   console.log("net available no action required")
+    // }
+    // else{
       let offData=await AsyncStorage.getItem("offlineData");
       if(offData==='' || offData===null || offData===undefined){
         setOfflineData([])
@@ -476,8 +478,11 @@ const AuthProvider = ({ children }) => {
         let parsedData=JSON.parse(offData)
         setOfflineData(parsedData)
       }
-    }
+    // }
   }
+
+
+
   return (
     <AuthContext.Provider
       value={{

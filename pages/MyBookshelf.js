@@ -14,7 +14,9 @@ import {
     TouchableOpacity,
     ImageBackground,
     Animated,
-    PermissionsAndroid
+    PermissionsAndroid,
+    Dimensions,
+    Alert
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Overlay from 'react-native-modal-overlay';
@@ -25,29 +27,39 @@ import { useAuth } from '../Context/Authcontext.js';
 import { UserProfile } from '../Context/Usercontext.js';
 import Config from "../config/Config.json";
 import RNFS from 'react-native-fs';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const MyBookshelf = ({ navigation }) => {
 
-    const { authData ,storedOfflineData} = useAuth()
+    const { authData, storedOfflineData,offlineData } = useAuth()
     const { getBookShelf, myBookList } = UserProfile()
     const [bookReading, setBookReading] = useState('')
     const [bookReadType, setBookReadType] = useState(0)
     const [readerModalvisibility, setReaderModalvisibility] = useState(false);
     const [urifile, setFile] = useState();
+    const [loadingContent, setLoadingContent] = useState(false);
+    const [isDownloaded, setIsDownloaded] = useState(false);
+
+    const uri = Config.API_URL + Config.PUB_IMAGES
+
     const INITIAL_LOCATION = {
         href: '/OPS/main3.xml',
         title: 'Chapter 2 - The Carpet-Bag',
         type: 'application/xhtml+xml',
         target: 27,
         locations: {
-          position: 24,
-          progression: 0,
-          totalProgression: 0.03392330383480826
+            position: 24,
+            progression: 0,
+            totalProgression: 0.03392330383480826
         },
-      };
+    };
     useEffect(() => {
-        
+        // clearAsync()
     }, [authData]);
+    useEffect(() => {
+        console.log("offline Data1 =",offlineData)
+        checkDownload(offlineData)
+    }, [offlineData]);
 
     const bookTypeValue = [
         {
@@ -72,13 +84,13 @@ export const MyBookshelf = ({ navigation }) => {
         setReaderModalvisibility(false);
         if (book_type_val === 1) {
             // open pdf book
-            if(bookReading !== null){
+            if (bookReading !== null) {
                 navigation.navigate('pdf', { epdf: Config.API_URL + Config.PUB_IMAGES + bookReading.publisherid + "/" + bookReading.epdf_link })
             }
         }
         else if (book_type_val === 2) {
             // open epub book
-            if(bookReading !== null){
+            if (bookReading !== null) {
                 navigation.navigate('epub', { epub: Config.API_URL + Config.PUB_IMAGES + bookReading.publisherid + "/" + bookReading.epub_link })
             }
         }
@@ -96,7 +108,7 @@ export const MyBookshelf = ({ navigation }) => {
         setReaderModalvisibility(false);
     }
 
-    
+
     const navigateToReadScreen = async (book) => {
         console.log("Reading : ", book);
         if ((book.epdf_link !== null && book.epdf_link !== 'null') && (book.epub_link !== null && book.epub_link !== 'null')) {
@@ -117,46 +129,135 @@ export const MyBookshelf = ({ navigation }) => {
 
         }
     }
-const downloadBooks=async(book)=>{
-    console.log("DATA BOOKS",book)
-    const EPUB_URL=Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.epdf_link
-    const fileName=EPUB_URL.split("/");
-    const latFname=fileName[fileName.length-1]
-    const EPUB_PATH = `${RNFS.DocumentDirectoryPath}/`+latFname;
 
-    const { promise } = RNFS.downloadFile({
-        fromUrl: EPUB_URL,
-        toFile: EPUB_PATH,
-        background: true,
-        discretionary: true,
-      });
-      console.log("DOWNLOADING....")
-      // wait for the download to complete
-      await promise;
-      alert("DOWNLOAD COMPLETE")
-  
-      setFile({
-        url: EPUB_PATH,
-        initialLocation: INITIAL_LOCATION,
-      });
+    const clearAsync = () => {
+        AsyncStorage.setItem("offlineData", "")
+    }
+    const navigateDownload = async (book) => {
+        console.log('book=', book)
+        let file = null
+          // clearAsync()
+        let offlineDataNew = {
+            id: book.id,
+            authors: book.authors,
+            title: book.title,
+            purchased: book.invoicedate?.split(" ")[0],
+            epdf_link: book.epdf_link,
+            epub_link: book.epub_link
 
-      let offlineData={
-        id:book.id,
-        authors:book.authors,
-        title:book.title,
-        epdf_link:{
-            url: EPUB_PATH,
-            initialLocation: INITIAL_LOCATION
         }
-      }
-      let dwnresp=await storedOfflineData(offlineData)
-}
 
+        if ((book.epdf_link !== null && book.epdf_link !== 'null') && (book.epub_link !== null && book.epub_link !== 'null')) {
+            console.log("Inside both");
+            file = await downloadBook(uri + book.publisherid + "/" + book.epdf_link, book.title)
+            offlineDataNew.pdfFileUri = file
+            file = await downloadBook(uri + book.publisherid + "/" + book.epub_link, book.title)
+            offlineDataNew.epubFileUri = file
+
+            let dwnresp = await storedOfflineData(offlineDataNew)
+            checkDownload(dwnresp)
+            Alert.alert("Download Complete")
+        }
+        else if (book.epdf_link !== null || book.epdf_link !== 'null') {
+            console.log("Inside pdf");
+            file = await downloadBook(uri + book.publisherid + "/" + book.epdf_link, book.title)
+            offlineDataNew.pdfFileUri = file
+            offlineDataNew.epubFileUri = null
+            let dwnresp = await storedOfflineData(offlineDataNew)
+            checkDownload(dwnresp)
+
+            Alert.alert("Download Complete")
+        }
+        else if (book.epub_link !== null || book.epub_link !== 'null') {
+            console.log("Inside epub");
+            file = await downloadBook(uri + book.publisherid + "/" + book.epub_link, book.title)
+            offlineDataNew.pdfFileUri = null
+            offlineDataNew.epubFileUri = file
+            let dwnresp = await storedOfflineData(offlineDataNew)
+            checkDownload(dwnresp)
+
+            Alert.alert("Download Complete")
+        }
+    }
+
+    const downloadBook = async (bookURL, bookTitle) => {
+
+        setLoadingContent(true)
+        console.log('book url=', bookURL)
+        let fileName = bookURL.split("/");
+        let latFname = fileName[fileName.length - 1]
+        console.log("FILE NAME", latFname)
+        let downloadPath = `${RNFS.DocumentDirectoryPath}/` + latFname;
+        let INITIAL_LOCATION = {
+            href: '/OPS/main3.xml',
+            title: bookTitle,
+            type: 'application/xhtml+xml',
+            target: 27,
+            locations: {
+                position: 24,
+                progression: 0,
+                totalProgression: 0.03392330383480826
+            }
+        }
+        const { promise } = RNFS.downloadFile({
+            fromUrl: bookURL,
+            toFile: downloadPath,
+            background: true,
+            discretionary: true,
+        });
+        console.log("DOWNLOADING....")
+        // wait for the download to complete
+        await promise;
+        setLoadingContent(false)
+        let fileObj = {
+            url: downloadPath,
+            initialLocation: INITIAL_LOCATION,
+        }
+
+
+        return fileObj
+
+
+    }
+
+    // const checkDownload=() =>{
+    // const checkDownload=(book) =>{
+    //     // let index=offlineData.findIndex(data => data.id === book.id)
+    //     // return index>=0 ?  false : true;
+    //     // return true
+
+    //     var matches = book.filter((val,index)=> myBookList.find((ele)=> ele['id'] ==val['id'] ) != null )
+    //     if(matches.length>0){
+    //         setIsDownloaded(true)
+    //     } else {
+    //         setIsDownloaded(false)
+    //     }
+    //     console.log("matches= ",matches)
+    // }
 
     return (
         <SafeAreaView>
             <ScrollView style={xStyle.cartPageBodyBg} stickyHeaderIndices={[0]}>
                 <TopBar />
+
+                {loadingContent === true && (
+                    <View
+                        style={{
+                            // flex:1,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: '#ffffff',
+                            height: Dimensions.get('screen').height,
+                            //paddingVertical:Dimensions.get('screen').height*0.1
+                        }}>
+                        <Image
+                            source={require('../assets/images/playstore.png')}
+                            style={{ height: 50, width: 50 }}
+                        />
+                        <Text style={xStyle.pub_home_best_card_title}>Loading</Text>
+                    </View>
+                )
+                }
                 <View style={xStyle.cartPageHeaderView}>
                     <Text style={xStyle.cartPageHeader}>
                         My BookShelf
@@ -214,14 +315,22 @@ const downloadBooks=async(book)=>{
                                                 Read Now
                                             </Text>
                                         </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={[xStyle.wishlistMoveToCartBtn, { width: '50%',marginLeft:'3%' }]}
-                                            onPress={() => downloadBooks(book)}
-                                        >
-                                            <Text style={xStyle.wishlistMoveToCartBtnTxt}>
-                                                Download
-                                            </Text>
-                                        </TouchableOpacity>
+
+                                        
+                                            {isDownloaded === false && 
+                                            
+                                            <TouchableOpacity
+                                                style={[xStyle.wishlistMoveToCartBtn, { width: '50%', marginLeft: '3%' }]}
+                                                // onPress={() => downloadBooks(book)}
+                                                onPress={() => navigateDownload(book)}
+
+                                            >
+                                                <Text style={xStyle.wishlistMoveToCartBtnTxt}>
+                                                    Download
+                                                </Text>
+                                            </TouchableOpacity>
+                                            }
+                                        
                                     </View>
                                 </View>
                             </View>
