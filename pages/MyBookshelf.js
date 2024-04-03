@@ -39,6 +39,7 @@ export const MyBookshelf = ({ navigation }) => {
     const [urifile, setFile] = useState();
     const [loadingContent, setLoadingContent] = useState(false);
     const [isDownloaded, setIsDownloaded] = useState(false);
+    const [tempArrBooks, setTempArrBooks] = useState([]);
 
     const uri = Config.API_URL + Config.PUB_IMAGES
 
@@ -54,12 +55,17 @@ export const MyBookshelf = ({ navigation }) => {
         },
     };
     useEffect(() => {
-        // clearAsync()
+        //clearAsync()
+        //setTempArrBooks(myBookList)
     }, [authData]);
     useEffect(() => {
         console.log("offline Data1 =",offlineData)
-        // checkDownload(offlineData)
+        tempDownload()
     }, [offlineData]);
+
+    // useEffect(() => {
+    //     console.log("CHANGED BOOK SHELF===>67",tempArrBooks)
+    // }, [tempArrBooks])
 
     const bookTypeValue = [
         {
@@ -78,8 +84,6 @@ export const MyBookshelf = ({ navigation }) => {
 
     const handleBookReadType = (itemValue, itemIndex) => {
         setBookReadType(itemValue)
-        console.log("Item val", itemValue);
-        console.log("Item index", itemIndex);
         let book_type_val = itemValue;
         setReaderModalvisibility(false);
         if (book_type_val === 1) {
@@ -133,8 +137,8 @@ export const MyBookshelf = ({ navigation }) => {
     const clearAsync = () => {
         AsyncStorage.setItem("offlineData", "")
     }
-    const navigateDownload = async (book) => {
-        console.log('book=', book)
+    const navigateDownload = async (book,i) => {
+        checkDownload(book,i)
         let file = null
           // clearAsync()
         let offlineDataNew = {
@@ -155,7 +159,7 @@ export const MyBookshelf = ({ navigation }) => {
             offlineDataNew.epubFileUri = file
 
             let dwnresp = await storedOfflineData(offlineDataNew)
-            checkDownload(dwnresp)
+            //checkDownload(dwnresp)
             Alert.alert("Download Complete")
         }
         else if (book.epdf_link !== null || book.epdf_link !== 'null') {
@@ -164,9 +168,9 @@ export const MyBookshelf = ({ navigation }) => {
             offlineDataNew.pdfFileUri = file
             offlineDataNew.epubFileUri = null
             let dwnresp = await storedOfflineData(offlineDataNew)
-            checkDownload(dwnresp)
+            //checkDownload(dwnresp)
 
-            Alert.alert("Download Complete")
+            //Alert.alert("Download Complete")
         }
         else if (book.epub_link !== null || book.epub_link !== 'null') {
             console.log("Inside epub");
@@ -174,9 +178,9 @@ export const MyBookshelf = ({ navigation }) => {
             offlineDataNew.pdfFileUri = null
             offlineDataNew.epubFileUri = file
             let dwnresp = await storedOfflineData(offlineDataNew)
-            checkDownload(dwnresp)
+            //checkDownload(dwnresp)
 
-            Alert.alert("Download Complete")
+            //Alert.alert("Download Complete")
         }
     }
 
@@ -209,6 +213,7 @@ export const MyBookshelf = ({ navigation }) => {
         // wait for the download to complete
         await promise;
         setLoadingContent(false)
+        //Alert.alert("Download Complete")
         let fileObj = {
             url: downloadPath,
             initialLocation: INITIAL_LOCATION,
@@ -221,19 +226,24 @@ export const MyBookshelf = ({ navigation }) => {
     }
 
     // const checkDownload=() =>{
-    // const checkDownload=(book) =>{
-    //     // let index=offlineData.findIndex(data => data.id === book.id)
-    //     // return index>=0 ?  false : true;
-    //     // return true
+    const checkDownload=(book,i) =>{
+        //let index=offlineData.findIndex(data => data.id === book.id)
+        let arr=tempArrBooks
+        arr[i]["isDownloaded"]=true
+        setTempArrBooks(arr)
+    }
 
-    //     var matches = book.filter((val,index)=> myBookList.find((ele)=> ele['id'] ==val['id'] ) != null )
-    //     if(matches.length>0){
-    //         setIsDownloaded(true)
-    //     } else {
-    //         setIsDownloaded(false)
-    //     }
-    //     console.log("matches= ",matches)
-    // }
+    const tempDownload=() =>{
+        let arr=myBookList
+        for(let i=0;i<offlineData.length;i++){
+            let getIndex = arr.findIndex(function(item){
+                return item.id === offlineData[i].id
+              });
+            arr[getIndex]["isDownloaded"]=true
+        }
+        console.log("ARRR",arr)
+        setTempArrBooks(arr)
+    }
 
     return (
         <SafeAreaView>
@@ -244,17 +254,18 @@ export const MyBookshelf = ({ navigation }) => {
                     <View
                         style={{
                             // flex:1,
-                            justifyContent: 'center',
+                            //justifyContent: 'center',
                             alignItems: 'center',
                             backgroundColor: '#ffffff',
                             height: Dimensions.get('screen').height,
+                            paddingVertical:'50%'
                             //paddingVertical:Dimensions.get('screen').height*0.1
                         }}>
                         <Image
                             source={require('../assets/images/playstore.png')}
                             style={{ height: 50, width: 50 }}
                         />
-                        <Text style={xStyle.pub_home_best_card_title}>Loading</Text>
+                        <Text style={xStyle.pub_home_best_card_title}>Downloading... Please Wait</Text>
                     </View>
                 )
                 }
@@ -263,7 +274,7 @@ export const MyBookshelf = ({ navigation }) => {
                         My BookShelf
                     </Text>
                     <Text style={xStyle.cartPageHeaderResults}>
-                        {myBookList.length} items
+                        {tempArrBooks.length} items
                     </Text>
                 </View>
                 <View style={[
@@ -271,8 +282,10 @@ export const MyBookshelf = ({ navigation }) => {
                     { marginBottom: '50%' }
                 ]}>
                     {
-                        myBookList.length > 0 && myBookList.map((book, index) => (
+                        tempArrBooks.length > 0 && tempArrBooks.map((book, index) => (
+                            
                             <View style={[xStyle.pub_home_best_card]} key={index}>
+                                {/* {checkDownload(book,index)} */}
                                 <Image
                                     source={{ uri: Config.API_URL + Config.PUB_IMAGES + book.publisherid + "/" + book.image + '?d=' + new Date() }}
                                     style={xStyle.pub_home_best_cover}
@@ -317,19 +330,23 @@ export const MyBookshelf = ({ navigation }) => {
                                         </TouchableOpacity>
 
                                         
-                                            {isDownloaded === false && 
-                                            
-                                            <TouchableOpacity
+                                            {book.isDownloaded === true ?(
+                                                <View><Text>{book.isDownloaded}</Text></View>
+                                            ):(
+                                                <TouchableOpacity
                                                 style={[xStyle.wishlistMoveToCartBtn, { width: '50%', marginLeft: '3%' }]}
                                                 // onPress={() => downloadBooks(book)}
-                                                onPress={() => navigateDownload(book)}
+                                                onPress={() => navigateDownload(book,index)}
 
-                                            >
+                                                 >
                                                 <Text style={xStyle.wishlistMoveToCartBtnTxt}>
                                                     Download
                                                 </Text>
-                                            </TouchableOpacity>
-                                            }
+                                                </TouchableOpacity>
+                                            )}
+                                            
+                                            
+                                            
                                         
                                     </View>
                                 </View>
