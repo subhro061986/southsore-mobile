@@ -59,8 +59,7 @@ export const MyBookshelf = ({ navigation }) => {
         //setTempArrBooks(myBookList)
     }, [authData]);
     useEffect(() => {
-        console.log("offline Data1 =",offlineData)
-        tempDownload()
+        
     }, [offlineData]);
 
     // useEffect(() => {
@@ -138,7 +137,15 @@ export const MyBookshelf = ({ navigation }) => {
         AsyncStorage.setItem("offlineData", "")
     }
     const navigateDownload = async (book,i) => {
-        checkDownload(book,i)
+        let index=offlineData.findIndex(data => data.id === book.id)
+        if(index>-1){
+            Alert.alert('Message', 'Book is already downloaded', [
+                {
+                  text: 'OK', onPress:null
+                },
+              ]);
+        }
+        else{
         let file = null
           // clearAsync()
         let offlineDataNew = {
@@ -183,6 +190,7 @@ export const MyBookshelf = ({ navigation }) => {
             //Alert.alert("Download Complete")
         }
     }
+    }
 
     const downloadBook = async (bookURL, bookTitle) => {
 
@@ -226,24 +234,24 @@ export const MyBookshelf = ({ navigation }) => {
     }
 
     // const checkDownload=() =>{
-    const checkDownload=(book,i) =>{
-        //let index=offlineData.findIndex(data => data.id === book.id)
-        let arr=tempArrBooks
-        arr[i]["isDownloaded"]=true
-        setTempArrBooks(arr)
-    }
+    // const checkDownload=(book,i) =>{
+    //     //let index=offlineData.findIndex(data => data.id === book.id)
+    //     let arr=tempArrBooks
+    //     arr[i]["isDownloaded"]=true
+    //     setTempArrBooks(arr)
+    // }
 
-    const tempDownload=() =>{
-        let arr=myBookList
-        for(let i=0;i<offlineData.length;i++){
-            let getIndex = arr.findIndex(function(item){
-                return item.id === offlineData[i].id
-              });
-            arr[getIndex]["isDownloaded"]=true
-        }
-        console.log("ARRR",arr)
-        setTempArrBooks(arr)
-    }
+    // const tempDownload=() =>{
+    //     let arr=myBookList
+    //     for(let i=0;i<offlineData.length;i++){
+    //         let getIndex = arr.findIndex(function(item){
+    //             return item.id === offlineData[i].id
+    //           });
+    //         arr[getIndex]["isDownloaded"]=true
+    //     }
+    //     console.log("ARRR",arr)
+    //     setTempArrBooks(arr)
+    // }
 
     return (
         <SafeAreaView>
@@ -274,7 +282,7 @@ export const MyBookshelf = ({ navigation }) => {
                         My BookShelf
                     </Text>
                     <Text style={xStyle.cartPageHeaderResults}>
-                        {tempArrBooks.length} items
+                        {myBookList.length} items
                     </Text>
                 </View>
                 <View style={[
@@ -282,7 +290,7 @@ export const MyBookshelf = ({ navigation }) => {
                     { marginBottom: '50%' }
                 ]}>
                     {
-                        tempArrBooks.length > 0 && tempArrBooks.map((book, index) => (
+                        myBookList.length > 0 && myBookList.map((book, index) => (
                             
                             <View style={[xStyle.pub_home_best_card]} key={index}>
                                 {/* {checkDownload(book,index)} */}
@@ -330,9 +338,7 @@ export const MyBookshelf = ({ navigation }) => {
                                         </TouchableOpacity>
 
                                         
-                                            {book.isDownloaded === true ?(
-                                                <View><Text>{book.isDownloaded}</Text></View>
-                                            ):(
+                                            
                                                 <TouchableOpacity
                                                 style={[xStyle.wishlistMoveToCartBtn, { width: '50%', marginLeft: '3%' }]}
                                                 // onPress={() => downloadBooks(book)}
@@ -343,7 +349,7 @@ export const MyBookshelf = ({ navigation }) => {
                                                     Download
                                                 </Text>
                                                 </TouchableOpacity>
-                                            )}
+                                            
                                             
                                             
                                             
