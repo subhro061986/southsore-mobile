@@ -461,7 +461,6 @@ const AuthProvider = ({ children }) => {
     tempArr.push(args)
     setOfflineData(tempArr)
     await AsyncStorage.setItem("offlineData", JSON.stringify(tempArr));
-    console.log("STORED",tempArr)
     return offlineData
   }
   const getNetStatus=async()=>{
