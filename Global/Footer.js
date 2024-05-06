@@ -174,7 +174,7 @@ export const Footer = () => {
   const user_registration = async () => {
     var json = {
       email: signUpEmail,
-      password: signUpPassword,
+      // password: signUpPassword,
       contactno: phone,
       name: userName
     }
@@ -521,13 +521,14 @@ export const Footer = () => {
                 placeholderTextColor={'#7B8890'}
                 value={phone}
                 onChangeText={(e) => setPhone(e)}
+                keyboardType='numeric'
               />
               <Image
                 source={require('../assets/images/call.png')}
                 style={xStyle.buy_join_modal_input_icon}
               />
             </View>
-            <Text style={xStyle.buy_join_modal_legend}>Password</Text>
+            {/* <Text style={xStyle.buy_join_modal_legend}>Password</Text>
             <View style={xStyle.buy_join_modal_input_view}>
               <TextInput
                 style={[xStyle.buy_join_modal_input, xStyle.buy_join_modal_input_height]}
@@ -560,7 +561,7 @@ export const Footer = () => {
                   )
                 }
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
           <TouchableOpacity style={xStyle.logInBtn} onPress={do_registration}>
             <Text style={[xStyle.logInBtnText]}>Sign Up</Text>
