@@ -37,7 +37,8 @@ const UserProvider = ({ children }) => {
   const [currentpageno, setCurrentpageno] = useState(1)
   const [record_no, setRecord_no] = useState(100)
   const [loaderOn, setLoaderOn] = useState(false)
-  
+  const [bookmark, setBookmark] = useState('')
+  const [markPdf, setMarkPdf] = useState(0)
 
 
   useEffect(() => {
@@ -1024,6 +1025,14 @@ const UserProvider = ({ children }) => {
     }
   }
 
+  const bookmarkSettings=async(args)=>{
+    setBookmark(args)
+    return true
+}
+const bookMarkForPdf=async(args)=>{
+  setMarkPdf(args)
+  return true
+}
 
   return (
     <UserContext.Provider
@@ -1077,7 +1086,11 @@ const UserProvider = ({ children }) => {
         allNewArrival,
         globalCategoryId,
         getInvoiceByIdMobile,
-        DeleteInvoiceByIdMobile
+        DeleteInvoiceByIdMobile,
+        bookmarkSettings,
+        bookmark,
+        bookMarkForPdf,
+        markPdf
 
       }}
     >

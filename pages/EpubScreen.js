@@ -27,13 +27,14 @@ import {
     ReadiumView,
     Settings,
   } from 'react-native-readium';
+  import { Link, Locator, File } from 'react-native-readium';
   import RNFS from 'react-native-fs';
 import TopBarReader from '../Global/TopBarReader.js';
 
 export const EpubScreen = ({route,navigation}) => {
 console.log("EPUB",route.params.epub)
 const {authData} = useAuth()
-const { getBookShelf,myBookList} = UserProfile()
+const { getBookShelf,myBookList,bookmarkSettings,bookmark} = UserProfile()
 const [loadingContent, setLoadingContent] = useState(true);
 //const EPUB_URL = `https://react-reader.metabits.no/files/alice.epub`;
 const EPUB_URL = route.params.epub;
@@ -43,22 +44,28 @@ const latFname=fileName[fileName.length-1]
 const EPUB_PATH = `${RNFS.DocumentDirectoryPath}/`+latFname;
 
   const [urifile, setFile] = useState();
-  const INITIAL_LOCATION = {
-    href: '/OPS/main3.xml',
-    title: 'Chapter 2 - The Carpet-Bag',
-    type: 'application/xhtml+xml',
-    target: 27,
-    locations: {
-      position: 24,
-      progression: 0,
-      totalProgression: 0.03392330383480826
-    },
-  };
+  // const INITIAL_LOCATION = {
+  //   href: '/OPS/main3.xml',
+  //   title: 'Chapter 2 - The Carpet-Bag',
+  //   type: 'application/xhtml+xml',
+  //   target: 27,
+  //   locations: {
+  //     position: 24,
+  //     progression: 0,
+  //     totalProgression: 0.03392330383480826
+  //   },
+  // };
 
 useEffect(() => {
     downloadFile()
 }, [authData]);
+useEffect(() => {
+  console.log("LOCATIOR",bookmark)
+}, [bookmark]);
 
+const storeBookMark=async(val)=>{
+  const res=await bookmarkSettings(val)
+}
 const downloadFile=async()=>{
     const { promise } = RNFS.downloadFile({
       fromUrl: EPUB_URL,
@@ -73,7 +80,17 @@ const downloadFile=async()=>{
 
     setFile({
       url: EPUB_PATH,
-      initialLocation: INITIAL_LOCATION,
+      initialLocation:{
+        href: bookmark===''?'/OPS/main3.xml':bookmark.href,
+        title: '',
+        type: 'application/xhtml+xml',
+        target: 27,
+        locations: {
+          position: bookmark===''?0:bookmark.locations.position,
+          progression: bookmark===''?0:bookmark.locations.progression,
+          totalProgression: bookmark===''?0:bookmark.locations.totalProgression
+        },
+      }
     });
   }
 
@@ -101,6 +118,7 @@ const downloadFile=async()=>{
                 file={urifile}
                 style={{marginBottom:20}}
                 //src="https://react-reader.metabits.no/files/alice.epub"
+                onLocationChange={(locator)=>storeBookMark(locator)}
             />
             )}
         </SafeAreaView>
