@@ -4,6 +4,8 @@
 1. keytool -genkey -alias ebook_alias -keyalg RSA -keystore ebook.jks
 run this command in your cmd
 
+keytool -genkey -v -keystore ebook.keystore -alias ebook_alias -keyalg RSA -keysize 2048 -validity 365000
+
 # KEYSTORE DETAILS WITH SIGNATURE
 1.keytool -list -v -keystore keystore.jks
 
@@ -45,6 +47,9 @@ drawable-hdpi,drawable-mdpi,drawable-xhdpi,drawable-xxhdpi,drawable-xxxhdpi thes
 
 9. As a result, the APK creation process is done. You can find the generated APK at react-native\android\app\build\outputs\bundle\release\app-release.aab
 
+10. user name: sales@southshore.in
+    Password: Supremacy16!
+
 
 <!-- Alias name: ebook_alias
 Creation date: 18-Apr-2024
@@ -71,6 +76,8 @@ KeyIdentifier [
 0010: 19 1E B4 92                                        ....
 ]
 ] -->
+
+Southshore Innovations
 
 
 

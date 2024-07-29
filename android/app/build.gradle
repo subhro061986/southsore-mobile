@@ -137,8 +137,8 @@ android {
         applicationId "com.ebooksjunction"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "2.2"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -224,8 +224,16 @@ android {
         //     keyAlias 'androiddebugkey'
         //     keyPassword 'android'
         // }
+        //===========INDUSS APP========//
+        // release {
+        //     storeFile file('ebook.jks')
+        //     storePassword 'ebook2024'
+        //     keyAlias 'ebook_alias'
+        //     keyPassword 'ebook2024'
+        // }
+        //===========PLAYSTORE========//
         release {
-            storeFile file('ebook.jks')
+            storeFile file('ebook.keystore')
             storePassword 'ebook2024'
             keyAlias 'ebook_alias'
             keyPassword 'ebook2024'
